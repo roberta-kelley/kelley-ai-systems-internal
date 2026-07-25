@@ -142,7 +142,7 @@ h1{font-size:34px}
     <div class="working"><span class="spark">✣</span><b>Your systems are working</b><p>Phoenix is organizing activity and surfacing the next best move.</p><a>View activity →</a></div>
   </aside>
   <div class="app">
-  <header class="top"><div class="brand"><span class="mark">Φ</span><span><b>Phoenix Systems</b><small>Executive Intelligence</small></span></div><div class="systems"><span>ATHENA <i>Intel</i></span><span>APOLLO <i>Scheduling</i></span><span>PHOENIX <i>Operations</i></span></div><div class="pipe"><small>Pipeline</small><b id="pipelineTotal">$0</b></div></header>
+  <header class="top"><div class="brand"><span class="mark">Φ</span><span><b>Phoenix Systems</b><small>Executive Intelligence</small></span></div><div class="systems"><span>INTAKE <i>Qualify</i></span><span>CLOSER <i>Research</i></span><span>SALES <i>Propose</i></span><span>FULFILLMENT <i>Deliver</i></span><span>CONTENT <i>Grow</i></span><span>PHOENIX <i>Orchestrate</i></span></div><div class="pipe"><small>Pipeline</small><b id="pipelineTotal">$0</b></div></header>
   <div class="demo">Private owner workspace · Supabase protected</div>
   <div class="shell">
     <section class="main">
@@ -154,16 +154,17 @@ h1{font-size:34px}
       </div>
       <article class="card proof"><div class="proofhead"><div><p class="eye">Proof &amp; performance</p><h2>What is producing movement</h2></div><p class="sub">Measured from your real Phoenix activity.</p></div><div class="proofgrid"><div class="proofmetric"><small>Outcomes recorded</small><strong id="proofOutcomes">0</strong></div><div class="proofmetric"><small>Follow-ups sent</small><strong id="proofFollowUps">0</strong></div><div class="proofmetric"><small>Interested</small><strong id="proofInterested">0</strong></div><div class="proofmetric"><small>Proposals</small><strong id="proofProposals">0</strong></div><div class="proofmetric"><small>Wins</small><strong id="proofWins">0</strong></div><div class="proofmetric"><small>Positive movement</small><strong id="proofConversion">0%</strong></div></div><div class="proofinsight" id="proofInsight">Phoenix needs a few recorded outcomes before it can identify a reliable pattern.</div><div class="proofinsight" id="proofFeedback">Recommendation feedback will appear here as you accept, edit, or reject Phoenix suggestions.</div></article>
     </section>
-    <aside><div class="aside"><p class="eye">Lead intelligence</p><h2 id="intelligenceName">Select an opportunity</h2><p class="location" id="intelligenceLocation">Protected owner workspace</p></div><div class="aside"><p class="eye">Stage roadmap</p><div class="road" id="stageRoadmap"><span data-stage="identified"><i>1</i>Capture</span><span data-stage="vetted"><i>2</i>Vetted</span><span data-stage="discovery"><i>3</i>Discovery</span><span data-stage="proposal"><i>4</i>Proposal</span><span data-stage="closed"><i>5</i>Closed</span></div></div><div class="aside"><p class="eye">Strategic briefing</p><div class="brief" id="strategicBrief">Choose an opportunity to review its current intelligence record.</div><button class="actionbtn" id="openBrief" type="button">Prepare call brief</button><button class="actionbtn" id="openProposal" type="button">Prepare proposal</button></div><div class="aside"><p class="eye">Next best action</p><strong class="action" id="nextAction">Review the opportunity record</strong><button class="actionbtn" id="openWorkspace" type="button">Open lead workspace</button><button class="actionbtn" id="openOutcome" type="button">Record call outcome</button><button class="actionbtn" id="openActivity" type="button">View activity &amp; follow-up</button></div></aside>
+    <aside><div class="aside"><p class="eye">Lead intelligence</p><h2 id="intelligenceName">Select an opportunity</h2><p class="location" id="intelligenceLocation">Protected owner workspace</p></div><div class="aside"><p class="eye">Stage roadmap</p><div class="road" id="stageRoadmap"><span data-stage="identified"><i>1</i>Capture</span><span data-stage="vetted"><i>2</i>Vetted</span><span data-stage="discovery"><i>3</i>Discovery</span><span data-stage="proposal"><i>4</i>Proposal</span><span data-stage="closed"><i>5</i>Closed</span></div></div><div class="aside"><p class="eye">Strategic briefing</p><div class="brief" id="strategicBrief">Choose an opportunity to review its current intelligence record.</div><button class="actionbtn" id="openBrief" type="button">Prepare call brief</button><button class="actionbtn" id="openProposal" type="button">Prepare proposal</button><button class="actionbtn" id="openFulfillment" type="button">Prepare fulfillment handoff</button></div><div class="aside"><p class="eye">Next best action</p><strong class="action" id="nextAction">Review the opportunity record</strong><button class="actionbtn" id="openWorkspace" type="button">Open lead workspace</button><button class="actionbtn" id="openOutcome" type="button">Record call outcome</button><button class="actionbtn" id="openActivity" type="button">View activity &amp; follow-up</button></div></aside>
   </div>
   <div class="utility"><button type="button" id="resetConnection">Reset connection</button><button type="button" id="signOut">Sign out</button></div>
   <div id="authVeil" class="authveil" hidden></div>
   <div id="workspaceVeil" class="workspaceveil" hidden><form class="workspacebox" id="workspaceForm"><header><div><p class="eye">Opportunity workspace</p><h2 id="workspaceName">Lead</h2><p class="location" id="workspaceLocation"></p></div><button class="close" id="closeWorkspace" type="button">Close</button></header><p class="eye">Primary contact</p><label>First name<input id="workspaceFirstName" placeholder="First name"></label><label>Last name<input id="workspaceLastName" placeholder="Last name"></label><label>Role<input id="workspaceRole" placeholder="Owner, Sales Manager, etc."></label><label>Email<input id="workspaceEmail" type="email" placeholder="name@company.com"></label><label>Phone<input id="workspacePhone" type="tel" placeholder="Phone number"></label><p class="eye">Opportunity</p><label>Stage<select id="workspaceStage"><option value="identified">Captured</option><option value="researched">Researched</option><option value="contacted">Contacted</option><option value="engaged">Engaged</option><option value="consultation_scheduled">Consultation scheduled</option><option value="consultation_completed">Consultation completed</option><option value="proposal_sent">Proposal sent</option><option value="decision_pending">Decision pending</option><option value="won">Won</option><option value="lost">Lost</option><option value="nurture">Nurture</option></select></label><label>Next best action<textarea id="workspaceAction" placeholder="What should happen next?"></textarea></label><button class="save" id="saveWorkspace" type="submit">Save contact and lead</button><p class="message" id="workspaceMessage"></p></form></div>
   <div id="addLeadVeil" class="workspaceveil" hidden><form class="workspacebox" id="addLeadForm"><header><div><p class="eye">New relationship</p><h2>Add a lead</h2><p class="location">Create the company, contact, and first opportunity.</p></div><button class="close" id="closeAddLead" type="button">Close</button></header><p class="eye">Company</p><label>Company name<input id="newCompanyName" required placeholder="Company or prospect name"></label><label>Location<input id="newCompanyLocation" placeholder="City, State"></label><p class="eye">Primary contact</p><label>First name<input id="newFirstName" required placeholder="First name"></label><label>Last name<input id="newLastName" placeholder="Last name"></label><label>Role<input id="newContactRole" placeholder="Owner, Sales Manager, etc."></label><label>Email<input id="newContactEmail" type="email" placeholder="name@company.com"></label><label>Phone<input id="newContactPhone" type="tel" placeholder="Phone number"></label><p class="eye">Opportunity</p><label>Opportunity name<input id="newOpportunityName" required placeholder="Example: AI systems consultation"></label><label>Estimated value<input id="newEstimatedValue" type="number" min="0" step="1" value="0"></label><label>Next best action<textarea id="newNextAction" placeholder="Example: Research company and prepare outreach"></textarea></label><button class="save" id="saveNewLead" type="submit">Add lead to Phoenix</button><p class="message" id="addLeadMessage"></p></form></div>
   <div id="briefVeil" class="workspaceveil" hidden><form class="workspacebox" id="briefForm"><header><div><p class="eye">Closer intelligence</p><h2 id="briefName">Call preparation</h2><p class="location" id="briefLocation"></p></div><button class="close" id="closeBrief" type="button">Close</button></header><button class="save" id="generateBrief" type="button">Generate starter brief</button><label>Company background<textarea id="briefBackground"></textarea></label><label>Likely pain points, one per line<textarea id="briefPainPoints"></textarea></label><label>Recommended questions, one per line<textarea id="briefQuestions"></textarea></label><label>Relevant Kelley AI offer<textarea id="briefOffer"></textarea></label><label>Possible objections and responses, using Objection | Response<textarea id="briefObjections"></textarea></label><label>Desired call outcome<textarea id="briefOutcome"></textarea></label><button class="save" id="saveBrief" type="submit">Save call brief</button><p class="message" id="briefMessage"></p></form></div>
-  <div id="outcomeVeil" class="workspaceveil" hidden><form class="workspacebox" id="outcomeForm"><header><div><p class="eye">Closed-loop handoff</p><h2 id="outcomeName">Record call outcome</h2><p class="location" id="outcomeLocation"></p></div><button class="close" id="closeOutcome" type="button">Close</button></header><label>Call disposition<select id="outcomeDisposition"><option value="follow_up">Follow-up needed</option><option value="interested">Interested</option><option value="proposal_requested">Proposal requested</option><option value="closed_won">Closed won</option><option value="closed_lost">Closed lost</option><option value="no_answer">No answer</option></select></label><label>Confirmed pain points — one per line<textarea id="outcomePainPoints"></textarea></label><label>Objections raised — one per line<textarea id="outcomeObjections"></textarea></label><label>Commitments made — one per line<textarea id="outcomeCommitments"></textarea></label><label>Move pipeline to<select id="outcomeStage"><option value="identified">Captured</option><option value="researched">Researched</option><option value="contacted">Contacted</option><option value="engaged">Engaged</option><option value="consultation_scheduled">Consultation scheduled</option><option value="consultation_completed">Consultation completed</option><option value="proposal_sent">Proposal sent</option><option value="decision_pending">Decision pending</option><option value="won">Won</option><option value="lost">Lost</option><option value="nurture">Nurture</option></select></label><label>Next best action<textarea id="outcomeNextAction"></textarea></label><label>Follow-up due date<input id="outcomeDueDate" type="date"></label><button class="save" id="generateFollowUp" type="button">Generate follow-up message</button><label>Follow-up message<textarea id="outcomeFollowUp"></textarea></label><a class="save" id="openEmailDraft" href="#">Open email draft for review</a><label>Phoenix recommendation<select id="recommendationDecision"><option value="accepted">Accept as recommended</option><option value="edited">I edited the recommendation</option><option value="rejected">Reject the recommendation</option></select></label><label class="approval"><input id="approveOutcome" type="checkbox" checked><span>Allow Phoenix to update the pipeline and create the next task.</span></label><button class="save" id="saveOutcome" type="submit">Save outcome and update Phoenix</button><p class="message" id="outcomeMessage"></p></form></div>
+  <div id="outcomeVeil" class="workspaceveil" hidden><form class="workspacebox" id="outcomeForm"><header><div><p class="eye">Closed-loop handoff</p><h2 id="outcomeName">Record call outcome</h2><p class="location" id="outcomeLocation"></p></div><button class="close" id="closeOutcome" type="button">Close</button></header><label>Call disposition<select id="outcomeDisposition"><option value="follow_up">Follow-up needed</option><option value="interested">Interested</option><option value="proposal_requested">Proposal requested</option><option value="closed_won">Closed won</option><option value="closed_lost">Closed lost</option><option value="no_answer">No answer</option></select></label><label>Confirmed pain points, one per line<textarea id="outcomePainPoints"></textarea></label><label>Objections raised, one per line<textarea id="outcomeObjections"></textarea></label><label>Commitments made, one per line<textarea id="outcomeCommitments"></textarea></label><label>Move pipeline to<select id="outcomeStage"><option value="identified">Captured</option><option value="researched">Researched</option><option value="contacted">Contacted</option><option value="engaged">Engaged</option><option value="consultation_scheduled">Consultation scheduled</option><option value="consultation_completed">Consultation completed</option><option value="proposal_sent">Proposal sent</option><option value="decision_pending">Decision pending</option><option value="won">Won</option><option value="lost">Lost</option><option value="nurture">Nurture</option></select></label><label>Next best action<textarea id="outcomeNextAction"></textarea></label><label>Follow-up due date<input id="outcomeDueDate" type="date"></label><button class="save" id="generateFollowUp" type="button">Generate follow-up message</button><label>Follow-up message<textarea id="outcomeFollowUp"></textarea></label><a class="save" id="openEmailDraft" href="#">Open email draft for review</a><label>Phoenix recommendation<select id="recommendationDecision"><option value="accepted">Accept as recommended</option><option value="edited">I edited the recommendation</option><option value="rejected">Reject the recommendation</option></select></label><label class="approval"><input id="approveOutcome" type="checkbox" checked><span>Allow Phoenix to update the pipeline and create the next task.</span></label><button class="save" id="saveOutcome" type="submit">Save outcome and update Phoenix</button><p class="message" id="outcomeMessage"></p></form></div>
   <div id="activityVeil" class="workspaceveil" hidden><section class="workspacebox"><header><div><p class="eye">Orchestrator view</p><h2 id="activityName">Activity &amp; follow-up</h2><p class="location" id="activityLocation"></p></div><button class="close" id="closeActivity" type="button">Close</button></header><div class="activitylist" id="activityList"></div><p class="message" id="activityMessage"></p></section></div>
   <div id="proposalVeil" class="workspaceveil" hidden><form class="workspacebox" id="proposalForm"><header><div><p class="eye">Sales agent</p><h2 id="proposalName">Proposal writer</h2><p class="location" id="proposalLocation">Drafted from the opportunity record</p></div><button class="close" id="closeProposal" type="button">Close</button></header><label>Project investment<input id="proposalInvestment" placeholder="Example: $3,200 setup plus $297 monthly"></label><label>Expected timeline<input id="proposalTimeline" value="2 to 3 weeks after receiving access and materials"></label><label>Payment terms<input id="proposalTerms" placeholder="Enter the payment schedule"></label><button class="save" id="generateProposal" type="button">Generate proposal draft</button><label>Editable proposal<textarea id="proposalDraft" style="min-height:460px" placeholder="Generate a draft, then revise it in your own words."></textarea></label><label class="approval"><input id="approveProposal" type="checkbox"><span>I reviewed this proposal and confirm that the facts, scope, price, and promises are accurate.</span></label><button class="save" id="saveProposal" type="button">Save draft on this device</button><button class="save" id="copyProposal" type="button">Copy approved proposal</button><button class="save" id="downloadProposal" type="button">Download approved proposal</button><p class="message" id="proposalMessage"></p></form></div>
+  <div id="fulfillmentVeil" class="workspaceveil" hidden><form class="workspacebox" id="fulfillmentForm"><header><div><p class="eye">Fulfillment handoff</p><h2 id="fulfillmentName">Project launch plan</h2><p class="location" id="fulfillmentLocation">Turn the sale into controlled delivery</p></div><button class="close" id="closeFulfillment" type="button">Close</button></header><div class="brief"><strong>Notion is the authoritative delivery record.</strong><br>Phoenix readiness and milestone reminders do not replace the protected Client Configuration record, 46-task Implementation Checklist, QA records, or Gates A through E.</div><a class="save" href="https://app.notion.com/p/3a8db17278ed8105a122f3f443841f26" target="_blank" rel="noopener">Open canonical lifecycle in Notion</a><a class="save" href="https://app.notion.com/p/3a1db17278ed8164a3d7f489d4ccfc9d" target="_blank" rel="noopener">Open Project Start Requirements</a><label>Readiness decision<select id="fulfillmentReadiness"><option value="not_ready">Not Ready</option><option value="conditionally_ready">Conditionally Ready</option><option value="ready">Ready</option></select></label><label>Internal project owner<input id="fulfillmentOwner" value="Roberta Kelley"></label><label>Confirmed Day 1<input id="fulfillmentStart" type="date"></label><p class="eye">Required evidence before Day 1</p><label class="approval"><input id="gateProposal" type="checkbox"><span>Final proposal and scope approved</span></label><label class="approval"><input id="gateAgreement" type="checkbox"><span>Services agreement signed</span></label><label class="approval"><input id="gatePayment" type="checkbox"><span>Initial payment paid and cleared</span></label><label class="approval"><input id="gateRequirements" type="checkbox"><span>Project Start Requirements complete</span></label><label class="approval"><input id="gateSetup" type="checkbox"><span>Private client setup and preflight audit complete in Notion</span></label><label class="approval"><input id="gateDay1" type="checkbox"><span>Written Day 1 Confirmation issued</span></label><button class="save" id="generateFulfillment" type="button">Generate handoff plan</button><label>Project summary<textarea id="fulfillmentSummary"></textarea></label><label>Client requirements, one per line<textarea id="fulfillmentRequirements"></textarea></label><label>Delivery milestones, one per line<textarea id="fulfillmentMilestones"></textarea></label><label>Known risks or boundaries<textarea id="fulfillmentRisks"></textarea></label><label class="approval"><input id="approveFulfillment" type="checkbox"><span>I verified these facts against the current Notion client records and approve Phoenix milestone reminders.</span></label><button class="save" id="saveFulfillment" type="button">Save readiness summary on this device</button><button class="save" id="createFulfillmentTasks" type="button">Create Day 1 milestone reminders</button><p class="message" id="fulfillmentMessage"></p></form></div>
   <script>
     (() => {
       const URL_KEY = "kelley-ai:supabase-url";
@@ -178,6 +179,8 @@ h1{font-size:34px}
       const activityVeil = document.getElementById("activityVeil");
       const proposalVeil = document.getElementById("proposalVeil");
       const PROPOSAL_KEY = "phoenix:proposal:";
+      const fulfillmentVeil = document.getElementById("fulfillmentVeil");
+      const FULFILLMENT_KEY = "phoenix:fulfillment:";
       const money = new Intl.NumberFormat("en-US", {style:"currency",currency:"USD",maximumFractionDigits:0});
       const validStages = ["identified","researched","contacted","engaged","consultation_scheduled","consultation_completed","proposal_sent","decision_pending","won","lost","nurture"];
       let selectedOpportunity = null;
@@ -786,7 +789,7 @@ h1{font-size:34px}
             ? painPoints.map(item => "• " + item).join("\n")
             : "• Confirm the first workflow priority with the client before sending this proposal.";
           const recommendation = brief.recommended_offer || "A focused lead capture, qualification, and follow-up system built around the process your team already uses.";
-          const nextStep = outcome.proposed_next_action || "Review the scope together and confirm the project start date.";
+          const nextStep = outcome.proposed_next_action || "Review the scope together and confirm the next commercial step.";
           const date = new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
           const draft = [
             "PROPOSAL FOR " + companyName,
@@ -836,7 +839,7 @@ h1{font-size:34px}
             "",
             nextStep,
             "",
-            "If this reflects what we discussed, we can confirm the final scope and choose a start date.",
+            "If this reflects what we discussed, we can confirm the final scope and complete the project start requirements.",
             "",
             "Roberta Kelley",
             "Kelley AI Systems"
@@ -886,6 +889,171 @@ h1{font-size:34px}
           message.textContent = "Approved proposal downloaded. Nothing was sent automatically.";
         } catch (problem) {
           message.textContent = problem instanceof Error ? problem.message : "The proposal could not be downloaded.";
+        }
+      });
+      const fulfillmentStorageKey = () => FULFILLMENT_KEY + selectedOpportunity.id;
+      const fulfillmentSnapshot = () => ({
+        readiness:document.getElementById("fulfillmentReadiness").value,
+        owner:document.getElementById("fulfillmentOwner").value.trim(),
+        start:document.getElementById("fulfillmentStart").value,
+        gates:{
+          proposal:document.getElementById("gateProposal").checked,
+          agreement:document.getElementById("gateAgreement").checked,
+          payment:document.getElementById("gatePayment").checked,
+          requirements:document.getElementById("gateRequirements").checked,
+          setup:document.getElementById("gateSetup").checked,
+          day1:document.getElementById("gateDay1").checked
+        },
+        summary:document.getElementById("fulfillmentSummary").value.trim(),
+        requirements:document.getElementById("fulfillmentRequirements").value.trim(),
+        milestones:document.getElementById("fulfillmentMilestones").value.trim(),
+        risks:document.getElementById("fulfillmentRisks").value.trim()
+      });
+      document.getElementById("openFulfillment").addEventListener("click", () => {
+        if (!selectedOpportunity) return;
+        const companyName = selectedCompany?.name || selectedOpportunity.name;
+        document.getElementById("fulfillmentName").textContent = companyName;
+        document.getElementById("fulfillmentLocation").textContent = String(selectedOpportunity.stage) === "won"
+          ? "Commercially accepted. Readiness evidence is still required."
+          : "Preview only. This opportunity is not marked Won.";
+        document.getElementById("approveFulfillment").checked = false;
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        document.getElementById("fulfillmentStart").value = tomorrow.toISOString().slice(0,10);
+        try {
+          const saved = JSON.parse(localStorage.getItem(fulfillmentStorageKey()) || "null");
+          document.getElementById("fulfillmentReadiness").value = saved?.readiness || "not_ready";
+          document.getElementById("fulfillmentOwner").value = saved?.owner || "Roberta Kelley";
+          document.getElementById("fulfillmentStart").value = saved?.start || tomorrow.toISOString().slice(0,10);
+          document.getElementById("fulfillmentSummary").value = saved?.summary || "";
+          document.getElementById("fulfillmentRequirements").value = saved?.requirements || "";
+          document.getElementById("fulfillmentMilestones").value = saved?.milestones || "";
+          document.getElementById("fulfillmentRisks").value = saved?.risks || "";
+          document.getElementById("gateProposal").checked = Boolean(saved?.gates?.proposal);
+          document.getElementById("gateAgreement").checked = Boolean(saved?.gates?.agreement);
+          document.getElementById("gatePayment").checked = Boolean(saved?.gates?.payment);
+          document.getElementById("gateRequirements").checked = Boolean(saved?.gates?.requirements);
+          document.getElementById("gateSetup").checked = Boolean(saved?.gates?.setup);
+          document.getElementById("gateDay1").checked = Boolean(saved?.gates?.day1);
+          document.getElementById("fulfillmentMessage").textContent = saved
+            ? "Your saved readiness summary is loaded. Verify it against Notion before creating reminders."
+            : "Generate a first draft, then verify every gate against the current Notion client records.";
+        } catch {
+          document.getElementById("fulfillmentReadiness").value = "not_ready";
+          document.getElementById("gateProposal").checked = false;
+          document.getElementById("gateAgreement").checked = false;
+          document.getElementById("gatePayment").checked = false;
+          document.getElementById("gateRequirements").checked = false;
+          document.getElementById("gateSetup").checked = false;
+          document.getElementById("gateDay1").checked = false;
+          document.getElementById("fulfillmentMessage").textContent = "Generate a first draft, then confirm the requirements, dates, and boundaries.";
+        }
+        fulfillmentVeil.hidden = false;
+        fulfillmentVeil.scrollTop = 0;
+      });
+      document.getElementById("closeFulfillment").addEventListener("click", () => { fulfillmentVeil.hidden = true; });
+      document.getElementById("generateFulfillment").addEventListener("click", () => {
+        const companyName = selectedCompany?.name || selectedOpportunity.name;
+        const proposal = (() => {
+          try { return JSON.parse(localStorage.getItem(PROPOSAL_KEY + selectedOpportunity.id) || "null"); }
+          catch { return null; }
+        })();
+        const commercialStatus = String(selectedOpportunity.stage) === "won"
+          ? companyName + " commercially approved a Kelley AI Systems project."
+          : companyName + " is still in the sales lifecycle. This is a planning preview, not an approved client project.";
+        document.getElementById("fulfillmentSummary").value = commercialStatus + " Delivery may begin only after the current Notion readiness records are complete and written Day 1 Confirmation is issued." + (proposal?.investment ? " Proposed investment: " + proposal.investment + "." : "");
+        document.getElementById("fulfillmentRequirements").value = [
+          "Name one person who can approve decisions and answer process questions",
+          "Provide approved business information, offers, FAQs, and client-facing language",
+          "Provide access through secure invitations or an approved password manager, never through plain text",
+          "Confirm the current lead sources, forms, calendars, and follow-up process",
+          "Provide test records and approve the required gates before launch",
+          "Complete the private Client Configuration, 46-task checklist, QA selection, and Launch Approval records in Notion"
+        ].join("\n");
+        document.getElementById("fulfillmentMilestones").value = [
+          "Kickoff and secure access confirmed",
+          "Current workflow mapped and approved",
+          "Core system built and internally tested",
+          "Client review completed and revisions approved",
+          "Launch, training, and written handoff completed"
+        ].join("\n");
+        document.getElementById("fulfillmentRisks").value = "Work pauses when required access, content, or approvals are late. New requests outside the approved scope require a written change decision before they are added.";
+        document.getElementById("approveFulfillment").checked = false;
+        document.getElementById("fulfillmentMessage").textContent = "Readiness draft generated. Edit it to match the signed agreement and current Notion records.";
+      });
+      document.getElementById("saveFulfillment").addEventListener("click", () => {
+        localStorage.setItem(fulfillmentStorageKey(), JSON.stringify(fulfillmentSnapshot()));
+        document.getElementById("fulfillmentMessage").textContent = "Readiness summary saved on this device. Notion remains authoritative. No reminders were created.";
+      });
+      const addBusinessDays = (date, days) => {
+        const result = new Date(date);
+        let remaining = days;
+        while (remaining > 0) {
+          result.setDate(result.getDate() + 1);
+          const weekday = result.getDay();
+          if (weekday !== 0 && weekday !== 6) remaining -= 1;
+        }
+        return result;
+      };
+      document.getElementById("createFulfillmentTasks").addEventListener("click", async () => {
+        const button = document.getElementById("createFulfillmentTasks");
+        const message = document.getElementById("fulfillmentMessage");
+        const plan = fulfillmentSnapshot();
+        const requirements = lines(plan.requirements);
+        const milestones = lines(plan.milestones);
+        const allGatesComplete = Object.values(plan.gates).every(Boolean);
+        if (String(selectedOpportunity.stage) !== "won") {
+          message.textContent = "This opportunity is not marked Won. Phoenix cannot begin client delivery.";
+          return;
+        }
+        if (plan.readiness !== "ready" || !allGatesComplete) {
+          message.textContent = "Readiness is incomplete. Confirm every requirement in Notion and issue written Day 1 Confirmation first.";
+          return;
+        }
+        if (!plan.owner || !plan.start || !plan.summary || !requirements.length || !milestones.length) {
+          message.textContent = "Complete the owner, start date, summary, requirements, and milestones first.";
+          return;
+        }
+        if (!document.getElementById("approveFulfillment").checked) {
+          message.textContent = "Review the handoff and check the approval box before creating work.";
+          return;
+        }
+        button.disabled = true;
+        button.textContent = "Creating approved work...";
+        message.textContent = "";
+        try {
+          localStorage.setItem(fulfillmentStorageKey(), JSON.stringify(plan));
+          const existing = await request("tasks?opportunity_id=eq." + encodeURIComponent(selectedOpportunity.id) + "&task_type=eq.fulfillment&select=id,title,status");
+          const existingTitles = new Set(existing.map(task => task.title));
+          const taskPlans = milestones.map((milestone,index) => ({
+            title:"Fulfillment: " + milestone,
+            offset:[0,3,8,11,15][index] ?? 15 + ((index - 4) * 3)
+          }));
+          let created = 0;
+          for (const taskPlan of taskPlans) {
+            if (existingTitles.has(taskPlan.title)) continue;
+            const dayOne = new Date(plan.start + "T17:00:00");
+            const due = addBusinessDays(dayOne, taskPlan.offset);
+            await createRecord("tasks", {
+              workspace_id:selectedOpportunity.workspace_id,
+              opportunity_id:selectedOpportunity.id,
+              title:taskPlan.title,
+              task_type:"fulfillment",
+              priority:taskPlan.offset <= 2 ? "high" : "normal",
+              status:"open",
+              due_at:due.toISOString()
+            });
+            created += 1;
+          }
+          message.textContent = created
+            ? created + " Phoenix milestone reminders created from confirmed Day 1. Continue managing the authoritative 46-task project in Notion."
+            : "The Phoenix milestone reminders already exist. No duplicates were created. Continue managing delivery in Notion.";
+          await loadData();
+        } catch (problem) {
+          message.textContent = problem instanceof Error ? problem.message : "The fulfillment tasks could not be created.";
+        } finally {
+          button.disabled = false;
+          button.textContent = "Create Day 1 milestone reminders";
         }
       });
       document.getElementById("openOutcome").addEventListener("click", () => {
@@ -1075,12 +1243,14 @@ h1{font-size:34px}
             addActivityItem(
               (overdue ? "Overdue: " : "Pending: ") + task.title,
               "Due " + due + " · " + task.priority + " priority",
-              overdue ? "This follow-up needs attention." : "Open follow-up task",
+              overdue
+                ? (task.task_type === "fulfillment" ? "This delivery reminder needs attention. Verify the authoritative task in Notion." : "This follow-up needs attention.")
+                : (task.task_type === "fulfillment" ? "Phoenix milestone reminder. The authoritative project task remains in Notion." : "Open follow-up task"),
               "",
               {
                 overdue,
                 onComplete:async () => {
-                  await updateRecord("tasks", task.id, {status:"completed"});
+                  await updateRecord("tasks", task.id, {status:"completed",completed_at:new Date().toISOString()});
                   document.getElementById("activityMessage").textContent = "Task completed. Phoenix has refreshed your priorities.";
                   await loadData();
                 }
