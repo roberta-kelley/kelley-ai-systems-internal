@@ -108,7 +108,7 @@ h1{font-size:34px}
 .autherror{margin-top:12px;border-radius:10px;background:var(--roseSoft);padding:10px;color:var(--rose2)!important}
 .workspaceveil{position:fixed;inset:0;z-index:1100;display:grid;place-items:start center;overflow-y:auto;background:#ffffffcf;padding:22px}
 .workspaceveil[hidden]{display:none!important}
-.workspacebox{width:min(560px,100%);margin:18px auto;border:1px solid var(--gold);border-radius:24px;background:#fff;padding:26px;box-shadow:0 24px 70px #27384214}
+.workspacebox{width:min(680px,100%);margin:18px auto;border:1px solid var(--gold);border-radius:24px;background:#fff;padding:26px;box-shadow:0 24px 70px #27384214}
 .workspacebox header{display:flex;align-items:start;justify-content:space-between;gap:16px}.workspacebox h2{font-size:24px}.workspacebox .close{width:auto;margin:0;border:1px solid var(--gold);border-radius:999px;background:#fff;padding:8px 12px;color:var(--ink)}
 .workspacebox label{display:block;margin-top:15px;color:var(--muted);font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.workspacebox input,.workspacebox select,.workspacebox textarea{width:100%;margin-top:6px;border:1px solid var(--gold);border-radius:11px;background:#fff;padding:12px;color:var(--ink)}.workspacebox textarea{min-height:110px;resize:vertical}.workspacebox .save{width:100%;margin-top:18px;border:1px solid var(--gold);border-radius:11px;background:var(--rose);padding:12px;color:#fff;font-weight:800}.workspacebox .message{margin-top:12px;color:var(--rose2);font-size:11px}
 .utility{position:fixed;right:12px;bottom:12px;z-index:900;display:flex;gap:7px}.utility button{width:auto;margin:0;background:#fff;color:var(--ink);font-size:9px;padding:7px 10px}
@@ -144,12 +144,13 @@ h1{font-size:34px}
         <article class="card leads"><div class="leadhead"><div><p class="eye">Relationships</p><h2>Active opportunities</h2></div><button type="button" id="addLead">＋ Add lead</button></div><table><thead><tr><th>Name</th><th>Status</th><th>Score</th><th>Value</th><th>Stage</th><th>Agent</th></tr></thead><tbody id="opportunityRows"><tr><td colspan="6">Loading protected opportunities…</td></tr></tbody></table></article>
       </div>
     </section>
-    <aside><div class="aside"><p class="eye">Lead intelligence</p><h2 id="intelligenceName">Select an opportunity</h2><p class="location" id="intelligenceLocation">Protected owner workspace</p></div><div class="aside"><p class="eye">Stage roadmap</p><div class="road" id="stageRoadmap"><span data-stage="identified"><i>1</i>Capture</span><span data-stage="vetted"><i>2</i>Vetted</span><span data-stage="discovery"><i>3</i>Discovery</span><span data-stage="proposal"><i>4</i>Proposal</span><span data-stage="closed"><i>5</i>Closed</span></div></div><div class="aside"><p class="eye">Strategic briefing</p><div class="brief" id="strategicBrief">Choose an opportunity to review its current intelligence record.</div></div><div class="aside"><p class="eye">Next best action</p><strong class="action" id="nextAction">Review the opportunity record</strong><button class="actionbtn" id="openWorkspace" type="button">Open lead workspace</button></div></aside>
+    <aside><div class="aside"><p class="eye">Lead intelligence</p><h2 id="intelligenceName">Select an opportunity</h2><p class="location" id="intelligenceLocation">Protected owner workspace</p></div><div class="aside"><p class="eye">Stage roadmap</p><div class="road" id="stageRoadmap"><span data-stage="identified"><i>1</i>Capture</span><span data-stage="vetted"><i>2</i>Vetted</span><span data-stage="discovery"><i>3</i>Discovery</span><span data-stage="proposal"><i>4</i>Proposal</span><span data-stage="closed"><i>5</i>Closed</span></div></div><div class="aside"><p class="eye">Strategic briefing</p><div class="brief" id="strategicBrief">Choose an opportunity to review its current intelligence record.</div><button class="actionbtn" id="openBrief" type="button">Prepare call brief</button></div><div class="aside"><p class="eye">Next best action</p><strong class="action" id="nextAction">Review the opportunity record</strong><button class="actionbtn" id="openWorkspace" type="button">Open lead workspace</button></div></aside>
   </div>
   <div class="utility"><button type="button" id="resetConnection">Reset connection</button><button type="button" id="signOut">Sign out</button></div>
   <div id="authVeil" class="authveil" hidden></div>
   <div id="workspaceVeil" class="workspaceveil" hidden><form class="workspacebox" id="workspaceForm"><header><div><p class="eye">Opportunity workspace</p><h2 id="workspaceName">Lead</h2><p class="location" id="workspaceLocation"></p></div><button class="close" id="closeWorkspace" type="button">Close</button></header><label>Stage<select id="workspaceStage"><option value="identified">Capture</option><option value="vetted">Vetted</option><option value="discovery">Discovery</option><option value="proposal">Proposal</option><option value="closed">Closed</option></select></label><label>Next best action<textarea id="workspaceAction" placeholder="What should happen next?"></textarea></label><button class="save" id="saveWorkspace" type="submit">Save lead update</button><p class="message" id="workspaceMessage"></p></form></div>
   <div id="addLeadVeil" class="workspaceveil" hidden><form class="workspacebox" id="addLeadForm"><header><div><p class="eye">New relationship</p><h2>Add a lead</h2><p class="location">Create the company and its first opportunity.</p></div><button class="close" id="closeAddLead" type="button">Close</button></header><label>Company name<input id="newCompanyName" required placeholder="Company or prospect name"></label><label>Location<input id="newCompanyLocation" placeholder="City, State"></label><label>Opportunity name<input id="newOpportunityName" required placeholder="Example: AI systems consultation"></label><label>Estimated value<input id="newEstimatedValue" type="number" min="0" step="1" value="0"></label><label>Next best action<textarea id="newNextAction" placeholder="Example: Research company and prepare outreach"></textarea></label><button class="save" id="saveNewLead" type="submit">Add lead to Phoenix</button><p class="message" id="addLeadMessage"></p></form></div>
+  <div id="briefVeil" class="workspaceveil" hidden><form class="workspacebox" id="briefForm"><header><div><p class="eye">Closer intelligence</p><h2 id="briefName">Call preparation</h2><p class="location" id="briefLocation"></p></div><button class="close" id="closeBrief" type="button">Close</button></header><button class="save" id="generateBrief" type="button">Generate starter brief</button><label>Company background<textarea id="briefBackground"></textarea></label><label>Likely pain points — one per line<textarea id="briefPainPoints"></textarea></label><label>Recommended questions — one per line<textarea id="briefQuestions"></textarea></label><label>Relevant Kelley AI offer<textarea id="briefOffer"></textarea></label><label>Possible objections and responses — use Objection | Response<textarea id="briefObjections"></textarea></label><label>Desired call outcome<textarea id="briefOutcome"></textarea></label><button class="save" id="saveBrief" type="submit">Save call brief</button><p class="message" id="briefMessage"></p></form></div>
   <script>
     (() => {
       const URL_KEY = "kelley-ai:supabase-url";
@@ -159,9 +160,11 @@ h1{font-size:34px}
       const rows = document.getElementById("opportunityRows");
       const workspaceVeil = document.getElementById("workspaceVeil");
       const addLeadVeil = document.getElementById("addLeadVeil");
+      const briefVeil = document.getElementById("briefVeil");
       const money = new Intl.NumberFormat("en-US", {style:"currency",currency:"USD",maximumFractionDigits:0});
       let selectedOpportunity = null;
       let selectedCompany = null;
+      let selectedBrief = null;
 
       const config = () => ({
         url: localStorage.getItem(URL_KEY) || "",
@@ -305,6 +308,23 @@ h1{font-size:34px}
         });
         const data = await response.json();
         if (!response.ok) throw new Error(data.message || data.hint || data.details || "The record could not be created.");
+        return data[0];
+      };
+      const updateRecord = async (table, id, payload) => {
+        const {url,key} = config();
+        const current = session();
+        const response = await fetch(url + "/rest/v1/" + table + "?id=eq." + encodeURIComponent(id), {
+          method:"PATCH",
+          headers:{
+            "apikey":key,
+            "Authorization":"Bearer " + current.access_token,
+            "Content-Type":"application/json",
+            "Prefer":"return=representation"
+          },
+          body:JSON.stringify(payload)
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message || data.hint || data.details || "The record could not be updated.");
         return data[0];
       };
       const saveOpportunity = async changes => {
@@ -476,6 +496,92 @@ h1{font-size:34px}
         } finally {
           button.disabled = false;
           button.textContent = "Add lead to Phoenix";
+        }
+      });
+      const lines = value => value.split("\n").map(item => item.trim()).filter(Boolean);
+      const showBrief = brief => {
+        selectedBrief = brief;
+        document.getElementById("briefBackground").value = brief?.company_background || "";
+        document.getElementById("briefPainPoints").value = (brief?.likely_pain_points || []).join("\n");
+        document.getElementById("briefQuestions").value = (brief?.recommended_questions || []).join("\n");
+        document.getElementById("briefOffer").value = brief?.recommended_offer || "";
+        document.getElementById("briefObjections").value = (brief?.possible_objections || []).map(item => item.objection + " | " + item.response).join("\n");
+        document.getElementById("briefOutcome").value = brief?.desired_outcome || "";
+      };
+      document.getElementById("openBrief").addEventListener("click", async () => {
+        if (!selectedOpportunity) return;
+        document.getElementById("briefName").textContent = selectedCompany?.name || selectedOpportunity.name;
+        document.getElementById("briefLocation").textContent = selectedCompany?.location || "Kelley AI opportunity";
+        document.getElementById("briefMessage").textContent = "Loading saved intelligence…";
+        briefVeil.hidden = false;
+        try {
+          const briefs = await request("intelligence_briefs?opportunity_id=eq." + encodeURIComponent(selectedOpportunity.id) + "&select=id,workspace_id,opportunity_id,company_background,likely_pain_points,recommended_questions,recommended_offer,possible_objections,desired_outcome,confidence_score&limit=1");
+          showBrief(briefs[0] || null);
+          document.getElementById("briefMessage").textContent = briefs.length ? "Saved brief loaded." : "No saved brief yet. Generate a starter or write your own.";
+        } catch (problem) {
+          document.getElementById("briefMessage").textContent = problem instanceof Error ? problem.message : "The call brief could not be loaded.";
+        }
+      });
+      document.getElementById("closeBrief").addEventListener("click", () => { briefVeil.hidden = true; });
+      document.getElementById("generateBrief").addEventListener("click", () => {
+        if (!selectedOpportunity) return;
+        const companyName = selectedCompany?.name || selectedOpportunity.name;
+        const location = selectedCompany?.location || "its market";
+        document.getElementById("briefBackground").value = companyName + " is an active prospect in " + location + ". Confirm its services, current lead process, response speed, scheduling flow, and follow-up process during discovery.";
+        document.getElementById("briefPainPoints").value = [
+          "Qualified inquiries may not receive immediate, consistent follow-up",
+          "The owner or sales team may spend too much time answering repetitive questions",
+          "Lead details may be scattered across forms, messages, and spreadsheets",
+          "Promising opportunities may stall without a clear next action"
+        ].join("\n");
+        document.getElementById("briefQuestions").value = [
+          "What happens from the moment a new inquiry arrives?",
+          "How quickly does a prospect normally receive a response?",
+          "Where do leads most often stall or disappear?",
+          "What information do you need before deciding a lead is qualified?",
+          "What would a better follow-up system free your team to do?"
+        ].join("\n");
+        document.getElementById("briefOffer").value = "Kelley AI Systems lead capture, qualification, follow-up, and owner command-center workflow tailored to the company’s existing process.";
+        document.getElementById("briefObjections").value = [
+          "We already have a CRM | Kelley AI improves the workflow around the tools already in place instead of requiring an unnecessary replacement.",
+          "AI will feel impersonal | The system uses the company’s voice and hands qualified conversations to a person at the right moment.",
+          "We are too busy to implement this | Start with one high-impact workflow and expand only after it proves useful."
+        ].join("\n");
+        document.getElementById("briefOutcome").value = "Confirm the company’s most expensive lead-management gap and earn agreement on one focused next step.";
+        document.getElementById("briefMessage").textContent = "Starter brief generated. Review and personalize it before saving.";
+      });
+      document.getElementById("briefForm").addEventListener("submit", async event => {
+        event.preventDefault();
+        const button = document.getElementById("saveBrief");
+        const message = document.getElementById("briefMessage");
+        button.disabled = true;
+        button.textContent = "Saving…";
+        message.textContent = "";
+        const payload = {
+          workspace_id:selectedOpportunity.workspace_id,
+          opportunity_id:selectedOpportunity.id,
+          company_background:document.getElementById("briefBackground").value.trim() || null,
+          likely_pain_points:lines(document.getElementById("briefPainPoints").value),
+          recommended_questions:lines(document.getElementById("briefQuestions").value),
+          recommended_offer:document.getElementById("briefOffer").value.trim() || null,
+          possible_objections:lines(document.getElementById("briefObjections").value).map(item => {
+            const parts = item.split("|");
+            return {objection:(parts.shift() || "").trim(),response:parts.join("|").trim()};
+          }),
+          desired_outcome:document.getElementById("briefOutcome").value.trim() || null,
+          confidence_score:60
+        };
+        try {
+          selectedBrief = selectedBrief
+            ? await updateRecord("intelligence_briefs", selectedBrief.id, payload)
+            : await createRecord("intelligence_briefs", payload);
+          message.textContent = "Call brief saved to this opportunity.";
+          document.getElementById("strategicBrief").textContent = payload.likely_pain_points[0] || "Call preparation is ready.";
+        } catch (problem) {
+          message.textContent = problem instanceof Error ? problem.message : "The call brief could not be saved.";
+        } finally {
+          button.disabled = false;
+          button.textContent = "Save call brief";
         }
       });
       if (!config().url || !config().key) showSetup();
