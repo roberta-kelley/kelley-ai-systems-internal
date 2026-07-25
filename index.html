@@ -59,6 +59,7 @@ h1{font-size:40px}
 .results strong{display:block;margin-top:4px;color:var(--rose);font:600 25px "Manrope","DM Sans",Arial,sans-serif}
 .results div:last-child strong{color:var(--roseAccent)}
 .leads{overflow-x:auto}
+.proof{margin-top:16px;padding:22px}.proofhead{display:flex;align-items:end;justify-content:space-between;gap:18px}.proofhead h2{font-size:23px}.proofgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:18px}.proofmetric{border:1px solid var(--gold);border-radius:14px;background:#fff;padding:14px}.proofmetric small{display:block;color:var(--muted);font-size:8px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.proofmetric strong{display:block;margin-top:8px;color:var(--rose);font:600 24px "Manrope","DM Sans",Arial,sans-serif}.proofinsight{margin-top:14px;border:1px solid var(--gold);border-radius:14px;background:var(--roseSoft);padding:14px;color:var(--ink);font-size:11px;line-height:1.6}
 .leadhead{display:flex;align-items:center;justify-content:space-between;padding:19px 20px;border-bottom:1px solid var(--gold)}
 .leadhead button{border:1px solid var(--gold);border-radius:999px;background:var(--taupe);padding:9px 14px;color:white;font-size:10px;font-weight:700}
 table{width:100%;border-collapse:collapse;font-size:10px}
@@ -87,6 +88,7 @@ aside{border-top:1px solid var(--line);border-left:0}
 }
 @media(max-width:1300px){.lower{grid-template-columns:1fr}
 .leads table{min-width:760px}
+.proofgrid{grid-template-columns:repeat(3,1fr)}
 }
 @media(max-width:900px){.kfside{display:none}
 }
@@ -95,11 +97,13 @@ aside{border-top:1px solid var(--line);border-left:0}
 .metrics{grid-template-columns:1fr 1fr}
 .lower{grid-template-columns:1fr}
 .focus{width:100%}
+.proofgrid{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:500px){.pipe{display:none}
 .metrics{grid-template-columns:1fr}
 .progress{align-items:start;flex-direction:column;gap:9px}
 h1{font-size:34px}
+.proofgrid{grid-template-columns:1fr}
 }
 .authveil{position:fixed;inset:0;z-index:1000;display:block;overflow-y:auto;background:transparent;padding:20px;pointer-events:none}
 .authveil[hidden]{display:none!important}
@@ -148,6 +152,7 @@ h1{font-size:34px}
       <div class="lower"><article class="card goal"><p class="eye">Planning</p><h2>Goal calculator</h2><p class="sub">Turn your target into a clear client number.</p><label>Monthly income goal<div class="input">$ 5,500</div></label><label>Average project value<div class="input">$ 3,200</div></label><div class="results"><div><small>Clients needed</small><strong>2</strong></div><div><small>Delivery hours</small><strong>30</strong></div></div></article>
         <article class="card leads"><div class="leadhead"><div><p class="eye">Relationships</p><h2>Active opportunities</h2></div><button type="button" id="addLead">＋ Add lead</button></div><table><thead><tr><th>Name</th><th>Status</th><th>Score</th><th>Value</th><th>Stage</th><th>Action</th></tr></thead><tbody id="opportunityRows"><tr><td colspan="6">Loading protected opportunities…</td></tr></tbody></table></article>
       </div>
+      <article class="card proof"><div class="proofhead"><div><p class="eye">Proof &amp; performance</p><h2>What is producing movement</h2></div><p class="sub">Measured from your real Phoenix activity.</p></div><div class="proofgrid"><div class="proofmetric"><small>Outcomes recorded</small><strong id="proofOutcomes">0</strong></div><div class="proofmetric"><small>Follow-ups sent</small><strong id="proofFollowUps">0</strong></div><div class="proofmetric"><small>Interested</small><strong id="proofInterested">0</strong></div><div class="proofmetric"><small>Proposals</small><strong id="proofProposals">0</strong></div><div class="proofmetric"><small>Wins</small><strong id="proofWins">0</strong></div><div class="proofmetric"><small>Positive movement</small><strong id="proofConversion">0%</strong></div></div><div class="proofinsight" id="proofInsight">Phoenix needs a few recorded outcomes before it can identify a reliable pattern.</div><div class="proofinsight" id="proofFeedback">Recommendation feedback will appear here as you accept, edit, or reject Phoenix suggestions.</div></article>
     </section>
     <aside><div class="aside"><p class="eye">Lead intelligence</p><h2 id="intelligenceName">Select an opportunity</h2><p class="location" id="intelligenceLocation">Protected owner workspace</p></div><div class="aside"><p class="eye">Stage roadmap</p><div class="road" id="stageRoadmap"><span data-stage="identified"><i>1</i>Capture</span><span data-stage="vetted"><i>2</i>Vetted</span><span data-stage="discovery"><i>3</i>Discovery</span><span data-stage="proposal"><i>4</i>Proposal</span><span data-stage="closed"><i>5</i>Closed</span></div></div><div class="aside"><p class="eye">Strategic briefing</p><div class="brief" id="strategicBrief">Choose an opportunity to review its current intelligence record.</div><button class="actionbtn" id="openBrief" type="button">Prepare call brief</button></div><div class="aside"><p class="eye">Next best action</p><strong class="action" id="nextAction">Review the opportunity record</strong><button class="actionbtn" id="openWorkspace" type="button">Open lead workspace</button><button class="actionbtn" id="openOutcome" type="button">Record call outcome</button><button class="actionbtn" id="openActivity" type="button">View activity &amp; follow-up</button></div></aside>
   </div>
@@ -156,7 +161,7 @@ h1{font-size:34px}
   <div id="workspaceVeil" class="workspaceveil" hidden><form class="workspacebox" id="workspaceForm"><header><div><p class="eye">Opportunity workspace</p><h2 id="workspaceName">Lead</h2><p class="location" id="workspaceLocation"></p></div><button class="close" id="closeWorkspace" type="button">Close</button></header><p class="eye">Primary contact</p><label>First name<input id="workspaceFirstName" placeholder="First name"></label><label>Last name<input id="workspaceLastName" placeholder="Last name"></label><label>Role<input id="workspaceRole" placeholder="Owner, Sales Manager, etc."></label><label>Email<input id="workspaceEmail" type="email" placeholder="name@company.com"></label><label>Phone<input id="workspacePhone" type="tel" placeholder="Phone number"></label><p class="eye">Opportunity</p><label>Stage<select id="workspaceStage"><option value="identified">Captured</option><option value="researched">Researched</option><option value="contacted">Contacted</option><option value="engaged">Engaged</option><option value="consultation_scheduled">Consultation scheduled</option><option value="consultation_completed">Consultation completed</option><option value="proposal_sent">Proposal sent</option><option value="decision_pending">Decision pending</option><option value="won">Won</option><option value="lost">Lost</option><option value="nurture">Nurture</option></select></label><label>Next best action<textarea id="workspaceAction" placeholder="What should happen next?"></textarea></label><button class="save" id="saveWorkspace" type="submit">Save contact and lead</button><p class="message" id="workspaceMessage"></p></form></div>
   <div id="addLeadVeil" class="workspaceveil" hidden><form class="workspacebox" id="addLeadForm"><header><div><p class="eye">New relationship</p><h2>Add a lead</h2><p class="location">Create the company, contact, and first opportunity.</p></div><button class="close" id="closeAddLead" type="button">Close</button></header><p class="eye">Company</p><label>Company name<input id="newCompanyName" required placeholder="Company or prospect name"></label><label>Location<input id="newCompanyLocation" placeholder="City, State"></label><p class="eye">Primary contact</p><label>First name<input id="newFirstName" required placeholder="First name"></label><label>Last name<input id="newLastName" placeholder="Last name"></label><label>Role<input id="newContactRole" placeholder="Owner, Sales Manager, etc."></label><label>Email<input id="newContactEmail" type="email" placeholder="name@company.com"></label><label>Phone<input id="newContactPhone" type="tel" placeholder="Phone number"></label><p class="eye">Opportunity</p><label>Opportunity name<input id="newOpportunityName" required placeholder="Example: AI systems consultation"></label><label>Estimated value<input id="newEstimatedValue" type="number" min="0" step="1" value="0"></label><label>Next best action<textarea id="newNextAction" placeholder="Example: Research company and prepare outreach"></textarea></label><button class="save" id="saveNewLead" type="submit">Add lead to Phoenix</button><p class="message" id="addLeadMessage"></p></form></div>
   <div id="briefVeil" class="workspaceveil" hidden><form class="workspacebox" id="briefForm"><header><div><p class="eye">Closer intelligence</p><h2 id="briefName">Call preparation</h2><p class="location" id="briefLocation"></p></div><button class="close" id="closeBrief" type="button">Close</button></header><button class="save" id="generateBrief" type="button">Generate starter brief</button><label>Company background<textarea id="briefBackground"></textarea></label><label>Likely pain points — one per line<textarea id="briefPainPoints"></textarea></label><label>Recommended questions — one per line<textarea id="briefQuestions"></textarea></label><label>Relevant Kelley AI offer<textarea id="briefOffer"></textarea></label><label>Possible objections and responses — use Objection | Response<textarea id="briefObjections"></textarea></label><label>Desired call outcome<textarea id="briefOutcome"></textarea></label><button class="save" id="saveBrief" type="submit">Save call brief</button><p class="message" id="briefMessage"></p></form></div>
-  <div id="outcomeVeil" class="workspaceveil" hidden><form class="workspacebox" id="outcomeForm"><header><div><p class="eye">Closed-loop handoff</p><h2 id="outcomeName">Record call outcome</h2><p class="location" id="outcomeLocation"></p></div><button class="close" id="closeOutcome" type="button">Close</button></header><label>Call disposition<select id="outcomeDisposition"><option value="follow_up">Follow-up needed</option><option value="interested">Interested</option><option value="proposal_requested">Proposal requested</option><option value="closed_won">Closed won</option><option value="closed_lost">Closed lost</option><option value="no_answer">No answer</option></select></label><label>Confirmed pain points — one per line<textarea id="outcomePainPoints"></textarea></label><label>Objections raised — one per line<textarea id="outcomeObjections"></textarea></label><label>Commitments made — one per line<textarea id="outcomeCommitments"></textarea></label><label>Move pipeline to<select id="outcomeStage"><option value="identified">Captured</option><option value="researched">Researched</option><option value="contacted">Contacted</option><option value="engaged">Engaged</option><option value="consultation_scheduled">Consultation scheduled</option><option value="consultation_completed">Consultation completed</option><option value="proposal_sent">Proposal sent</option><option value="decision_pending">Decision pending</option><option value="won">Won</option><option value="lost">Lost</option><option value="nurture">Nurture</option></select></label><label>Next best action<textarea id="outcomeNextAction"></textarea></label><label>Follow-up due date<input id="outcomeDueDate" type="date"></label><button class="save" id="generateFollowUp" type="button">Generate follow-up message</button><label>Follow-up message<textarea id="outcomeFollowUp"></textarea></label><a class="save" id="openEmailDraft" href="#">Open email draft for review</a><label class="approval"><input id="approveOutcome" type="checkbox" checked><span>I approve updating the Phoenix pipeline and next action.</span></label><button class="save" id="saveOutcome" type="submit">Save outcome and update Phoenix</button><p class="message" id="outcomeMessage"></p></form></div>
+  <div id="outcomeVeil" class="workspaceveil" hidden><form class="workspacebox" id="outcomeForm"><header><div><p class="eye">Closed-loop handoff</p><h2 id="outcomeName">Record call outcome</h2><p class="location" id="outcomeLocation"></p></div><button class="close" id="closeOutcome" type="button">Close</button></header><label>Call disposition<select id="outcomeDisposition"><option value="follow_up">Follow-up needed</option><option value="interested">Interested</option><option value="proposal_requested">Proposal requested</option><option value="closed_won">Closed won</option><option value="closed_lost">Closed lost</option><option value="no_answer">No answer</option></select></label><label>Confirmed pain points — one per line<textarea id="outcomePainPoints"></textarea></label><label>Objections raised — one per line<textarea id="outcomeObjections"></textarea></label><label>Commitments made — one per line<textarea id="outcomeCommitments"></textarea></label><label>Move pipeline to<select id="outcomeStage"><option value="identified">Captured</option><option value="researched">Researched</option><option value="contacted">Contacted</option><option value="engaged">Engaged</option><option value="consultation_scheduled">Consultation scheduled</option><option value="consultation_completed">Consultation completed</option><option value="proposal_sent">Proposal sent</option><option value="decision_pending">Decision pending</option><option value="won">Won</option><option value="lost">Lost</option><option value="nurture">Nurture</option></select></label><label>Next best action<textarea id="outcomeNextAction"></textarea></label><label>Follow-up due date<input id="outcomeDueDate" type="date"></label><button class="save" id="generateFollowUp" type="button">Generate follow-up message</button><label>Follow-up message<textarea id="outcomeFollowUp"></textarea></label><a class="save" id="openEmailDraft" href="#">Open email draft for review</a><label>Phoenix recommendation<select id="recommendationDecision"><option value="accepted">Accept as recommended</option><option value="edited">I edited the recommendation</option><option value="rejected">Reject the recommendation</option></select></label><label class="approval"><input id="approveOutcome" type="checkbox" checked><span>Allow Phoenix to update the pipeline and create the next task.</span></label><button class="save" id="saveOutcome" type="submit">Save outcome and update Phoenix</button><p class="message" id="outcomeMessage"></p></form></div>
   <div id="activityVeil" class="workspaceveil" hidden><section class="workspacebox"><header><div><p class="eye">Orchestrator view</p><h2 id="activityName">Activity &amp; follow-up</h2><p class="location" id="activityLocation"></p></div><button class="close" id="closeActivity" type="button">Close</button></header><div class="activitylist" id="activityList"></div><p class="message" id="activityMessage"></p></section></div>
   <script>
     (() => {
@@ -386,11 +391,12 @@ h1{font-size:34px}
         loading.appendChild(loadingCell);
         rows.appendChild(loading);
         try {
-          const [opportunities, companies, contacts, tasks] = await Promise.all([
+          const [opportunities, companies, contacts, tasks, outcomes] = await Promise.all([
             request("opportunities?select=id,workspace_id,company_id,primary_contact_id,name,stage,status,estimated_value,priority_score,score_reasons,next_action,next_action_due_at&order=priority_score.desc"),
             request("companies?select=id,workspace_id,name,location"),
             request("contacts?select=id,workspace_id,company_id,first_name,last_name,role,email,phone"),
-            request("tasks?select=id,opportunity_id,title,priority,status,due_at&status=neq.completed&order=due_at.asc.nullslast")
+            request("tasks?select=id,opportunity_id,title,priority,status,due_at&status=neq.completed&order=due_at.asc.nullslast"),
+            request("outcomes?select=id,opportunity_id,disposition,commitments,proposed_stage,human_approved,created_at&order=created_at.desc")
           ]);
           const companyMap = new Map(companies.map(company => [company.id, company]));
           const contactMap = new Map(contacts.map(contact => [contact.id, contact]));
@@ -410,6 +416,38 @@ h1{font-size:34px}
           const wonPercent = Math.max(0,Math.min(100,(won / 5500) * 100));
           document.getElementById("wonPercent").textContent = wonPercent.toFixed(1).replace(".0","") + "%";
           document.getElementById("wonTrack").style.width = wonPercent + "%";
+          const outcomeOpportunityIds = new Set(outcomes.map(outcome => outcome.opportunity_id).filter(Boolean));
+          const positiveIds = new Set(outcomes
+            .filter(outcome => ["interested","proposal_requested","closed_won"].includes(String(outcome.disposition)))
+            .map(outcome => outcome.opportunity_id).filter(Boolean));
+          const proposalIds = new Set([
+            ...opportunities.filter(opportunity => ["proposal_sent","decision_pending","won"].includes(String(opportunity.stage))).map(opportunity => opportunity.id),
+            ...outcomes.filter(outcome => outcome.disposition === "proposal_requested" || ["proposal_sent","decision_pending","won"].includes(String(outcome.proposed_stage))).map(outcome => outcome.opportunity_id)
+          ].filter(Boolean));
+          const winIds = new Set([
+            ...opportunities.filter(opportunity => String(opportunity.stage) === "won").map(opportunity => opportunity.id),
+            ...outcomes.filter(outcome => outcome.disposition === "closed_won").map(outcome => outcome.opportunity_id)
+          ].filter(Boolean));
+          const followUpsSent = outcomes.filter(outcome => (outcome.commitments || []).some(item => String(item).startsWith("FOLLOW-UP SENT: "))).length;
+          const recommendationCounts = {accepted:0,edited:0,rejected:0};
+          outcomes.forEach(outcome => {
+            const marker = (outcome.commitments || []).find(item => String(item).startsWith("PHOENIX RECOMMENDATION: "));
+            const decision = marker ? String(marker).replace("PHOENIX RECOMMENDATION: ","").trim() : outcome.human_approved ? "accepted" : "rejected";
+            if (recommendationCounts[decision] !== undefined) recommendationCounts[decision] += 1;
+          });
+          const movementRate = outcomeOpportunityIds.size ? (positiveIds.size / outcomeOpportunityIds.size) * 100 : 0;
+          document.getElementById("proofOutcomes").textContent = String(outcomes.length);
+          document.getElementById("proofFollowUps").textContent = String(followUpsSent);
+          document.getElementById("proofInterested").textContent = String(positiveIds.size);
+          document.getElementById("proofProposals").textContent = String(proposalIds.size);
+          document.getElementById("proofWins").textContent = String(winIds.size);
+          document.getElementById("proofConversion").textContent = movementRate.toFixed(0) + "%";
+          document.getElementById("proofInsight").textContent = outcomes.length < 5
+            ? "Phoenix has " + outcomes.length + " recorded outcome" + (outcomes.length === 1 ? "" : "s") + ". Keep recording every contact and follow-up; a reliable pattern needs more evidence."
+            : positiveIds.size
+              ? movementRate.toFixed(0) + "% of opportunities with recorded outcomes have shown positive movement. Continue tracking the outreach method and result before treating this as a proven pattern."
+              : "No positive movement is recorded yet. Phoenix will keep measuring which outreach and follow-up actions create a response.";
+          document.getElementById("proofFeedback").textContent = "Recommendations · " + recommendationCounts.accepted + " accepted · " + recommendationCounts.edited + " edited · " + recommendationCounts.rejected + " rejected";
           const focusTask = dueTasks[0] || tasks[0];
           const focusOpportunity = activeOpportunities.find(item => item.next_action);
           document.getElementById("todayFocus").textContent = focusTask
@@ -678,6 +716,8 @@ h1{font-size:34px}
         const stage = String(selectedOpportunity.stage || "identified").toLowerCase();
         document.getElementById("outcomeStage").value = validStages.includes(stage) ? stage : "identified";
         document.getElementById("outcomeNextAction").value = selectedOpportunity.next_action || "";
+        document.getElementById("recommendationDecision").value = "accepted";
+        document.getElementById("approveOutcome").checked = true;
         if (!document.getElementById("outcomeDueDate").value) {
           const tomorrow = new Date();
           tomorrow.setDate(tomorrow.getDate() + 1);
@@ -725,6 +765,9 @@ h1{font-size:34px}
           : "Follow-up generated. Add the contact’s email in Lead Workspace to open an email draft.";
       });
       document.getElementById("outcomeDisposition").addEventListener("change", refreshEmailDraft);
+      document.getElementById("recommendationDecision").addEventListener("change", event => {
+        document.getElementById("approveOutcome").checked = event.target.value !== "rejected";
+      });
       document.getElementById("outcomeFollowUp").addEventListener("input", refreshEmailDraft);
       document.getElementById("openEmailDraft").addEventListener("click", event => {
         refreshEmailDraft();
@@ -740,12 +783,14 @@ h1{font-size:34px}
         event.preventDefault();
         const button = document.getElementById("saveOutcome");
         const message = document.getElementById("outcomeMessage");
-        const approved = document.getElementById("approveOutcome").checked;
+        const recommendationDecision = document.getElementById("recommendationDecision").value;
+        const approved = document.getElementById("approveOutcome").checked && recommendationDecision !== "rejected";
         const nextAction = document.getElementById("outcomeNextAction").value.trim();
         const proposedStage = document.getElementById("outcomeStage").value;
         const dueDate = document.getElementById("outcomeDueDate").value;
         const dueAt = dueDate ? new Date(dueDate + "T17:00:00").toISOString() : null;
         const commitments = lines(document.getElementById("outcomeCommitments").value);
+        commitments.push("PHOENIX RECOMMENDATION: " + recommendationDecision);
         const followUp = document.getElementById("outcomeFollowUp").value.trim();
         if (followUp) commitments.push("FOLLOW-UP MESSAGE: " + followUp);
         button.disabled = true;
