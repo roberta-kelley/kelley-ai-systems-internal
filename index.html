@@ -545,30 +545,40 @@ h1{font-size:34px}
           if (!researchApproved && ["identified","researched"].includes(String(opportunity.stage))) missing.push("approved research");
           if (!opportunity.next_action) missing.push("next action");
           if (missing.length) {
-            missingItems.push({opportunity,missing});
-            const route = missing.includes("contact permission")
-              ? "qualification"
-              : missing.includes("primary contact") || missing.includes("contact method")
-                ? "workspace"
-                : missing.includes("company website") || missing.includes("approved research")
-                  ? "research"
-                  : "workspace";
-            const routeOwner = route === "qualification" ? "Receptionist"
-              : route === "research" ? "Researcher"
-              : "Receptionist";
-            const routeTitle = route === "qualification" ? "Review contact permission for " + (company?.name || opportunity.name)
-              : route === "research" ? "Complete research setup for " + (company?.name || opportunity.name)
-              : "Complete " + (company?.name || opportunity.name) + " record";
-            commands.push({
-              kind:"missing",
-              rank:80 + Number(opportunity.priority_score || 0) / 10,
-              owner:routeOwner,
-              title:routeTitle,
-              meta:"Missing information",
-              why:"Still needed: " + missing.join(", ") + ".",
-              outcome:commandOutcome("missing",opportunity),
-              opportunity,
-              route
+            const name = company?.name || opportunity.name;
+            const routeGroups = [
+              {
+                route:"qualification",
+                owner:"Receptionist",
+                title:"Review contact permission for " + name,
+                items:missing.filter(item => item === "contact permission")
+              },
+              {
+                route:"research",
+                owner:"Researcher",
+                title:"Complete research setup for " + name,
+                items:missing.filter(item => item === "company website" || item === "approved research")
+              },
+              {
+                route:"workspace",
+                owner:"Receptionist",
+                title:"Complete " + name + " record",
+                items:missing.filter(item => item === "primary contact" || item === "contact method" || item === "next action")
+              }
+            ].filter(group => group.items.length);
+            routeGroups.forEach((group,index) => {
+              missingItems.push({opportunity,missing:group.items,route:group.route});
+              commands.push({
+                kind:"missing",
+                rank:80 + Number(opportunity.priority_score || 0) / 10 - index,
+                owner:group.owner,
+                title:group.title,
+                meta:"Missing information",
+                why:"Still needed: " + group.items.join(", ") + ".",
+                outcome:commandOutcome("missing",opportunity),
+                opportunity,
+                route:group.route
+              });
             });
           } else if (opportunity.next_action && !tasks.some(task => task.opportunity_id === opportunity.id)) {
             commands.push({
