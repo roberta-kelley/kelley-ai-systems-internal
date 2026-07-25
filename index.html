@@ -334,6 +334,16 @@ h1{font-size:34px}
         if (!response.ok) throw new Error(data.message || data.hint || data.details || ("Supabase returned " + response.status));
         return data;
       };
+      const optionalRequest = async (name,path) => {
+        try { return {name,data:await request(path),error:""}; }
+        catch (problem) {
+          return {
+            name,
+            data:[],
+            error:problem instanceof Error ? problem.message : "This source is temporarily unavailable."
+          };
+        }
+      };
       const cell = (text, className) => {
         const td = document.createElement("td");
         if (className) td.className = className;
@@ -457,7 +467,7 @@ h1{font-size:34px}
         if (String(opportunity?.stage) === "proposal_sent") return "A documented decision or follow-up date.";
         return "A verified next step with an owner and date.";
       };
-      const renderOrchestrator = ({opportunities,companies,contacts,tasks,recommendations,agentRuns,companyMap,contactMap}) => {
+      const renderOrchestrator = ({opportunities,companies,contacts,tasks,recommendations,agentRuns,companyMap,contactMap,sourceWarnings = []}) => {
         const commands = [];
         const now = new Date();
         const endOfToday = new Date();
@@ -543,7 +553,9 @@ h1{font-size:34px}
         document.getElementById("orchestratorApprovals").textContent = String(pendingRecommendations.length);
         document.getElementById("orchestratorMissing").textContent = String(missingItems.length);
         document.getElementById("orchestratorAgents").textContent = String(new Set([...owners,...runningAgents]).size);
-        document.getElementById("orchestratorStatus").textContent = commands.length ? commands.length + " item" + (commands.length === 1 ? "" : "s") + " organized" : "All clear";
+        document.getElementById("orchestratorStatus").textContent = sourceWarnings.length
+          ? "Core records loaded · " + sourceWarnings.join(" and ") + " unavailable"
+          : commands.length ? commands.length + " item" + (commands.length === 1 ? "" : "s") + " organized" : "All clear";
         const container = document.getElementById("orchestratorCommands");
         container.replaceChildren();
         if (!visible.length) {
@@ -606,15 +618,18 @@ h1{font-size:34px}
         loading.appendChild(loadingCell);
         rows.appendChild(loading);
         try {
-          const [opportunities, companies, contacts, tasks, outcomes, recommendations, agentRuns] = await Promise.all([
+          const [opportunities, companies, contacts, tasks, outcomes, recommendationSource, agentRunSource] = await Promise.all([
             request("opportunities?select=id,workspace_id,company_id,primary_contact_id,name,stage,status,estimated_value,fit_score,intent_score,value_score,urgency_score,engagement_score,confidence_score,priority_score,score_reasons,source,next_action,next_action_due_at&order=priority_score.desc"),
             request("companies?select=id,workspace_id,name,location,website,normalized_domain,industry,research_facts,research_inferences"),
             request("contacts?select=id,workspace_id,company_id,first_name,last_name,role,email,phone,consent_status"),
             request("tasks?select=id,opportunity_id,title,task_type,priority,status,due_at&status=neq.completed&order=due_at.asc.nullslast"),
             request("outcomes?select=id,opportunity_id,disposition,commitments,proposed_stage,human_approved,created_at&order=created_at.desc"),
-            request("recommendations?select=id,opportunity_id,role,action,rationale,confidence_score,decision,edited_action,decided_at,created_at&order=created_at.desc"),
-            request("agent_runs?select=id,opportunity_id,role,status,started_at,completed_at&order=started_at.desc&limit=30")
+            optionalRequest("approvals","recommendations?select=id,opportunity_id,role,action,rationale,confidence_score,decision,edited_action,decided_at,created_at&order=created_at.desc"),
+            optionalRequest("agent activity","agent_runs?select=id,opportunity_id,role,status,started_at,completed_at&order=started_at.desc&limit=30")
           ]);
+          const recommendations = recommendationSource.data;
+          const agentRuns = agentRunSource.data;
+          const sourceWarnings = [recommendationSource,agentRunSource].filter(source => source.error).map(source => source.name);
           const companyMap = new Map(companies.map(company => [company.id, company]));
           const contactMap = new Map(contacts.map(contact => [contact.id, contact]));
           rows.replaceChildren();
@@ -668,7 +683,7 @@ h1{font-size:34px}
               ? movementRate.toFixed(0) + "% of opportunities with recorded outcomes have shown positive movement. Continue tracking the outreach method and result before treating this as a proven pattern."
               : "No positive movement is recorded yet. Phoenix will keep measuring which outreach and follow-up actions create a response.";
           document.getElementById("proofFeedback").textContent = "Recommendations · " + recommendationCounts.accepted + " accepted · " + recommendationCounts.edited + " edited · " + recommendationCounts.rejected + " rejected";
-          renderOrchestrator({opportunities,companies,contacts,tasks,recommendations,agentRuns,companyMap,contactMap});
+          renderOrchestrator({opportunities,companies,contacts,tasks,recommendations,agentRuns,companyMap,contactMap,sourceWarnings});
           const focusTask = dueTasks[0] || tasks[0];
           const focusOpportunity = activeOpportunities.find(item => item.next_action);
           document.getElementById("todayFocus").textContent = focusTask
@@ -729,6 +744,12 @@ h1{font-size:34px}
           } else selectOpportunity(opportunities[0], companyMap.get(opportunities[0].company_id), contactMap.get(opportunities[0].primary_contact_id));
           document.getElementById("pipelineTotal").textContent = money.format(pipeline);
         } catch (problem) {
+          document.getElementById("orchestratorStatus").textContent = "Core records unavailable";
+          document.getElementById("orchestratorCommands").replaceChildren();
+          const commandError = document.createElement("div");
+          commandError.className = "commandempty";
+          commandError.textContent = "Phoenix could not read the core opportunity records. Sign in again if your session expired. Your saved records were not changed.";
+          document.getElementById("orchestratorCommands").appendChild(commandError);
           rows.replaceChildren();
           const tr = document.createElement("tr");
           const td = cell(problem instanceof Error ? problem.message : "The opportunity record could not be loaded.", "dataerror");
