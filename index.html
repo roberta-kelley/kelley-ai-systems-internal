@@ -811,20 +811,21 @@ h1{font-size:34px}
           follow.textContent = followUp;
           item.appendChild(follow);
         }
-        if (options.onComplete) {
+        if (options.onAction || options.onComplete) {
           const complete = document.createElement("button");
           complete.className = "complete";
           complete.type = "button";
-          complete.textContent = "Mark complete";
+          complete.textContent = options.actionLabel || "Mark complete";
           complete.addEventListener("click", async () => {
             complete.disabled = true;
-            complete.textContent = "Completing…";
+            complete.textContent = options.busyLabel || "Completing…";
             try {
-              await options.onComplete();
-              item.remove();
+              await (options.onAction || options.onComplete)();
+              if (options.removeAfterAction !== false) item.remove();
+              else complete.textContent = options.doneLabel || "Completed";
             } catch (problem) {
               complete.disabled = false;
-              complete.textContent = "Try again";
+              complete.textContent = options.retryLabel || "Try again";
               document.getElementById("activityMessage").textContent = problem instanceof Error ? problem.message : "The task could not be completed.";
             }
           });
@@ -865,15 +866,42 @@ h1{font-size:34px}
           outcomes.forEach(outcome => {
             const commitments = outcome.commitments || [];
             const followUp = commitments.find(item => item.startsWith("FOLLOW-UP MESSAGE: "));
-            const ordinary = commitments.filter(item => !item.startsWith("FOLLOW-UP MESSAGE: "));
+            const sentMarker = commitments.find(item => item.startsWith("FOLLOW-UP SENT: "));
+            const ordinary = commitments.filter(item => !item.startsWith("FOLLOW-UP MESSAGE: ") && !item.startsWith("FOLLOW-UP SENT: "));
             const body = [
               ...(outcome.confirmed_pain_points || []).map(item => "Pain point: " + item),
               ...(outcome.objections || []).map(item => "Objection: " + item),
               ...ordinary.map(item => "Commitment: " + item),
-              outcome.proposed_next_action ? "Next: " + outcome.proposed_next_action : ""
+              outcome.proposed_next_action ? "Next: " + outcome.proposed_next_action : "",
+              sentMarker ? "Follow-up confirmed sent." : ""
             ].filter(Boolean).join(" · ");
             const date = outcome.created_at ? new Date(outcome.created_at).toLocaleString() : "Saved outcome";
-            addActivityItem("Outcome: " + String(outcome.disposition).replaceAll("_"," "), date, body || "Outcome recorded.", followUp ? followUp.replace("FOLLOW-UP MESSAGE: ","") : "");
+            const options = followUp && !sentMarker ? {
+              actionLabel:"Confirm follow-up sent",
+              busyLabel:"Confirming…",
+              doneLabel:"Follow-up confirmed",
+              removeAfterAction:false,
+              onAction:async () => {
+                await updateRecord("outcomes", outcome.id, {
+                  commitments:[...commitments, "FOLLOW-UP SENT: " + new Date().toISOString()]
+                });
+                const matchingTasks = tasks.filter(task =>
+                  task.status !== "completed" &&
+                  outcome.proposed_next_action &&
+                  task.title === outcome.proposed_next_action
+                );
+                await Promise.all(matchingTasks.map(task => updateRecord("tasks", task.id, {status:"completed"})));
+                document.getElementById("activityMessage").textContent = "Follow-up confirmed. Phoenix has refreshed your priorities.";
+                await loadData();
+              }
+            } : {};
+            addActivityItem(
+              "Outcome: " + String(outcome.disposition).replaceAll("_"," "),
+              date,
+              body || "Outcome recorded.",
+              followUp ? followUp.replace("FOLLOW-UP MESSAGE: ","") : "",
+              options
+            );
           });
           document.getElementById("activityMessage").textContent = outcomes.length || tasks.length ? "" : "No activity has been recorded yet.";
         } catch (problem) {
