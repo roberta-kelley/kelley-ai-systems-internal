@@ -155,7 +155,7 @@ h1{font-size:34px}
       </div>
       <article class="card proof"><div class="proofhead"><div><p class="eye">Proof &amp; performance</p><h2>What is producing movement</h2></div><p class="sub">Measured from your real Phoenix activity.</p></div><div class="proofgrid"><div class="proofmetric"><small>Outcomes recorded</small><strong id="proofOutcomes">0</strong></div><div class="proofmetric"><small>Follow-ups sent</small><strong id="proofFollowUps">0</strong></div><div class="proofmetric"><small>Interested</small><strong id="proofInterested">0</strong></div><div class="proofmetric"><small>Proposals</small><strong id="proofProposals">0</strong></div><div class="proofmetric"><small>Wins</small><strong id="proofWins">0</strong></div><div class="proofmetric"><small>Positive movement</small><strong id="proofConversion">0%</strong></div></div><div class="proofinsight" id="proofInsight">Phoenix needs a few recorded outcomes before it can identify a reliable pattern.</div><div class="proofinsight" id="proofFeedback">Recommendation feedback will appear here as you accept, edit, or reject Phoenix suggestions.</div></article>
     </section>
-    <aside><div class="aside"><p class="eye">Lead intelligence</p><h2 id="intelligenceName">Select an opportunity</h2><p class="location" id="intelligenceLocation">Protected owner workspace</p></div><div class="aside"><p class="eye">Stage roadmap</p><div class="road" id="stageRoadmap"><span data-stage="identified"><i>1</i>Capture</span><span data-stage="vetted"><i>2</i>Vetted</span><span data-stage="discovery"><i>3</i>Discovery</span><span data-stage="proposal"><i>4</i>Proposal</span><span data-stage="closed"><i>5</i>Closed</span></div></div><div class="aside"><p class="eye">Strategic briefing</p><div class="brief" id="strategicBrief">Choose an opportunity to review its current intelligence record.</div><button class="actionbtn" id="openBrief" type="button">Prepare call brief</button><button class="actionbtn" id="openProposal" type="button">Prepare proposal</button><button class="actionbtn" id="openFulfillment" type="button">Prepare fulfillment handoff</button><button class="actionbtn" id="openGates" type="button">Track project gates A to E</button></div><div class="aside"><p class="eye">Next best action</p><strong class="action" id="nextAction">Review the opportunity record</strong><button class="actionbtn" id="openWorkspace" type="button">Open lead workspace</button><button class="actionbtn" id="openOutcome" type="button">Record call outcome</button><button class="actionbtn" id="openActivity" type="button">View activity &amp; follow-up</button></div></aside>
+    <aside><div class="aside"><p class="eye">Lead intelligence</p><h2 id="intelligenceName">Select an opportunity</h2><p class="location" id="intelligenceLocation">Protected owner workspace</p></div><div class="aside"><p class="eye">Stage roadmap</p><div class="road" id="stageRoadmap"><span data-stage="identified"><i>1</i>Capture</span><span data-stage="vetted"><i>2</i>Vetted</span><span data-stage="discovery"><i>3</i>Discovery</span><span data-stage="proposal"><i>4</i>Proposal</span><span data-stage="closed"><i>5</i>Closed</span></div></div><div class="aside"><p class="eye">Strategic briefing</p><div class="brief" id="strategicBrief">Choose an opportunity to review its current intelligence record.</div><button class="actionbtn" id="openBrief" type="button">Prepare call brief</button><button class="actionbtn" id="openProposal" type="button">Prepare proposal</button><button class="actionbtn" id="openFulfillment" type="button">Prepare fulfillment handoff</button><button class="actionbtn" id="openGates" type="button">Track project gates A to E</button><button class="actionbtn" id="openContent" type="button">Create approved growth content</button></div><div class="aside"><p class="eye">Next best action</p><strong class="action" id="nextAction">Review the opportunity record</strong><button class="actionbtn" id="openWorkspace" type="button">Open lead workspace</button><button class="actionbtn" id="openOutcome" type="button">Record call outcome</button><button class="actionbtn" id="openActivity" type="button">View activity &amp; follow-up</button></div></aside>
   </div>
   <div class="utility"><button type="button" id="resetConnection">Reset connection</button><button type="button" id="signOut">Sign out</button></div>
   <div id="authVeil" class="authveil" hidden></div>
@@ -167,6 +167,7 @@ h1{font-size:34px}
   <div id="proposalVeil" class="workspaceveil" hidden><form class="workspacebox" id="proposalForm"><header><div><p class="eye">Sales agent</p><h2 id="proposalName">Proposal writer</h2><p class="location" id="proposalLocation">Drafted from the opportunity record</p></div><button class="close" id="closeProposal" type="button">Close</button></header><label>Project investment<input id="proposalInvestment" placeholder="Example: $3,200 setup plus $297 monthly"></label><label>Expected timeline<input id="proposalTimeline" value="2 to 3 weeks after receiving access and materials"></label><label>Payment terms<input id="proposalTerms" placeholder="Enter the payment schedule"></label><button class="save" id="generateProposal" type="button">Generate proposal draft</button><label>Editable proposal<textarea id="proposalDraft" style="min-height:460px" placeholder="Generate a draft, then revise it in your own words."></textarea></label><label class="approval"><input id="approveProposal" type="checkbox"><span>I reviewed this proposal and confirm that the facts, scope, price, and promises are accurate.</span></label><button class="save" id="saveProposal" type="button">Save draft on this device</button><button class="save" id="copyProposal" type="button">Copy approved proposal</button><button class="save" id="downloadProposal" type="button">Download approved proposal</button><p class="message" id="proposalMessage"></p></form></div>
   <div id="fulfillmentVeil" class="workspaceveil" hidden><form class="workspacebox" id="fulfillmentForm"><header><div><p class="eye">Fulfillment handoff</p><h2 id="fulfillmentName">Project launch plan</h2><p class="location" id="fulfillmentLocation">Turn the sale into controlled delivery</p></div><button class="close" id="closeFulfillment" type="button">Close</button></header><div class="brief"><strong>Notion is the authoritative delivery record.</strong><br>Phoenix readiness and milestone reminders do not replace the protected Client Configuration record, 46-task Implementation Checklist, QA records, or Gates A through E.</div><a class="save" href="https://app.notion.com/p/3a8db17278ed8105a122f3f443841f26" target="_blank" rel="noopener">Open canonical lifecycle in Notion</a><a class="save" href="https://app.notion.com/p/3a1db17278ed8164a3d7f489d4ccfc9d" target="_blank" rel="noopener">Open Project Start Requirements</a><label>Readiness decision<select id="fulfillmentReadiness"><option value="not_ready">Not Ready</option><option value="conditionally_ready">Conditionally Ready</option><option value="ready">Ready</option></select></label><label>Internal project owner<input id="fulfillmentOwner" value="Roberta Kelley"></label><label>Confirmed Day 1<input id="fulfillmentStart" type="date"></label><p class="eye">Required evidence before Day 1</p><label class="approval"><input id="gateProposal" type="checkbox"><span>Final proposal and scope approved</span></label><label class="approval"><input id="gateAgreement" type="checkbox"><span>Services agreement signed</span></label><label class="approval"><input id="gatePayment" type="checkbox"><span>Initial payment paid and cleared</span></label><label class="approval"><input id="gateRequirements" type="checkbox"><span>Project Start Requirements complete</span></label><label class="approval"><input id="gateSetup" type="checkbox"><span>Private client setup and preflight audit complete in Notion</span></label><label class="approval"><input id="gateDay1" type="checkbox"><span>Written Day 1 Confirmation issued</span></label><button class="save" id="generateFulfillment" type="button">Generate handoff plan</button><label>Project summary<textarea id="fulfillmentSummary"></textarea></label><label>Client requirements, one per line<textarea id="fulfillmentRequirements"></textarea></label><label>Delivery milestones, one per line<textarea id="fulfillmentMilestones"></textarea></label><label>Known risks or boundaries<textarea id="fulfillmentRisks"></textarea></label><label class="approval"><input id="approveFulfillment" type="checkbox"><span>I verified these facts against the current Notion client records and approve Phoenix milestone reminders.</span></label><button class="save" id="saveFulfillment" type="button">Save readiness summary on this device</button><button class="save" id="createFulfillmentTasks" type="button">Create Day 1 milestone reminders</button><p class="message" id="fulfillmentMessage"></p></form></div>
   <div id="gatesVeil" class="workspaceveil" hidden><form class="workspacebox" id="gatesForm"><header><div><p class="eye">Controlled delivery</p><h2 id="gatesName">Project gates A to E</h2><p class="location" id="gatesLocation">Each gate requires evidence and an authorized written decision.</p></div><button class="close" id="closeGates" type="button">Close</button></header><div class="brief"><strong>Notion remains the authoritative approval record.</strong><br>This Phoenix snapshot helps the orchestrator see the current gate, missing evidence, next owner, and next review date. It does not replace the client-specific Launch Approval record.</div><a class="save" href="https://app.notion.com/p/39cdb17278ed81e698e7cc5975ba7a73" target="_blank" rel="noopener">Open QA, Pilot and Launch Playbook in Notion</a><div class="gategrid" id="gateGrid"></div><div class="gateeditor"><p class="eye" id="gateEditorTitle">Gate A: Configuration</p><label>Gate status<select id="projectGateStatus"><option value="not_started">Not Started</option><option value="in_progress">In Progress</option><option value="ready_for_review">Ready for Review</option><option value="blocked">Blocked</option><option value="approved">Approved</option><option value="rejected">Rejected</option></select></label><label>Authorized approver<input id="projectGateApprover" placeholder="Name and role"></label><label>Decision date<input id="projectGateDate" type="date"></label><label>Exact version and scope<textarea id="projectGateScope" placeholder="Identify the version, workflow, and scope being reviewed."></textarea></label><label>Evidence location<textarea id="projectGateEvidence" placeholder="Paste the Notion page link or describe the exact evidence location."></textarea></label><label>Open risks or accepted exceptions<textarea id="projectGateRisks" placeholder="Write None, or describe the known risks and approved exceptions."></textarea></label><label>Written decision or review notes<textarea id="projectGateDecision" placeholder="Record approve, reject, hold, changes required, or the current review note."></textarea></label><label>Next owner<input id="projectGateNextOwner" placeholder="Person responsible for the next action"></label><label>Next review date<input id="projectGateNextDate" type="date"></label><label class="approval"><input id="approveProjectGate" type="checkbox"><span>I verified this gate against the current Notion evidence and authorized written decision.</span></label><button class="save" id="saveProjectGate" type="submit">Save gate snapshot</button><p class="message" id="gatesMessage"></p></div></form></div>
+  <div id="contentVeil" class="workspaceveil" hidden><form class="workspacebox" id="contentForm"><header><div><p class="eye">Content and Growth Agent</p><h2 id="contentName">Human-reviewed content studio</h2><p class="location" id="contentLocation">Turn verified lessons into useful, approved communication.</p></div><button class="close" id="closeContent" type="button">Close</button></header><div class="brief"><strong>Nothing is published or sent automatically.</strong><br>Use only verified facts and current offer positioning. Client names, private records, quotes, and results require the correct written permission.</div><a class="save" href="https://app.notion.com/p/39fdb17278ed81ed8156e050ead18053" target="_blank" rel="noopener">Open Kelley AI Systems Marketing Studio in Notion</a><label>Content type<select id="contentType"><option value="educational_post">Educational social post</option><option value="lesson_post">Anonymized lesson post</option><option value="case_study">Client case-study draft</option><option value="email">Educational email draft</option></select></label><label>Audience<input id="contentAudience" value="Owner-led service businesses"></label><label>Channel<select id="contentChannel"><option value="Facebook">Facebook</option><option value="LinkedIn">LinkedIn</option><option value="Email">Email</option><option value="Website">Website</option></select></label><label>Purpose<input id="contentPurpose" placeholder="Example: Explain why clear follow-up ownership matters"></label><label>Verified lesson or result<textarea id="contentVerifiedFact" placeholder="Enter only a fact, lesson, or result you can support with evidence."></textarea></label><label>Evidence location<textarea id="contentEvidence" placeholder="Notion record, approved results review, test record, or source link"></textarea></label><label>Client permission<select id="contentPermission"><option value="not_applicable">Not applicable, no client information used</option><option value="anonymized_only">Anonymized use only</option><option value="written_permission">Written permission granted</option><option value="not_granted">Permission not granted</option></select></label><label>Call to action<input id="contentCta" value="If you want a clearer lead and follow-up process, I would be glad to show you how I approach it."></label><button class="save" id="generateContent" type="button">Generate content draft</button><label>Editable draft<textarea id="contentDraft" style="min-height:420px" placeholder="Your draft will appear here."></textarea></label><label class="approval"><input id="approveContent" type="checkbox"><span>I reviewed every fact, removed private information, confirmed permission, and approve this draft for manual use.</span></label><button class="save" id="saveContent" type="button">Save draft on this device</button><button class="save" id="copyContent" type="button">Copy approved draft</button><button class="save" id="downloadContent" type="button">Download approved draft</button><p class="message" id="contentMessage"></p></form></div>
   <script>
     (() => {
       const URL_KEY = "kelley-ai:supabase-url";
@@ -185,6 +186,8 @@ h1{font-size:34px}
       const FULFILLMENT_KEY = "phoenix:fulfillment:";
       const gatesVeil = document.getElementById("gatesVeil");
       const PROJECT_GATES_KEY = "phoenix:project-gates:";
+      const contentVeil = document.getElementById("contentVeil");
+      const CONTENT_KEY = "phoenix:content:";
       const projectGateDefinitions = [
         {id:"A",name:"Configuration",summary:"Approved rules, language, data, routing, scope, and boundaries"},
         {id:"B",name:"Build Review",summary:"Approved build matches configuration and acceptance criteria"},
@@ -901,6 +904,180 @@ h1{font-size:34px}
           message.textContent = "Approved proposal downloaded. Nothing was sent automatically.";
         } catch (problem) {
           message.textContent = problem instanceof Error ? problem.message : "The proposal could not be downloaded.";
+        }
+      });
+      const contentStorageKey = () => CONTENT_KEY + selectedOpportunity.id;
+      const contentSnapshot = () => ({
+        type:document.getElementById("contentType").value,
+        audience:document.getElementById("contentAudience").value.trim(),
+        channel:document.getElementById("contentChannel").value,
+        purpose:document.getElementById("contentPurpose").value.trim(),
+        verifiedFact:document.getElementById("contentVerifiedFact").value.trim(),
+        evidence:document.getElementById("contentEvidence").value.trim(),
+        permission:document.getElementById("contentPermission").value,
+        cta:document.getElementById("contentCta").value.trim(),
+        draft:document.getElementById("contentDraft").value.trim()
+      });
+      const contentFileName = () => ((selectedCompany?.name || selectedOpportunity?.name || "Kelley AI") + " Content Draft")
+        .replace(/[^a-z0-9]+/gi,"-").replace(/^-|-$/g,"") + ".txt";
+      const scrubClientIdentity = text => {
+        const names = [selectedCompany?.name,selectedOpportunity?.name].filter(Boolean);
+        return names.reduce((copy,name) => copy.replaceAll(name,"a service business"),text);
+      };
+      const requireApprovedContent = () => {
+        const snapshot = contentSnapshot();
+        if (!snapshot.verifiedFact || !snapshot.evidence) throw new Error("Add the verified lesson or result and its evidence location first.");
+        if (!snapshot.draft) throw new Error("Generate or write the content draft first.");
+        if (snapshot.type === "case_study" && snapshot.permission !== "written_permission") {
+          throw new Error("A client case study requires written permission.");
+        }
+        const companyName = selectedCompany?.name || "";
+        if (snapshot.permission !== "written_permission" && companyName && snapshot.draft.toLowerCase().includes(companyName.toLowerCase())) {
+          throw new Error("Remove the client name or record written permission before using this draft.");
+        }
+        const issues = clientCopyIssues(snapshot.draft);
+        if (issues.length) throw new Error("Review the draft before using it. Phoenix found: " + issues.join(", ") + ".");
+        if (!document.getElementById("approveContent").checked) {
+          throw new Error("Review the facts, privacy, permission, and wording, then check the approval box.");
+        }
+        return snapshot.draft;
+      };
+      document.getElementById("openContent").addEventListener("click", () => {
+        if (!selectedOpportunity) return;
+        document.getElementById("contentName").textContent = (selectedCompany?.name || selectedOpportunity.name) + " content studio";
+        document.getElementById("contentLocation").textContent = "Drafts only. Nothing is published or sent automatically.";
+        document.getElementById("approveContent").checked = false;
+        try {
+          const saved = JSON.parse(localStorage.getItem(contentStorageKey()) || "null");
+          document.getElementById("contentType").value = saved?.type || "educational_post";
+          document.getElementById("contentAudience").value = saved?.audience || "Owner-led service businesses";
+          document.getElementById("contentChannel").value = saved?.channel || "Facebook";
+          document.getElementById("contentPurpose").value = saved?.purpose || "";
+          document.getElementById("contentVerifiedFact").value = saved?.verifiedFact || "";
+          document.getElementById("contentEvidence").value = saved?.evidence || "";
+          document.getElementById("contentPermission").value = saved?.permission || "not_applicable";
+          document.getElementById("contentCta").value = saved?.cta || "If you want a clearer lead and follow-up process, I would be glad to show you how I approach it.";
+          document.getElementById("contentDraft").value = saved?.draft || "";
+          document.getElementById("contentMessage").textContent = saved
+            ? "Your saved draft is loaded from this device. Verify the source and permission again before using it."
+            : "Choose the content type and enter one verified lesson or result with its evidence.";
+        } catch {
+          document.getElementById("contentMessage").textContent = "Choose the content type and enter one verified lesson or result with its evidence.";
+        }
+        contentVeil.hidden = false;
+        contentVeil.scrollTop = 0;
+      });
+      document.getElementById("closeContent").addEventListener("click", () => { contentVeil.hidden = true; });
+      document.getElementById("generateContent").addEventListener("click", () => {
+        const message = document.getElementById("contentMessage");
+        const snapshot = contentSnapshot();
+        if (!snapshot.audience || !snapshot.purpose || !snapshot.verifiedFact || !snapshot.evidence) {
+          message.textContent = "Complete the audience, purpose, verified lesson or result, and evidence location first.";
+          return;
+        }
+        if (snapshot.type === "case_study" && snapshot.permission !== "written_permission") {
+          message.textContent = "A client case-study draft requires written permission. Choose another content type or record the permission first.";
+          return;
+        }
+        const companyName = selectedCompany?.name || selectedOpportunity.name;
+        const safeFact = snapshot.permission === "written_permission"
+          ? snapshot.verifiedFact
+          : scrubClientIdentity(snapshot.verifiedFact);
+        const cta = snapshot.cta || "If you want a clearer lead and follow-up process, I would be glad to show you how I approach it.";
+        const drafts = {
+          educational_post:[
+            "A clear system should make the next decision easier.",
+            "",
+            safeFact,
+            "",
+            "The useful question is not whether a business has enough software. It is whether the right information reaches the right person, with a clear next action and a date.",
+            "",
+            "That is the standard I use when I review a lead and follow-up process.",
+            "",
+            cta
+          ],
+          lesson_post:[
+            "A recent workflow review reinforced an important lesson:",
+            "",
+            safeFact,
+            "",
+            "Small gaps become expensive when nobody owns the handoff. A practical system names the next action, the next owner, the review date, and the evidence that shows the work was completed.",
+            "",
+            cta
+          ],
+          case_study:[
+            companyName + ": WORKFLOW CASE STUDY",
+            "",
+            "The verified result",
+            safeFact,
+            "",
+            "What changed",
+            "The work focused on a clearer handoff, visible next actions, documented approvals, and a process the owner could review without searching through disconnected tools.",
+            "",
+            "Why it matters",
+            "The result came from clearer operating decisions and consistent follow-through, not from replacing human judgment.",
+            "",
+            cta
+          ],
+          email:[
+            "Subject: A clearer way to manage the next step",
+            "",
+            "Hello,",
+            "",
+            safeFact,
+            "",
+            "It is a useful reminder that a follow-up process needs more than a list of names. It needs a clear owner, a specific next action, a review date, and a reliable record of what happened.",
+            "",
+            "That is the kind of practical clarity I build into Kelley AI Systems workflows.",
+            "",
+            cta,
+            "",
+            "Best,",
+            "Roberta",
+            "Kelley AI Systems"
+          ]
+        };
+        let draft = (drafts[snapshot.type] || drafts.educational_post).join("\n");
+        if (snapshot.permission !== "written_permission") draft = scrubClientIdentity(draft);
+        document.getElementById("contentDraft").value = draft;
+        document.getElementById("approveContent").checked = false;
+        message.textContent = "Draft generated from the fact you provided. Review the source, privacy, permission, and wording before using it.";
+      });
+      document.getElementById("saveContent").addEventListener("click", () => {
+        localStorage.setItem(contentStorageKey(),JSON.stringify(contentSnapshot()));
+        document.getElementById("contentMessage").textContent = "Draft saved on this device. Nothing was published or sent.";
+      });
+      document.getElementById("copyContent").addEventListener("click", async () => {
+        const message = document.getElementById("contentMessage");
+        try {
+          const draft = requireApprovedContent();
+          if (navigator.clipboard?.writeText) await navigator.clipboard.writeText(draft);
+          else {
+            const field = document.getElementById("contentDraft");
+            field.focus();
+            field.select();
+            document.execCommand("copy");
+          }
+          message.textContent = "Approved draft copied. Nothing was published or sent automatically.";
+        } catch (problem) {
+          message.textContent = problem instanceof Error ? problem.message : "The content draft could not be copied.";
+        }
+      });
+      document.getElementById("downloadContent").addEventListener("click", () => {
+        const message = document.getElementById("contentMessage");
+        try {
+          const draft = requireApprovedContent();
+          const url = URL.createObjectURL(new Blob([draft],{type:"text/plain;charset=utf-8"}));
+          const link = document.createElement("a");
+          link.href = url;
+          link.download = contentFileName();
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+          setTimeout(() => URL.revokeObjectURL(url),1000);
+          message.textContent = "Approved draft downloaded. Nothing was published or sent automatically.";
+        } catch (problem) {
+          message.textContent = problem instanceof Error ? problem.message : "The content draft could not be downloaded.";
         }
       });
       const fulfillmentStorageKey = () => FULFILLMENT_KEY + selectedOpportunity.id;
