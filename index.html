@@ -992,6 +992,10 @@ h1{font-size:34px}
         const record = projectGateSnapshot();
         const records = readProjectGates();
         const needsReviewEvidence = ["ready_for_review","approved","rejected"].includes(record.status);
+        if (record.status !== "not_started" && (!record.nextOwner || !record.nextDate)) {
+          message.textContent = "Name the next owner and next review date before saving an active gate.";
+          return;
+        }
         if (needsReviewEvidence && (!record.scope || !record.evidence || !record.decision || !record.nextOwner || !record.nextDate)) {
           message.textContent = "Add the exact scope, evidence location, written decision, next owner, and next review date first.";
           return;
