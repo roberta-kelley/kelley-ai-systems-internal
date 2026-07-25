@@ -139,9 +139,9 @@ h1{font-size:34px}
   <div class="demo">Private owner workspace · Supabase protected</div>
   <div class="shell">
     <section class="main">
-      <div class="intro"><div><p class="eye">Friday, July 24</p><h1>Executive overview</h1><p>Revenue, relationships, and the next decisions that move the business forward.</p></div><div class="focus">Today’s focus · Move one qualified lead forward</div></div>
-      <div class="metrics"><article class="card metric"><span class="icon">7D</span><p>This week</p><strong>$1,200</strong></article><article class="card metric"><span class="icon">14</span><p>Two weeks</p><strong>$1,200</strong></article><article class="card metric"><span class="icon">M</span><p>This month</p><strong>$1,200</strong></article><article class="card metric"><span class="icon">Y</span><p>Year to date</p><strong>$1,200</strong></article></div>
-      <article class="card progress"><div><p class="eye">Monthly revenue progress</p><strong>$1,200</strong><span> / $5,500 goal</span></div><b class="pct">21.8%</b><div class="track"><i></i></div></article>
+      <div class="intro"><div><p class="eye" id="todayDate">Today</p><h1>Executive overview</h1><p>Revenue, relationships, and the next decisions that move the business forward.</p></div><div class="focus" id="todayFocus">Today’s focus · Loading your next best move</div></div>
+      <div class="metrics"><article class="card metric"><span class="icon">A</span><p>Active leads</p><strong id="metricActive">0</strong></article><article class="card metric"><span class="icon">D</span><p>Follow-ups due</p><strong id="metricDue">0</strong></article><article class="card metric"><span class="icon">P</span><p>Open pipeline</p><strong id="metricPipeline">$0</strong></article><article class="card metric"><span class="icon">W</span><p>Won value</p><strong id="metricWon">$0</strong></article></div>
+      <article class="card progress"><div><p class="eye">Won-value progress</p><strong id="wonProgress">$0</strong><span> / $5,500 goal</span></div><b class="pct" id="wonPercent">0%</b><div class="track"><i id="wonTrack"></i></div></article>
       <div class="lower"><article class="card goal"><p class="eye">Planning</p><h2>Goal calculator</h2><p class="sub">Turn your target into a clear client number.</p><label>Monthly income goal<div class="input">$ 5,500</div></label><label>Average project value<div class="input">$ 3,200</div></label><div class="results"><div><small>Clients needed</small><strong>2</strong></div><div><small>Delivery hours</small><strong>30</strong></div></div></article>
         <article class="card leads"><div class="leadhead"><div><p class="eye">Relationships</p><h2>Active opportunities</h2></div><button type="button" id="addLead">＋ Add lead</button></div><table><thead><tr><th>Name</th><th>Status</th><th>Score</th><th>Value</th><th>Stage</th><th>Agent</th></tr></thead><tbody id="opportunityRows"><tr><td colspan="6">Loading protected opportunities…</td></tr></tbody></table></article>
       </div>
@@ -363,15 +363,36 @@ h1{font-size:34px}
         loading.appendChild(loadingCell);
         rows.appendChild(loading);
         try {
-          const [opportunities, companies] = await Promise.all([
-            request("opportunities?select=id,workspace_id,company_id,name,stage,status,estimated_value,priority_score,score_reasons,next_action&order=priority_score.desc"),
-            request("companies?select=id,workspace_id,name,location")
+          const [opportunities, companies, tasks] = await Promise.all([
+            request("opportunities?select=id,workspace_id,company_id,name,stage,status,estimated_value,priority_score,score_reasons,next_action,next_action_due_at&order=priority_score.desc"),
+            request("companies?select=id,workspace_id,name,location"),
+            request("tasks?select=id,opportunity_id,title,priority,status,due_at&status=neq.completed&order=due_at.asc.nullslast")
           ]);
           const companyMap = new Map(companies.map(company => [company.id, company]));
           rows.replaceChildren();
-          let pipeline = 0;
+          const activeOpportunities = opportunities.filter(item => !["won","lost"].includes(String(item.stage).toLowerCase()));
+          const pipeline = activeOpportunities.reduce((total,item) => total + Number(item.estimated_value || 0), 0);
+          const won = opportunities.filter(item => String(item.stage).toLowerCase() === "won").reduce((total,item) => total + Number(item.estimated_value || 0), 0);
+          const endOfToday = new Date();
+          endOfToday.setHours(23,59,59,999);
+          const dueTasks = tasks.filter(task => task.due_at && new Date(task.due_at) <= endOfToday);
+          document.getElementById("todayDate").textContent = new Date().toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric"});
+          document.getElementById("metricActive").textContent = String(activeOpportunities.length);
+          document.getElementById("metricDue").textContent = String(dueTasks.length);
+          document.getElementById("metricPipeline").textContent = money.format(pipeline);
+          document.getElementById("metricWon").textContent = money.format(won);
+          document.getElementById("wonProgress").textContent = money.format(won);
+          const wonPercent = Math.max(0,Math.min(100,(won / 5500) * 100));
+          document.getElementById("wonPercent").textContent = wonPercent.toFixed(1).replace(".0","") + "%";
+          document.getElementById("wonTrack").style.width = wonPercent + "%";
+          const focusTask = dueTasks[0] || tasks[0];
+          const focusOpportunity = activeOpportunities.find(item => item.next_action);
+          document.getElementById("todayFocus").textContent = focusTask
+            ? "Today’s focus · " + focusTask.title
+            : focusOpportunity
+              ? "Today’s focus · " + focusOpportunity.next_action
+              : "Today’s focus · Add and qualify your next opportunity";
           opportunities.forEach(opportunity => {
-            pipeline += Number(opportunity.estimated_value || 0);
             const company = companyMap.get(opportunity.company_id);
             const tr = document.createElement("tr");
             const nameCell = document.createElement("td");
