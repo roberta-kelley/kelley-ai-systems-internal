@@ -119,6 +119,7 @@ h1{font-size:34px}
 .workspacebox header{display:flex;align-items:start;justify-content:space-between;gap:16px}.workspacebox h2{font-size:24px}.workspacebox .close{width:auto;margin:0;border:1px solid var(--gold);border-radius:999px;background:#fff;padding:8px 12px;color:var(--ink)}
 .workspacebox label{display:block;margin-top:15px;color:var(--muted);font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.workspacebox input,.workspacebox select,.workspacebox textarea{width:100%;margin-top:6px;border:1px solid var(--gold);border-radius:11px;background:#fff;padding:12px;color:var(--ink)}.workspacebox textarea{min-height:110px;resize:vertical}.workspacebox .save{display:block;width:100%;margin-top:18px;border:1px solid var(--gold);border-radius:11px;background:var(--rose);padding:12px;color:#fff;font-weight:800;text-align:center;text-decoration:none}.workspacebox .message{margin-top:12px;color:var(--rose2);font-size:11px}
 .workspacebox .approval{display:flex;align-items:center;gap:9px;border:1px solid var(--gold);border-radius:11px;background:var(--goldSoft);padding:12px}.workspacebox .approval input{width:auto;margin:0}.workspacebox .approval span{color:var(--ink);font-size:10px;letter-spacing:0;text-transform:none}
+.gategrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:18px}.gatecard{border:1px solid var(--gold);border-radius:14px;background:#fff;padding:12px;color:var(--ink);text-align:left}.gatecard strong{display:block;color:var(--rose);font-size:13px}.gatecard span{display:block;margin-top:5px;color:var(--muted);font-size:8px;line-height:1.35}.gatecard.active{background:var(--roseSoft);box-shadow:inset 0 0 0 1px var(--rose)}.gatecard.approved{background:var(--goldSoft)}.gatecard.approved strong{color:var(--gold)}.gateeditor{margin-top:18px;border-top:1px solid var(--line);padding-top:4px}@media(max-width:700px){.gategrid{grid-template-columns:1fr 1fr}.gatecard:last-child{grid-column:1/-1}}
 .activitylist{display:grid;gap:10px;margin-top:18px}.activityitem{border:1px solid var(--gold);border-radius:14px;background:#fff;padding:14px}.activityitem.overdue{border-width:2px;background:var(--roseSoft)}.activityitem strong{display:block;font-size:13px}.activityitem small{display:block;margin-top:4px;color:var(--muted);font-size:9px}.activityitem p{margin-top:8px;color:var(--ink);font-size:11px;line-height:1.55}.activityitem .followup{margin-top:9px;border-radius:10px;background:var(--roseSoft);padding:10px;color:var(--rose2)}.activityitem .complete{margin-top:10px;border:1px solid var(--gold);border-radius:999px;background:var(--rose);padding:7px 11px;color:#fff;font-size:9px;font-weight:800}.activityitem .complete:disabled{opacity:.6}
 .utility{position:fixed;right:12px;bottom:12px;z-index:900;display:flex;gap:7px}.utility button{width:auto;margin:0;background:#fff;color:var(--ink);font-size:9px;padding:7px 10px}
 .dataerror{padding:18px!important;color:var(--rose2);white-space:normal}
@@ -154,7 +155,7 @@ h1{font-size:34px}
       </div>
       <article class="card proof"><div class="proofhead"><div><p class="eye">Proof &amp; performance</p><h2>What is producing movement</h2></div><p class="sub">Measured from your real Phoenix activity.</p></div><div class="proofgrid"><div class="proofmetric"><small>Outcomes recorded</small><strong id="proofOutcomes">0</strong></div><div class="proofmetric"><small>Follow-ups sent</small><strong id="proofFollowUps">0</strong></div><div class="proofmetric"><small>Interested</small><strong id="proofInterested">0</strong></div><div class="proofmetric"><small>Proposals</small><strong id="proofProposals">0</strong></div><div class="proofmetric"><small>Wins</small><strong id="proofWins">0</strong></div><div class="proofmetric"><small>Positive movement</small><strong id="proofConversion">0%</strong></div></div><div class="proofinsight" id="proofInsight">Phoenix needs a few recorded outcomes before it can identify a reliable pattern.</div><div class="proofinsight" id="proofFeedback">Recommendation feedback will appear here as you accept, edit, or reject Phoenix suggestions.</div></article>
     </section>
-    <aside><div class="aside"><p class="eye">Lead intelligence</p><h2 id="intelligenceName">Select an opportunity</h2><p class="location" id="intelligenceLocation">Protected owner workspace</p></div><div class="aside"><p class="eye">Stage roadmap</p><div class="road" id="stageRoadmap"><span data-stage="identified"><i>1</i>Capture</span><span data-stage="vetted"><i>2</i>Vetted</span><span data-stage="discovery"><i>3</i>Discovery</span><span data-stage="proposal"><i>4</i>Proposal</span><span data-stage="closed"><i>5</i>Closed</span></div></div><div class="aside"><p class="eye">Strategic briefing</p><div class="brief" id="strategicBrief">Choose an opportunity to review its current intelligence record.</div><button class="actionbtn" id="openBrief" type="button">Prepare call brief</button><button class="actionbtn" id="openProposal" type="button">Prepare proposal</button><button class="actionbtn" id="openFulfillment" type="button">Prepare fulfillment handoff</button></div><div class="aside"><p class="eye">Next best action</p><strong class="action" id="nextAction">Review the opportunity record</strong><button class="actionbtn" id="openWorkspace" type="button">Open lead workspace</button><button class="actionbtn" id="openOutcome" type="button">Record call outcome</button><button class="actionbtn" id="openActivity" type="button">View activity &amp; follow-up</button></div></aside>
+    <aside><div class="aside"><p class="eye">Lead intelligence</p><h2 id="intelligenceName">Select an opportunity</h2><p class="location" id="intelligenceLocation">Protected owner workspace</p></div><div class="aside"><p class="eye">Stage roadmap</p><div class="road" id="stageRoadmap"><span data-stage="identified"><i>1</i>Capture</span><span data-stage="vetted"><i>2</i>Vetted</span><span data-stage="discovery"><i>3</i>Discovery</span><span data-stage="proposal"><i>4</i>Proposal</span><span data-stage="closed"><i>5</i>Closed</span></div></div><div class="aside"><p class="eye">Strategic briefing</p><div class="brief" id="strategicBrief">Choose an opportunity to review its current intelligence record.</div><button class="actionbtn" id="openBrief" type="button">Prepare call brief</button><button class="actionbtn" id="openProposal" type="button">Prepare proposal</button><button class="actionbtn" id="openFulfillment" type="button">Prepare fulfillment handoff</button><button class="actionbtn" id="openGates" type="button">Track project gates A to E</button></div><div class="aside"><p class="eye">Next best action</p><strong class="action" id="nextAction">Review the opportunity record</strong><button class="actionbtn" id="openWorkspace" type="button">Open lead workspace</button><button class="actionbtn" id="openOutcome" type="button">Record call outcome</button><button class="actionbtn" id="openActivity" type="button">View activity &amp; follow-up</button></div></aside>
   </div>
   <div class="utility"><button type="button" id="resetConnection">Reset connection</button><button type="button" id="signOut">Sign out</button></div>
   <div id="authVeil" class="authveil" hidden></div>
@@ -165,6 +166,7 @@ h1{font-size:34px}
   <div id="activityVeil" class="workspaceveil" hidden><section class="workspacebox"><header><div><p class="eye">Orchestrator view</p><h2 id="activityName">Activity &amp; follow-up</h2><p class="location" id="activityLocation"></p></div><button class="close" id="closeActivity" type="button">Close</button></header><div class="activitylist" id="activityList"></div><p class="message" id="activityMessage"></p></section></div>
   <div id="proposalVeil" class="workspaceveil" hidden><form class="workspacebox" id="proposalForm"><header><div><p class="eye">Sales agent</p><h2 id="proposalName">Proposal writer</h2><p class="location" id="proposalLocation">Drafted from the opportunity record</p></div><button class="close" id="closeProposal" type="button">Close</button></header><label>Project investment<input id="proposalInvestment" placeholder="Example: $3,200 setup plus $297 monthly"></label><label>Expected timeline<input id="proposalTimeline" value="2 to 3 weeks after receiving access and materials"></label><label>Payment terms<input id="proposalTerms" placeholder="Enter the payment schedule"></label><button class="save" id="generateProposal" type="button">Generate proposal draft</button><label>Editable proposal<textarea id="proposalDraft" style="min-height:460px" placeholder="Generate a draft, then revise it in your own words."></textarea></label><label class="approval"><input id="approveProposal" type="checkbox"><span>I reviewed this proposal and confirm that the facts, scope, price, and promises are accurate.</span></label><button class="save" id="saveProposal" type="button">Save draft on this device</button><button class="save" id="copyProposal" type="button">Copy approved proposal</button><button class="save" id="downloadProposal" type="button">Download approved proposal</button><p class="message" id="proposalMessage"></p></form></div>
   <div id="fulfillmentVeil" class="workspaceveil" hidden><form class="workspacebox" id="fulfillmentForm"><header><div><p class="eye">Fulfillment handoff</p><h2 id="fulfillmentName">Project launch plan</h2><p class="location" id="fulfillmentLocation">Turn the sale into controlled delivery</p></div><button class="close" id="closeFulfillment" type="button">Close</button></header><div class="brief"><strong>Notion is the authoritative delivery record.</strong><br>Phoenix readiness and milestone reminders do not replace the protected Client Configuration record, 46-task Implementation Checklist, QA records, or Gates A through E.</div><a class="save" href="https://app.notion.com/p/3a8db17278ed8105a122f3f443841f26" target="_blank" rel="noopener">Open canonical lifecycle in Notion</a><a class="save" href="https://app.notion.com/p/3a1db17278ed8164a3d7f489d4ccfc9d" target="_blank" rel="noopener">Open Project Start Requirements</a><label>Readiness decision<select id="fulfillmentReadiness"><option value="not_ready">Not Ready</option><option value="conditionally_ready">Conditionally Ready</option><option value="ready">Ready</option></select></label><label>Internal project owner<input id="fulfillmentOwner" value="Roberta Kelley"></label><label>Confirmed Day 1<input id="fulfillmentStart" type="date"></label><p class="eye">Required evidence before Day 1</p><label class="approval"><input id="gateProposal" type="checkbox"><span>Final proposal and scope approved</span></label><label class="approval"><input id="gateAgreement" type="checkbox"><span>Services agreement signed</span></label><label class="approval"><input id="gatePayment" type="checkbox"><span>Initial payment paid and cleared</span></label><label class="approval"><input id="gateRequirements" type="checkbox"><span>Project Start Requirements complete</span></label><label class="approval"><input id="gateSetup" type="checkbox"><span>Private client setup and preflight audit complete in Notion</span></label><label class="approval"><input id="gateDay1" type="checkbox"><span>Written Day 1 Confirmation issued</span></label><button class="save" id="generateFulfillment" type="button">Generate handoff plan</button><label>Project summary<textarea id="fulfillmentSummary"></textarea></label><label>Client requirements, one per line<textarea id="fulfillmentRequirements"></textarea></label><label>Delivery milestones, one per line<textarea id="fulfillmentMilestones"></textarea></label><label>Known risks or boundaries<textarea id="fulfillmentRisks"></textarea></label><label class="approval"><input id="approveFulfillment" type="checkbox"><span>I verified these facts against the current Notion client records and approve Phoenix milestone reminders.</span></label><button class="save" id="saveFulfillment" type="button">Save readiness summary on this device</button><button class="save" id="createFulfillmentTasks" type="button">Create Day 1 milestone reminders</button><p class="message" id="fulfillmentMessage"></p></form></div>
+  <div id="gatesVeil" class="workspaceveil" hidden><form class="workspacebox" id="gatesForm"><header><div><p class="eye">Controlled delivery</p><h2 id="gatesName">Project gates A to E</h2><p class="location" id="gatesLocation">Each gate requires evidence and an authorized written decision.</p></div><button class="close" id="closeGates" type="button">Close</button></header><div class="brief"><strong>Notion remains the authoritative approval record.</strong><br>This Phoenix snapshot helps the orchestrator see the current gate, missing evidence, next owner, and next review date. It does not replace the client-specific Launch Approval record.</div><a class="save" href="https://app.notion.com/p/39cdb17278ed81e698e7cc5975ba7a73" target="_blank" rel="noopener">Open QA, Pilot and Launch Playbook in Notion</a><div class="gategrid" id="gateGrid"></div><div class="gateeditor"><p class="eye" id="gateEditorTitle">Gate A: Configuration</p><label>Gate status<select id="projectGateStatus"><option value="not_started">Not Started</option><option value="in_progress">In Progress</option><option value="ready_for_review">Ready for Review</option><option value="blocked">Blocked</option><option value="approved">Approved</option><option value="rejected">Rejected</option></select></label><label>Authorized approver<input id="projectGateApprover" placeholder="Name and role"></label><label>Decision date<input id="projectGateDate" type="date"></label><label>Exact version and scope<textarea id="projectGateScope" placeholder="Identify the version, workflow, and scope being reviewed."></textarea></label><label>Evidence location<textarea id="projectGateEvidence" placeholder="Paste the Notion page link or describe the exact evidence location."></textarea></label><label>Open risks or accepted exceptions<textarea id="projectGateRisks" placeholder="Write None, or describe the known risks and approved exceptions."></textarea></label><label>Written decision or review notes<textarea id="projectGateDecision" placeholder="Record approve, reject, hold, changes required, or the current review note."></textarea></label><label>Next owner<input id="projectGateNextOwner" placeholder="Person responsible for the next action"></label><label>Next review date<input id="projectGateNextDate" type="date"></label><label class="approval"><input id="approveProjectGate" type="checkbox"><span>I verified this gate against the current Notion evidence and authorized written decision.</span></label><button class="save" id="saveProjectGate" type="submit">Save gate snapshot</button><p class="message" id="gatesMessage"></p></div></form></div>
   <script>
     (() => {
       const URL_KEY = "kelley-ai:supabase-url";
@@ -181,6 +183,16 @@ h1{font-size:34px}
       const PROPOSAL_KEY = "phoenix:proposal:";
       const fulfillmentVeil = document.getElementById("fulfillmentVeil");
       const FULFILLMENT_KEY = "phoenix:fulfillment:";
+      const gatesVeil = document.getElementById("gatesVeil");
+      const PROJECT_GATES_KEY = "phoenix:project-gates:";
+      const projectGateDefinitions = [
+        {id:"A",name:"Configuration",summary:"Approved rules, language, data, routing, scope, and boundaries"},
+        {id:"B",name:"Build Review",summary:"Approved build matches configuration and acceptance criteria"},
+        {id:"C",name:"Controlled Pilot",summary:"Limited use is authorized with monitoring and stop rules"},
+        {id:"D",name:"Production Launch",summary:"A specific version is approved for production"},
+        {id:"E",name:"Handoff",summary:"Documentation, training, ownership, and open items are accepted"}
+      ];
+      let activeProjectGateIndex = 0;
       const money = new Intl.NumberFormat("en-US", {style:"currency",currency:"USD",maximumFractionDigits:0});
       const validStages = ["identified","researched","contacted","engaged","consultation_scheduled","consultation_completed","proposal_sent","decision_pending","won","lost","nurture"];
       let selectedOpportunity = null;
@@ -892,6 +904,134 @@ h1{font-size:34px}
         }
       });
       const fulfillmentStorageKey = () => FULFILLMENT_KEY + selectedOpportunity.id;
+      const projectGatesStorageKey = () => PROJECT_GATES_KEY + selectedOpportunity.id;
+      const emptyProjectGates = () => Object.fromEntries(projectGateDefinitions.map(gate => [gate.id,{
+        status:"not_started",approver:"",date:"",scope:"",evidence:"",risks:"",
+        decision:"",nextOwner:"",nextDate:"",verified:false,updatedAt:""
+      }]));
+      const readProjectGates = () => {
+        try {
+          const saved = JSON.parse(localStorage.getItem(projectGatesStorageKey()) || "null");
+          return {...emptyProjectGates(),...(saved || {})};
+        } catch {
+          return emptyProjectGates();
+        }
+      };
+      const projectGateStatusLabel = status => ({
+        not_started:"Not Started",in_progress:"In Progress",ready_for_review:"Ready for Review",
+        blocked:"Blocked",approved:"Approved",rejected:"Rejected"
+      })[status] || "Not Started";
+      const projectGateSnapshot = () => ({
+        status:document.getElementById("projectGateStatus").value,
+        approver:document.getElementById("projectGateApprover").value.trim(),
+        date:document.getElementById("projectGateDate").value,
+        scope:document.getElementById("projectGateScope").value.trim(),
+        evidence:document.getElementById("projectGateEvidence").value.trim(),
+        risks:document.getElementById("projectGateRisks").value.trim(),
+        decision:document.getElementById("projectGateDecision").value.trim(),
+        nextOwner:document.getElementById("projectGateNextOwner").value.trim(),
+        nextDate:document.getElementById("projectGateNextDate").value,
+        verified:document.getElementById("approveProjectGate").checked,
+        updatedAt:new Date().toISOString()
+      });
+      const loadProjectGateEditor = index => {
+        activeProjectGateIndex = index;
+        const gate = projectGateDefinitions[index];
+        const record = readProjectGates()[gate.id];
+        document.getElementById("gateEditorTitle").textContent = "Gate " + gate.id + ": " + gate.name;
+        document.getElementById("projectGateStatus").value = record.status;
+        document.getElementById("projectGateApprover").value = record.approver;
+        document.getElementById("projectGateDate").value = record.date;
+        document.getElementById("projectGateScope").value = record.scope;
+        document.getElementById("projectGateEvidence").value = record.evidence;
+        document.getElementById("projectGateRisks").value = record.risks;
+        document.getElementById("projectGateDecision").value = record.decision;
+        document.getElementById("projectGateNextOwner").value = record.nextOwner;
+        document.getElementById("projectGateNextDate").value = record.nextDate;
+        document.getElementById("approveProjectGate").checked = Boolean(record.verified);
+        document.getElementById("gatesMessage").textContent = record.updatedAt
+          ? "Saved Phoenix snapshot loaded. Verify the authoritative evidence in Notion before changing this gate."
+          : "No Phoenix snapshot has been saved for this gate.";
+        renderProjectGates();
+      };
+      const renderProjectGates = () => {
+        const records = readProjectGates();
+        const grid = document.getElementById("gateGrid");
+        grid.replaceChildren();
+        projectGateDefinitions.forEach((gate,index) => {
+          const record = records[gate.id];
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "gatecard";
+          if (index === activeProjectGateIndex) button.classList.add("active");
+          if (record.status === "approved") button.classList.add("approved");
+          const title = document.createElement("strong");
+          title.textContent = "Gate " + gate.id + " · " + projectGateStatusLabel(record.status);
+          const detail = document.createElement("span");
+          detail.textContent = gate.name + ": " + gate.summary;
+          button.append(title,detail);
+          button.addEventListener("click", () => loadProjectGateEditor(index));
+          grid.appendChild(button);
+        });
+      };
+      document.getElementById("openGates").addEventListener("click", () => {
+        if (!selectedOpportunity) return;
+        document.getElementById("gatesName").textContent = (selectedCompany?.name || selectedOpportunity.name) + " project gates";
+        document.getElementById("gatesLocation").textContent = String(selectedOpportunity.stage) === "won"
+          ? "Commercially accepted. Gate approvals still require current Notion evidence."
+          : "Planning view only. This opportunity is not marked Won.";
+        gatesVeil.hidden = false;
+        gatesVeil.scrollTop = 0;
+        loadProjectGateEditor(0);
+      });
+      document.getElementById("closeGates").addEventListener("click", () => { gatesVeil.hidden = true; });
+      document.getElementById("gatesForm").addEventListener("submit", event => {
+        event.preventDefault();
+        const message = document.getElementById("gatesMessage");
+        const gate = projectGateDefinitions[activeProjectGateIndex];
+        const record = projectGateSnapshot();
+        const records = readProjectGates();
+        const needsReviewEvidence = ["ready_for_review","approved","rejected"].includes(record.status);
+        if (needsReviewEvidence && (!record.scope || !record.evidence || !record.decision || !record.nextOwner || !record.nextDate)) {
+          message.textContent = "Add the exact scope, evidence location, written decision, next owner, and next review date first.";
+          return;
+        }
+        if (record.status === "blocked" && (!record.risks || !record.decision || !record.nextOwner || !record.nextDate)) {
+          message.textContent = "A blocked gate requires the blocker or risk, review note, next owner, and next review date.";
+          return;
+        }
+        if (record.status === "approved") {
+          let readiness = null;
+          try { readiness = JSON.parse(localStorage.getItem(fulfillmentStorageKey()) || "null"); }
+          catch { readiness = null; }
+          const readinessEvidenceComplete = readiness?.readiness === "ready"
+            && Object.values(readiness?.gates || {}).length === 6
+            && Object.values(readiness.gates).every(Boolean);
+          if (String(selectedOpportunity.stage) !== "won" || !readinessEvidenceComplete) {
+            message.textContent = "Phoenix cannot approve a delivery gate until the opportunity is Won and Day 1 readiness is verified.";
+            return;
+          }
+          if (activeProjectGateIndex > 0) {
+            const priorGate = projectGateDefinitions[activeProjectGateIndex - 1];
+            if (records[priorGate.id]?.status !== "approved") {
+              message.textContent = "Gate " + priorGate.id + " must be approved before Gate " + gate.id + " can be approved.";
+              return;
+            }
+          }
+          if (!record.approver || !record.date || !record.risks || !record.verified) {
+            message.textContent = "Approval requires the authorized approver, decision date, open risks or None, and the verification checkbox.";
+            return;
+          }
+          if (!/\bapprove(?:d)?\b/i.test(record.decision)) {
+            message.textContent = "The written decision must clearly state that this exact gate, version, and scope are approved.";
+            return;
+          }
+        }
+        records[gate.id] = record;
+        localStorage.setItem(projectGatesStorageKey(), JSON.stringify(records));
+        renderProjectGates();
+        message.textContent = "Gate " + gate.id + " snapshot saved on this device. Notion remains the authoritative approval record.";
+      });
       const fulfillmentSnapshot = () => ({
         readiness:document.getElementById("fulfillmentReadiness").value,
         owner:document.getElementById("fulfillmentOwner").value.trim(),
