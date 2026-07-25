@@ -731,6 +731,7 @@ h1{font-size:34px}
       const requireApprovedProposal = () => {
         const draft = document.getElementById("proposalDraft").value.trim();
         if (!draft) throw new Error("Generate or write the proposal first.");
+        if (/\[Enter [^\]]+\]/i.test(draft)) throw new Error("Complete every bracketed item before approving the proposal.");
         const issues = clientCopyIssues(draft);
         if (issues.length) throw new Error("Review the draft before using it. Phoenix found: " + issues.join(", ") + ".");
         if (!document.getElementById("approveProposal").checked) throw new Error("Review the proposal and check the approval box first.");
@@ -766,18 +767,14 @@ h1{font-size:34px}
       document.getElementById("closeProposal").addEventListener("click", () => { proposalVeil.hidden = true; });
       document.getElementById("generateProposal").addEventListener("click", async () => {
         const message = document.getElementById("proposalMessage");
-        const investment = document.getElementById("proposalInvestment").value.trim();
-        const timeline = document.getElementById("proposalTimeline").value.trim();
-        const terms = document.getElementById("proposalTerms").value.trim();
-        if (!investment || !timeline || !terms) {
-          message.textContent = "Enter the investment, timeline, and payment terms before generating the proposal.";
-          return;
-        }
+        const investment = document.getElementById("proposalInvestment").value.trim() || "[Enter project investment]";
+        const timeline = document.getElementById("proposalTimeline").value.trim() || "[Enter expected timeline]";
+        const terms = document.getElementById("proposalTerms").value.trim() || "[Enter payment terms]";
         message.textContent = "Preparing a factual first draft...";
         try {
           const [briefs, outcomes] = await Promise.all([
-            request("intelligence_briefs?opportunity_id=eq." + encodeURIComponent(selectedOpportunity.id) + "&select=company_background,likely_pain_points,recommended_offer,desired_outcome&order=created_at.desc&limit=1"),
-            request("outcomes?opportunity_id=eq." + encodeURIComponent(selectedOpportunity.id) + "&select=confirmed_pain_points,objections,commitments,proposed_next_action,created_at&order=created_at.desc&limit=1")
+            request("intelligence_briefs?opportunity_id=eq." + encodeURIComponent(selectedOpportunity.id) + "&select=company_background,likely_pain_points,recommended_offer,desired_outcome&limit=1").catch(() => []),
+            request("outcomes?opportunity_id=eq." + encodeURIComponent(selectedOpportunity.id) + "&select=confirmed_pain_points,objections,commitments,proposed_next_action,created_at&order=created_at.desc&limit=1").catch(() => [])
           ]);
           const brief = briefs[0] || {};
           const outcome = outcomes[0] || {};
@@ -846,7 +843,10 @@ h1{font-size:34px}
           ].join("\n");
           document.getElementById("proposalDraft").value = draft;
           document.getElementById("approveProposal").checked = false;
-          message.textContent = "Draft generated. Read every section, make it sound like you, and confirm that the scope and price are correct.";
+          const hasPlaceholders = draft.includes("[Enter ");
+          message.textContent = hasPlaceholders
+            ? "Draft generated. Complete the bracketed items, then review every fact, promise, price, and scope."
+            : "Draft generated. Read every section, make it sound like you, and confirm that the scope and price are correct.";
         } catch (problem) {
           message.textContent = problem instanceof Error ? problem.message : "The proposal draft could not be prepared.";
         }
