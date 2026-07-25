@@ -546,15 +546,29 @@ h1{font-size:34px}
           if (!opportunity.next_action) missing.push("next action");
           if (missing.length) {
             missingItems.push({opportunity,missing});
+            const route = missing.includes("contact permission")
+              ? "qualification"
+              : missing.includes("primary contact") || missing.includes("contact method")
+                ? "workspace"
+                : missing.includes("company website") || missing.includes("approved research")
+                  ? "research"
+                  : "workspace";
+            const routeOwner = route === "qualification" ? "Receptionist"
+              : route === "research" ? "Researcher"
+              : "Receptionist";
+            const routeTitle = route === "qualification" ? "Review contact permission for " + (company?.name || opportunity.name)
+              : route === "research" ? "Complete research setup for " + (company?.name || opportunity.name)
+              : "Complete " + (company?.name || opportunity.name) + " record";
             commands.push({
               kind:"missing",
               rank:80 + Number(opportunity.priority_score || 0) / 10,
-              owner:missing.includes("approved research") ? "Researcher" : "Receptionist",
-              title:"Complete " + (company?.name || opportunity.name) + " record",
+              owner:routeOwner,
+              title:routeTitle,
               meta:"Missing information",
               why:"Still needed: " + missing.join(", ") + ".",
               outcome:commandOutcome("missing",opportunity),
-              opportunity
+              opportunity,
+              route
             });
           } else if (opportunity.next_action && !tasks.some(task => task.opportunity_id === opportunity.id)) {
             commands.push({
@@ -609,7 +623,11 @@ h1{font-size:34px}
           outcome.textContent = "Outcome: " + command.outcome;
           const button = document.createElement("button");
           button.type = "button";
-          button.textContent = command.kind === "approval" ? "Review and decide" : command.kind === "task" ? "Open work item" : "Open record";
+          button.textContent = command.kind === "approval" ? "Review and decide"
+            : command.kind === "task" ? "Open work item"
+            : command.route === "qualification" ? "Open qualification"
+            : command.route === "research" ? "Open research"
+            : "Open record";
           button.addEventListener("click", () => {
             const opportunity = command.opportunity;
             if (opportunity) selectOpportunity(opportunity,companyMap.get(opportunity.company_id),contactMap.get(opportunity.primary_contact_id));
@@ -626,6 +644,10 @@ h1{font-size:34px}
               orchestratorVeil.scrollTop = 0;
             } else if (command.kind === "task") {
               document.getElementById("openActivity").click();
+            } else if (command.route === "qualification") {
+              document.getElementById("openQualification").click();
+            } else if (command.route === "research") {
+              document.getElementById("openResearch").click();
             } else {
               showLeadWorkspace();
             }
