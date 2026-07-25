@@ -675,8 +675,13 @@ h1{font-size:34px}
         const email = selectedContact?.email || "";
         const body = document.getElementById("outcomeFollowUp").value.trim();
         const companyName = selectedCompany?.name || selectedOpportunity?.name || "our conversation";
+        const disposition = document.getElementById("outcomeDisposition").value;
+        const subject = disposition === "no_answer" ? "Tried to reach you — " + companyName
+          : disposition === "proposal_requested" ? "Your next steps — " + companyName
+          : disposition === "closed_won" ? "Welcome — " + companyName
+          : "Following up — " + companyName;
         link.href = email && body
-          ? "mailto:" + encodeURIComponent(email) + "?subject=" + encodeURIComponent("Following up — " + companyName) + "&body=" + encodeURIComponent(body)
+          ? "mailto:" + encodeURIComponent(email) + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body)
           : "#";
       };
       document.getElementById("generateFollowUp").addEventListener("click", () => {
@@ -686,12 +691,22 @@ h1{font-size:34px}
         const painPoints = lines(document.getElementById("outcomePainPoints").value);
         const nextAction = document.getElementById("outcomeNextAction").value.trim() || "the next step we discussed";
         const detail = painPoints.length ? "especially your need to " + painPoints[0].replace(/[.]+$/,"").toLowerCase() : "the priorities we discussed";
-        document.getElementById("outcomeFollowUp").value = greeting + "\n\nThank you for taking the time to speak with me about " + companyName + ". I appreciated learning more about " + detail + ". Based on our conversation, I believe a focused Kelley AI workflow could help without disrupting the tools you already use. I’ll follow up with " + nextAction + ". Please let me know if there is anything else you would like me to include.\n\nBest,\nRoberta\nKelley AI Systems";
+        const disposition = document.getElementById("outcomeDisposition").value;
+        const messages = {
+          no_answer:greeting + "\n\nI tried to reach you today regarding " + companyName + " and wanted to follow up here as well. I help businesses improve lead response, qualification, and follow-up without replacing the tools that already work for them. If this is relevant, I would be glad to share a brief example and learn how your current process works.\n\nBest,\nRoberta\nKelley AI Systems",
+          interested:greeting + "\n\nThank you for taking the time to speak with me about " + companyName + ". I appreciated learning more about " + detail + ". Based on our conversation, I believe a focused Kelley AI workflow could help without disrupting the tools you already use. I’ll follow up with " + nextAction + ".\n\nBest,\nRoberta\nKelley AI Systems",
+          proposal_requested:greeting + "\n\nThank you for the conversation about " + companyName + ". I’m preparing the next steps around " + detail + " and will follow up with " + nextAction + ". I’ll keep the recommendation focused on the workflow priorities we discussed.\n\nBest,\nRoberta\nKelley AI Systems",
+          closed_won:greeting + "\n\nThank you for choosing Kelley AI Systems. I’m excited to support " + companyName + ". Our next step is " + nextAction + ", and I’ll make sure the process stays clear and organized from the start.\n\nBest,\nRoberta\nKelley AI Systems",
+          closed_lost:greeting + "\n\nThank you for considering Kelley AI Systems and for the time you shared. I understand that now may not be the right time for " + companyName + ". I appreciate the conversation and would be glad to reconnect if your priorities change.\n\nBest,\nRoberta\nKelley AI Systems",
+          follow_up:greeting + "\n\nI wanted to follow up regarding " + companyName + ". Based on what we discussed, the most relevant next step is " + nextAction + ". Please let me know if you have any questions or if there is anything else you would like me to include.\n\nBest,\nRoberta\nKelley AI Systems"
+        };
+        document.getElementById("outcomeFollowUp").value = messages[disposition] || messages.follow_up;
         refreshEmailDraft();
         document.getElementById("outcomeMessage").textContent = selectedContact?.email
           ? "Follow-up draft generated. Review it, then open the unsent email draft."
           : "Follow-up generated. Add the contact’s email in Lead Workspace to open an email draft.";
       });
+      document.getElementById("outcomeDisposition").addEventListener("change", refreshEmailDraft);
       document.getElementById("outcomeFollowUp").addEventListener("input", refreshEmailDraft);
       document.getElementById("openEmailDraft").addEventListener("click", event => {
         refreshEmailDraft();
