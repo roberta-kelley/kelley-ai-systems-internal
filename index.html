@@ -919,6 +919,9 @@ h1{font-size:34px}
         document.getElementById("approveFulfillment").checked = false;
         const tomorrow = new Date();
         tomorrow.setDate(tomorrow.getDate() + 1);
+        while (tomorrow.getDay() === 0 || tomorrow.getDay() === 6) {
+          tomorrow.setDate(tomorrow.getDate() + 1);
+        }
         document.getElementById("fulfillmentStart").value = tomorrow.toISOString().slice(0,10);
         try {
           const saved = JSON.parse(localStorage.getItem(fulfillmentStorageKey()) || "null");
@@ -995,6 +998,10 @@ h1{font-size:34px}
         }
         return result;
       };
+      const isBusinessDay = dateValue => {
+        const day = new Date(dateValue + "T12:00:00").getDay();
+        return day !== 0 && day !== 6;
+      };
       document.getElementById("createFulfillmentTasks").addEventListener("click", async () => {
         const button = document.getElementById("createFulfillmentTasks");
         const message = document.getElementById("fulfillmentMessage");
@@ -1014,6 +1021,10 @@ h1{font-size:34px}
           message.textContent = "Complete the owner, start date, summary, requirements, and milestones first.";
           return;
         }
+        if (!isBusinessDay(plan.start)) {
+          message.textContent = "Confirmed Day 1 must be a business day. Choose Monday through Friday.";
+          return;
+        }
         if (!document.getElementById("approveFulfillment").checked) {
           message.textContent = "Review the handoff and check the approval box before creating work.";
           return;
@@ -1024,16 +1035,25 @@ h1{font-size:34px}
         try {
           localStorage.setItem(fulfillmentStorageKey(), JSON.stringify(plan));
           const existing = await request("tasks?opportunity_id=eq." + encodeURIComponent(selectedOpportunity.id) + "&task_type=eq.fulfillment&select=id,title,status");
-          const existingTitles = new Set(existing.map(task => task.title));
+          const existingByTitle = new Map(existing.map(task => [task.title, task]));
           const taskPlans = milestones.map((milestone,index) => ({
             title:"Fulfillment: " + milestone,
             offset:[0,3,8,11,15][index] ?? 15 + ((index - 4) * 3)
           }));
           let created = 0;
+          let rescheduled = 0;
           for (const taskPlan of taskPlans) {
-            if (existingTitles.has(taskPlan.title)) continue;
             const dayOne = new Date(plan.start + "T17:00:00");
             const due = addBusinessDays(dayOne, taskPlan.offset);
+            const existingTask = existingByTitle.get(taskPlan.title);
+            if (existingTask && existingTask.status !== "completed") {
+              await updateRecord("tasks", existingTask.id, {
+                priority:taskPlan.offset <= 2 ? "high" : "normal",
+                due_at:due.toISOString()
+              });
+              rescheduled += 1;
+              continue;
+            }
             await createRecord("tasks", {
               workspace_id:selectedOpportunity.workspace_id,
               opportunity_id:selectedOpportunity.id,
@@ -1047,7 +1067,9 @@ h1{font-size:34px}
           }
           message.textContent = created
             ? created + " Phoenix milestone reminders created from confirmed Day 1. Continue managing the authoritative 46-task project in Notion."
-            : "The Phoenix milestone reminders already exist. No duplicates were created. Continue managing delivery in Notion.";
+            : rescheduled
+              ? rescheduled + " existing Phoenix milestone reminders rescheduled from the confirmed Day 1. No duplicates were created."
+              : "The Phoenix milestone reminders already exist. No duplicates were created. Continue managing delivery in Notion.";
           await loadData();
         } catch (problem) {
           message.textContent = problem instanceof Error ? problem.message : "The fulfillment tasks could not be created.";
@@ -1235,7 +1257,7 @@ h1{font-size:34px}
         try {
           const [outcomes, tasks] = await Promise.all([
             request("outcomes?opportunity_id=eq." + encodeURIComponent(selectedOpportunity.id) + "&select=id,disposition,confirmed_pain_points,objections,commitments,proposed_stage,proposed_next_action,proposed_due_at,human_approved,created_at&order=created_at.desc"),
-            request("tasks?opportunity_id=eq." + encodeURIComponent(selectedOpportunity.id) + "&select=id,title,task_type,priority,status,due_at,created_at&order=created_at.desc")
+            request("tasks?opportunity_id=eq." + encodeURIComponent(selectedOpportunity.id) + "&select=id,title,task_type,priority,status,due_at,created_at&order=due_at.asc")
           ]);
           tasks.filter(task => task.status !== "completed").forEach(task => {
             const due = task.due_at ? new Date(task.due_at).toLocaleDateString() : "No due date";
