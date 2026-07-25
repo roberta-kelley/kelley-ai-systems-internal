@@ -154,15 +154,16 @@ h1{font-size:34px}
       </div>
       <article class="card proof"><div class="proofhead"><div><p class="eye">Proof &amp; performance</p><h2>What is producing movement</h2></div><p class="sub">Measured from your real Phoenix activity.</p></div><div class="proofgrid"><div class="proofmetric"><small>Outcomes recorded</small><strong id="proofOutcomes">0</strong></div><div class="proofmetric"><small>Follow-ups sent</small><strong id="proofFollowUps">0</strong></div><div class="proofmetric"><small>Interested</small><strong id="proofInterested">0</strong></div><div class="proofmetric"><small>Proposals</small><strong id="proofProposals">0</strong></div><div class="proofmetric"><small>Wins</small><strong id="proofWins">0</strong></div><div class="proofmetric"><small>Positive movement</small><strong id="proofConversion">0%</strong></div></div><div class="proofinsight" id="proofInsight">Phoenix needs a few recorded outcomes before it can identify a reliable pattern.</div><div class="proofinsight" id="proofFeedback">Recommendation feedback will appear here as you accept, edit, or reject Phoenix suggestions.</div></article>
     </section>
-    <aside><div class="aside"><p class="eye">Lead intelligence</p><h2 id="intelligenceName">Select an opportunity</h2><p class="location" id="intelligenceLocation">Protected owner workspace</p></div><div class="aside"><p class="eye">Stage roadmap</p><div class="road" id="stageRoadmap"><span data-stage="identified"><i>1</i>Capture</span><span data-stage="vetted"><i>2</i>Vetted</span><span data-stage="discovery"><i>3</i>Discovery</span><span data-stage="proposal"><i>4</i>Proposal</span><span data-stage="closed"><i>5</i>Closed</span></div></div><div class="aside"><p class="eye">Strategic briefing</p><div class="brief" id="strategicBrief">Choose an opportunity to review its current intelligence record.</div><button class="actionbtn" id="openBrief" type="button">Prepare call brief</button></div><div class="aside"><p class="eye">Next best action</p><strong class="action" id="nextAction">Review the opportunity record</strong><button class="actionbtn" id="openWorkspace" type="button">Open lead workspace</button><button class="actionbtn" id="openOutcome" type="button">Record call outcome</button><button class="actionbtn" id="openActivity" type="button">View activity &amp; follow-up</button></div></aside>
+    <aside><div class="aside"><p class="eye">Lead intelligence</p><h2 id="intelligenceName">Select an opportunity</h2><p class="location" id="intelligenceLocation">Protected owner workspace</p></div><div class="aside"><p class="eye">Stage roadmap</p><div class="road" id="stageRoadmap"><span data-stage="identified"><i>1</i>Capture</span><span data-stage="vetted"><i>2</i>Vetted</span><span data-stage="discovery"><i>3</i>Discovery</span><span data-stage="proposal"><i>4</i>Proposal</span><span data-stage="closed"><i>5</i>Closed</span></div></div><div class="aside"><p class="eye">Strategic briefing</p><div class="brief" id="strategicBrief">Choose an opportunity to review its current intelligence record.</div><button class="actionbtn" id="openBrief" type="button">Prepare call brief</button><button class="actionbtn" id="openProposal" type="button">Prepare proposal</button></div><div class="aside"><p class="eye">Next best action</p><strong class="action" id="nextAction">Review the opportunity record</strong><button class="actionbtn" id="openWorkspace" type="button">Open lead workspace</button><button class="actionbtn" id="openOutcome" type="button">Record call outcome</button><button class="actionbtn" id="openActivity" type="button">View activity &amp; follow-up</button></div></aside>
   </div>
   <div class="utility"><button type="button" id="resetConnection">Reset connection</button><button type="button" id="signOut">Sign out</button></div>
   <div id="authVeil" class="authveil" hidden></div>
   <div id="workspaceVeil" class="workspaceveil" hidden><form class="workspacebox" id="workspaceForm"><header><div><p class="eye">Opportunity workspace</p><h2 id="workspaceName">Lead</h2><p class="location" id="workspaceLocation"></p></div><button class="close" id="closeWorkspace" type="button">Close</button></header><p class="eye">Primary contact</p><label>First name<input id="workspaceFirstName" placeholder="First name"></label><label>Last name<input id="workspaceLastName" placeholder="Last name"></label><label>Role<input id="workspaceRole" placeholder="Owner, Sales Manager, etc."></label><label>Email<input id="workspaceEmail" type="email" placeholder="name@company.com"></label><label>Phone<input id="workspacePhone" type="tel" placeholder="Phone number"></label><p class="eye">Opportunity</p><label>Stage<select id="workspaceStage"><option value="identified">Captured</option><option value="researched">Researched</option><option value="contacted">Contacted</option><option value="engaged">Engaged</option><option value="consultation_scheduled">Consultation scheduled</option><option value="consultation_completed">Consultation completed</option><option value="proposal_sent">Proposal sent</option><option value="decision_pending">Decision pending</option><option value="won">Won</option><option value="lost">Lost</option><option value="nurture">Nurture</option></select></label><label>Next best action<textarea id="workspaceAction" placeholder="What should happen next?"></textarea></label><button class="save" id="saveWorkspace" type="submit">Save contact and lead</button><p class="message" id="workspaceMessage"></p></form></div>
   <div id="addLeadVeil" class="workspaceveil" hidden><form class="workspacebox" id="addLeadForm"><header><div><p class="eye">New relationship</p><h2>Add a lead</h2><p class="location">Create the company, contact, and first opportunity.</p></div><button class="close" id="closeAddLead" type="button">Close</button></header><p class="eye">Company</p><label>Company name<input id="newCompanyName" required placeholder="Company or prospect name"></label><label>Location<input id="newCompanyLocation" placeholder="City, State"></label><p class="eye">Primary contact</p><label>First name<input id="newFirstName" required placeholder="First name"></label><label>Last name<input id="newLastName" placeholder="Last name"></label><label>Role<input id="newContactRole" placeholder="Owner, Sales Manager, etc."></label><label>Email<input id="newContactEmail" type="email" placeholder="name@company.com"></label><label>Phone<input id="newContactPhone" type="tel" placeholder="Phone number"></label><p class="eye">Opportunity</p><label>Opportunity name<input id="newOpportunityName" required placeholder="Example: AI systems consultation"></label><label>Estimated value<input id="newEstimatedValue" type="number" min="0" step="1" value="0"></label><label>Next best action<textarea id="newNextAction" placeholder="Example: Research company and prepare outreach"></textarea></label><button class="save" id="saveNewLead" type="submit">Add lead to Phoenix</button><p class="message" id="addLeadMessage"></p></form></div>
-  <div id="briefVeil" class="workspaceveil" hidden><form class="workspacebox" id="briefForm"><header><div><p class="eye">Closer intelligence</p><h2 id="briefName">Call preparation</h2><p class="location" id="briefLocation"></p></div><button class="close" id="closeBrief" type="button">Close</button></header><button class="save" id="generateBrief" type="button">Generate starter brief</button><label>Company background<textarea id="briefBackground"></textarea></label><label>Likely pain points — one per line<textarea id="briefPainPoints"></textarea></label><label>Recommended questions — one per line<textarea id="briefQuestions"></textarea></label><label>Relevant Kelley AI offer<textarea id="briefOffer"></textarea></label><label>Possible objections and responses — use Objection | Response<textarea id="briefObjections"></textarea></label><label>Desired call outcome<textarea id="briefOutcome"></textarea></label><button class="save" id="saveBrief" type="submit">Save call brief</button><p class="message" id="briefMessage"></p></form></div>
+  <div id="briefVeil" class="workspaceveil" hidden><form class="workspacebox" id="briefForm"><header><div><p class="eye">Closer intelligence</p><h2 id="briefName">Call preparation</h2><p class="location" id="briefLocation"></p></div><button class="close" id="closeBrief" type="button">Close</button></header><button class="save" id="generateBrief" type="button">Generate starter brief</button><label>Company background<textarea id="briefBackground"></textarea></label><label>Likely pain points, one per line<textarea id="briefPainPoints"></textarea></label><label>Recommended questions, one per line<textarea id="briefQuestions"></textarea></label><label>Relevant Kelley AI offer<textarea id="briefOffer"></textarea></label><label>Possible objections and responses, using Objection | Response<textarea id="briefObjections"></textarea></label><label>Desired call outcome<textarea id="briefOutcome"></textarea></label><button class="save" id="saveBrief" type="submit">Save call brief</button><p class="message" id="briefMessage"></p></form></div>
   <div id="outcomeVeil" class="workspaceveil" hidden><form class="workspacebox" id="outcomeForm"><header><div><p class="eye">Closed-loop handoff</p><h2 id="outcomeName">Record call outcome</h2><p class="location" id="outcomeLocation"></p></div><button class="close" id="closeOutcome" type="button">Close</button></header><label>Call disposition<select id="outcomeDisposition"><option value="follow_up">Follow-up needed</option><option value="interested">Interested</option><option value="proposal_requested">Proposal requested</option><option value="closed_won">Closed won</option><option value="closed_lost">Closed lost</option><option value="no_answer">No answer</option></select></label><label>Confirmed pain points — one per line<textarea id="outcomePainPoints"></textarea></label><label>Objections raised — one per line<textarea id="outcomeObjections"></textarea></label><label>Commitments made — one per line<textarea id="outcomeCommitments"></textarea></label><label>Move pipeline to<select id="outcomeStage"><option value="identified">Captured</option><option value="researched">Researched</option><option value="contacted">Contacted</option><option value="engaged">Engaged</option><option value="consultation_scheduled">Consultation scheduled</option><option value="consultation_completed">Consultation completed</option><option value="proposal_sent">Proposal sent</option><option value="decision_pending">Decision pending</option><option value="won">Won</option><option value="lost">Lost</option><option value="nurture">Nurture</option></select></label><label>Next best action<textarea id="outcomeNextAction"></textarea></label><label>Follow-up due date<input id="outcomeDueDate" type="date"></label><button class="save" id="generateFollowUp" type="button">Generate follow-up message</button><label>Follow-up message<textarea id="outcomeFollowUp"></textarea></label><a class="save" id="openEmailDraft" href="#">Open email draft for review</a><label>Phoenix recommendation<select id="recommendationDecision"><option value="accepted">Accept as recommended</option><option value="edited">I edited the recommendation</option><option value="rejected">Reject the recommendation</option></select></label><label class="approval"><input id="approveOutcome" type="checkbox" checked><span>Allow Phoenix to update the pipeline and create the next task.</span></label><button class="save" id="saveOutcome" type="submit">Save outcome and update Phoenix</button><p class="message" id="outcomeMessage"></p></form></div>
   <div id="activityVeil" class="workspaceveil" hidden><section class="workspacebox"><header><div><p class="eye">Orchestrator view</p><h2 id="activityName">Activity &amp; follow-up</h2><p class="location" id="activityLocation"></p></div><button class="close" id="closeActivity" type="button">Close</button></header><div class="activitylist" id="activityList"></div><p class="message" id="activityMessage"></p></section></div>
+  <div id="proposalVeil" class="workspaceveil" hidden><form class="workspacebox" id="proposalForm"><header><div><p class="eye">Sales agent</p><h2 id="proposalName">Proposal writer</h2><p class="location" id="proposalLocation">Drafted from the opportunity record</p></div><button class="close" id="closeProposal" type="button">Close</button></header><label>Project investment<input id="proposalInvestment" placeholder="Example: $3,200 setup plus $297 monthly"></label><label>Expected timeline<input id="proposalTimeline" value="2 to 3 weeks after receiving access and materials"></label><label>Payment terms<input id="proposalTerms" placeholder="Enter the payment schedule"></label><button class="save" id="generateProposal" type="button">Generate proposal draft</button><label>Editable proposal<textarea id="proposalDraft" style="min-height:460px" placeholder="Generate a draft, then revise it in your own words."></textarea></label><label class="approval"><input id="approveProposal" type="checkbox"><span>I reviewed this proposal and confirm that the facts, scope, price, and promises are accurate.</span></label><button class="save" id="saveProposal" type="button">Save draft on this device</button><button class="save" id="copyProposal" type="button">Copy approved proposal</button><button class="save" id="downloadProposal" type="button">Download approved proposal</button><p class="message" id="proposalMessage"></p></form></div>
   <script>
     (() => {
       const URL_KEY = "kelley-ai:supabase-url";
@@ -175,6 +176,8 @@ h1{font-size:34px}
       const briefVeil = document.getElementById("briefVeil");
       const outcomeVeil = document.getElementById("outcomeVeil");
       const activityVeil = document.getElementById("activityVeil");
+      const proposalVeil = document.getElementById("proposalVeil");
+      const PROPOSAL_KEY = "phoenix:proposal:";
       const money = new Intl.NumberFormat("en-US", {style:"currency",currency:"USD",maximumFractionDigits:0});
       const validStages = ["identified","researched","contacted","engaged","consultation_scheduled","consultation_completed","proposal_sent","decision_pending","won","lost","nurture"];
       let selectedOpportunity = null;
@@ -709,6 +712,182 @@ h1{font-size:34px}
           button.textContent = "Save call brief";
         }
       });
+      const clientCopyIssues = text => {
+        const phrases = ["leverage","seamlessly","transform your business","unlock your potential","cutting-edge","in today’s fast-paced world","in today's fast-paced world","revolutionize","game-changing","delve"];
+        const lowered = text.toLowerCase();
+        const issues = phrases.filter(phrase => lowered.includes(phrase));
+        if (text.includes("—")) issues.push("em dash");
+        return issues;
+      };
+      const proposalStorageKey = () => PROPOSAL_KEY + selectedOpportunity.id;
+      const proposalSnapshot = () => ({
+        investment:document.getElementById("proposalInvestment").value.trim(),
+        timeline:document.getElementById("proposalTimeline").value.trim(),
+        terms:document.getElementById("proposalTerms").value.trim(),
+        draft:document.getElementById("proposalDraft").value.trim()
+      });
+      const proposalFileName = () => ((selectedCompany?.name || selectedOpportunity?.name || "Client") + " Proposal")
+        .replace(/[^a-z0-9]+/gi,"-").replace(/^-|-$/g,"") + ".txt";
+      const requireApprovedProposal = () => {
+        const draft = document.getElementById("proposalDraft").value.trim();
+        if (!draft) throw new Error("Generate or write the proposal first.");
+        const issues = clientCopyIssues(draft);
+        if (issues.length) throw new Error("Review the draft before using it. Phoenix found: " + issues.join(", ") + ".");
+        if (!document.getElementById("approveProposal").checked) throw new Error("Review the proposal and check the approval box first.");
+        return draft;
+      };
+      document.getElementById("openProposal").addEventListener("click", async () => {
+        if (!selectedOpportunity) return;
+        document.getElementById("proposalName").textContent = selectedCompany?.name || selectedOpportunity.name;
+        document.getElementById("proposalLocation").textContent = "Proposal writer for " + (selectedContact?.first_name || selectedCompany?.name || "this opportunity");
+        document.getElementById("proposalMessage").textContent = "Loading the opportunity record...";
+        document.getElementById("approveProposal").checked = false;
+        proposalVeil.hidden = false;
+        proposalVeil.scrollTop = 0;
+        try {
+          const saved = JSON.parse(localStorage.getItem(proposalStorageKey()) || "null");
+          if (saved) {
+            document.getElementById("proposalInvestment").value = saved.investment || "";
+            document.getElementById("proposalTimeline").value = saved.timeline || "2 to 3 weeks after receiving access and materials";
+            document.getElementById("proposalTerms").value = saved.terms || "";
+            document.getElementById("proposalDraft").value = saved.draft || "";
+            document.getElementById("proposalMessage").textContent = "Your saved draft is loaded. It is stored on this device.";
+          } else {
+            document.getElementById("proposalInvestment").value = "";
+            document.getElementById("proposalTimeline").value = "2 to 3 weeks after receiving access and materials";
+            document.getElementById("proposalTerms").value = "";
+            document.getElementById("proposalDraft").value = "";
+            document.getElementById("proposalMessage").textContent = "Enter the investment and payment terms, then generate the first draft.";
+          }
+        } catch {
+          document.getElementById("proposalMessage").textContent = "Enter the investment and payment terms, then generate the first draft.";
+        }
+      });
+      document.getElementById("closeProposal").addEventListener("click", () => { proposalVeil.hidden = true; });
+      document.getElementById("generateProposal").addEventListener("click", async () => {
+        const message = document.getElementById("proposalMessage");
+        const investment = document.getElementById("proposalInvestment").value.trim();
+        const timeline = document.getElementById("proposalTimeline").value.trim();
+        const terms = document.getElementById("proposalTerms").value.trim();
+        if (!investment || !timeline || !terms) {
+          message.textContent = "Enter the investment, timeline, and payment terms before generating the proposal.";
+          return;
+        }
+        message.textContent = "Preparing a factual first draft...";
+        try {
+          const [briefs, outcomes] = await Promise.all([
+            request("intelligence_briefs?opportunity_id=eq." + encodeURIComponent(selectedOpportunity.id) + "&select=company_background,likely_pain_points,recommended_offer,desired_outcome&order=created_at.desc&limit=1"),
+            request("outcomes?opportunity_id=eq." + encodeURIComponent(selectedOpportunity.id) + "&select=confirmed_pain_points,objections,commitments,proposed_next_action,created_at&order=created_at.desc&limit=1")
+          ]);
+          const brief = briefs[0] || {};
+          const outcome = outcomes[0] || {};
+          const companyName = selectedCompany?.name || selectedOpportunity.name;
+          const contactName = selectedContact ? [selectedContact.first_name,selectedContact.last_name].filter(Boolean).join(" ") : "";
+          const confirmedPainPoints = outcome.confirmed_pain_points || [];
+          const painPoints = confirmedPainPoints.length ? confirmedPainPoints : brief.likely_pain_points || [];
+          const priorities = painPoints.length
+            ? painPoints.map(item => "• " + item).join("\n")
+            : "• Confirm the first workflow priority with the client before sending this proposal.";
+          const recommendation = brief.recommended_offer || "A focused lead capture, qualification, and follow-up system built around the process your team already uses.";
+          const nextStep = outcome.proposed_next_action || "Review the scope together and confirm the project start date.";
+          const date = new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
+          const draft = [
+            "PROPOSAL FOR " + companyName,
+            "",
+            "Prepared by Kelley AI Systems",
+            contactName ? "Prepared for " + contactName : "Prepared for " + companyName,
+            date,
+            "",
+            "A PRACTICAL NEXT STEP",
+            "",
+            "Thank you for sharing how " + companyName + " currently handles new opportunities and follow-up. This proposal focuses on the areas discussed and keeps the first project clear enough to implement, test, and improve.",
+            "",
+            "CURRENT PRIORITIES",
+            "",
+            priorities,
+            "",
+            "RECOMMENDED PLAN",
+            "",
+            recommendation,
+            "",
+            "SCOPE OF WORK",
+            "",
+            "• Confirm the current lead process and the points where follow-up slows down.",
+            "• Set up the agreed lead capture and qualification flow.",
+            "• Organize lead details, status, next action, and follow-up dates in one owner view.",
+            "• Prepare the agreed messages and handoff steps in the company’s natural voice.",
+            "• Test the workflow with sample records before launch.",
+            "• Provide a practical handoff and written operating instructions.",
+            "",
+            "TIMELINE",
+            "",
+            timeline + ". The schedule begins after the required access, materials, and approvals are received.",
+            "",
+            "INVESTMENT",
+            "",
+            investment,
+            "",
+            "Payment terms: " + terms,
+            "",
+            "CLIENT RESPONSIBILITIES",
+            "",
+            "• Provide accurate business information, approved messaging, and access to the agreed tools.",
+            "• Review drafts and test results within the agreed response window.",
+            "• Name one person who can approve decisions and answer process questions.",
+            "",
+            "NEXT STEP",
+            "",
+            nextStep,
+            "",
+            "If this reflects what we discussed, we can confirm the final scope and choose a start date.",
+            "",
+            "Roberta Kelley",
+            "Kelley AI Systems"
+          ].join("\n");
+          document.getElementById("proposalDraft").value = draft;
+          document.getElementById("approveProposal").checked = false;
+          message.textContent = "Draft generated. Read every section, make it sound like you, and confirm that the scope and price are correct.";
+        } catch (problem) {
+          message.textContent = problem instanceof Error ? problem.message : "The proposal draft could not be prepared.";
+        }
+      });
+      document.getElementById("saveProposal").addEventListener("click", () => {
+        localStorage.setItem(proposalStorageKey(), JSON.stringify(proposalSnapshot()));
+        document.getElementById("proposalMessage").textContent = "Draft saved on this device. It has not been sent.";
+      });
+      document.getElementById("copyProposal").addEventListener("click", async () => {
+        const message = document.getElementById("proposalMessage");
+        try {
+          const draft = requireApprovedProposal();
+          if (navigator.clipboard?.writeText) await navigator.clipboard.writeText(draft);
+          else {
+            const draftField = document.getElementById("proposalDraft");
+            draftField.focus();
+            draftField.select();
+            document.execCommand("copy");
+          }
+          message.textContent = "Approved proposal copied. Nothing was sent automatically.";
+        } catch (problem) {
+          message.textContent = problem instanceof Error ? problem.message : "The proposal could not be copied.";
+        }
+      });
+      document.getElementById("downloadProposal").addEventListener("click", () => {
+        const message = document.getElementById("proposalMessage");
+        try {
+          const draft = requireApprovedProposal();
+          const url = URL.createObjectURL(new Blob([draft],{type:"text/plain;charset=utf-8"}));
+          const link = document.createElement("a");
+          link.href = url;
+          link.download = proposalFileName();
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+          setTimeout(() => URL.revokeObjectURL(url), 1000);
+          message.textContent = "Approved proposal downloaded. Nothing was sent automatically.";
+        } catch (problem) {
+          message.textContent = problem instanceof Error ? problem.message : "The proposal could not be downloaded.";
+        }
+      });
       document.getElementById("openOutcome").addEventListener("click", () => {
         if (!selectedOpportunity) return;
         document.getElementById("outcomeName").textContent = selectedCompany?.name || selectedOpportunity.name;
@@ -734,10 +913,10 @@ h1{font-size:34px}
         const body = document.getElementById("outcomeFollowUp").value.trim();
         const companyName = selectedCompany?.name || selectedOpportunity?.name || "our conversation";
         const disposition = document.getElementById("outcomeDisposition").value;
-        const subject = disposition === "no_answer" ? "Tried to reach you — " + companyName
-          : disposition === "proposal_requested" ? "Your next steps — " + companyName
-          : disposition === "closed_won" ? "Welcome — " + companyName
-          : "Following up — " + companyName;
+        const subject = disposition === "no_answer" ? "Tried to reach you: " + companyName
+          : disposition === "proposal_requested" ? "Your next steps: " + companyName
+          : disposition === "closed_won" ? "Welcome: " + companyName
+          : "Following up: " + companyName;
         link.href = email && body
           ? "mailto:" + encodeURIComponent(email) + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body)
           : "#";
