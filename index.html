@@ -150,8 +150,8 @@ h1{font-size:34px}
   </div>
   <div class="utility"><button type="button" id="resetConnection">Reset connection</button><button type="button" id="signOut">Sign out</button></div>
   <div id="authVeil" class="authveil" hidden></div>
-  <div id="workspaceVeil" class="workspaceveil" hidden><form class="workspacebox" id="workspaceForm"><header><div><p class="eye">Opportunity workspace</p><h2 id="workspaceName">Lead</h2><p class="location" id="workspaceLocation"></p></div><button class="close" id="closeWorkspace" type="button">Close</button></header><label>Stage<select id="workspaceStage"><option value="identified">Captured</option><option value="researched">Researched</option><option value="contacted">Contacted</option><option value="engaged">Engaged</option><option value="consultation_scheduled">Consultation scheduled</option><option value="consultation_completed">Consultation completed</option><option value="proposal_sent">Proposal sent</option><option value="decision_pending">Decision pending</option><option value="won">Won</option><option value="lost">Lost</option><option value="nurture">Nurture</option></select></label><label>Next best action<textarea id="workspaceAction" placeholder="What should happen next?"></textarea></label><button class="save" id="saveWorkspace" type="submit">Save lead update</button><p class="message" id="workspaceMessage"></p></form></div>
-  <div id="addLeadVeil" class="workspaceveil" hidden><form class="workspacebox" id="addLeadForm"><header><div><p class="eye">New relationship</p><h2>Add a lead</h2><p class="location">Create the company and its first opportunity.</p></div><button class="close" id="closeAddLead" type="button">Close</button></header><label>Company name<input id="newCompanyName" required placeholder="Company or prospect name"></label><label>Location<input id="newCompanyLocation" placeholder="City, State"></label><label>Opportunity name<input id="newOpportunityName" required placeholder="Example: AI systems consultation"></label><label>Estimated value<input id="newEstimatedValue" type="number" min="0" step="1" value="0"></label><label>Next best action<textarea id="newNextAction" placeholder="Example: Research company and prepare outreach"></textarea></label><button class="save" id="saveNewLead" type="submit">Add lead to Phoenix</button><p class="message" id="addLeadMessage"></p></form></div>
+  <div id="workspaceVeil" class="workspaceveil" hidden><form class="workspacebox" id="workspaceForm"><header><div><p class="eye">Opportunity workspace</p><h2 id="workspaceName">Lead</h2><p class="location" id="workspaceLocation"></p></div><button class="close" id="closeWorkspace" type="button">Close</button></header><p class="eye">Primary contact</p><label>First name<input id="workspaceFirstName" placeholder="First name"></label><label>Last name<input id="workspaceLastName" placeholder="Last name"></label><label>Role<input id="workspaceRole" placeholder="Owner, Sales Manager, etc."></label><label>Email<input id="workspaceEmail" type="email" placeholder="name@company.com"></label><label>Phone<input id="workspacePhone" type="tel" placeholder="Phone number"></label><p class="eye">Opportunity</p><label>Stage<select id="workspaceStage"><option value="identified">Captured</option><option value="researched">Researched</option><option value="contacted">Contacted</option><option value="engaged">Engaged</option><option value="consultation_scheduled">Consultation scheduled</option><option value="consultation_completed">Consultation completed</option><option value="proposal_sent">Proposal sent</option><option value="decision_pending">Decision pending</option><option value="won">Won</option><option value="lost">Lost</option><option value="nurture">Nurture</option></select></label><label>Next best action<textarea id="workspaceAction" placeholder="What should happen next?"></textarea></label><button class="save" id="saveWorkspace" type="submit">Save contact and lead</button><p class="message" id="workspaceMessage"></p></form></div>
+  <div id="addLeadVeil" class="workspaceveil" hidden><form class="workspacebox" id="addLeadForm"><header><div><p class="eye">New relationship</p><h2>Add a lead</h2><p class="location">Create the company, contact, and first opportunity.</p></div><button class="close" id="closeAddLead" type="button">Close</button></header><p class="eye">Company</p><label>Company name<input id="newCompanyName" required placeholder="Company or prospect name"></label><label>Location<input id="newCompanyLocation" placeholder="City, State"></label><p class="eye">Primary contact</p><label>First name<input id="newFirstName" required placeholder="First name"></label><label>Last name<input id="newLastName" placeholder="Last name"></label><label>Role<input id="newContactRole" placeholder="Owner, Sales Manager, etc."></label><label>Email<input id="newContactEmail" type="email" placeholder="name@company.com"></label><label>Phone<input id="newContactPhone" type="tel" placeholder="Phone number"></label><p class="eye">Opportunity</p><label>Opportunity name<input id="newOpportunityName" required placeholder="Example: AI systems consultation"></label><label>Estimated value<input id="newEstimatedValue" type="number" min="0" step="1" value="0"></label><label>Next best action<textarea id="newNextAction" placeholder="Example: Research company and prepare outreach"></textarea></label><button class="save" id="saveNewLead" type="submit">Add lead to Phoenix</button><p class="message" id="addLeadMessage"></p></form></div>
   <div id="briefVeil" class="workspaceveil" hidden><form class="workspacebox" id="briefForm"><header><div><p class="eye">Closer intelligence</p><h2 id="briefName">Call preparation</h2><p class="location" id="briefLocation"></p></div><button class="close" id="closeBrief" type="button">Close</button></header><button class="save" id="generateBrief" type="button">Generate starter brief</button><label>Company background<textarea id="briefBackground"></textarea></label><label>Likely pain points — one per line<textarea id="briefPainPoints"></textarea></label><label>Recommended questions — one per line<textarea id="briefQuestions"></textarea></label><label>Relevant Kelley AI offer<textarea id="briefOffer"></textarea></label><label>Possible objections and responses — use Objection | Response<textarea id="briefObjections"></textarea></label><label>Desired call outcome<textarea id="briefOutcome"></textarea></label><button class="save" id="saveBrief" type="submit">Save call brief</button><p class="message" id="briefMessage"></p></form></div>
   <div id="outcomeVeil" class="workspaceveil" hidden><form class="workspacebox" id="outcomeForm"><header><div><p class="eye">Closed-loop handoff</p><h2 id="outcomeName">Record call outcome</h2><p class="location" id="outcomeLocation"></p></div><button class="close" id="closeOutcome" type="button">Close</button></header><label>Call disposition<select id="outcomeDisposition"><option value="follow_up">Follow-up needed</option><option value="interested">Interested</option><option value="proposal_requested">Proposal requested</option><option value="closed_won">Closed won</option><option value="closed_lost">Closed lost</option><option value="no_answer">No answer</option></select></label><label>Confirmed pain points — one per line<textarea id="outcomePainPoints"></textarea></label><label>Objections raised — one per line<textarea id="outcomeObjections"></textarea></label><label>Commitments made — one per line<textarea id="outcomeCommitments"></textarea></label><label>Move pipeline to<select id="outcomeStage"><option value="identified">Captured</option><option value="researched">Researched</option><option value="contacted">Contacted</option><option value="engaged">Engaged</option><option value="consultation_scheduled">Consultation scheduled</option><option value="consultation_completed">Consultation completed</option><option value="proposal_sent">Proposal sent</option><option value="decision_pending">Decision pending</option><option value="won">Won</option><option value="lost">Lost</option><option value="nurture">Nurture</option></select></label><label>Next best action<textarea id="outcomeNextAction"></textarea></label><label>Follow-up due date<input id="outcomeDueDate" type="date"></label><button class="save" id="generateFollowUp" type="button">Generate follow-up message</button><label>Follow-up message<textarea id="outcomeFollowUp"></textarea></label><label class="approval"><input id="approveOutcome" type="checkbox" checked><span>I approve updating the Phoenix pipeline and next action.</span></label><button class="save" id="saveOutcome" type="submit">Save outcome and update Phoenix</button><p class="message" id="outcomeMessage"></p></form></div>
   <div id="activityVeil" class="workspaceveil" hidden><section class="workspacebox"><header><div><p class="eye">Orchestrator view</p><h2 id="activityName">Activity &amp; follow-up</h2><p class="location" id="activityLocation"></p></div><button class="close" id="closeActivity" type="button">Close</button></header><div class="activitylist" id="activityList"></div><p class="message" id="activityMessage"></p></section></div>
@@ -171,6 +171,7 @@ h1{font-size:34px}
       const validStages = ["identified","researched","contacted","engaged","consultation_scheduled","consultation_completed","proposal_sent","decision_pending","won","lost","nurture"];
       let selectedOpportunity = null;
       let selectedCompany = null;
+      let selectedContact = null;
       let selectedBrief = null;
 
       const config = () => ({
@@ -286,11 +287,13 @@ h1{font-size:34px}
         td.textContent = text;
         return td;
       };
-      const selectOpportunity = (opportunity, company) => {
+      const selectOpportunity = (opportunity, company, contact = null) => {
         selectedOpportunity = opportunity;
         selectedCompany = company;
+        selectedContact = contact;
         document.getElementById("intelligenceName").textContent = company?.name || opportunity.name;
-        document.getElementById("intelligenceLocation").textContent = company?.location || "Kelley AI opportunity";
+        const contactName = contact ? [contact.first_name,contact.last_name].filter(Boolean).join(" ") : "";
+        document.getElementById("intelligenceLocation").textContent = [contactName,company?.location].filter(Boolean).join(" · ") || "Kelley AI opportunity";
         document.getElementById("strategicBrief").textContent = (opportunity.score_reasons || []).join(" · ") || "Intelligence brief is ready for review.";
         document.getElementById("nextAction").textContent = opportunity.next_action || "Review and qualify this opportunity";
         const stage = String(opportunity.stage || "identified").toLowerCase();
@@ -363,12 +366,14 @@ h1{font-size:34px}
         loading.appendChild(loadingCell);
         rows.appendChild(loading);
         try {
-          const [opportunities, companies, tasks] = await Promise.all([
-            request("opportunities?select=id,workspace_id,company_id,name,stage,status,estimated_value,priority_score,score_reasons,next_action,next_action_due_at&order=priority_score.desc"),
+          const [opportunities, companies, contacts, tasks] = await Promise.all([
+            request("opportunities?select=id,workspace_id,company_id,primary_contact_id,name,stage,status,estimated_value,priority_score,score_reasons,next_action,next_action_due_at&order=priority_score.desc"),
             request("companies?select=id,workspace_id,name,location"),
+            request("contacts?select=id,workspace_id,company_id,first_name,last_name,role,email,phone"),
             request("tasks?select=id,opportunity_id,title,priority,status,due_at&status=neq.completed&order=due_at.asc.nullslast")
           ]);
           const companyMap = new Map(companies.map(company => [company.id, company]));
+          const contactMap = new Map(contacts.map(contact => [contact.id, contact]));
           rows.replaceChildren();
           const activeOpportunities = opportunities.filter(item => !["won","lost"].includes(String(item.stage).toLowerCase()));
           const pipeline = activeOpportunities.reduce((total,item) => total + Number(item.estimated_value || 0), 0);
@@ -399,7 +404,9 @@ h1{font-size:34px}
             const name = document.createElement("b");
             name.textContent = company?.name || opportunity.name;
             const location = document.createElement("small");
-            location.textContent = company?.location || "Kelley AI Systems";
+            const contact = contactMap.get(opportunity.primary_contact_id);
+            const contactName = contact ? [contact.first_name,contact.last_name].filter(Boolean).join(" ") : "";
+            location.textContent = [contactName,company?.location].filter(Boolean).join(" · ") || "Kelley AI Systems";
             nameCell.append(name, location);
             const statusCell = document.createElement("td");
             const status = document.createElement("span");
@@ -418,7 +425,7 @@ h1{font-size:34px}
             tr.addEventListener("click", () => {
               rows.querySelectorAll("tr").forEach(row => row.classList.remove("selected"));
               tr.classList.add("selected");
-              selectOpportunity(opportunity, company);
+              selectOpportunity(opportunity, company, contact);
             });
             rows.appendChild(tr);
           });
@@ -428,7 +435,7 @@ h1{font-size:34px}
             emptyCell.colSpan = 6;
             empty.appendChild(emptyCell);
             rows.appendChild(empty);
-          } else selectOpportunity(opportunities[0], companyMap.get(opportunities[0].company_id));
+          } else selectOpportunity(opportunities[0], companyMap.get(opportunities[0].company_id), contactMap.get(opportunities[0].primary_contact_id));
           document.getElementById("pipelineTotal").textContent = money.format(pipeline);
         } catch (problem) {
           rows.replaceChildren();
@@ -453,6 +460,11 @@ h1{font-size:34px}
         if (!selectedOpportunity) return;
         document.getElementById("workspaceName").textContent = selectedCompany?.name || selectedOpportunity.name;
         document.getElementById("workspaceLocation").textContent = selectedCompany?.location || "Kelley AI Systems";
+        document.getElementById("workspaceFirstName").value = selectedContact?.first_name || "";
+        document.getElementById("workspaceLastName").value = selectedContact?.last_name || "";
+        document.getElementById("workspaceRole").value = selectedContact?.role || "";
+        document.getElementById("workspaceEmail").value = selectedContact?.email || "";
+        document.getElementById("workspacePhone").value = selectedContact?.phone || "";
         const stage = String(selectedOpportunity.stage || "identified").toLowerCase().replaceAll(" ","_");
         document.getElementById("workspaceStage").value = validStages.includes(stage) ? stage : "identified";
         document.getElementById("workspaceAction").value = selectedOpportunity.next_action || "";
@@ -468,18 +480,33 @@ h1{font-size:34px}
         button.textContent = "Saving…";
         message.textContent = "";
         try {
-          selectedOpportunity = await saveOpportunity({
+          const firstName = document.getElementById("workspaceFirstName").value.trim();
+          const contactPayload = {
+            workspace_id:selectedOpportunity.workspace_id,
+            company_id:selectedCompany.id,
+            first_name:firstName,
+            last_name:document.getElementById("workspaceLastName").value.trim() || null,
+            role:document.getElementById("workspaceRole").value.trim() || null,
+            email:document.getElementById("workspaceEmail").value.trim() || null,
+            phone:document.getElementById("workspacePhone").value.trim() || null
+          };
+          if (selectedContact && !firstName) throw new Error("The contact needs a first name.");
+          if (selectedContact) selectedContact = await updateRecord("contacts", selectedContact.id, contactPayload);
+          else if (firstName) selectedContact = await createRecord("contacts", contactPayload);
+          const opportunityChanges = {
             stage:document.getElementById("workspaceStage").value,
             next_action:document.getElementById("workspaceAction").value.trim()
-          });
-          selectOpportunity(selectedOpportunity, selectedCompany);
-          message.textContent = "Lead update saved.";
+          };
+          if (selectedContact) opportunityChanges.primary_contact_id = selectedContact.id;
+          selectedOpportunity = await saveOpportunity(opportunityChanges);
+          selectOpportunity(selectedOpportunity, selectedCompany, selectedContact);
+          message.textContent = "Contact and lead saved.";
           await loadData();
         } catch (problem) {
           message.textContent = problem instanceof Error ? problem.message : "The lead update could not be saved.";
         } finally {
           button.disabled = false;
-          button.textContent = "Save lead update";
+          button.textContent = "Save contact and lead";
         }
       });
       document.getElementById("addLead").addEventListener("click", () => {
@@ -507,9 +534,19 @@ h1{font-size:34px}
             location:document.getElementById("newCompanyLocation").value.trim() || null,
             source:"phoenix"
           });
+          const contact = await createRecord("contacts", {
+            workspace_id:workspaceId,
+            company_id:company.id,
+            first_name:document.getElementById("newFirstName").value.trim(),
+            last_name:document.getElementById("newLastName").value.trim() || null,
+            role:document.getElementById("newContactRole").value.trim() || null,
+            email:document.getElementById("newContactEmail").value.trim() || null,
+            phone:document.getElementById("newContactPhone").value.trim() || null
+          });
           await createRecord("opportunities", {
             workspace_id:workspaceId,
             company_id:company.id,
+            primary_contact_id:contact.id,
             name:document.getElementById("newOpportunityName").value.trim(),
             stage:"identified",
             status:"open",
@@ -686,7 +723,7 @@ h1{font-size:34px}
               next_action:nextAction || null,
               next_action_due_at:dueAt
             });
-            selectOpportunity(selectedOpportunity, selectedCompany);
+            selectOpportunity(selectedOpportunity, selectedCompany, selectedContact);
             message.textContent = "Outcome saved. Phoenix pipeline and next action updated.";
             await loadData();
           } else {
