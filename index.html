@@ -220,6 +220,11 @@ h1{font-size:34px}
       let activeProjectGateIndex = 0;
       const money = new Intl.NumberFormat("en-US", {style:"currency",currency:"USD",maximumFractionDigits:0});
       const validStages = ["identified","researched","contacted","engaged","consultation_scheduled","consultation_completed","proposal_sent","decision_pending","won","lost","nurture"];
+      const isTestOpportunity = opportunity => {
+        const source = String(opportunity?.source || "").toLowerCase().trim();
+        const name = String(opportunity?.name || "").toLowerCase();
+        return ["internal_test","synthetic","test"].includes(source) || name.includes("internal test");
+      };
       let selectedOpportunity = null;
       let selectedCompany = null;
       let selectedContact = null;
@@ -688,16 +693,22 @@ h1{font-size:34px}
           const sourceWarnings = [recommendationSource,agentRunSource].filter(source => source.error).map(source => source.name);
           const companyMap = new Map(companies.map(company => [company.id, company]));
           const contactMap = new Map(contacts.map(contact => [contact.id, contact]));
+          const realOpportunities = opportunities.filter(opportunity => !isTestOpportunity(opportunity));
+          const realOpportunityIds = new Set(realOpportunities.map(opportunity => opportunity.id));
+          const realTasks = tasks.filter(task => realOpportunityIds.has(task.opportunity_id));
+          const realOutcomes = outcomes.filter(outcome => realOpportunityIds.has(outcome.opportunity_id));
+          const realRecommendations = recommendations.filter(recommendation => realOpportunityIds.has(recommendation.opportunity_id));
+          const realAgentRuns = agentRuns.filter(run => !run.opportunity_id || realOpportunityIds.has(run.opportunity_id));
           rows.replaceChildren();
-          const activeOpportunities = opportunities.filter(item =>
+          const activeOpportunities = realOpportunities.filter(item =>
             !["won","lost"].includes(String(item.stage).toLowerCase())
             && !["hold","closed"].includes(String(item.status).toLowerCase())
           );
           const pipeline = activeOpportunities.reduce((total,item) => total + Number(item.estimated_value || 0), 0);
-          const won = opportunities.filter(item => String(item.stage).toLowerCase() === "won").reduce((total,item) => total + Number(item.estimated_value || 0), 0);
+          const won = realOpportunities.filter(item => String(item.stage).toLowerCase() === "won").reduce((total,item) => total + Number(item.estimated_value || 0), 0);
           const endOfToday = new Date();
           endOfToday.setHours(23,59,59,999);
-          const dueTasks = tasks.filter(task => task.due_at && new Date(task.due_at) <= endOfToday);
+          const dueTasks = realTasks.filter(task => task.due_at && new Date(task.due_at) <= endOfToday);
           document.getElementById("todayDate").textContent = new Date().toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric"});
           document.getElementById("metricActive").textContent = String(activeOpportunities.length);
           document.getElementById("metricDue").textContent = String(dueTasks.length);
@@ -707,40 +718,40 @@ h1{font-size:34px}
           const wonPercent = Math.max(0,Math.min(100,(won / 5500) * 100));
           document.getElementById("wonPercent").textContent = wonPercent.toFixed(1).replace(".0","") + "%";
           document.getElementById("wonTrack").style.width = wonPercent + "%";
-          const outcomeOpportunityIds = new Set(outcomes.map(outcome => outcome.opportunity_id).filter(Boolean));
-          const positiveIds = new Set(outcomes
+          const outcomeOpportunityIds = new Set(realOutcomes.map(outcome => outcome.opportunity_id).filter(Boolean));
+          const positiveIds = new Set(realOutcomes
             .filter(outcome => ["interested","proposal_requested","closed_won"].includes(String(outcome.disposition)))
             .map(outcome => outcome.opportunity_id).filter(Boolean));
           const proposalIds = new Set([
-            ...opportunities.filter(opportunity => ["proposal_sent","decision_pending","won"].includes(String(opportunity.stage))).map(opportunity => opportunity.id),
-            ...outcomes.filter(outcome => outcome.disposition === "proposal_requested" || ["proposal_sent","decision_pending","won"].includes(String(outcome.proposed_stage))).map(outcome => outcome.opportunity_id)
+            ...realOpportunities.filter(opportunity => ["proposal_sent","decision_pending","won"].includes(String(opportunity.stage))).map(opportunity => opportunity.id),
+            ...realOutcomes.filter(outcome => outcome.disposition === "proposal_requested" || ["proposal_sent","decision_pending","won"].includes(String(outcome.proposed_stage))).map(outcome => outcome.opportunity_id)
           ].filter(Boolean));
           const winIds = new Set([
-            ...opportunities.filter(opportunity => String(opportunity.stage) === "won").map(opportunity => opportunity.id),
-            ...outcomes.filter(outcome => outcome.disposition === "closed_won").map(outcome => outcome.opportunity_id)
+            ...realOpportunities.filter(opportunity => String(opportunity.stage) === "won").map(opportunity => opportunity.id),
+            ...realOutcomes.filter(outcome => outcome.disposition === "closed_won").map(outcome => outcome.opportunity_id)
           ].filter(Boolean));
-          const followUpsSent = outcomes.filter(outcome => (outcome.commitments || []).some(item => String(item).startsWith("FOLLOW-UP SENT: "))).length;
+          const followUpsSent = realOutcomes.filter(outcome => (outcome.commitments || []).some(item => String(item).startsWith("FOLLOW-UP SENT: "))).length;
           const recommendationCounts = {accepted:0,edited:0,rejected:0};
-          outcomes.forEach(outcome => {
+          realOutcomes.forEach(outcome => {
             const marker = (outcome.commitments || []).find(item => String(item).startsWith("PHOENIX RECOMMENDATION: "));
             const decision = marker ? String(marker).replace("PHOENIX RECOMMENDATION: ","").trim() : outcome.human_approved ? "accepted" : "rejected";
             if (recommendationCounts[decision] !== undefined) recommendationCounts[decision] += 1;
           });
           const movementRate = outcomeOpportunityIds.size ? (positiveIds.size / outcomeOpportunityIds.size) * 100 : 0;
-          document.getElementById("proofOutcomes").textContent = String(outcomes.length);
+          document.getElementById("proofOutcomes").textContent = String(realOutcomes.length);
           document.getElementById("proofFollowUps").textContent = String(followUpsSent);
           document.getElementById("proofInterested").textContent = String(positiveIds.size);
           document.getElementById("proofProposals").textContent = String(proposalIds.size);
           document.getElementById("proofWins").textContent = String(winIds.size);
           document.getElementById("proofConversion").textContent = movementRate.toFixed(0) + "%";
-          document.getElementById("proofInsight").textContent = outcomes.length < 5
-            ? "Phoenix has " + outcomes.length + " recorded outcome" + (outcomes.length === 1 ? "" : "s") + ". Keep recording every contact and follow-up; a reliable pattern needs more evidence."
+          document.getElementById("proofInsight").textContent = realOutcomes.length < 5
+            ? "Phoenix has " + realOutcomes.length + " recorded outcome" + (realOutcomes.length === 1 ? "" : "s") + ". Keep recording every contact and follow-up; a reliable pattern needs more evidence."
             : positiveIds.size
               ? movementRate.toFixed(0) + "% of opportunities with recorded outcomes have shown positive movement. Continue tracking the outreach method and result before treating this as a proven pattern."
               : "No positive movement is recorded yet. Phoenix will keep measuring which outreach and follow-up actions create a response.";
           document.getElementById("proofFeedback").textContent = "Recommendations · " + recommendationCounts.accepted + " accepted · " + recommendationCounts.edited + " edited · " + recommendationCounts.rejected + " rejected";
-          renderOrchestrator({opportunities,companies,contacts,tasks,recommendations,agentRuns,companyMap,contactMap,sourceWarnings});
-          const focusTask = dueTasks[0] || tasks[0];
+          renderOrchestrator({opportunities:realOpportunities,companies,contacts,tasks:realTasks,recommendations:realRecommendations,agentRuns:realAgentRuns,companyMap,contactMap,sourceWarnings});
+          const focusTask = dueTasks[0] || realTasks[0];
           const focusOpportunity = activeOpportunities.find(item => item.next_action);
           document.getElementById("todayFocus").textContent = focusTask
             ? "Today’s focus · " + focusTask.title
@@ -761,7 +772,9 @@ h1{font-size:34px}
             const statusCell = document.createElement("td");
             const status = document.createElement("span");
             status.className = "status";
-            status.textContent = String(opportunity.status || "open").toLowerCase() === "open" ? "Active" : opportunity.status;
+            status.textContent = isTestOpportunity(opportunity)
+              ? "Test"
+              : String(opportunity.status || "open").toLowerCase() === "open" ? "Active" : opportunity.status;
             statusCell.appendChild(status);
             const stars = Math.max(1, Math.min(5, Math.ceil(Number(opportunity.priority_score || 0) / 20)));
             const actionCell = document.createElement("td");
