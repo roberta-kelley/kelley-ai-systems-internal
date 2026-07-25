@@ -112,6 +112,7 @@ h1{font-size:34px}
 .workspacebox header{display:flex;align-items:start;justify-content:space-between;gap:16px}.workspacebox h2{font-size:24px}.workspacebox .close{width:auto;margin:0;border:1px solid var(--gold);border-radius:999px;background:#fff;padding:8px 12px;color:var(--ink)}
 .workspacebox label{display:block;margin-top:15px;color:var(--muted);font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.workspacebox input,.workspacebox select,.workspacebox textarea{width:100%;margin-top:6px;border:1px solid var(--gold);border-radius:11px;background:#fff;padding:12px;color:var(--ink)}.workspacebox textarea{min-height:110px;resize:vertical}.workspacebox .save{width:100%;margin-top:18px;border:1px solid var(--gold);border-radius:11px;background:var(--rose);padding:12px;color:#fff;font-weight:800}.workspacebox .message{margin-top:12px;color:var(--rose2);font-size:11px}
 .workspacebox .approval{display:flex;align-items:center;gap:9px;border:1px solid var(--gold);border-radius:11px;background:var(--goldSoft);padding:12px}.workspacebox .approval input{width:auto;margin:0}.workspacebox .approval span{color:var(--ink);font-size:10px;letter-spacing:0;text-transform:none}
+.activitylist{display:grid;gap:10px;margin-top:18px}.activityitem{border:1px solid var(--gold);border-radius:14px;background:#fff;padding:14px}.activityitem strong{display:block;font-size:13px}.activityitem small{display:block;margin-top:4px;color:var(--muted);font-size:9px}.activityitem p{margin-top:8px;color:var(--ink);font-size:11px;line-height:1.55}.activityitem .followup{margin-top:9px;border-radius:10px;background:var(--roseSoft);padding:10px;color:var(--rose2)}
 .utility{position:fixed;right:12px;bottom:12px;z-index:900;display:flex;gap:7px}.utility button{width:auto;margin:0;background:#fff;color:var(--ink);font-size:9px;padding:7px 10px}
 .dataerror{padding:18px!important;color:var(--rose2);white-space:normal}
 @media(max-width:500px){.authveil{padding:10px}.authbox{margin:8px auto;padding:22px}}
@@ -145,14 +146,15 @@ h1{font-size:34px}
         <article class="card leads"><div class="leadhead"><div><p class="eye">Relationships</p><h2>Active opportunities</h2></div><button type="button" id="addLead">＋ Add lead</button></div><table><thead><tr><th>Name</th><th>Status</th><th>Score</th><th>Value</th><th>Stage</th><th>Agent</th></tr></thead><tbody id="opportunityRows"><tr><td colspan="6">Loading protected opportunities…</td></tr></tbody></table></article>
       </div>
     </section>
-    <aside><div class="aside"><p class="eye">Lead intelligence</p><h2 id="intelligenceName">Select an opportunity</h2><p class="location" id="intelligenceLocation">Protected owner workspace</p></div><div class="aside"><p class="eye">Stage roadmap</p><div class="road" id="stageRoadmap"><span data-stage="identified"><i>1</i>Capture</span><span data-stage="vetted"><i>2</i>Vetted</span><span data-stage="discovery"><i>3</i>Discovery</span><span data-stage="proposal"><i>4</i>Proposal</span><span data-stage="closed"><i>5</i>Closed</span></div></div><div class="aside"><p class="eye">Strategic briefing</p><div class="brief" id="strategicBrief">Choose an opportunity to review its current intelligence record.</div><button class="actionbtn" id="openBrief" type="button">Prepare call brief</button></div><div class="aside"><p class="eye">Next best action</p><strong class="action" id="nextAction">Review the opportunity record</strong><button class="actionbtn" id="openWorkspace" type="button">Open lead workspace</button><button class="actionbtn" id="openOutcome" type="button">Record call outcome</button></div></aside>
+    <aside><div class="aside"><p class="eye">Lead intelligence</p><h2 id="intelligenceName">Select an opportunity</h2><p class="location" id="intelligenceLocation">Protected owner workspace</p></div><div class="aside"><p class="eye">Stage roadmap</p><div class="road" id="stageRoadmap"><span data-stage="identified"><i>1</i>Capture</span><span data-stage="vetted"><i>2</i>Vetted</span><span data-stage="discovery"><i>3</i>Discovery</span><span data-stage="proposal"><i>4</i>Proposal</span><span data-stage="closed"><i>5</i>Closed</span></div></div><div class="aside"><p class="eye">Strategic briefing</p><div class="brief" id="strategicBrief">Choose an opportunity to review its current intelligence record.</div><button class="actionbtn" id="openBrief" type="button">Prepare call brief</button></div><div class="aside"><p class="eye">Next best action</p><strong class="action" id="nextAction">Review the opportunity record</strong><button class="actionbtn" id="openWorkspace" type="button">Open lead workspace</button><button class="actionbtn" id="openOutcome" type="button">Record call outcome</button><button class="actionbtn" id="openActivity" type="button">View activity &amp; follow-up</button></div></aside>
   </div>
   <div class="utility"><button type="button" id="resetConnection">Reset connection</button><button type="button" id="signOut">Sign out</button></div>
   <div id="authVeil" class="authveil" hidden></div>
   <div id="workspaceVeil" class="workspaceveil" hidden><form class="workspacebox" id="workspaceForm"><header><div><p class="eye">Opportunity workspace</p><h2 id="workspaceName">Lead</h2><p class="location" id="workspaceLocation"></p></div><button class="close" id="closeWorkspace" type="button">Close</button></header><label>Stage<select id="workspaceStage"><option value="identified">Captured</option><option value="researched">Researched</option><option value="contacted">Contacted</option><option value="engaged">Engaged</option><option value="consultation_scheduled">Consultation scheduled</option><option value="consultation_completed">Consultation completed</option><option value="proposal_sent">Proposal sent</option><option value="decision_pending">Decision pending</option><option value="won">Won</option><option value="lost">Lost</option><option value="nurture">Nurture</option></select></label><label>Next best action<textarea id="workspaceAction" placeholder="What should happen next?"></textarea></label><button class="save" id="saveWorkspace" type="submit">Save lead update</button><p class="message" id="workspaceMessage"></p></form></div>
   <div id="addLeadVeil" class="workspaceveil" hidden><form class="workspacebox" id="addLeadForm"><header><div><p class="eye">New relationship</p><h2>Add a lead</h2><p class="location">Create the company and its first opportunity.</p></div><button class="close" id="closeAddLead" type="button">Close</button></header><label>Company name<input id="newCompanyName" required placeholder="Company or prospect name"></label><label>Location<input id="newCompanyLocation" placeholder="City, State"></label><label>Opportunity name<input id="newOpportunityName" required placeholder="Example: AI systems consultation"></label><label>Estimated value<input id="newEstimatedValue" type="number" min="0" step="1" value="0"></label><label>Next best action<textarea id="newNextAction" placeholder="Example: Research company and prepare outreach"></textarea></label><button class="save" id="saveNewLead" type="submit">Add lead to Phoenix</button><p class="message" id="addLeadMessage"></p></form></div>
   <div id="briefVeil" class="workspaceveil" hidden><form class="workspacebox" id="briefForm"><header><div><p class="eye">Closer intelligence</p><h2 id="briefName">Call preparation</h2><p class="location" id="briefLocation"></p></div><button class="close" id="closeBrief" type="button">Close</button></header><button class="save" id="generateBrief" type="button">Generate starter brief</button><label>Company background<textarea id="briefBackground"></textarea></label><label>Likely pain points — one per line<textarea id="briefPainPoints"></textarea></label><label>Recommended questions — one per line<textarea id="briefQuestions"></textarea></label><label>Relevant Kelley AI offer<textarea id="briefOffer"></textarea></label><label>Possible objections and responses — use Objection | Response<textarea id="briefObjections"></textarea></label><label>Desired call outcome<textarea id="briefOutcome"></textarea></label><button class="save" id="saveBrief" type="submit">Save call brief</button><p class="message" id="briefMessage"></p></form></div>
-  <div id="outcomeVeil" class="workspaceveil" hidden><form class="workspacebox" id="outcomeForm"><header><div><p class="eye">Closed-loop handoff</p><h2 id="outcomeName">Record call outcome</h2><p class="location" id="outcomeLocation"></p></div><button class="close" id="closeOutcome" type="button">Close</button></header><label>Call disposition<select id="outcomeDisposition"><option value="follow_up">Follow-up needed</option><option value="interested">Interested</option><option value="proposal_requested">Proposal requested</option><option value="closed_won">Closed won</option><option value="closed_lost">Closed lost</option><option value="no_answer">No answer</option></select></label><label>Confirmed pain points — one per line<textarea id="outcomePainPoints"></textarea></label><label>Objections raised — one per line<textarea id="outcomeObjections"></textarea></label><label>Commitments made — one per line<textarea id="outcomeCommitments"></textarea></label><label>Move pipeline to<select id="outcomeStage"><option value="identified">Captured</option><option value="researched">Researched</option><option value="contacted">Contacted</option><option value="engaged">Engaged</option><option value="consultation_scheduled">Consultation scheduled</option><option value="consultation_completed">Consultation completed</option><option value="proposal_sent">Proposal sent</option><option value="decision_pending">Decision pending</option><option value="won">Won</option><option value="lost">Lost</option><option value="nurture">Nurture</option></select></label><label>Next best action<textarea id="outcomeNextAction"></textarea></label><button class="save" id="generateFollowUp" type="button">Generate follow-up message</button><label>Follow-up message<textarea id="outcomeFollowUp"></textarea></label><label class="approval"><input id="approveOutcome" type="checkbox" checked><span>I approve updating the Phoenix pipeline and next action.</span></label><button class="save" id="saveOutcome" type="submit">Save outcome and update Phoenix</button><p class="message" id="outcomeMessage"></p></form></div>
+  <div id="outcomeVeil" class="workspaceveil" hidden><form class="workspacebox" id="outcomeForm"><header><div><p class="eye">Closed-loop handoff</p><h2 id="outcomeName">Record call outcome</h2><p class="location" id="outcomeLocation"></p></div><button class="close" id="closeOutcome" type="button">Close</button></header><label>Call disposition<select id="outcomeDisposition"><option value="follow_up">Follow-up needed</option><option value="interested">Interested</option><option value="proposal_requested">Proposal requested</option><option value="closed_won">Closed won</option><option value="closed_lost">Closed lost</option><option value="no_answer">No answer</option></select></label><label>Confirmed pain points — one per line<textarea id="outcomePainPoints"></textarea></label><label>Objections raised — one per line<textarea id="outcomeObjections"></textarea></label><label>Commitments made — one per line<textarea id="outcomeCommitments"></textarea></label><label>Move pipeline to<select id="outcomeStage"><option value="identified">Captured</option><option value="researched">Researched</option><option value="contacted">Contacted</option><option value="engaged">Engaged</option><option value="consultation_scheduled">Consultation scheduled</option><option value="consultation_completed">Consultation completed</option><option value="proposal_sent">Proposal sent</option><option value="decision_pending">Decision pending</option><option value="won">Won</option><option value="lost">Lost</option><option value="nurture">Nurture</option></select></label><label>Next best action<textarea id="outcomeNextAction"></textarea></label><label>Follow-up due date<input id="outcomeDueDate" type="date"></label><button class="save" id="generateFollowUp" type="button">Generate follow-up message</button><label>Follow-up message<textarea id="outcomeFollowUp"></textarea></label><label class="approval"><input id="approveOutcome" type="checkbox" checked><span>I approve updating the Phoenix pipeline and next action.</span></label><button class="save" id="saveOutcome" type="submit">Save outcome and update Phoenix</button><p class="message" id="outcomeMessage"></p></form></div>
+  <div id="activityVeil" class="workspaceveil" hidden><section class="workspacebox"><header><div><p class="eye">Orchestrator view</p><h2 id="activityName">Activity &amp; follow-up</h2><p class="location" id="activityLocation"></p></div><button class="close" id="closeActivity" type="button">Close</button></header><div class="activitylist" id="activityList"></div><p class="message" id="activityMessage"></p></section></div>
   <script>
     (() => {
       const URL_KEY = "kelley-ai:supabase-url";
@@ -164,6 +166,7 @@ h1{font-size:34px}
       const addLeadVeil = document.getElementById("addLeadVeil");
       const briefVeil = document.getElementById("briefVeil");
       const outcomeVeil = document.getElementById("outcomeVeil");
+      const activityVeil = document.getElementById("activityVeil");
       const money = new Intl.NumberFormat("en-US", {style:"currency",currency:"USD",maximumFractionDigits:0});
       const validStages = ["identified","researched","contacted","engaged","consultation_scheduled","consultation_completed","proposal_sent","decision_pending","won","lost","nurture"];
       let selectedOpportunity = null;
@@ -599,6 +602,11 @@ h1{font-size:34px}
         const stage = String(selectedOpportunity.stage || "identified").toLowerCase();
         document.getElementById("outcomeStage").value = validStages.includes(stage) ? stage : "identified";
         document.getElementById("outcomeNextAction").value = selectedOpportunity.next_action || "";
+        if (!document.getElementById("outcomeDueDate").value) {
+          const tomorrow = new Date();
+          tomorrow.setDate(tomorrow.getDate() + 1);
+          document.getElementById("outcomeDueDate").value = tomorrow.toISOString().slice(0,10);
+        }
         document.getElementById("outcomeMessage").textContent = "";
         outcomeVeil.hidden = false;
       });
@@ -619,6 +627,8 @@ h1{font-size:34px}
         const approved = document.getElementById("approveOutcome").checked;
         const nextAction = document.getElementById("outcomeNextAction").value.trim();
         const proposedStage = document.getElementById("outcomeStage").value;
+        const dueDate = document.getElementById("outcomeDueDate").value;
+        const dueAt = dueDate ? new Date(dueDate + "T17:00:00").toISOString() : null;
         const commitments = lines(document.getElementById("outcomeCommitments").value);
         const followUp = document.getElementById("outcomeFollowUp").value.trim();
         if (followUp) commitments.push("FOLLOW-UP MESSAGE: " + followUp);
@@ -635,12 +645,25 @@ h1{font-size:34px}
             commitments,
             proposed_stage:proposedStage,
             proposed_next_action:nextAction || null,
+            proposed_due_at:dueAt,
             human_approved:approved
           });
           if (approved) {
+            if (nextAction) {
+              await createRecord("tasks", {
+                workspace_id:selectedOpportunity.workspace_id,
+                opportunity_id:selectedOpportunity.id,
+                title:nextAction,
+                task_type:"follow_up",
+                priority:"high",
+                status:"open",
+                due_at:dueAt
+              });
+            }
             selectedOpportunity = await updateRecord("opportunities", selectedOpportunity.id, {
               stage:proposedStage,
-              next_action:nextAction || null
+              next_action:nextAction || null,
+              next_action_due_at:dueAt
             });
             selectOpportunity(selectedOpportunity, selectedCompany);
             message.textContent = "Outcome saved. Phoenix pipeline and next action updated.";
@@ -655,6 +678,59 @@ h1{font-size:34px}
           button.textContent = "Save outcome and update Phoenix";
         }
       });
+      const addActivityItem = (title, meta, body, followUp = "") => {
+        const item = document.createElement("article");
+        item.className = "activityitem";
+        const heading = document.createElement("strong");
+        heading.textContent = title;
+        const details = document.createElement("small");
+        details.textContent = meta;
+        const copy = document.createElement("p");
+        copy.textContent = body;
+        item.append(heading, details, copy);
+        if (followUp) {
+          const follow = document.createElement("p");
+          follow.className = "followup";
+          follow.textContent = followUp;
+          item.appendChild(follow);
+        }
+        document.getElementById("activityList").appendChild(item);
+      };
+      document.getElementById("openActivity").addEventListener("click", async () => {
+        if (!selectedOpportunity) return;
+        document.getElementById("activityName").textContent = selectedCompany?.name || selectedOpportunity.name;
+        document.getElementById("activityLocation").textContent = "Activity & follow-up";
+        document.getElementById("activityList").replaceChildren();
+        document.getElementById("activityMessage").textContent = "Loading activity…";
+        activityVeil.hidden = false;
+        try {
+          const [outcomes, tasks] = await Promise.all([
+            request("outcomes?opportunity_id=eq." + encodeURIComponent(selectedOpportunity.id) + "&select=id,disposition,confirmed_pain_points,objections,commitments,proposed_stage,proposed_next_action,proposed_due_at,human_approved,created_at&order=created_at.desc"),
+            request("tasks?opportunity_id=eq." + encodeURIComponent(selectedOpportunity.id) + "&select=id,title,task_type,priority,status,due_at,created_at&order=created_at.desc")
+          ]);
+          tasks.filter(task => task.status !== "completed").forEach(task => {
+            const due = task.due_at ? new Date(task.due_at).toLocaleDateString() : "No due date";
+            addActivityItem("Pending: " + task.title, "Due " + due + " · " + task.priority + " priority", "Open follow-up task");
+          });
+          outcomes.forEach(outcome => {
+            const commitments = outcome.commitments || [];
+            const followUp = commitments.find(item => item.startsWith("FOLLOW-UP MESSAGE: "));
+            const ordinary = commitments.filter(item => !item.startsWith("FOLLOW-UP MESSAGE: "));
+            const body = [
+              ...(outcome.confirmed_pain_points || []).map(item => "Pain point: " + item),
+              ...(outcome.objections || []).map(item => "Objection: " + item),
+              ...ordinary.map(item => "Commitment: " + item),
+              outcome.proposed_next_action ? "Next: " + outcome.proposed_next_action : ""
+            ].filter(Boolean).join(" · ");
+            const date = outcome.created_at ? new Date(outcome.created_at).toLocaleString() : "Saved outcome";
+            addActivityItem("Outcome: " + String(outcome.disposition).replaceAll("_"," "), date, body || "Outcome recorded.", followUp ? followUp.replace("FOLLOW-UP MESSAGE: ","") : "");
+          });
+          document.getElementById("activityMessage").textContent = outcomes.length || tasks.length ? "" : "No activity has been recorded yet.";
+        } catch (problem) {
+          document.getElementById("activityMessage").textContent = problem instanceof Error ? problem.message : "Activity could not be loaded.";
+        }
+      });
+      document.getElementById("closeActivity").addEventListener("click", () => { activityVeil.hidden = true; });
       if (!config().url || !config().key) showSetup();
       else if (!session()?.access_token) showLogin();
       else loadData();
