@@ -794,7 +794,7 @@ h1{font-size:34px}
             : focusOpportunity
               ? "Today’s focus · " + focusOpportunity.next_action
               : "Today’s focus · Add and qualify your next opportunity";
-          opportunities.forEach(opportunity => {
+          realOpportunities.forEach(opportunity => {
             const company = companyMap.get(opportunity.company_id);
             const tr = document.createElement("tr");
             const nameCell = document.createElement("td");
@@ -840,13 +840,13 @@ h1{font-size:34px}
             });
             rows.appendChild(tr);
           });
-          if (!opportunities.length) {
+          if (!realOpportunities.length) {
             const empty = document.createElement("tr");
             const emptyCell = cell("Your protected workspace is connected. No opportunities have been added yet.");
             emptyCell.colSpan = 6;
             empty.appendChild(emptyCell);
             rows.appendChild(empty);
-          } else selectOpportunity(opportunities[0], companyMap.get(opportunities[0].company_id), contactMap.get(opportunities[0].primary_contact_id));
+          } else selectOpportunity(realOpportunities[0], companyMap.get(realOpportunities[0].company_id), contactMap.get(realOpportunities[0].primary_contact_id));
           document.getElementById("pipelineTotal").textContent = money.format(pipeline);
         } catch (problem) {
           document.getElementById("orchestratorStatus").textContent = "Core records unavailable";
