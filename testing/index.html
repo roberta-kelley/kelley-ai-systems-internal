@@ -28,6 +28,7 @@ body{display:flex;margin:0;background:#fff;color:var(--ink);font-family:"DM Sans
 .pipe small{display:block;color:var(--muted);font-size:8px;letter-spacing:.17em;text-transform:uppercase}
 .demo{padding:7px;border-bottom:1px solid var(--gold);background:var(--goldSoft);color:var(--ink);font-size:9px;font-weight:700;letter-spacing:.16em;text-align:center;text-transform:uppercase}
 .testtools{display:flex;justify-content:center;border-bottom:1px solid var(--gold);background:#fff;padding:8px}.testtools a{border:1px solid var(--gold);border-radius:999px;background:var(--rose);padding:8px 15px;color:#fff;font-size:9px;font-weight:800;text-decoration:none}
+.testbadge{position:fixed;top:10px;right:10px;z-index:2000;border:2px solid var(--gold);border-radius:999px;background:#8e4f5c;padding:9px 14px;color:#fff;font-size:11px;font-weight:900;letter-spacing:.12em;box-shadow:0 8px 24px rgba(39,56,66,.22)}
 .shell{display:grid;grid-template-columns:minmax(0,1fr) 330px}
 .main{min-width:0;padding:30px}
 .intro{display:flex;align-items:flex-end;justify-content:space-between;gap:20px}
@@ -136,6 +137,7 @@ h1{font-size:34px}
   </style>
 </head>
 <body>
+  <div class="testbadge">TEST MODE</div>
   <aside class="kfside">
     <div class="kflogo"><span class="waves">≋≋≋</span><span><b>Phoenix</b><small>Executive Systems</small></span></div>
     <div class="workspace"><span><i>PS</i><span><b>Phoenix Systems</b><small>Executive workspace</small></span></span><b>⌄</b></div>
@@ -237,6 +239,11 @@ h1{font-size:34px}
         const source = String(opportunity?.source || "").toLowerCase().trim();
         const name = String(opportunity?.name || "").toLowerCase();
         return ["internal_test","synthetic","test"].includes(source) || name.includes("internal test");
+      };
+      const isIsolatedTestOpportunity = opportunity => {
+        const source = String(opportunity?.source || "").toLowerCase().trim();
+        const name = String(opportunity?.name || "").trim();
+        return source === "internal_test" && name.startsWith("[TEST]");
       };
       const TEST_MODE = true;
       let selectedOpportunity = null;
@@ -758,7 +765,7 @@ h1{font-size:34px}
           const companyMap = new Map(companies.map(company => [company.id, company]));
           const contactMap = new Map(contacts.map(contact => [contact.id, contact]));
           const realOpportunities = TEST_MODE
-            ? opportunities.filter(isTestOpportunity)
+            ? opportunities.filter(isIsolatedTestOpportunity)
             : opportunities.filter(opportunity => !isTestOpportunity(opportunity));
           const realOpportunityIds = new Set(realOpportunities.map(opportunity => opportunity.id));
           const realTasks = tasks.filter(task => realOpportunityIds.has(task.opportunity_id));
