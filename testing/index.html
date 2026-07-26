@@ -1011,9 +1011,18 @@ h1{font-size:34px}
         event.preventDefault();
         const button = document.getElementById("saveNewLead");
         const message = document.getElementById("addLeadMessage");
-        const workspaceId = selectedOpportunity?.workspace_id || selectedCompany?.workspace_id;
+        let workspaceId = selectedOpportunity?.workspace_id || selectedCompany?.workspace_id;
         if (!workspaceId) {
-          message.textContent = "Open an existing opportunity once so Phoenix can confirm the secure workspace.";
+          try {
+            const authorizedWorkspaces = await request("workspaces?select=id&limit=1");
+            workspaceId = authorizedWorkspaces[0]?.id || null;
+          } catch (problem) {
+            message.textContent = problem instanceof Error ? problem.message : "Phoenix could not confirm your secure workspace.";
+            return;
+          }
+        }
+        if (!workspaceId) {
+          message.textContent = "No authorized workspace is available for this signed-in user.";
           return;
         }
         button.disabled = true;
