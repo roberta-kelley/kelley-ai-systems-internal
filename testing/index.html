@@ -248,6 +248,7 @@ h1{font-size:34px}
       const TEST_MODE = true;
       let selectedOpportunity = null;
       let selectedCompany = null;
+      let authorizedWorkspaceId = null;
       let selectedContact = null;
       let selectedBrief = null;
       let selectedQualificationRecommendation = null;
@@ -761,6 +762,11 @@ h1{font-size:34px}
           ]);
           const recommendations = recommendationSource.data;
           const agentRuns = agentRunSource.data;
+          authorizedWorkspaceId =
+            opportunities.find(item => item.workspace_id)?.workspace_id
+            || companies.find(item => item.workspace_id)?.workspace_id
+            || contacts.find(item => item.workspace_id)?.workspace_id
+            || null;
           const sourceWarnings = [recommendationSource,agentRunSource].filter(source => source.error).map(source => source.name);
           const companyMap = new Map(companies.map(company => [company.id, company]));
           const contactMap = new Map(contacts.map(contact => [contact.id, contact]));
@@ -1011,16 +1017,10 @@ h1{font-size:34px}
         event.preventDefault();
         const button = document.getElementById("saveNewLead");
         const message = document.getElementById("addLeadMessage");
-        let workspaceId = selectedOpportunity?.workspace_id || selectedCompany?.workspace_id;
-        if (!workspaceId) {
-          try {
-            const authorizedWorkspaces = await request("workspaces?select=id&limit=1");
-            workspaceId = authorizedWorkspaces[0]?.id || null;
-          } catch (problem) {
-            message.textContent = problem instanceof Error ? problem.message : "Phoenix could not confirm your secure workspace.";
-            return;
-          }
-        }
+        const workspaceId =
+          selectedOpportunity?.workspace_id
+          || selectedCompany?.workspace_id
+          || authorizedWorkspaceId;
         if (!workspaceId) {
           message.textContent = "No authorized workspace is available for this signed-in user.";
           return;
