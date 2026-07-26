@@ -248,7 +248,6 @@ h1{font-size:34px}
       const TEST_MODE = true;
       let selectedOpportunity = null;
       let selectedCompany = null;
-      let authorizedWorkspaceId = null;
       let selectedContact = null;
       let selectedBrief = null;
       let selectedQualificationRecommendation = null;
@@ -481,6 +480,22 @@ h1{font-size:34px}
         const data = await response.json();
         if (!response.ok) throw new Error(data.message || data.hint || data.details || "The record could not be updated.");
         return data[0];
+      };
+      const completeOpenTasks = async ({types = [], exceptTitle = ""} = {}) => {
+        if (!selectedOpportunity?.id) return 0;
+        const openTasks = await request(
+          "tasks?opportunity_id=eq." + encodeURIComponent(selectedOpportunity.id) +
+          "&status=neq.completed&select=id,title,task_type"
+        );
+        const matching = openTasks.filter(task =>
+          (!types.length || types.includes(String(task.task_type || ""))) &&
+          (!exceptTitle || task.title !== exceptTitle)
+        );
+        const completedAt = new Date().toISOString();
+        await Promise.all(matching.map(task =>
+          updateRecord("tasks", task.id, {status:"completed",completed_at:completedAt})
+        ));
+        return matching.length;
       };
       const saveOpportunity = async changes => {
         if (TEST_MODE && !isTestOpportunity(selectedOpportunity)) {
@@ -762,11 +777,6 @@ h1{font-size:34px}
           ]);
           const recommendations = recommendationSource.data;
           const agentRuns = agentRunSource.data;
-          authorizedWorkspaceId =
-            opportunities.find(item => item.workspace_id)?.workspace_id
-            || companies.find(item => item.workspace_id)?.workspace_id
-            || contacts.find(item => item.workspace_id)?.workspace_id
-            || null;
           const sourceWarnings = [recommendationSource,agentRunSource].filter(source => source.error).map(source => source.name);
           const companyMap = new Map(companies.map(company => [company.id, company]));
           const contactMap = new Map(contacts.map(contact => [contact.id, contact]));
@@ -837,7 +847,7 @@ h1{font-size:34px}
             : focusOpportunity
               ? "Today’s focus · " + focusOpportunity.next_action
               : "Today’s focus · Add and qualify your next opportunity";
-          realOpportunities.forEach(opportunity => {
+          opportunities.forEach(opportunity => {
             const company = companyMap.get(opportunity.company_id);
             const tr = document.createElement("tr");
             const nameCell = document.createElement("td");
@@ -883,13 +893,13 @@ h1{font-size:34px}
             });
             rows.appendChild(tr);
           });
-          if (!realOpportunities.length) {
+          if (!opportunities.length) {
             const empty = document.createElement("tr");
             const emptyCell = cell("Your protected workspace is connected. No opportunities have been added yet.");
             emptyCell.colSpan = 6;
             empty.appendChild(emptyCell);
             rows.appendChild(empty);
-          } else selectOpportunity(realOpportunities[0], companyMap.get(realOpportunities[0].company_id), contactMap.get(realOpportunities[0].primary_contact_id));
+          } else selectOpportunity(opportunities[0], companyMap.get(opportunities[0].company_id), contactMap.get(opportunities[0].primary_contact_id));
           document.getElementById("pipelineTotal").textContent = money.format(pipeline);
         } catch (problem) {
           document.getElementById("orchestratorStatus").textContent = "Core records unavailable";
@@ -1017,12 +1027,9 @@ h1{font-size:34px}
         event.preventDefault();
         const button = document.getElementById("saveNewLead");
         const message = document.getElementById("addLeadMessage");
-        const workspaceId =
-          selectedOpportunity?.workspace_id
-          || selectedCompany?.workspace_id
-          || authorizedWorkspaceId;
+        const workspaceId = selectedOpportunity?.workspace_id || selectedCompany?.workspace_id;
         if (!workspaceId) {
-          message.textContent = "No authorized workspace is available for this signed-in user.";
+          message.textContent = "Open an existing opportunity once so Phoenix can confirm the secure workspace.";
           return;
         }
         button.disabled = true;
@@ -1499,6 +1506,7 @@ h1{font-size:34px}
           if (String(selectedOpportunity.stage) === "identified") {
             selectedOpportunity = await updateRecord("opportunities",selectedOpportunity.id,{stage:"researched"});
           }
+          await completeOpenTasks({types:["qualification"]});
           selectOpportunity(selectedOpportunity,selectedCompany,selectedContact);
           await loadData();
           message.textContent = "Research approved and saved. The Closer can now use these facts, hypotheses, angles, questions, and cautions.";
@@ -2560,12 +2568,19 @@ h1{font-size:34px}
         const greeting = selectedContact?.first_name ? "Hi " + selectedContact.first_name + "," : "Hello,";
         const painPoints = lines(document.getElementById("outcomePainPoints").value);
         const nextAction = document.getElementById("outcomeNextAction").value.trim() || "the next step we discussed";
-        const detail = painPoints.length ? "especially your need to " + painPoints[0].replace(/[.]+$/,"").toLowerCase() : "the priorities we discussed";
+        const cleanSentence = value => {
+          const text = String(value || "").trim().replace(/[.]+$/,"");
+          return text ? text.charAt(0).toLowerCase() + text.slice(1) : "";
+        };
+        const discussionDetail = painPoints.length
+          ? "what you shared about " + cleanSentence(painPoints[0])
+          : "the priorities we discussed";
+        const nextStep = cleanSentence(nextAction);
         const disposition = document.getElementById("outcomeDisposition").value;
         const messages = {
           no_answer:greeting + "\n\nI tried to reach you today regarding " + companyName + " and wanted to follow up here as well. I help businesses improve lead response, qualification, and follow-up without replacing the tools that already work for them. If this is relevant, I would be glad to share a brief example and learn how your current process works.\n\nBest,\nRoberta\nKelley AI Systems",
-          interested:greeting + "\n\nThank you for taking the time to speak with me about " + companyName + ". I appreciated learning more about " + detail + ". Based on our conversation, I believe a focused Kelley AI workflow could help without disrupting the tools you already use. I’ll follow up with " + nextAction + ".\n\nBest,\nRoberta\nKelley AI Systems",
-          proposal_requested:greeting + "\n\nThank you for the conversation about " + companyName + ". I’m preparing the next steps around " + detail + " and will follow up with " + nextAction + ". I’ll keep the recommendation focused on the workflow priorities we discussed.\n\nBest,\nRoberta\nKelley AI Systems",
+          interested:greeting + "\n\nThank you for speaking with me today. I appreciated learning more about " + discussionDetail + ". I’ll put together " + nextStep + " and keep it focused on the priorities we discussed. Once you have reviewed it, we can decide together whether it makes sense to move forward.\n\nBest,\nRoberta\nKelley AI Systems",
+          proposal_requested:greeting + "\n\nThank you for speaking with me today. I’m putting together " + nextStep + " for " + companyName + ". I’ll base it on " + discussionDetail + " and keep the scope clear and practical. I’ll send it for your review, and you can let me know what you would like adjusted.\n\nBest,\nRoberta\nKelley AI Systems",
           closed_won:greeting + "\n\nThank you for choosing Kelley AI Systems. I’m excited to support " + companyName + ". Our next step is " + nextAction + ", and I’ll make sure the process stays clear and organized from the start.\n\nBest,\nRoberta\nKelley AI Systems",
           closed_lost:greeting + "\n\nThank you for considering Kelley AI Systems and for the time you shared. I understand that now may not be the right time for " + companyName + ". I appreciate the conversation and would be glad to reconnect if your priorities change.\n\nBest,\nRoberta\nKelley AI Systems",
           follow_up:greeting + "\n\nI wanted to follow up regarding " + companyName + ". Based on what we discussed, the most relevant next step is " + nextAction + ". Please let me know if you have any questions or if there is anything else you would like me to include.\n\nBest,\nRoberta\nKelley AI Systems"
@@ -2622,16 +2637,27 @@ h1{font-size:34px}
             human_approved:approved
           });
           if (approved) {
+            await completeOpenTasks({
+              types:["qualification","research","closer","proposal","follow_up","orchestration"],
+              exceptTitle:nextAction
+            });
             if (nextAction) {
-              await createRecord("tasks", {
-                workspace_id:selectedOpportunity.workspace_id,
-                opportunity_id:selectedOpportunity.id,
-                title:nextAction,
-                task_type:"follow_up",
-                priority:"high",
-                status:"open",
-                due_at:dueAt
-              });
+              const existingTasks = await request(
+                "tasks?opportunity_id=eq." + encodeURIComponent(selectedOpportunity.id) +
+                "&title=eq." + encodeURIComponent(nextAction) +
+                "&status=neq.completed&select=id"
+              );
+              if (!existingTasks.length) {
+                await createRecord("tasks", {
+                  workspace_id:selectedOpportunity.workspace_id,
+                  opportunity_id:selectedOpportunity.id,
+                  title:nextAction,
+                  task_type:"follow_up",
+                  priority:"high",
+                  status:"open",
+                  due_at:dueAt
+                });
+              }
             }
             selectedOpportunity = await updateRecord("opportunities", selectedOpportunity.id, {
               stage:proposedStage,
