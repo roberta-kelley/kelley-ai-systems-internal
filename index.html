@@ -206,6 +206,7 @@ h1{font-size:34px}
       const PROJECT_GATES_KEY = "phoenix:project-gates:";
       const contentVeil = document.getElementById("contentVeil");
       const CONTENT_KEY = "phoenix:content:";
+      const QUALIFICATION_DRAFT_KEY = "phoenix:qualification-draft:";
       const qualificationVeil = document.getElementById("qualificationVeil");
       const researchVeil = document.getElementById("researchVeil");
       const orchestratorVeil = document.getElementById("orchestratorVeil");
@@ -239,6 +240,53 @@ h1{font-size:34px}
       const session = () => {
         try { return JSON.parse(localStorage.getItem(SESSION_KEY) || "null"); }
         catch { return null; }
+      };
+      let refreshPromise = null;
+      const refreshSession = async () => {
+        if (refreshPromise) return refreshPromise;
+        refreshPromise = (async () => {
+          const {url,key} = config();
+          const current = session();
+          if (!current?.refresh_token) throw new Error("Your secure session needs a new sign-in.");
+          const response = await fetch(url + "/auth/v1/token?grant_type=refresh_token", {
+            method:"POST",
+            headers:{"apikey":key,"Content-Type":"application/json"},
+            body:JSON.stringify({refresh_token:current.refresh_token})
+          });
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.error_description || data.msg || data.message || "Your secure session needs a new sign-in.");
+          localStorage.setItem(SESSION_KEY, JSON.stringify(data));
+          return data;
+        })();
+        try { return await refreshPromise; }
+        finally { refreshPromise = null; }
+      };
+      const authenticatedFetch = async (path,options = {}) => {
+        const {url,key} = config();
+        let current = session();
+        if (!current) {
+          showLogin();
+          throw new Error("Please sign in to continue.");
+        }
+        try {
+          if (current.expires_at && Number(current.expires_at) * 1000 <= Date.now() + 30000) {
+            current = await refreshSession();
+          }
+          const send = token => fetch(url + "/rest/v1/" + path, {
+            ...options,
+            headers:{...(options.headers || {}),"apikey":key,"Authorization":"Bearer " + token}
+          });
+          let response = await send(current.access_token);
+          if (response.status === 401) {
+            current = await refreshSession();
+            response = await send(current.access_token);
+          }
+          return response;
+        } catch (problem) {
+          localStorage.removeItem(SESSION_KEY);
+          showLogin();
+          throw problem;
+        }
       };
       const field = (label, type, id, placeholder = "") => {
         const wrap = document.createElement("label");
@@ -325,16 +373,7 @@ h1{font-size:34px}
         }
       );
       const request = async path => {
-        const {url,key} = config();
-        const current = session();
-        const response = await fetch(url + "/rest/v1/" + path, {
-          headers:{"apikey":key,"Authorization":"Bearer " + current.access_token}
-        });
-        if (response.status === 401) {
-          localStorage.removeItem(SESSION_KEY);
-          showLogin();
-          throw new Error("Your secure session expired. Please sign in again.");
-        }
+        const response = await authenticatedFetch(path);
         const data = await response.json();
         if (!response.ok) throw new Error(data.message || data.hint || data.details || ("Supabase returned " + response.status));
         return data;
@@ -376,13 +415,9 @@ h1{font-size:34px}
         });
       };
       const createRecord = async (table, payload) => {
-        const {url,key} = config();
-        const current = session();
-        const response = await fetch(url + "/rest/v1/" + table, {
+        const response = await authenticatedFetch(table, {
           method:"POST",
           headers:{
-            "apikey":key,
-            "Authorization":"Bearer " + current.access_token,
             "Content-Type":"application/json",
             "Prefer":"return=representation"
           },
@@ -393,13 +428,9 @@ h1{font-size:34px}
         return data[0];
       };
       const updateRecord = async (table, id, payload) => {
-        const {url,key} = config();
-        const current = session();
-        const response = await fetch(url + "/rest/v1/" + table + "?id=eq." + encodeURIComponent(id), {
+        const response = await authenticatedFetch(table + "?id=eq." + encodeURIComponent(id), {
           method:"PATCH",
           headers:{
-            "apikey":key,
-            "Authorization":"Bearer " + current.access_token,
             "Content-Type":"application/json",
             "Prefer":"return=representation"
           },
@@ -410,13 +441,9 @@ h1{font-size:34px}
         return data[0];
       };
       const saveOpportunity = async changes => {
-        const {url,key} = config();
-        const current = session();
-        const response = await fetch(url + "/rest/v1/opportunities?id=eq." + encodeURIComponent(selectedOpportunity.id), {
+        const response = await authenticatedFetch("opportunities?id=eq." + encodeURIComponent(selectedOpportunity.id), {
           method:"PATCH",
           headers:{
-            "apikey":key,
-            "Authorization":"Bearer " + current.access_token,
             "Content-Type":"application/json",
             "Prefer":"return=representation"
           },
@@ -1007,6 +1034,37 @@ h1{font-size:34px}
         nextOwner:document.getElementById("qualificationNextOwner").value.trim(),
         nextDate:document.getElementById("qualificationNextDate").value
       });
+      const qualificationDraftFields = [
+        "qualificationSource","qualificationSummary","qualificationPreference","qualificationConsent",
+        "qualificationFit","qualificationDecisionMaker","qualificationNeed","qualificationTiming",
+        "qualificationFacts","qualificationMissing","qualificationRisks","qualificationRecommendation",
+        "qualificationRationale","qualificationConfidence","qualificationNextAction",
+        "qualificationNextOwner","qualificationNextDate"
+      ];
+      const qualificationDraftKey = () => selectedOpportunity ? QUALIFICATION_DRAFT_KEY + selectedOpportunity.id : "";
+      const saveQualificationDraft = () => {
+        const key = qualificationDraftKey();
+        if (!key) return;
+        const values = {};
+        qualificationDraftFields.forEach(id => { values[id] = document.getElementById(id).value; });
+        localStorage.setItem(key,JSON.stringify({savedAt:new Date().toISOString(),values}));
+      };
+      const restoreQualificationDraft = () => {
+        const key = qualificationDraftKey();
+        if (!key) return false;
+        try {
+          const draft = JSON.parse(localStorage.getItem(key) || "null");
+          if (!draft?.values) return false;
+          qualificationDraftFields.forEach(id => {
+            if (draft.values[id] !== undefined) document.getElementById(id).value = draft.values[id];
+          });
+          return true;
+        } catch { return false; }
+      };
+      const clearQualificationDraft = () => {
+        const key = qualificationDraftKey();
+        if (key) localStorage.removeItem(key);
+      };
       const qualificationScores = review => {
         const fit = {unknown:10,strong:85,possible:55,poor:10}[review.fit];
         const intent = (review.need === "yes" ? 65 : review.need === "no" ? 10 : 25)
@@ -1044,7 +1102,7 @@ h1{font-size:34px}
         let saved = {};
         try { saved = record?.rationale ? JSON.parse(record.rationale) : {}; }
         catch { saved = {rationale:record?.rationale || ""}; }
-        document.getElementById("qualificationSource").value = selectedOpportunity.source || saved.source || "";
+        document.getElementById("qualificationSource").value = saved.source || selectedOpportunity.source || "";
         document.getElementById("qualificationSummary").value = saved.summary || "";
         document.getElementById("qualificationPreference").value = saved.preference || "unknown";
         document.getElementById("qualificationConsent").value = saved.consent || selectedContact?.consent_status || "unknown";
@@ -1073,15 +1131,23 @@ h1{font-size:34px}
         try {
           const records = await request("recommendations?opportunity_id=eq." + encodeURIComponent(selectedOpportunity.id) + "&role=eq.concierge&select=id,workspace_id,opportunity_id,role,action,rationale,confidence_score,decision,edited_action,decided_at,created_at&order=created_at.desc&limit=1");
           showQualification(records[0] || null);
-          document.getElementById("qualificationMessage").textContent = records.length
-            ? "The latest qualification record is loaded. Verify every field before routing."
-            : "No qualification record exists yet. Preserve unknowns instead of guessing.";
+          const draftRestored = restoreQualificationDraft();
+          document.getElementById("qualificationMessage").textContent = draftRestored
+            ? "Your saved device draft was restored. Verify every field before routing."
+            : records.length
+              ? "The latest qualification record is loaded. Verify every field before routing."
+              : "No qualification record exists yet. Preserve unknowns instead of guessing.";
         } catch (problem) {
           showQualification(null);
-          document.getElementById("qualificationMessage").textContent = problem instanceof Error ? problem.message : "The qualification record could not be loaded.";
+          const draftRestored = restoreQualificationDraft();
+          document.getElementById("qualificationMessage").textContent = draftRestored
+            ? "Your saved device draft was restored. Sign in again if Phoenix requests it before saving."
+            : problem instanceof Error ? problem.message : "The qualification record could not be loaded.";
         }
       });
       document.getElementById("closeQualification").addEventListener("click", () => { qualificationVeil.hidden = true; });
+      document.getElementById("qualificationForm").addEventListener("input",saveQualificationDraft);
+      document.getElementById("qualificationForm").addEventListener("change",saveQualificationDraft);
       document.getElementById("saveQualificationReview").addEventListener("click", async () => {
         const button = document.getElementById("saveQualificationReview");
         const message = document.getElementById("qualificationMessage");
@@ -1103,6 +1169,7 @@ h1{font-size:34px}
           selectedQualificationRecommendation = selectedQualificationRecommendation
             ? await updateRecord("recommendations",selectedQualificationRecommendation.id,payload)
             : await createRecord("recommendations",payload);
+          clearQualificationDraft();
           message.textContent = "Qualification saved for review. Phoenix did not change the pipeline or create a task.";
         } catch (problem) {
           message.textContent = problem instanceof Error ? problem.message : "The qualification could not be saved.";
@@ -1169,6 +1236,7 @@ h1{font-size:34px}
           }
           selectOpportunity(selectedOpportunity,selectedCompany,selectedContact);
           await loadData();
+          clearQualificationDraft();
           message.textContent = "Qualification approved. Phoenix routed the opportunity, updated its scores, and created the next task.";
         } catch (problem) {
           message.textContent = problem instanceof Error ? problem.message : "Phoenix could not route the opportunity.";
