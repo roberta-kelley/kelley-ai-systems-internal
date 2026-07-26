@@ -124,6 +124,7 @@ h1{font-size:34px}
 .workspacebox header{display:flex;align-items:start;justify-content:space-between;gap:16px}.workspacebox h2{font-size:24px}.workspacebox .close{width:auto;margin:0;border:1px solid var(--gold);border-radius:999px;background:#fff;padding:8px 12px;color:var(--ink)}
 .workspacebox label{display:block;margin-top:15px;color:var(--muted);font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.workspacebox input,.workspacebox select,.workspacebox textarea{width:100%;margin-top:6px;border:1px solid var(--gold);border-radius:11px;background:#fff;padding:12px;color:var(--ink)}.workspacebox textarea{min-height:110px;resize:vertical}.workspacebox .save{display:block;width:100%;margin-top:18px;border:1px solid var(--gold);border-radius:11px;background:var(--rose);padding:12px;color:#fff;font-weight:800;text-align:center;text-decoration:none}.workspacebox .message{margin-top:12px;color:var(--rose2);font-size:11px}
 .workspacebox .approval{display:flex;align-items:center;gap:9px;border:1px solid var(--gold);border-radius:11px;background:var(--goldSoft);padding:12px}.workspacebox .approval input{width:auto;margin:0}.workspacebox .approval span{color:var(--ink);font-size:10px;letter-spacing:0;text-transform:none}
+.prepbox{width:min(900px,100%)}.preptabs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:18px}.preptab{border:1px solid var(--gold);border-radius:12px;background:#fff;padding:11px;color:var(--rose2);font-size:9px;font-weight:800}.preptab.active{background:var(--rose);color:#fff}.preppanel{margin-top:16px}.preppanel[hidden]{display:none!important}.prepgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.prepresult{margin-top:14px;border:1px solid var(--gold);border-radius:14px;background:var(--goldSoft);padding:16px}.prepresult strong{display:block;color:var(--rose);font-size:25px}.prepresult p{margin:7px 0 0;color:var(--muted);font-size:10px;line-height:1.55}.knowledgepack{min-height:420px!important}.toolnote{margin-top:12px;color:var(--muted);font-size:10px;line-height:1.55}@media(max-width:700px){.preptabs{grid-template-columns:1fr 1fr}.prepgrid{grid-template-columns:1fr}}
 .gategrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:18px}.gatecard{border:1px solid var(--gold);border-radius:14px;background:#fff;padding:12px;color:var(--ink);text-align:left}.gatecard strong{display:block;color:var(--rose);font-size:13px}.gatecard span{display:block;margin-top:5px;color:var(--muted);font-size:8px;line-height:1.35}.gatecard.active{background:var(--roseSoft);box-shadow:inset 0 0 0 1px var(--rose)}.gatecard.approved{background:var(--goldSoft)}.gatecard.approved strong{color:var(--gold)}.gateeditor{margin-top:18px;border-top:1px solid var(--line);padding-top:4px}@media(max-width:700px){.gategrid{grid-template-columns:1fr 1fr}.gatecard:last-child{grid-column:1/-1}}
 .activitylist{display:grid;gap:10px;margin-top:18px}.activityitem{border:1px solid var(--gold);border-radius:14px;background:#fff;padding:14px}.activityitem.overdue{border-width:2px;background:var(--roseSoft)}.activityitem strong{display:block;font-size:13px}.activityitem small{display:block;margin-top:4px;color:var(--muted);font-size:9px}.activityitem p{margin-top:8px;color:var(--ink);font-size:11px;line-height:1.55}.activityitem .followup{margin-top:9px;border-radius:10px;background:var(--roseSoft);padding:10px;color:var(--rose2)}.activityitem .complete{margin-top:10px;border:1px solid var(--gold);border-radius:999px;background:var(--rose);padding:7px 11px;color:#fff;font-size:9px;font-weight:800}.activityitem .complete:disabled{opacity:.6}
 .utility{position:fixed;right:12px;bottom:12px;z-index:900;display:flex;gap:7px}.utility button{width:auto;margin:0;background:#fff;color:var(--ink);font-size:9px;padding:7px 10px}
@@ -170,7 +171,7 @@ h1{font-size:34px}
       </div>
       <article class="card proof"><div class="proofhead"><div><p class="eye">Proof &amp; performance</p><h2>What is producing movement</h2></div><p class="sub">Measured from your real Phoenix activity.</p></div><div class="proofgrid"><div class="proofmetric"><small>Outcomes recorded</small><strong id="proofOutcomes">0</strong></div><div class="proofmetric"><small>Follow-ups sent</small><strong id="proofFollowUps">0</strong></div><div class="proofmetric"><small>Interested</small><strong id="proofInterested">0</strong></div><div class="proofmetric"><small>Proposals</small><strong id="proofProposals">0</strong></div><div class="proofmetric"><small>Wins</small><strong id="proofWins">0</strong></div><div class="proofmetric"><small>Positive movement</small><strong id="proofConversion">0%</strong></div></div><div class="proofinsight" id="proofInsight">Phoenix needs a few recorded outcomes before it can identify a reliable pattern.</div><div class="proofinsight" id="proofFeedback">Recommendation feedback will appear here as you accept, edit, or reject Phoenix suggestions.</div></article>
     </section>
-    <aside><div class="aside"><p class="eye">Lead intelligence</p><h2 id="intelligenceName">Select an opportunity</h2><p class="location" id="intelligenceLocation">Protected owner workspace</p></div><div class="aside"><p class="eye">Stage roadmap</p><div class="road" id="stageRoadmap"><span data-stage="identified"><i>1</i>Capture</span><span data-stage="vetted"><i>2</i>Vetted</span><span data-stage="discovery"><i>3</i>Discovery</span><span data-stage="proposal"><i>4</i>Proposal</span><span data-stage="closed"><i>5</i>Closed</span></div></div><div class="aside"><p class="eye">Strategic briefing</p><div class="brief" id="strategicBrief">Choose an opportunity to review its current intelligence record.</div><button class="actionbtn" id="openQualification" type="button">Qualify and route opportunity</button><button class="actionbtn" id="openResearch" type="button">Research company and outreach angles</button><button class="actionbtn" id="openBrief" type="button">Prepare call brief</button><button class="actionbtn" id="openProposal" type="button">Prepare proposal</button><button class="actionbtn" id="openFulfillment" type="button">Prepare fulfillment handoff</button><button class="actionbtn" id="openGates" type="button">Track project gates A to E</button><button class="actionbtn" id="openContent" type="button">Create approved growth content</button></div><div class="aside"><p class="eye">Next best action</p><strong class="action" id="nextAction">Review the opportunity record</strong><button class="actionbtn" id="openWorkspace" type="button">Open lead workspace</button><button class="actionbtn" id="openOutcome" type="button">Record call outcome</button><button class="actionbtn" id="openActivity" type="button">View activity &amp; follow-up</button></div></aside>
+    <aside><div class="aside"><p class="eye">Lead intelligence</p><h2 id="intelligenceName">Select an opportunity</h2><p class="location" id="intelligenceLocation">Protected owner workspace</p></div><div class="aside"><p class="eye">Stage roadmap</p><div class="road" id="stageRoadmap"><span data-stage="identified"><i>1</i>Capture</span><span data-stage="vetted"><i>2</i>Vetted</span><span data-stage="discovery"><i>3</i>Discovery</span><span data-stage="proposal"><i>4</i>Proposal</span><span data-stage="closed"><i>5</i>Closed</span></div></div><div class="aside"><p class="eye">Strategic briefing</p><div class="brief" id="strategicBrief">Choose an opportunity to review its current intelligence record.</div><button class="actionbtn" id="openPreparation" type="button">Prepare for conversation</button><button class="actionbtn" id="openQualification" type="button">Qualify and route opportunity</button><button class="actionbtn" id="openResearch" type="button">Research company and outreach angles</button><button class="actionbtn" id="openBrief" type="button">Prepare call brief</button><button class="actionbtn" id="openProposal" type="button">Prepare proposal</button><button class="actionbtn" id="openFulfillment" type="button">Prepare fulfillment handoff</button><button class="actionbtn" id="openGates" type="button">Track project gates A to E</button><button class="actionbtn" id="openContent" type="button">Create approved growth content</button></div><div class="aside"><p class="eye">Next best action</p><strong class="action" id="nextAction">Review the opportunity record</strong><button class="actionbtn" id="openWorkspace" type="button">Open lead workspace</button><button class="actionbtn" id="openOutcome" type="button">Record call outcome</button><button class="actionbtn" id="openActivity" type="button">View activity &amp; follow-up</button></div></aside>
   </div>
   <div class="utility"><button type="button" id="resetConnection">Reset connection</button><button type="button" id="signOut">Sign out</button></div>
   <div id="authVeil" class="authveil" hidden></div>
@@ -178,6 +179,12 @@ h1{font-size:34px}
   <div id="orchestratorVeil" class="workspaceveil" hidden><form class="workspacebox" id="orchestratorForm"><header><div><p class="eye">Human decision required</p><h2 id="orchestratorReviewName">Review Phoenix recommendation</h2><p class="location" id="orchestratorReviewLocation">No action is taken until you approve it.</p></div><button class="close" id="closeOrchestrator" type="button">Close</button></header><label>Recommended action<textarea id="orchestratorAction"></textarea></label><label>Why Phoenix recommends it<textarea id="orchestratorRationale" readonly></textarea></label><label>Confidence score<input id="orchestratorConfidence" readonly></label><label>Your decision<select id="orchestratorDecision"><option value="accepted">Approve as written</option><option value="edited">Approve my edited action</option><option value="rejected">Decline this recommendation</option></select></label><label class="approval"><input id="approveOrchestrator" type="checkbox"><span>I reviewed the facts, rationale, action, and owner. I authorize Phoenix to record this decision.</span></label><button class="save" id="saveOrchestratorDecision" type="submit">Save decision and refresh priorities</button><p class="message" id="orchestratorMessage"></p></form></div>
   <div id="addLeadVeil" class="workspaceveil" hidden><form class="workspacebox" id="addLeadForm"><header><div><p class="eye">New relationship</p><h2>Add a lead</h2><p class="location">Create the company, contact, and first opportunity.</p></div><button class="close" id="closeAddLead" type="button">Close</button></header><p class="eye">Company</p><label>Company name<input id="newCompanyName" required placeholder="Company or prospect name"></label><label>Location<input id="newCompanyLocation" placeholder="City, State"></label><p class="eye">Primary contact</p><label>First name<input id="newFirstName" required placeholder="First name"></label><label>Last name<input id="newLastName" placeholder="Last name"></label><label>Role<input id="newContactRole" placeholder="Owner, Sales Manager, etc."></label><label>Email<input id="newContactEmail" type="email" placeholder="name@company.com"></label><label>Phone<input id="newContactPhone" type="tel" placeholder="Phone number"></label><p class="eye">Opportunity</p><label>Opportunity name<input id="newOpportunityName" required placeholder="Example: AI systems consultation"></label><label>Estimated value<input id="newEstimatedValue" type="number" min="0" step="1" value="0"></label><label>Next best action<textarea id="newNextAction" placeholder="Example: Research company and prepare outreach"></textarea></label><button class="save" id="saveNewLead" type="submit">Add lead to Phoenix</button><p class="message" id="addLeadMessage"></p></form></div>
   <div id="briefVeil" class="workspaceveil" hidden><form class="workspacebox" id="briefForm"><header><div><p class="eye">Closer intelligence</p><h2 id="briefName">Call preparation</h2><p class="location" id="briefLocation"></p></div><button class="close" id="closeBrief" type="button">Close</button></header><button class="save" id="generateBrief" type="button">Generate call brief</button><label>Company background<textarea id="briefBackground"></textarea></label><label>Possible needs to verify, one per line<textarea id="briefPainPoints"></textarea></label><label>Recommended questions, one per line<textarea id="briefQuestions"></textarea></label><label>Relevant Kelley AI offer<textarea id="briefOffer"></textarea></label><label>Possible objections and responses, using Objection | Response<textarea id="briefObjections"></textarea></label><label>Desired call outcome<textarea id="briefOutcome"></textarea></label><button class="save" id="saveBrief" type="submit">Save call brief</button><p class="message" id="briefMessage"></p></form></div>
+  <div id="preparationVeil" class="workspaceveil" hidden><section class="workspacebox prepbox"><header><div><p class="eye">Unified prospect preparation</p><h2 id="preparationName">Prepare for conversation</h2><p class="location" id="preparationLocation">Closer practice, revenue context, meeting access and shared knowledge.</p></div><button class="close" id="closePreparation" type="button">Close</button></header><div class="brief"><strong>One approved source of truth.</strong><br>This workspace uses the selected opportunity, approved public research and saved Closer brief. Estimates remain estimates. Zoom is opened only when you choose it. No message, call, recording or external action happens automatically.</div><div class="preptabs"><button class="preptab active" type="button" data-prep-tab="conversation">Call briefing</button><button class="preptab" type="button" data-prep-tab="practice">Practice</button><button class="preptab" type="button" data-prep-tab="calculator">Revenue loss</button><button class="preptab" type="button" data-prep-tab="knowledge">Agent knowledge</button></div>
+    <div class="preppanel" data-prep-panel="conversation"><label>Conversation briefing<textarea id="preparationBrief" style="min-height:360px" readonly></textarea></label><div class="prepgrid"><label>Zoom meeting link<input id="preparationZoom" type="url" placeholder="https://zoom.us/j/..."></label><label>Meeting time<input id="preparationMeetingTime" type="datetime-local"></label></div><button class="save" id="saveMeetingPreparation" type="button">Save meeting details on this device</button><button class="save" id="joinPreparationZoom" type="button">Open Zoom meeting</button><p class="message" id="preparationMeetingMessage"></p></div>
+    <div class="preppanel" data-prep-panel="practice" hidden><label>Practice objective<input id="practiceObjective" value="Confirm one meaningful need and earn permission for the next step"></label><label>Prospect role<select id="practiceRole"><option>Owner or founder</option><option>Sales manager</option><option>Office manager</option><option>Skeptical decision-maker</option></select></label><button class="save" id="generatePractice" type="button">Generate practice round</button><label>Practice scenario<textarea id="practiceScenario" style="min-height:360px"></textarea></label><p class="toolnote">Use this as a rehearsal. Phoenix does not claim the prospect has these objections or needs. Confirm them in the real conversation.</p></div>
+    <div class="preppanel" data-prep-panel="calculator" hidden><div class="prepgrid"><label>New inquiries per month<input id="lossLeads" type="number" min="0" value="30"></label><label>Average project value<input id="lossValue" type="number" min="0" value="10000"></label><label>Estimated inquiries not reached promptly (%)<input id="lossMissed" type="number" min="0" max="100" value="20"></label><label>Estimated close rate on qualified inquiries (%)<input id="lossClose" type="number" min="0" max="100" value="25"></label></div><button class="save" id="calculateLoss" type="button">Calculate transparent estimate</button><div class="prepresult"><small>Potential monthly revenue exposed</small><strong id="lossResult">$0</strong><p id="lossExplanation">Enter the prospect’s confirmed or clearly labeled estimated numbers. This calculator does not predict or guarantee recovered revenue.</p></div></div>
+    <div class="preppanel" data-prep-panel="knowledge" hidden><button class="save" id="buildKnowledgePack" type="button">Build governed knowledge pack</button><label>Approved agent knowledge<textarea id="knowledgePack" class="knowledgepack"></textarea></label><label class="approval"><input id="approveKnowledgePack" type="checkbox"><span>I reviewed this pack, removed unsupported or private information, and approve it for manual use by Kelley AI Systems agents.</span></label><button class="save" id="copyKnowledgePack" type="button">Copy approved knowledge pack</button><button class="save" id="downloadKnowledgePack" type="button">Download approved knowledge pack</button><p class="message" id="knowledgeMessage"></p></div>
+  </section></div>
   <div id="outcomeVeil" class="workspaceveil" hidden><form class="workspacebox" id="outcomeForm"><header><div><p class="eye">Closed-loop handoff</p><h2 id="outcomeName">Record call outcome</h2><p class="location" id="outcomeLocation"></p></div><button class="close" id="closeOutcome" type="button">Close</button></header><label>Call disposition<select id="outcomeDisposition"><option value="follow_up">Follow-up needed</option><option value="interested">Interested</option><option value="proposal_requested">Proposal requested</option><option value="closed_won">Closed won</option><option value="closed_lost">Closed lost</option><option value="no_answer">No answer</option></select></label><label>Confirmed pain points, one per line<textarea id="outcomePainPoints"></textarea></label><label>Objections raised, one per line<textarea id="outcomeObjections"></textarea></label><label>Commitments made, one per line<textarea id="outcomeCommitments"></textarea></label><label>Move pipeline to<select id="outcomeStage"><option value="identified">Captured</option><option value="researched">Researched</option><option value="contacted">Contacted</option><option value="engaged">Engaged</option><option value="consultation_scheduled">Consultation scheduled</option><option value="consultation_completed">Consultation completed</option><option value="proposal_sent">Proposal sent</option><option value="decision_pending">Decision pending</option><option value="won">Won</option><option value="lost">Lost</option><option value="nurture">Nurture</option></select></label><label>Next best action<textarea id="outcomeNextAction"></textarea></label><label>Follow-up due date<input id="outcomeDueDate" type="date"></label><button class="save" id="generateFollowUp" type="button">Generate follow-up message</button><label>Follow-up message<textarea id="outcomeFollowUp"></textarea></label><a class="save" id="openEmailDraft" href="#">Open email draft for review</a><label>Phoenix recommendation<select id="recommendationDecision"><option value="accepted">Accept as recommended</option><option value="edited">I edited the recommendation</option><option value="rejected">Reject the recommendation</option></select></label><label class="approval"><input id="approveOutcome" type="checkbox" checked><span>Allow Phoenix to update the pipeline and create the next task.</span></label><button class="save" id="saveOutcome" type="submit">Save outcome and update Phoenix</button><p class="message" id="outcomeMessage"></p></form></div>
   <div id="activityVeil" class="workspaceveil" hidden><section class="workspacebox"><header><div><p class="eye">Orchestrator view</p><h2 id="activityName">Activity &amp; follow-up</h2><p class="location" id="activityLocation"></p></div><button class="close" id="closeActivity" type="button">Close</button></header><div class="activitylist" id="activityList"></div><p class="message" id="activityMessage"></p></section></div>
   <div id="proposalVeil" class="workspaceveil" hidden><form class="workspacebox" id="proposalForm"><header><div><p class="eye">Sales agent</p><h2 id="proposalName">Proposal writer</h2><p class="location" id="proposalLocation">Drafted from the opportunity record</p></div><button class="close" id="closeProposal" type="button">Close</button></header><label>Project investment<input id="proposalInvestment" placeholder="Example: $3,200 setup plus $297 monthly"></label><label>Expected timeline<input id="proposalTimeline" value="2 to 3 weeks after receiving access and materials"></label><label>Payment terms<input id="proposalTerms" placeholder="Enter the payment schedule"></label><button class="save" id="generateProposal" type="button">Generate proposal draft</button><label>Editable proposal<textarea id="proposalDraft" style="min-height:460px" placeholder="Generate a draft, then revise it in your own words."></textarea></label><label class="approval"><input id="approveProposal" type="checkbox"><span>I reviewed this proposal and confirm that the facts, scope, price, and promises are accurate.</span></label><button class="save" id="saveProposal" type="button">Save draft on this device</button><button class="save" id="copyProposal" type="button">Copy approved proposal</button><button class="save" id="downloadProposal" type="button">Download approved proposal</button><p class="message" id="proposalMessage"></p></form></div>
@@ -196,6 +203,8 @@ h1{font-size:34px}
       const workspaceVeil = document.getElementById("workspaceVeil");
       const addLeadVeil = document.getElementById("addLeadVeil");
       const briefVeil = document.getElementById("briefVeil");
+      const preparationVeil = document.getElementById("preparationVeil");
+      const PREPARATION_KEY = "phoenix:preparation:";
       const outcomeVeil = document.getElementById("outcomeVeil");
       const activityVeil = document.getElementById("activityVeil");
       const proposalVeil = document.getElementById("proposalVeil");
@@ -1569,6 +1578,232 @@ h1{font-size:34px}
         } finally {
           button.disabled = false;
           button.textContent = "Save call brief";
+        }
+      });
+      const preparationStorageKey = () => PREPARATION_KEY + (selectedOpportunity?.id || "none");
+      const preparationData = () => {
+        try { return JSON.parse(localStorage.getItem(preparationStorageKey()) || "{}"); }
+        catch { return {}; }
+      };
+      const cleanResearchFacts = () => (selectedCompany?.research_facts?.verified_facts || [])
+        .map(item => String(item).split("|")[0].trim())
+        .filter(Boolean);
+      const buildPreparationBrief = () => {
+        const companyName = selectedCompany?.name || selectedOpportunity?.name || "Selected opportunity";
+        const contactName = selectedContact ? [selectedContact.first_name,selectedContact.last_name].filter(Boolean).join(" ") : "";
+        const research = selectedCompany?.research_inferences || {};
+        const facts = research.human_approved === true ? cleanResearchFacts() : [];
+        const brief = selectedBrief || {};
+        const questions = brief.recommended_questions?.length ? brief.recommended_questions : research.recommended_questions || [];
+        const needs = brief.likely_pain_points?.length ? brief.likely_pain_points : research.hypotheses || [];
+        const objections = brief.possible_objections || [];
+        return [
+          "PROSPECT",
+          companyName + (selectedCompany?.location ? " · " + selectedCompany.location : ""),
+          contactName ? "Contact: " + contactName + (selectedContact?.role ? ", " + selectedContact.role : "") : "Contact: Not confirmed",
+          "",
+          "VERIFIED PUBLIC FACTS",
+          ...(facts.length ? facts.map(item => "• " + item) : ["• No approved public facts are saved yet."]),
+          "",
+          "POSSIBLE NEEDS TO VERIFY",
+          ...(needs.length ? needs.map(item => "• " + item) : ["• Ask how inquiries are captured, qualified and followed up."]),
+          "",
+          "QUESTIONS",
+          ...(questions.length ? questions.slice(0,6).map(item => "• " + item) : ["• What happens from the moment a new inquiry arrives?", "• Where does the current process require the most manual attention?"]),
+          "",
+          "RELEVANT OFFER",
+          brief.recommended_offer || "Confirm the need before recommending a focused Kelley AI Systems workflow.",
+          "",
+          "OBJECTIONS TO PRACTICE",
+          ...(objections.length ? objections.map(item => "• " + item.objection + " | " + item.response) : ["• We already have a system | Ask what is working well and where follow-up still requires manual effort."]),
+          "",
+          "DESIRED OUTCOME",
+          brief.desired_outcome || selectedOpportunity?.next_action || "Confirm one meaningful need and agree on one appropriate next step.",
+          "",
+          "BOUNDARIES",
+          "• Do not present hypotheses as facts.",
+          "• Do not promise price, results, timing or availability without approval.",
+          "• Respect consent and communication preferences.",
+          "• Record the actual outcome after the conversation."
+        ].join("\n");
+      };
+      const openPreparation = async () => {
+        if (!selectedOpportunity) return;
+        document.getElementById("preparationName").textContent = selectedCompany?.name || selectedOpportunity.name;
+        document.getElementById("preparationLocation").textContent = [selectedContact ? [selectedContact.first_name,selectedContact.last_name].filter(Boolean).join(" ") : "",selectedCompany?.location].filter(Boolean).join(" · ") || "Kelley AI prospect";
+        preparationVeil.hidden = false;
+        preparationVeil.scrollTop = 0;
+        const saved = preparationData();
+        document.getElementById("preparationZoom").value = saved.zoom || "";
+        document.getElementById("preparationMeetingTime").value = saved.meetingTime || "";
+        document.getElementById("practiceObjective").value = saved.practiceObjective || "Confirm one meaningful need and earn permission for the next step";
+        try {
+          const briefs = await request("intelligence_briefs?opportunity_id=eq." + encodeURIComponent(selectedOpportunity.id) + "&select=id,workspace_id,opportunity_id,company_background,likely_pain_points,recommended_questions,recommended_offer,possible_objections,desired_outcome,confidence_score&limit=1");
+          showBrief(briefs[0] || selectedBrief);
+        } catch {}
+        document.getElementById("preparationBrief").value = buildPreparationBrief();
+        document.getElementById("knowledgePack").value = "";
+        document.getElementById("approveKnowledgePack").checked = false;
+        document.getElementById("knowledgeMessage").textContent = "";
+      };
+      document.getElementById("openPreparation").addEventListener("click", openPreparation);
+      document.getElementById("closePreparation").addEventListener("click", () => { preparationVeil.hidden = true; });
+      document.querySelectorAll("[data-prep-tab]").forEach(button => {
+        button.addEventListener("click", () => {
+          const tab = button.dataset.prepTab;
+          document.querySelectorAll("[data-prep-tab]").forEach(item => item.classList.toggle("active",item === button));
+          document.querySelectorAll("[data-prep-panel]").forEach(panel => { panel.hidden = panel.dataset.prepPanel !== tab; });
+        });
+      });
+      document.getElementById("saveMeetingPreparation").addEventListener("click", () => {
+        const zoom = document.getElementById("preparationZoom").value.trim();
+        if (zoom) {
+          let parsed;
+          try { parsed = new URL(zoom); }
+          catch {
+            document.getElementById("preparationMeetingMessage").textContent = "Enter a complete Zoom meeting link.";
+            return;
+          }
+          if (!/(^|\.)zoom\.us$/i.test(parsed.hostname)) {
+            document.getElementById("preparationMeetingMessage").textContent = "Use an official zoom.us meeting link.";
+            return;
+          }
+        }
+        const data = preparationData();
+        data.zoom = zoom;
+        data.meetingTime = document.getElementById("preparationMeetingTime").value;
+        data.practiceObjective = document.getElementById("practiceObjective").value.trim();
+        localStorage.setItem(preparationStorageKey(),JSON.stringify(data));
+        document.getElementById("preparationMeetingMessage").textContent = "Meeting details saved on this device. No meeting was created or changed.";
+      });
+      document.getElementById("joinPreparationZoom").addEventListener("click", () => {
+        const zoom = document.getElementById("preparationZoom").value.trim();
+        let parsed;
+        try { parsed = new URL(zoom); }
+        catch {
+          document.getElementById("preparationMeetingMessage").textContent = "Add the complete Zoom meeting link first.";
+          return;
+        }
+        if (!/(^|\.)zoom\.us$/i.test(parsed.hostname)) {
+          document.getElementById("preparationMeetingMessage").textContent = "Use an official zoom.us meeting link.";
+          return;
+        }
+        window.open(parsed.href,"_blank","noopener");
+        document.getElementById("preparationMeetingMessage").textContent = "Zoom opened in a new tab. Phoenix did not record or join automatically.";
+      });
+      document.getElementById("generatePractice").addEventListener("click", () => {
+        const companyName = selectedCompany?.name || selectedOpportunity?.name || "the prospect";
+        const role = document.getElementById("practiceRole").value;
+        const objective = document.getElementById("practiceObjective").value.trim();
+        const research = selectedCompany?.research_inferences || {};
+        const brief = selectedBrief || {};
+        const possibleNeeds = brief.likely_pain_points?.length ? brief.likely_pain_points : research.hypotheses || [];
+        const questions = brief.recommended_questions?.length ? brief.recommended_questions : research.recommended_questions || [];
+        const objections = brief.possible_objections?.length ? brief.possible_objections : [
+          {objection:"We already have a system.",response:"Ask what already works and where manual follow-up still takes time."},
+          {objection:"We are not ready to change.",response:"Offer to examine one narrow workflow without replacing the current process."}
+        ];
+        document.getElementById("practiceScenario").value = [
+          "PRACTICE ROUND",
+          "You are speaking with the " + role.toLowerCase() + " at " + companyName + ".",
+          "Objective: " + (objective || "Confirm one meaningful need and earn permission for the next step."),
+          "",
+          "OPEN IN YOUR OWN WORDS",
+          "Introduce yourself briefly, explain why you reached out and ask permission to learn about the current process.",
+          "",
+          "DISCOVERY QUESTIONS",
+          ...(questions.length ? questions.slice(0,5).map((item,index) => (index + 1) + ". " + item) : ["1. What happens when a new inquiry arrives?","2. Where does follow-up require the most manual attention?"]),
+          "",
+          "POSSIBLE NEEDS, NOT CONFIRMED FACTS",
+          ...(possibleNeeds.length ? possibleNeeds.slice(0,4).map(item => "• " + item) : ["• The current process may have an after-hours or follow-up gap."]),
+          "",
+          "OBJECTION PRACTICE",
+          ...objections.slice(0,4).map(item => "Prospect: " + item.objection + "\nYour goal: " + item.response),
+          "",
+          "SELF-CHECK",
+          "• Did I ask before assuming?",
+          "• Did I listen for the prospect’s exact language?",
+          "• Did I avoid promising a result?",
+          "• Did I ask for one clear next step?"
+        ].join("\n");
+        const data = preparationData();
+        data.practiceObjective = objective;
+        localStorage.setItem(preparationStorageKey(),JSON.stringify(data));
+      });
+      const calculateRevenueExposure = () => {
+        const inquiries = Math.max(0,Number(document.getElementById("lossLeads").value || 0));
+        const value = Math.max(0,Number(document.getElementById("lossValue").value || 0));
+        const missed = Math.max(0,Math.min(100,Number(document.getElementById("lossMissed").value || 0))) / 100;
+        const close = Math.max(0,Math.min(100,Number(document.getElementById("lossClose").value || 0))) / 100;
+        const exposed = inquiries * missed * close * value;
+        document.getElementById("lossResult").textContent = money.format(exposed);
+        document.getElementById("lossExplanation").textContent = inquiries + " inquiries × " + (missed * 100).toFixed(0) + "% not reached promptly × " + (close * 100).toFixed(0) + "% estimated close rate × " + money.format(value) + " average project value. This is a scenario estimate, not a prediction or guarantee.";
+      };
+      document.getElementById("calculateLoss").addEventListener("click", calculateRevenueExposure);
+      document.getElementById("buildKnowledgePack").addEventListener("click", () => {
+        const research = selectedCompany?.research_inferences || {};
+        const approved = research.human_approved === true;
+        const companyName = selectedCompany?.name || selectedOpportunity?.name || "Selected opportunity";
+        const pack = [
+          "KELLEY AI SYSTEMS GOVERNED AGENT KNOWLEDGE",
+          "Opportunity: " + companyName,
+          "Generated: " + new Date().toLocaleString(),
+          "",
+          "USAGE RULES",
+          "Use only the approved facts below as facts. Treat possible needs as questions to verify. Respect consent, privacy and channel preferences. Do not promise price, results, availability or timing. Do not send, publish, schedule, record or change records without Roberta Kelley's approval.",
+          "",
+          "APPROVED FACTS",
+          ...(approved && cleanResearchFacts().length ? cleanResearchFacts().map(item => "• " + item) : ["• No approved public company facts are available."]),
+          "",
+          "POSSIBLE NEEDS TO VERIFY",
+          ...((approved ? research.hypotheses || [] : []).length ? research.hypotheses.map(item => "• " + item) : ["• Unknown. Ask before assuming."]),
+          "",
+          "APPROVED QUESTIONS",
+          ...((selectedBrief?.recommended_questions || research.recommended_questions || []).map(item => "• " + item)),
+          "",
+          "CURRENT OFFER POSITIONING",
+          selectedBrief?.recommended_offer || "Confirm a real need before presenting a focused Kelley AI Systems workflow.",
+          "",
+          "CURRENT NEXT ACTION",
+          selectedOpportunity?.next_action || "Human review required.",
+          "",
+          "CONSENT AND CONTACT",
+          "Consent status: " + (selectedContact?.consent_status || "unknown"),
+          "Preferred channel: Not confirmed",
+          "",
+          "SOURCE OF TRUTH",
+          "Notion holds the authoritative playbooks and approvals. Supabase holds the operational record. Phoenix presents the approved working context."
+        ].join("\n");
+        document.getElementById("knowledgePack").value = pack;
+        document.getElementById("approveKnowledgePack").checked = false;
+        document.getElementById("knowledgeMessage").textContent = "Knowledge pack built from the current approved records. Review it before sharing it with another agent.";
+      });
+      const approvedKnowledgePack = () => {
+        const text = document.getElementById("knowledgePack").value.trim();
+        if (!text) throw new Error("Build or enter the knowledge pack first.");
+        if (!document.getElementById("approveKnowledgePack").checked) throw new Error("Review the knowledge pack and check the approval box first.");
+        return text;
+      };
+      document.getElementById("copyKnowledgePack").addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(approvedKnowledgePack());
+          document.getElementById("knowledgeMessage").textContent = "Approved knowledge pack copied. Nothing was sent or published.";
+        } catch (problem) {
+          document.getElementById("knowledgeMessage").textContent = problem instanceof Error ? problem.message : "The knowledge pack could not be copied.";
+        }
+      });
+      document.getElementById("downloadKnowledgePack").addEventListener("click", () => {
+        try {
+          const text = approvedKnowledgePack();
+          const name = (selectedCompany?.name || selectedOpportunity?.name || "opportunity").replace(/[^a-z0-9]+/gi,"-").replace(/^-|-$/g,"").toLowerCase();
+          const link = document.createElement("a");
+          link.href = URL.createObjectURL(new Blob([text],{type:"text/plain"}));
+          link.download = name + "-agent-knowledge.txt";
+          link.click();
+          URL.revokeObjectURL(link.href);
+          document.getElementById("knowledgeMessage").textContent = "Approved knowledge pack downloaded. Nothing was sent or published.";
+        } catch (problem) {
+          document.getElementById("knowledgeMessage").textContent = problem instanceof Error ? problem.message : "The knowledge pack could not be downloaded.";
         }
       });
       const clientCopyIssues = text => {
