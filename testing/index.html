@@ -3029,6 +3029,7 @@ h1{font-size:34px}
         }
       });
       document.getElementById("closeActivity").addEventListener("click", () => { activityVeil.hidden = true; });
+      renderGuidedWorkflow();
       if (!config().url || !config().key) showSetup();
       else if (!session()?.access_token) showLogin();
       else loadData();
