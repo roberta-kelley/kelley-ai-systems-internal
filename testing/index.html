@@ -826,6 +826,7 @@ h1{font-size:34px}
         });
       };
       const loadData = async () => {
+        const previouslySelectedOpportunityId = selectedOpportunity?.id || null;
         rows.replaceChildren();
         const loading = document.createElement("tr");
         const loadingCell = cell("Loading protected opportunities…");
@@ -923,6 +924,7 @@ h1{font-size:34px}
           realOpportunities.forEach(opportunity => {
             const company = companyMap.get(opportunity.company_id);
             const tr = document.createElement("tr");
+            if (opportunity.id === previouslySelectedOpportunityId) tr.classList.add("selected");
             const nameCell = document.createElement("td");
             const name = document.createElement("b");
             name.textContent = company?.name || opportunity.name;
@@ -972,7 +974,16 @@ h1{font-size:34px}
             emptyCell.colSpan = 6;
             empty.appendChild(emptyCell);
             rows.appendChild(empty);
-          } else selectOpportunity(realOpportunities[0], companyMap.get(realOpportunities[0].company_id), contactMap.get(realOpportunities[0].primary_contact_id));
+          } else {
+            const opportunityToSelect = realOpportunities.find(
+              opportunity => opportunity.id === previouslySelectedOpportunityId
+            ) || realOpportunities[0];
+            selectOpportunity(
+              opportunityToSelect,
+              companyMap.get(opportunityToSelect.company_id),
+              contactMap.get(opportunityToSelect.primary_contact_id)
+            );
+          }
           document.getElementById("pipelineTotal").textContent = money.format(pipeline);
         } catch (problem) {
           document.getElementById("orchestratorStatus").textContent = "Core records unavailable";
