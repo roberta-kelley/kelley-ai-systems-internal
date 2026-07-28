@@ -1840,9 +1840,13 @@ h1{font-size:34px}
         const researchFacts = selectedCompany?.research_facts?.verified_facts || [];
         const research = selectedCompany?.research_inferences || {};
         const approvedResearch = research.human_approved === true;
+        const syntheticResearch = selectedCompany?.research_facts?.synthetic_test === true
+          || research.synthetic_test === true;
         const factText = researchFacts.map(item => "• " + String(item).split("|")[0].trim()).join("\n");
         document.getElementById("briefBackground").value = approvedResearch && researchFacts.length
-          ? companyName + " is an active prospect in " + location + ". These public facts were reviewed and approved on " + (selectedCompany.research_facts.researched_at || "the recorded research date") + ":\n\n" + factText + "\n\nSource links remain in the approved research record. Verify time-sensitive details during the conversation."
+          ? syntheticResearch
+            ? companyName + " is a synthetic TEST MODE prospect in " + location + ". These invented test facts were approved for lifecycle testing on " + (selectedCompany.research_facts.researched_at || "the recorded test date") + ":\n\n" + factText + "\n\nNo public source was used. Do not treat these test details as facts about a real company."
+            : companyName + " is an active prospect in " + location + ". These public facts were reviewed and approved on " + (selectedCompany.research_facts.researched_at || "the recorded research date") + ":\n\n" + factText + "\n\nSource links remain in the approved research record. Verify time-sensitive details during the conversation."
           : companyName + " is an active prospect in " + location + ". Confirm its services, current lead process, response speed, scheduling flow, and follow-up process during discovery.";
         const starterPainPoints = [
           "Qualified inquiries may not receive immediate, consistent follow-up",
@@ -1861,7 +1865,7 @@ h1{font-size:34px}
         const approvedQuestions = approvedResearch ? research.recommended_questions || [] : [];
         document.getElementById("briefQuestions").value = (approvedQuestions.length ? approvedQuestions : starterQuestions).slice(0,6).join("\n");
         document.getElementById("briefOffer").value = approvedResearch
-          ? "A focused after-hours concierge and lead follow-up workflow that gives homeowners a polished first response and sends organized project details to Prestige’s team. It would support the process Prestige already uses."
+          ? "A focused after-hours concierge and lead follow-up workflow that gives homeowners a polished first response and sends organized project details to " + companyName + "’s team. It would support the process the company already uses."
           : "A focused Kelley AI Systems lead capture, qualification, and follow-up workflow built around the company’s existing process.";
         document.getElementById("briefObjections").value = approvedResearch
           ? [
@@ -1882,11 +1886,13 @@ h1{font-size:34px}
         document.getElementById("briefOutcome").value = approvedResearch
           ? "Primary objective: Learn what happens to a new inquiry after regular office hours and whether the current process leaves any response or follow-up gap.\n\n"
             + (angle ? "Positioning: " + angle + "\n\n" : "")
-            + "Desired next step: If Prestige confirms a meaningful gap, ask permission to schedule a short discovery conversation about one focused workflow."
+            + "Desired next step: If " + companyName + " confirms a meaningful gap, ask permission to schedule a short discovery conversation about one focused workflow."
             + cautionLines
           : "Understand the current lead process, confirm one meaningful problem, and agree on one appropriate next step.";
         document.getElementById("briefMessage").textContent = approvedResearch
-          ? "Research-informed starter brief generated. Facts are cited; hypotheses still need confirmation during the call."
+          ? syntheticResearch
+            ? "Synthetic TEST MODE brief generated. The test facts are invented; hypotheses still need confirmation within the scenario."
+            : "Research-informed starter brief generated. Facts are cited; hypotheses still need confirmation during the call."
           : "Starter brief generated. Review and personalize it before saving.";
       });
       document.getElementById("briefForm").addEventListener("submit", async event => {
@@ -1938,6 +1944,8 @@ h1{font-size:34px}
         const contactName = selectedContact ? [selectedContact.first_name,selectedContact.last_name].filter(Boolean).join(" ") : "";
         const research = selectedCompany?.research_inferences || {};
         const facts = research.human_approved === true ? cleanResearchFacts() : [];
+        const syntheticResearch = selectedCompany?.research_facts?.synthetic_test === true
+          || research.synthetic_test === true;
         const brief = selectedBrief || {};
         const questions = brief.recommended_questions?.length ? brief.recommended_questions : research.recommended_questions || [];
         const needs = brief.likely_pain_points?.length ? brief.likely_pain_points : research.hypotheses || [];
@@ -1947,8 +1955,8 @@ h1{font-size:34px}
           companyName + (selectedCompany?.location ? " · " + selectedCompany.location : ""),
           contactName ? "Contact: " + contactName + (selectedContact?.role ? ", " + selectedContact.role : "") : "Contact: Not confirmed",
           "",
-          "VERIFIED PUBLIC FACTS",
-          ...(facts.length ? facts.map(item => "• " + item) : ["• No approved public facts are saved yet."]),
+          syntheticResearch ? "SYNTHETIC TEST FACTS" : "VERIFIED PUBLIC FACTS",
+          ...(facts.length ? facts.map(item => "• " + item) : [syntheticResearch ? "• No synthetic test facts are saved yet." : "• No approved public facts are saved yet."]),
           "",
           "POSSIBLE NEEDS TO VERIFY",
           ...(needs.length ? needs.map(item => "• " + item) : ["• Ask how inquiries are captured, qualified and followed up."]),
