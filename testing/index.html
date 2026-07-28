@@ -2830,20 +2830,13 @@ h1{font-size:34px}
       });
       document.getElementById("openOutcome").addEventListener("click", () => {
         if (!selectedOpportunity) return;
+        document.getElementById("outcomeForm").reset();
         document.getElementById("outcomeName").textContent = selectedCompany?.name || selectedOpportunity.name;
         document.getElementById("outcomeLocation").textContent = selectedCompany?.location || "Kelley AI opportunity";
-        const stage = String(selectedOpportunity.stage || "identified").toLowerCase();
-        document.getElementById("outcomeStage").value = validStages.includes(stage) ? stage : "identified";
-        document.getElementById("outcomeNextAction").value = selectedOpportunity.next_action || "";
         document.getElementById("recommendationDecision").value = "accepted";
         document.getElementById("approveOutcome").checked = true;
-        if (!document.getElementById("outcomeDueDate").value) {
-          const tomorrow = new Date();
-          tomorrow.setDate(tomorrow.getDate() + 1);
-          document.getElementById("outcomeDueDate").value = tomorrow.toISOString().slice(0,10);
-        }
-        document.getElementById("outcomeMessage").textContent = "";
         document.getElementById("openEmailDraft").href = "#";
+        suggestOutcomeFields();
         outcomeVeil.hidden = false;
       });
       document.getElementById("closeOutcome").addEventListener("click", () => { outcomeVeil.hidden = true; });
