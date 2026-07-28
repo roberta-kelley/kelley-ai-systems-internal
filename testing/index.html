@@ -2825,9 +2825,14 @@ h1{font-size:34px}
       document.getElementById("outcomeFollowUp").addEventListener("input", refreshEmailDraft);
       const repairSavedFollowUpGrammar = value => String(value || "")
         .replace(
+          /I[’']m putting together prepare a focused test proposal for ([^.]+)\. I[’']ll base it on what you shared about inquiries need a clear owner and consistent follow-up and keep the scope clear and practical\. I[’']ll send it for your review, and you can let me know what you would like adjusted\./gi,
+          "My next step is to prepare a focused test proposal for $1. I’ll base it on what you shared about inquiries needing a clear owner and consistent follow-up. I’ll keep the scope clear and practical, send it for your review, and you can let me know what you would like adjusted."
+        )
+        .replace(
           /I[’']ll put together prepare a focused test proposal and keep it focused on the priorities we discussed\./gi,
           "My next step is to prepare a focused test proposal. I’ll make sure it reflects the priorities we discussed."
         )
+        .replace(/\bI[’']m putting together prepare\b/gi,"My next step is to prepare")
         .replace(/\bI[’']ll put together prepare\b/gi,"I’ll prepare")
         .replace(/\band keep it focused on the priorities we discussed\./gi,". I’ll make sure it reflects the priorities we discussed.");
       document.getElementById("openEmailDraft").addEventListener("click", event => {
