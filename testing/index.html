@@ -2901,7 +2901,10 @@ h1{font-size:34px}
           closed_won:{stage:"won",action:"Complete the fulfillment readiness review",days:1},
           closed_lost:{stage:"lost",action:"Close the opportunity and record the reason",days:1}
         };
-        const suggestion = suggestions[disposition] || suggestions.follow_up;
+        const currentStage = String(selectedOpportunity?.stage || "").toLowerCase();
+        const suggestion = disposition === "follow_up" && ["proposal_sent","decision_pending"].includes(currentStage)
+          ? {stage:"decision_pending",action:"Confirm the proposal decision and next step",days:2}
+          : suggestions[disposition] || suggestions.follow_up;
         const due = new Date();
         due.setDate(due.getDate() + suggestion.days);
         document.getElementById("outcomeStage").value = suggestion.stage;
