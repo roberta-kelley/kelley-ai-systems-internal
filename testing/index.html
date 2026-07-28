@@ -3122,7 +3122,11 @@ h1{font-size:34px}
             const commitments = outcome.commitments || [];
             const followUp = commitments.find(item => item.startsWith("FOLLOW-UP MESSAGE: "));
             const sentMarker = commitments.find(item => item.startsWith("FOLLOW-UP SENT: "));
-            const ordinary = commitments.filter(item => !item.startsWith("FOLLOW-UP MESSAGE: ") && !item.startsWith("FOLLOW-UP SENT: "));
+            const ordinary = commitments.filter(item =>
+              !item.startsWith("FOLLOW-UP MESSAGE: ")
+              && !item.startsWith("FOLLOW-UP SENT: ")
+              && !item.startsWith("PHOENIX RECOMMENDATION: ")
+            );
             const body = [
               ...(outcome.confirmed_pain_points || []).map(item => "Pain point: " + item),
               ...(outcome.objections || []).map(item => "Objection: " + item),
