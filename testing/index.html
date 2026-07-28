@@ -1238,7 +1238,7 @@ h1{font-size:34px}
         ["outcomeNextAction","Phoenix suggests","The single concrete next step."],
         ["outcomeDueDate","Phoenix suggests","When the next step should be completed."],
         ["outcomeFollowUp","Phoenix drafts","Review the recipient, facts, tone, and timing before opening the unsent email draft."],
-        ["proposalInvestment","Required · You","Use the approved offer and pricing source of truth."],
+        ["proposalInvestment","Required · You","State the total setup fee and recurring fee from the approved offer. Put installment timing in Payment terms."],
         ["proposalTimeline","Required · You","Promise only a timeline you can reliably deliver."],
         ["proposalTerms","Required · You","Enter the approved payment schedule."]
       ].forEach(args => addFieldHelp(...args));
@@ -2219,6 +2219,9 @@ h1{font-size:34px}
         const terms = document.getElementById("proposalTerms").value.trim() || "[Enter payment terms]";
         message.textContent = "Preparing a factual first draft...";
         try {
+          if (/\bdown payment\b/i.test(investment)) {
+            throw new Error("Project investment must state the total setup fee and recurring fee. Put the installment amounts and timing in Payment terms.");
+          }
           const [briefs, outcomes] = await Promise.all([
             request("intelligence_briefs?opportunity_id=eq." + encodeURIComponent(selectedOpportunity.id) + "&select=company_background,likely_pain_points,recommended_offer,desired_outcome&limit=1").catch(() => []),
             request("outcomes?opportunity_id=eq." + encodeURIComponent(selectedOpportunity.id) + "&select=confirmed_pain_points,objections,commitments,proposed_next_action,created_at&order=created_at.desc&limit=1").catch(() => [])
@@ -2233,7 +2236,7 @@ h1{font-size:34px}
             ? painPoints.map(item => "• " + item).join("\n")
             : "• Confirm the first workflow priority with the client before sending this proposal.";
           const recommendation = brief.recommended_offer || "A focused lead capture, qualification, and follow-up system built around the process your team already uses.";
-          const nextStep = outcome.proposed_next_action || "Review the scope together and confirm the next commercial step.";
+          const nextStep = "Review this proposal, confirm the final scope, and complete the service agreement.";
           const date = new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
           const draft = [
             "PROPOSAL FOR " + companyName,
