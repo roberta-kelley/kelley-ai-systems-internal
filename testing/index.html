@@ -451,6 +451,13 @@ h1{font-size:34px}
         outcomeButton.hidden = !showOutcome;
         outcomeButton.onclick = () => document.getElementById("openOutcome")?.click();
       };
+      const approvedProposalSaved = opportunityId => {
+        if (!opportunityId) return false;
+        try {
+          const saved = JSON.parse(localStorage.getItem(PROPOSAL_KEY + opportunityId) || "null");
+          return Boolean(saved?.approved && saved?.draft);
+        } catch { return false; }
+      };
       const renderGuidedWorkflow = () => {
         if (!selectedOpportunity) {
           guidedAction(0,"Add or select a prospect","Start with the company, one contact, and what you are offering. Use 0 when the value is not known yet.","addLead",{buttonLabel:"Add a prospect"});
@@ -465,7 +472,11 @@ h1{font-size:34px}
         } else if (stage === "won" || latestOutcome?.disposition === "closed_won") {
           guidedAction(7,"Prepare the approved project for delivery","Use the signed agreement and authoritative Notion records. Phoenix will not invent requirements or start work automatically.","openFulfillment",{buttonLabel:"Open delivery handoff"});
         } else if (latestOutcome?.disposition === "proposal_requested" || stage === "consultation_completed") {
-          guidedAction(6,"Prepare the proposal","Confirm the approved price, scope, timeline, and payment terms. Phoenix drafts; you verify every promise.","openProposal",{buttonLabel:"Open proposal writer"});
+          if (approvedProposalSaved(selectedOpportunity.id)) {
+            guidedAction(6,"Review and manually send the saved proposal","Phoenix confirmed the approved draft is saved on this device. Open it when you are ready to copy or download it; Phoenix will not send it automatically.","openProposal",{showOutcome:true,buttonLabel:"Open saved proposal"});
+          } else {
+            guidedAction(6,"Prepare the proposal","Confirm the approved price, scope, timeline, and payment terms. Phoenix drafts; you verify every promise.","openProposal",{buttonLabel:"Open proposal writer"});
+          }
         } else if (["proposal_sent","decision_pending","lost","nurture"].includes(stage) || latestOutcome) {
           guidedAction(5,"Complete the recorded follow-up","Review the saved outcome and open task. Send nothing until the wording, recipient, and timing are correct.","openActivity",{buttonLabel:"Open activity and follow-up"});
         } else if (["contacted","engaged","consultation_scheduled"].includes(stage)) {
@@ -2171,7 +2182,9 @@ h1{font-size:34px}
         investment:document.getElementById("proposalInvestment").value.trim(),
         timeline:document.getElementById("proposalTimeline").value.trim(),
         terms:document.getElementById("proposalTerms").value.trim(),
-        draft:document.getElementById("proposalDraft").value.trim()
+        draft:document.getElementById("proposalDraft").value.trim(),
+        approved:document.getElementById("approveProposal").checked,
+        savedAt:new Date().toISOString()
       });
       const proposalFileName = () => ((selectedCompany?.name || selectedOpportunity?.name || "Client") + " Proposal")
         .replace(/[^a-z0-9]+/gi,"-").replace(/^-|-$/g,"") + ".txt";
@@ -2306,8 +2319,18 @@ h1{font-size:34px}
         }
       });
       document.getElementById("saveProposal").addEventListener("click", () => {
-        localStorage.setItem(proposalStorageKey(), JSON.stringify(proposalSnapshot()));
-        document.getElementById("proposalMessage").textContent = "Draft saved on this device. It has not been sent.";
+        const message = document.getElementById("proposalMessage");
+        try {
+          requireApprovedProposal();
+          const snapshot = proposalSnapshot();
+          localStorage.setItem(proposalStorageKey(), JSON.stringify(snapshot));
+          const confirmed = JSON.parse(localStorage.getItem(proposalStorageKey()) || "null");
+          if (!confirmed?.approved || confirmed.draft !== snapshot.draft) throw new Error("Phoenix could not verify the saved proposal.");
+          message.textContent = "Approved draft saved and verified on this device. It has not been sent.";
+          renderGuidedWorkflow();
+        } catch (problem) {
+          message.textContent = problem instanceof Error ? problem.message : "The proposal draft could not be saved.";
+        }
       });
       document.getElementById("copyProposal").addEventListener("click", async () => {
         const message = document.getElementById("proposalMessage");
