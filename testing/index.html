@@ -261,12 +261,12 @@ h1{font-size:34px}
       const isTestOpportunity = opportunity => {
         const source = String(opportunity?.source || "").toLowerCase().trim();
         const name = String(opportunity?.name || "").toLowerCase();
-        return ["internal_test","synthetic","test"].includes(source) || name.includes("internal test");
+        return ["internal_test","synthetic","test"].includes(source) || name.includes("internal test") || name.startsWith("[test]");
       };
       const isIsolatedTestOpportunity = opportunity => {
         const source = String(opportunity?.source || "").toLowerCase().trim();
         const name = String(opportunity?.name || "").trim();
-        return source === "internal_test" && name.startsWith("[TEST]");
+        return name.startsWith("[TEST]") && (source === "internal_test" || Boolean(source));
       };
       const TEST_MODE = true;
       let selectedOpportunity = null;
