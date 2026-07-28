@@ -2212,11 +2212,15 @@ h1{font-size:34px}
         }
       });
       document.getElementById("closeProposal").addEventListener("click", () => { proposalVeil.hidden = true; });
+      const formatProposalMoney = value => String(value || "").replace(
+        /\$(\d{4,})\b/g,
+        (_,digits) => "$" + Number(digits).toLocaleString("en-US")
+      );
       document.getElementById("generateProposal").addEventListener("click", async () => {
         const message = document.getElementById("proposalMessage");
-        const investment = document.getElementById("proposalInvestment").value.trim() || "[Enter project investment]";
+        const investment = formatProposalMoney(document.getElementById("proposalInvestment").value.trim()) || "[Enter project investment]";
         const timeline = document.getElementById("proposalTimeline").value.trim() || "[Enter expected timeline]";
-        const terms = document.getElementById("proposalTerms").value.trim() || "[Enter payment terms]";
+        const terms = formatProposalMoney(document.getElementById("proposalTerms").value.trim()) || "[Enter payment terms]";
         message.textContent = "Preparing a factual first draft...";
         try {
           if (/\bdown payment\b/i.test(investment)) {
