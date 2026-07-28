@@ -1611,18 +1611,50 @@ h1{font-size:34px}
       };
       const toggleResearchMode = () => {
         const synthetic = document.getElementById("researchSynthetic").checked;
-        document.getElementById("researchWebsite").disabled = synthetic;
-        document.getElementById("researchUrls").disabled = synthetic;
+        const website = document.getElementById("researchWebsite");
+        const additionalUrls = document.getElementById("researchUrls");
+        const websiteLabel = website.closest("label");
+        const factsField = document.getElementById("researchFacts");
+        const factsLabel = factsField.closest("label");
+        if (websiteLabel?.firstChild) websiteLabel.firstChild.textContent = synthetic
+          ? "Company website URL (not used in synthetic test)"
+          : "Company website URL";
+        if (factsLabel?.firstChild) factsLabel.firstChild.textContent = synthetic
+          ? "Synthetic test facts, one per line"
+          : "Verified facts with source, one per line";
+        website.disabled = synthetic;
+        additionalUrls.disabled = synthetic;
         document.getElementById("readResearchSources").disabled = synthetic;
-        document.getElementById("researchFacts").placeholder = synthetic
+        factsField.placeholder = synthetic
           ? "Synthetic test fact, one per line. Do not enter real company information."
           : "Fact | https://source-url";
+        const websiteHelp = website.closest("label")?.querySelector(".fieldhelp");
+        const factsHelp = factsLabel?.querySelector(".fieldhelp");
+        if (websiteHelp) websiteHelp.innerHTML = synthetic
+          ? '<span class="fieldtag">Not used in test</span>No website is needed for this synthetic lifecycle.'
+          : '<span class="fieldtag">Required · You</span>Use the company’s official public website.';
+        if (factsHelp) factsHelp.innerHTML = synthetic
+          ? '<span class="fieldtag">Synthetic test data</span>Phoenix fills an invented scenario. Review it, but do not add real company information.'
+          : '<span class="fieldtag">You verify</span>Copy only useful facts and cite each as Fact | complete source URL.';
         document.getElementById("approveResearchText").textContent = synthetic
           ? "I confirm these are invented TEST MODE facts, separated hypotheses from test facts, and approve them only for this synthetic lifecycle test."
           : "I reviewed every saved fact against the cited public source, separated hypotheses from facts, and approve this research for Closer use.";
         if (synthetic) {
+          website.value = "";
+          additionalUrls.value = "";
           loadedResearchSources = [];
           document.getElementById("researchEvidence").value = "SYNTHETIC TEST SCENARIO\nNo public webpage was read. The entries below are invented test data and must not be treated as facts about a real company.";
+          const syntheticDefaults = {
+            researchFacts:"The company accepts inquiries through an online form.\nBusiness hours end at 4:00 PM.\nThe company is closed on weekends.",
+            researchHypotheses:"The company may need a clearer way to qualify, assign, and follow up with inquiries received outside business hours.",
+            researchAngles:"Ask about the current lead path before recommending any system change.",
+            researchQuestions:"What happens internally after a new inquiry arrives?\nHow are inquiries received after 4:00 PM or on weekends handled?",
+            researchCautions:"Do not say the company is losing leads or has a broken system. Confirm the current process first."
+          };
+          Object.entries(syntheticDefaults).forEach(([id,value]) => {
+            const field = document.getElementById(id);
+            if (!field.value.trim()) field.value = value;
+          });
         }
       };
       document.getElementById("researchSynthetic").addEventListener("change", () => {
