@@ -1485,7 +1485,7 @@ h1{font-size:34px}
           ];
           const dueAt = new Date(review.nextDate + "T17:00:00").toISOString();
           selectedOpportunity = await updateRecord("opportunities",selectedOpportunity.id,{
-            stage,status,source:review.source,fit_score:scores.fit,intent_score:scores.intent,
+            stage,status,source:TEST_MODE ? "internal_test" : review.source,fit_score:scores.fit,intent_score:scores.intent,
             urgency_score:scores.urgency,engagement_score:scores.engagement,
             confidence_score:scores.confidence,priority_score:scores.priority,
             score_reasons:scoreReasons,next_action:review.nextAction,next_action_due_at:dueAt
@@ -2823,6 +2823,13 @@ h1{font-size:34px}
         document.getElementById("approveOutcome").checked = event.target.value !== "rejected";
       });
       document.getElementById("outcomeFollowUp").addEventListener("input", refreshEmailDraft);
+      const repairSavedFollowUpGrammar = value => String(value || "")
+        .replace(
+          /I[’']ll put together prepare a focused test proposal and keep it focused on the priorities we discussed\./gi,
+          "My next step is to prepare a focused test proposal. I’ll make sure it reflects the priorities we discussed."
+        )
+        .replace(/\bI[’']ll put together prepare\b/gi,"I’ll prepare")
+        .replace(/\band keep it focused on the priorities we discussed\./gi,". I’ll make sure it reflects the priorities we discussed.");
       document.getElementById("openEmailDraft").addEventListener("click", event => {
         refreshEmailDraft();
         if (!selectedContact?.email) {
@@ -3019,7 +3026,7 @@ h1{font-size:34px}
               "Outcome: " + String(outcome.disposition).replaceAll("_"," "),
               date,
               body || "Outcome recorded.",
-              followUp ? followUp.replace("FOLLOW-UP MESSAGE: ","") : "",
+              followUp ? repairSavedFollowUpGrammar(followUp.replace("FOLLOW-UP MESSAGE: ","")) : "",
               options
             );
           });
