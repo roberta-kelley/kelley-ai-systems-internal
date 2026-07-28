@@ -1264,6 +1264,11 @@ h1{font-size:34px}
         "qualificationNextOwner","qualificationNextDate"
       ];
       const qualificationDraftKey = () => selectedOpportunity ? QUALIFICATION_DRAFT_KEY + selectedOpportunity.id : "";
+      const visibleLeadSource = value => String(value || "")
+        .replace(/\binternal[_ -]?test\b/gi,"")
+        .replace(/^[\s,;|:/-]+|[\s,;|:/-]+$/g,"")
+        .replace(/\s{2,}/g," ")
+        .trim();
       const saveQualificationDraft = () => {
         const key = qualificationDraftKey();
         if (!key) return;
@@ -1280,6 +1285,9 @@ h1{font-size:34px}
           qualificationDraftFields.forEach(id => {
             if (draft.values[id] !== undefined) document.getElementById(id).value = draft.values[id];
           });
+          document.getElementById("qualificationSource").value = visibleLeadSource(
+            document.getElementById("qualificationSource").value
+          );
           return true;
         } catch { return false; }
       };
@@ -1366,7 +1374,7 @@ h1{font-size:34px}
         let saved = {};
         try { saved = record?.rationale ? JSON.parse(record.rationale) : {}; }
         catch { saved = {rationale:record?.rationale || ""}; }
-        document.getElementById("qualificationSource").value = saved.source || selectedOpportunity.source || "";
+        document.getElementById("qualificationSource").value = visibleLeadSource(saved.source || selectedOpportunity.source);
         document.getElementById("qualificationSummary").value = saved.summary || "";
         document.getElementById("qualificationPreference").value = saved.preference || "unknown";
         document.getElementById("qualificationConsent").value = saved.consent || selectedContact?.consent_status || "unknown";
