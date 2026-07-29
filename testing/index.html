@@ -249,6 +249,7 @@ h1{font-size:34px}
       let loadedResearchSources = [];
       let briefedOpportunityIds = new Set();
       let latestOutcomeByOpportunity = new Map();
+      let fulfillmentTaskStateByOpportunity = new Map();
       const projectGateDefinitions = [
         {id:"A",name:"Configuration",summary:"Approved rules, language, data, routing, scope, and boundaries"},
         {id:"B",name:"Build Review",summary:"Approved build matches configuration and acceptance criteria"},
@@ -489,9 +490,16 @@ h1{font-size:34px}
               try { return JSON.parse(localStorage.getItem(FULFILLMENT_KEY + selectedOpportunity.id) || "null")?.synthetic_test === true; }
               catch { return false; }
             })();
-            guidedAction(7,synthetic ? "Manage the synthetic delivery milestones" : "Manage the approved delivery milestones",synthetic
-              ? "The test readiness plan is complete and milestone reminders exist for this synthetic opportunity. Review and complete them in order without using real client data."
-              : "The readiness plan is complete. Use the authoritative Notion project and review Phoenix milestone reminders in order.","openActivity",{buttonLabel:"Open delivery activity"});
+            const taskState = fulfillmentTaskStateByOpportunity.get(selectedOpportunity.id);
+            if (taskState?.total > 0 && taskState.open === 0) {
+              guidedAction(8,synthetic ? "Synthetic lifecycle test complete" : "Delivery milestones complete",synthetic
+                ? "All synthetic delivery milestones are complete. This TEST MODE opportunity has passed through the full Phoenix lifecycle."
+                : "All Phoenix delivery milestone reminders are complete. Confirm the authoritative project closeout in Notion.","openActivity",{buttonLabel:"Review completed activity"});
+            } else {
+              guidedAction(7,synthetic ? "Manage the synthetic delivery milestones" : "Manage the approved delivery milestones",synthetic
+                ? "The test readiness plan is complete and milestone reminders exist for this synthetic opportunity. Review and complete them in order without using real client data."
+                : "The readiness plan is complete. Use the authoritative Notion project and review Phoenix milestone reminders in order.","openActivity",{buttonLabel:"Open delivery activity"});
+            }
           } else {
             guidedAction(7,"Prepare the approved project for delivery","Use the signed agreement and authoritative Notion records. Phoenix will not invent requirements or start work automatically.","openFulfillment",{buttonLabel:"Open delivery handoff"});
           }
@@ -878,7 +886,7 @@ h1{font-size:34px}
             request("opportunities?select=id,workspace_id,company_id,primary_contact_id,name,stage,status,estimated_value,fit_score,intent_score,value_score,urgency_score,engagement_score,confidence_score,priority_score,score_reasons,source,next_action,next_action_due_at&order=priority_score.desc"),
             request("companies?select=id,workspace_id,name,location,website,normalized_domain,industry,research_facts,research_inferences"),
             request("contacts?select=id,workspace_id,company_id,first_name,last_name,role,email,phone,consent_status"),
-            request("tasks?select=id,opportunity_id,title,task_type,priority,status,due_at&status=neq.completed&order=due_at.asc.nullslast"),
+            request("tasks?select=id,opportunity_id,title,task_type,priority,status,due_at&order=due_at.asc.nullslast"),
             request("outcomes?select=id,opportunity_id,disposition,commitments,proposed_stage,human_approved,created_at&order=created_at.desc"),
             optionalRequest("approvals","recommendations?select=id,opportunity_id,role,action,rationale,confidence_score,decision,edited_action,decided_at,created_at&order=created_at.desc"),
             optionalRequest("agent activity","agent_runs?select=id,opportunity_id,role,status,started_at,completed_at&order=started_at.desc&limit=30"),
@@ -893,7 +901,15 @@ h1{font-size:34px}
             ? opportunities.filter(isIsolatedTestOpportunity)
             : opportunities.filter(opportunity => !isTestOpportunity(opportunity));
           const realOpportunityIds = new Set(realOpportunities.map(opportunity => opportunity.id));
-          const realTasks = tasks.filter(task => realOpportunityIds.has(task.opportunity_id));
+          const scopedTasks = tasks.filter(task => realOpportunityIds.has(task.opportunity_id));
+          const realTasks = scopedTasks.filter(task => task.status !== "completed");
+          fulfillmentTaskStateByOpportunity = new Map();
+          scopedTasks.filter(task => task.task_type === "fulfillment").forEach(task => {
+            const state = fulfillmentTaskStateByOpportunity.get(task.opportunity_id) || {total:0,open:0};
+            state.total += 1;
+            if (task.status !== "completed") state.open += 1;
+            fulfillmentTaskStateByOpportunity.set(task.opportunity_id,state);
+          });
           const realOutcomes = outcomes.filter(outcome => realOpportunityIds.has(outcome.opportunity_id));
           const realRecommendations = recommendations.filter(recommendation => realOpportunityIds.has(recommendation.opportunity_id));
           const realAgentRuns = agentRuns.filter(run => !run.opportunity_id || realOpportunityIds.has(run.opportunity_id));
