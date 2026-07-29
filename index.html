@@ -3,11 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Phoenix Executive Dashboard Preview</title>
+  <meta name="robots" content="noindex,nofollow">
+  <title>Phoenix Testing Environment</title>
   <style>
     :root{--taupe:#bb7481;--taupeSoft:#fff;--rose:#bb7481;--rose2:#8e4f5c;--roseSoft:#f6e8eb;--roseAccent:#bb7481;--gold:#b8924b;--goldSoft:#f7f0e2;--ink:#273842;--muted:#8e4f5c;--line:#eadbbd;--paper:#fff;--ground:#fff}
 
     *{box-sizing:border-box}
+    [hidden]{display:none!important}
 body{display:flex;margin:0;background:#fff;color:var(--ink);font-family:"DM Sans","Manrope",Arial,sans-serif}
 .kfside{position:sticky;top:0;display:flex;width:292px;height:100vh;flex:none;flex-direction:column;border-right:1px solid var(--gold);background:#fff;padding:30px 24px;color:var(--ink)}
 .kflogo{display:flex;align-items:center;gap:12px}.waves{color:var(--gold);font-size:26px;letter-spacing:-8px}.kflogo b{display:block;color:var(--gold);font-family:"Manrope","DM Sans",Arial,sans-serif;font-size:19px}.kflogo small{display:block;margin-top:3px;color:var(--muted);font-size:8px;letter-spacing:.18em;text-transform:uppercase}
@@ -26,6 +28,8 @@ body{display:flex;margin:0;background:#fff;color:var(--ink);font-family:"DM Sans
 .pipe{text-align:right}
 .pipe small{display:block;color:var(--muted);font-size:8px;letter-spacing:.17em;text-transform:uppercase}
 .demo{padding:7px;border-bottom:1px solid var(--gold);background:var(--goldSoft);color:var(--ink);font-size:9px;font-weight:700;letter-spacing:.16em;text-align:center;text-transform:uppercase}
+.testtools{display:flex;justify-content:center;border-bottom:1px solid var(--gold);background:#fff;padding:8px}.testtools a{border:1px solid var(--gold);border-radius:999px;background:var(--rose);padding:8px 15px;color:#fff;font-size:9px;font-weight:800;text-decoration:none}
+.testbadge{position:fixed;top:10px;right:10px;z-index:2000;border:2px solid var(--gold);border-radius:999px;background:#8e4f5c;padding:9px 14px;color:#fff;font-size:11px;font-weight:900;letter-spacing:.12em;box-shadow:0 8px 24px rgba(39,56,66,.22)}
 .shell{display:grid;grid-template-columns:minmax(0,1fr) 330px}
 .main{min-width:0;padding:30px}
 .intro{display:flex;align-items:flex-end;justify-content:space-between;gap:20px}
@@ -61,7 +65,13 @@ h1{font-size:40px}
 .leads{overflow-x:auto}
 .proof{margin-top:16px;padding:22px}.proofhead{display:flex;align-items:end;justify-content:space-between;gap:18px}.proofhead h2{font-size:23px}.proofgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:18px}.proofmetric{border:1px solid var(--gold);border-radius:14px;background:#fff;padding:14px}.proofmetric small{display:block;color:var(--muted);font-size:8px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.proofmetric strong{display:block;margin-top:8px;color:var(--rose);font:600 24px "Manrope","DM Sans",Arial,sans-serif}.proofinsight{margin-top:14px;border:1px solid var(--gold);border-radius:14px;background:var(--roseSoft);padding:14px;color:var(--ink);font-size:11px;line-height:1.6}
 .orchestrator{margin-top:16px;padding:22px}.orchestratorhead{display:flex;align-items:end;justify-content:space-between;gap:18px}.orchestratorhead>div{min-width:0}.orchestratorhead h2{font-size:24px}.orchestratorstatus{max-width:320px;border:1px solid var(--gold);border-radius:18px;background:#fff;padding:7px 11px;color:var(--rose2);font-size:9px;font-weight:800;line-height:1.35;text-align:center;overflow-wrap:anywhere}.orchestratorsummary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:17px}.orsummary{min-width:0;border:1px solid var(--gold);border-radius:13px;background:#fff;padding:12px}.orsummary small{display:block;color:var(--muted);font-size:7px;font-weight:800;letter-spacing:.11em;text-transform:uppercase}.orsummary strong{display:block;margin-top:5px;color:var(--rose);font-size:21px}.commandgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin-top:14px}.commandcard{display:flex;min-width:0;min-height:190px;flex-direction:column;border:1px solid var(--gold);border-radius:15px;background:#fff;padding:15px;overflow-wrap:anywhere}.commandcard.overdue{background:var(--roseSoft);box-shadow:inset 4px 0 0 var(--rose)}.commandcard.approval{background:var(--goldSoft)}.commandcard .commandmeta{display:flex;align-items:center;justify-content:space-between;gap:8px;color:var(--muted);font-size:7px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}.commandcard .owner{border:1px solid var(--gold);border-radius:999px;background:#fff;padding:4px 7px;color:var(--rose2)}.commandcard h3{margin:12px 0 0;font:600 16px/1.35 "Manrope","DM Sans",Arial,sans-serif}.commandcard p{margin:8px 0 0;color:var(--muted);font-size:10px;line-height:1.55}.commandcard .why{color:var(--ink)}.commandcard button{width:100%;margin-top:auto;border:1px solid var(--gold);border-radius:10px;background:var(--rose);padding:9px;color:#fff;font-size:9px;font-weight:800}.commandempty{grid-column:1/-1;border:1px solid var(--gold);border-radius:14px;background:#fff;padding:18px;color:var(--muted);font-size:11px;line-height:1.6}
-.operatorguide{margin-top:16px;padding:22px;border-width:2px}.operatorhead{display:flex;align-items:start;justify-content:space-between;gap:18px}.operatorhead h2{font-size:25px}.operatorbadge{border:1px solid var(--gold);border-radius:999px;background:var(--roseSoft);padding:7px 11px;color:var(--rose2);font-size:8px;font-weight:900;letter-spacing:.1em;text-transform:uppercase}.operatorsteps{display:grid;grid-template-columns:repeat(8,minmax(74px,1fr));gap:7px;margin-top:18px}.operatorstep{border:1px solid var(--gold);border-radius:12px;background:#fff;padding:10px 7px;color:var(--muted);font-size:8px;font-weight:800;line-height:1.35;text-align:center}.operatorstep span{display:grid;width:22px;height:22px;margin:0 auto 6px;place-items:center;border:1px solid var(--gold);border-radius:50%;color:var(--rose2)}.operatorstep.done{background:var(--goldSoft)}.operatorstep.current{background:var(--rose);color:#fff;box-shadow:0 9px 20px #bb748133}.operatorstep.current span{background:#fff;color:var(--rose2)}.operatoraction{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:12px;margin-top:15px}.operatorpanel{border:1px solid var(--gold);border-radius:14px;background:#fff;padding:15px}.operatorpanel small{display:block;color:var(--muted);font-size:8px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.operatorpanel strong{display:block;margin-top:7px;color:var(--rose2);font-size:18px}.operatorpanel p{margin:8px 0 0;color:var(--ink);font-size:11px;line-height:1.6}.operatorbuttons{display:flex;gap:8px;margin-top:13px}.operatorbuttons button{flex:1;border:1px solid var(--gold);border-radius:11px;background:var(--rose);padding:11px;color:#fff;font-size:10px;font-weight:800}.operatorbuttons button.secondary{background:#fff;color:var(--rose2)}.operatorlegend{display:grid;gap:8px;margin-top:9px}.operatorlegend div{border-radius:10px;padding:9px 10px;font-size:10px;line-height:1.45}.operatorlegend b{display:block;margin-bottom:2px;color:var(--rose2)}.operatorlegend .you{background:var(--roseSoft)}.operatorlegend .phoenix{background:var(--goldSoft)}.operatorlegend .approve{border:1px solid var(--gold);background:#fff}
+.operatorguide{margin-top:16px;padding:22px;border-width:2px}.operatorhead{display:flex;align-items:start;justify-content:space-between;gap:18px}.operatorhead h2{font-size:25px}.operatorbadge{border:1px solid var(--gold);border-radius:999px;background:var(--roseSoft);padding:7px 11px;color:var(--rose2);font-size:8px;font-weight:900;letter-spacing:.1em;text-transform:uppercase}.operatorsteps{display:grid;grid-template-columns:repeat(8,minmax(74px,1fr));gap:7px;margin-top:18px}.operatorstep{border:1px solid var(--gold);border-radius:12px;background:#fff;padding:10px 7px;color:var(--muted);font-size:8px;font-weight:800;line-height:1.35;text-align:center}.operatorstep span{display:grid;width:22px;height:22px;margin:0 auto 6px;place-items:center;border:1px solid var(--gold);border-radius:50%;color:var(--rose2)}.operatorstep.done{background:var(--goldSoft)}.operatorstep.current{background:var(--rose);color:#fff;box-shadow:0 9px 20px #bb748133}.operatorstep.current span{background:#fff;color:var(--rose2)}.operatoraction{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:12px;margin-top:15px}.operatorpanel{border:1px solid var(--gold);border-radius:14px;background:#fff;padding:15px}.operatorpanel small{display:block;color:var(--muted);font-size:8px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.operatorpanel strong{display:block;margin-top:7px;color:var(--rose2);font-size:18px}.operatorpanel p{margin:8px 0 0;color:var(--ink);font-size:11px;line-height:1.6}.operatorbuttons{display:flex;gap:8px;margin-top:13px}.operatorbuttons button{flex:1;border:1px solid var(--gold);border-radius:11px;background:var(--rose);padding:11px;color:#fff;font-size:10px;font-weight:800}.operatorbuttons button.secondary{background:#fff;color:var(--rose2)}.operatorlegend{display:grid;gap:8px;margin-top:9px}.operatorlegend div{border-radius:10px;padding:9px 10px;font-size:10px;line-height:1.45}.operatorlegend b{display:block;margin-bottom:2px;color:var(--rose2)}.operatorlegend .you{background:var(--roseSoft)}.operatorlegend .phoenix{background:var(--goldSoft)}.operatorlegend .approve{border:1px solid var(--gold);background:#fff}.fieldhelp{display:block;margin-top:6px;color:var(--ink);font-size:10px;font-weight:400;letter-spacing:0;line-height:1.45;text-transform:none}.fieldtag{display:inline-block;margin-right:6px;border:1px solid var(--gold);border-radius:999px;background:var(--goldSoft);padding:2px 6px;color:var(--rose2);font-size:7px;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.formguide{margin-top:14px;border:1px solid var(--gold);border-radius:13px;background:var(--roseSoft);padding:13px;color:var(--ink);font-size:11px;line-height:1.55}.formguide strong{color:var(--rose2)}.autofill{display:block;width:100%;margin-top:13px;border:1px solid var(--gold);border-radius:11px;background:#fff;padding:10px;color:var(--rose2);font-size:9px;font-weight:800}
+.operatorguide{position:sticky;top:0;z-index:35;background:#fff;box-shadow:0 12px 32px #27384214}.operatorhead .sub,.operatorlegend{display:none}.operatorhead{align-items:center}.operatorhead h2{font-size:18px}.operatorbadge{flex:none}.operatorsteps{margin-top:12px}.operatorstep{padding:7px 5px}.operatorstep span{width:19px;height:19px;margin-bottom:4px}.operatoraction{display:block;margin-top:10px}.operatorpanel{display:grid;grid-template-columns:auto minmax(180px,1fr) minmax(220px,1.4fr) auto;align-items:center;gap:10px;padding:10px 12px}.operatorpanel strong,.operatorpanel p,.operatorbuttons{margin:0}.operatorpanel strong{font-size:14px}.operatorpanel p{font-size:9px;line-height:1.4}.operatorbuttons{min-width:0}.operatorbuttons button{min-width:0;white-space:normal;padding:9px 12px}.operatoraction>.operatorpanel:last-child{display:none}
+.mobilepagebar{display:none;position:sticky;top:0;z-index:50;grid-template-columns:repeat(5,1fr);border-bottom:1px solid var(--gold);background:#fff;padding:7px;box-shadow:0 8px 22px #27384214}.mobilepagebar a{border:0;border-radius:10px;background:transparent;padding:8px 4px;color:var(--muted);font-size:8px;font-weight:800;text-align:center;text-decoration:none}.mobilepagebar a.active{background:var(--rose);color:#fff}
+.pageheading{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:18px}.pageheading h1{font-size:32px}.pageheading p{margin:7px 0 0;color:var(--muted);font-size:11px}.pageheading button{border:1px solid var(--gold);border-radius:999px;background:#fff;padding:10px 14px;color:var(--rose2);font-size:9px;font-weight:800}
+.settingspage{padding:22px}.settingsgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}.settingsblock{border:1px solid var(--gold);border-radius:14px;background:#fff;padding:16px}.settingsblock h3{margin:0;font-size:15px}.settingsblock p{color:var(--muted);font-size:10px;line-height:1.6}.settingsblock button{width:100%;margin-top:10px;border:1px solid var(--gold);border-radius:10px;background:var(--rose);padding:11px;color:#fff;font-size:9px;font-weight:800}
+.workspacecontext{position:sticky;top:-26px;z-index:5;margin:-26px -26px 20px;padding:12px 18px;border-bottom:1px solid var(--gold);background:#fff}.workspacecontexttop{display:flex;align-items:center;justify-content:space-between;gap:14px}.workspacecontexttop button{border:1px solid var(--gold);border-radius:999px;background:var(--rose);padding:9px 13px;color:#fff;font-size:9px;font-weight:800}.workspacecontextnext{min-width:0;text-align:right}.workspacecontextnext small{display:block;color:var(--muted);font-size:7px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.workspacecontextnext strong{display:block;overflow:hidden;color:var(--rose2);font-size:11px;text-overflow:ellipsis;white-space:nowrap}.workspacecontextsteps{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;margin-top:9px}.workspacecontextsteps span{border:1px solid var(--line);border-radius:999px;background:#fff;padding:5px 3px;color:var(--muted);font-size:7px;font-weight:800;text-align:center}.workspacecontextsteps span.done{background:var(--goldSoft)}.workspacecontextsteps span.current{border-color:var(--rose);background:var(--rose);color:#fff}
+[data-page][hidden]{display:none!important}
 .leadhead{display:flex;align-items:center;justify-content:space-between;padding:19px 20px;border-bottom:1px solid var(--gold)}
 .leadhead button{border:1px solid var(--gold);border-radius:999px;background:var(--taupe);padding:9px 14px;color:white;font-size:10px;font-weight:700}
 table{width:100%;border-collapse:collapse;font-size:10px}
@@ -78,7 +88,7 @@ aside{border-left:1px solid var(--gold);background:var(--goldSoft)}
 .location{margin-top:5px;color:var(--muted);font-size:10px}
 .brief{margin-top:12px;border:1px solid var(--gold);border-radius:12px;background:#fff;padding:13px;color:var(--ink);font-size:11px;line-height:1.6}
 .action{display:block;margin-top:9px;font:600 19px/1.4 "Manrope","DM Sans",Arial,sans-serif}
-.actionbtn{width:100%;margin-top:15px;border:1px solid var(--gold);border-radius:11px;background:var(--rose);padding:11px;color:white;font-size:10px;font-weight:700}
+.actionbtn{display:block;width:100%;margin-top:15px;border:1px solid var(--gold);border-radius:11px;background:var(--rose);padding:11px;color:white;font-size:10px;font-weight:700;text-align:center;text-decoration:none}
 .road{display:flex;justify-content:space-between;margin-top:17px}
 .road span{text-align:center;color:var(--muted);font-size:7px;text-transform:uppercase}
 .road i{display:grid;width:20px;height:20px;margin:0 auto 6px;place-items:center;border:2px solid var(--gold);border-radius:50%;background:#fff;color:var(--rose);font-style:normal}
@@ -95,6 +105,7 @@ aside{border-top:1px solid var(--line);border-left:0}
 .operatorsteps{grid-template-columns:repeat(4,1fr)}
 }
 @media(max-width:900px){.kfside{display:none}
+.mobilepagebar{display:grid}
 }
 @media(max-width:800px){.main{padding:22px 16px}
 .intro{align-items:start;flex-direction:column}
@@ -105,6 +116,7 @@ aside{border-top:1px solid var(--line);border-left:0}
 .orchestratorsummary{grid-template-columns:1fr 1fr}
 .commandgrid{grid-template-columns:1fr}
 .operatoraction{grid-template-columns:1fr}
+.operatorguide{top:55px}.operatorpanel{grid-template-columns:1fr}.operatorpanel small{display:none}.operatorpanel p{display:none}.operatorbuttons{display:flex}.settingsgrid{grid-template-columns:1fr}
 }
 @media(max-width:500px){.pipe{display:none}
 .metrics{grid-template-columns:1fr}
@@ -113,6 +125,7 @@ h1{font-size:34px}
 .proofgrid{grid-template-columns:1fr}
 .orchestratorhead{align-items:start;flex-direction:column}
 .operatorhead{flex-direction:column}.operatorsteps{grid-template-columns:repeat(2,1fr)}.operatorbuttons{flex-direction:column}
+.operatorguide{position:sticky;padding:12px}.operatorhead{display:none}.operatorsteps{display:flex;overflow-x:auto;margin:0 0 8px;padding-bottom:2px}.operatorstep{min-width:72px}.operatorpanel strong{font-size:13px}.workspacecontextsteps{display:flex;overflow-x:auto}.workspacecontextsteps span{min-width:66px}.workspacecontextnext{max-width:55%}
 }
 .authveil{position:fixed;inset:0;z-index:1000;display:block;overflow-y:auto;background:transparent;padding:20px;pointer-events:none}
 .authveil[hidden]{display:none!important}
@@ -134,6 +147,15 @@ h1{font-size:34px}
 .utility{position:fixed;right:12px;bottom:12px;z-index:900;display:flex;gap:7px}.utility button{width:auto;margin:0;background:#fff;color:var(--ink);font-size:9px;padding:7px 10px}
 .dataerror{padding:18px!important;color:var(--rose2);white-space:normal}
 @media(max-width:500px){.authveil{padding:10px}.authbox{margin:8px auto;padding:22px}}
+.executivesnapshot{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}.executiverevenue,.executiveday{padding:22px}.periodgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:17px}.periodmetric{border:1px solid var(--gold);border-radius:14px;background:#fff;padding:15px}.periodmetric small{display:block;color:var(--muted);font-size:8px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.periodmetric strong{display:block;margin-top:7px;color:var(--rose);font-size:24px}.daycolumns{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:17px}.daycolumn{border:1px solid var(--gold);border-radius:14px;background:#fff;padding:14px}.daycolumn h3{font-size:14px}.daylist{display:grid;gap:8px;margin-top:10px}.dayitem{border-radius:10px;background:var(--roseSoft);padding:10px;color:var(--ink);font-size:10px;line-height:1.45}.dayitem small{display:block;margin-top:3px;color:var(--muted);font-size:8px}.dayempty{color:var(--muted);font-size:10px;line-height:1.5}
+.calendarcard{padding:22px}.calendarhead{display:flex;align-items:center;justify-content:space-between;gap:12px}.calendarhead h2{font-size:21px}.calendarnav{display:flex;align-items:center;gap:7px}.calendarnav button{display:grid;width:32px;height:32px;place-items:center;border:1px solid var(--gold);border-radius:50%;background:#fff;color:var(--rose2);font-weight:900}.calendarweek,.calendargrid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.calendarweek{margin-top:18px}.calendarweek span{color:var(--muted);font-size:7px;font-weight:800;text-align:center;text-transform:uppercase}.calendargrid{margin-top:7px}.calendarday{position:relative;min-height:54px;border:1px solid var(--line);border-radius:10px;background:#fff;padding:7px;color:var(--ink);font-size:9px}.calendarday.outside{opacity:.35}.calendarday.today{border-color:var(--rose);background:var(--roseSoft);font-weight:900}.calendarday.hasitems::after{position:absolute;right:7px;bottom:7px;width:7px;height:7px;border-radius:50%;background:var(--gold);content:""}.calendarlegend{margin-top:10px;color:var(--muted);font-size:8px}
+#workspaceVeil{place-items:stretch end;overflow:hidden;padding:0;background:#2738424d}#workspaceVeil .workspacebox{width:min(620px,94vw);height:100%;max-height:100%;margin:0;border-width:0 0 0 1px;border-radius:24px 0 0 24px;overflow-y:auto;box-shadow:-24px 0 70px #27384228}.drawernext{margin:18px 0;border:1px solid var(--gold);border-radius:16px;background:var(--roseSoft);padding:15px}.drawernext small{display:block;color:var(--muted);font-size:8px;font-weight:900;letter-spacing:.1em;text-transform:uppercase}.drawernext strong{display:block;margin-top:6px;color:var(--rose2);font-size:18px}.drawernext p{margin:7px 0 0;color:var(--ink);font-size:10px;line-height:1.5}.drawernextbuttons{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.drawernextbuttons button{border:1px solid var(--gold);border-radius:10px;background:var(--rose);padding:11px;color:#fff;font-size:9px;font-weight:800}.drawernextbuttons button.secondary{background:#fff;color:var(--rose2)}
+body[data-current-page="dashboard"] .operatorguide,body[data-current-page="dashboard"] .shell>aside,body[data-current-page="insights"] .operatorguide,body[data-current-page="insights"] .shell>aside,body[data-current-page="settings"] .operatorguide,body[data-current-page="settings"] .shell>aside{display:none!important}
+body[data-current-page="dashboard"] .shell,body[data-current-page="insights"] .shell,body[data-current-page="settings"] .shell,body[data-current-page="opportunities"] .shell{grid-template-columns:minmax(0,1fr)}
+body[data-current-page="opportunities"] .operatorguide{position:static;top:auto;margin:0 0 18px;box-shadow:none}body[data-current-page="opportunities"] .operatorpanel{display:block}body[data-current-page="opportunities"] .operatorpanel small{display:block}body[data-current-page="opportunities"] .operatorpanel strong,body[data-current-page="opportunities"] .operatorpanel p,body[data-current-page="opportunities"] .operatorbuttons{margin-top:8px}body[data-current-page="opportunities"] .operatorbuttons{display:grid;grid-template-columns:1fr 1fr}
+body[data-current-page="opportunities"] .shell>aside{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--gold);border-left:0}body[data-current-page="opportunities"] .shell>aside .aside:nth-child(3),body[data-current-page="opportunities"] .shell>aside .aside:nth-child(4){grid-column:1/-1}body[data-current-page="opportunities"] .shell>aside .aside:nth-child(3){display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}body[data-current-page="opportunities"] .shell>aside .aside:nth-child(3)>.eye,body[data-current-page="opportunities"] .shell>aside .aside:nth-child(3)>.brief{grid-column:1/-1}body[data-current-page="opportunities"] .shell>aside .aside:nth-child(3) .actionbtn{margin-top:0}body[data-current-page="opportunities"] .shell>aside .aside:nth-child(4){display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}body[data-current-page="opportunities"] .shell>aside .aside:nth-child(4)>.eye,body[data-current-page="opportunities"] .shell>aside .aside:nth-child(4)>.action{grid-column:1/-1}body[data-current-page="opportunities"] .shell>aside .aside:nth-child(4) .actionbtn{margin-top:0}
+@media(max-width:1100px){.executivesnapshot{grid-template-columns:1fr}.daycolumns{grid-template-columns:1fr 1fr}body[data-current-page="opportunities"] .shell>aside .aside:nth-child(3){grid-template-columns:1fr 1fr}}
+@media(max-width:700px){.periodgrid,.daycolumns{grid-template-columns:1fr}.calendarday{min-height:42px;padding:5px}.drawernextbuttons{grid-template-columns:1fr}#workspaceVeil .workspacebox{width:100vw;border-radius:0}body[data-current-page="opportunities"] .shell>aside{grid-template-columns:1fr}body[data-current-page="opportunities"] .shell>aside .aside:nth-child(3),body[data-current-page="opportunities"] .shell>aside .aside:nth-child(4){grid-column:1;grid-template-columns:1fr}body[data-current-page="opportunities"] .shell>aside .aside:nth-child(3)>.eye,body[data-current-page="opportunities"] .shell>aside .aside:nth-child(3)>.brief,body[data-current-page="opportunities"] .shell>aside .aside:nth-child(4)>.eye,body[data-current-page="opportunities"] .shell>aside .aside:nth-child(4)>.action{grid-column:1}body[data-current-page="opportunities"] .operatorbuttons{grid-template-columns:1fr}}
 
   </style>
 </head>
@@ -142,13 +164,12 @@ h1{font-size:34px}
     <div class="kflogo"><span class="waves">≋≋≋</span><span><b>Phoenix</b><small>Executive Systems</small></span></div>
     <div class="workspace"><span><i>PS</i><span><b>Phoenix Systems</b><small>Executive workspace</small></span></span><b>⌄</b></div>
     <nav class="sidenav">
-      <a class="active" href="#dashboard"><em>▦</em>Dashboard</a>
-      <a href="#opportunities"><em>♙</em>Leads</a>
-      <a href="#opportunities"><em>▥</em>Pipeline</a>
-      <a href="#dashboard" id="navAppointments"><em>▣</em>Appointments</a>
+      <a class="active" href="./" data-page-target="dashboard"><em>▦</em>Dashboard</a>
+      <a href="./opportunities/" data-page-target="opportunities"><em>♙</em>Leads &amp; Pipeline</a>
+      <a href="./opportunities/?focus=next" data-page-target="opportunities" data-nav-action="next"><em>▣</em>Do this next</a>
       <a href="https://typebot.co/prestige-remodeling-solutions-demo-concierge-9eezvm4" target="_blank" rel="noopener noreferrer"><em>✣</em>AI Concierge Demo <span class="live">Demo</span></a>
-      <a href="#insights"><em>⌁</em>Insights</a>
-      <a href="#settings"><em>⚙</em>Settings</a>
+      <a href="./insights/" data-page-target="insights"><em>⌁</em>Insights</a>
+      <a href="./settings/" data-page-target="settings"><em>⚙</em>Settings</a>
     </nav>
     <div class="working"><span class="spark">✣</span><b>Your systems are working</b><p>Phoenix is organizing activity and surfacing the next best move.</p><a>View activity →</a></div>
   </aside>
@@ -160,6 +181,10 @@ h1{font-size:34px}
       <div class="intro"><div><p class="eye" id="todayDate">Today</p><h1>Executive overview</h1><p>Revenue, relationships, and the next decisions that move the business forward.</p></div><div class="focus" id="todayFocus">Today’s focus · Loading your next best move</div></div>
       <div class="metrics"><article class="card metric"><span class="icon">A</span><p>Active leads</p><strong id="metricActive">0</strong></article><article class="card metric"><span class="icon">D</span><p>Follow-ups due</p><strong id="metricDue">0</strong></article><article class="card metric"><span class="icon">P</span><p>Open pipeline</p><strong id="metricPipeline">$0</strong></article><article class="card metric"><span class="icon">W</span><p>Won value</p><strong id="metricWon">$0</strong></article></div>
       <article class="card progress"><div><p class="eye">Won-value progress</p><strong id="wonProgress">$0</strong><span> / $5,500 goal</span></div><b class="pct" id="wonPercent">0%</b><div class="track"><i id="wonTrack"></i></div></article>
+      <div class="executivesnapshot">
+        <article class="card executiverevenue"><p class="eye">Revenue snapshot</p><h2>What the business has earned</h2><p class="sub">Based on opportunities recorded as won in Phoenix.</p><div class="periodgrid"><div class="periodmetric"><small>This week</small><strong id="revenueWeek">$0</strong></div><div class="periodmetric"><small>This month</small><strong id="revenueMonth">$0</strong></div><div class="periodmetric"><small>This year</small><strong id="revenueYear">$0</strong></div></div></article>
+        <article class="card executiveday"><p class="eye">Today</p><h2>Appointments and priority work</h2><div class="daycolumns"><section class="daycolumn"><h3>Scheduled appointments</h3><div class="daylist" id="dashboardAppointments"><p class="dayempty">No appointments are scheduled in Phoenix.</p></div></section><section class="daycolumn"><h3>Priority tasks</h3><div class="daylist" id="dashboardTasks"><p class="dayempty">No priority tasks are due.</p></div></section></div></article>
+      </div>
       <article class="card operatorguide">
         <div class="operatorhead"><div><p class="eye">Guided operating mode</p><h2>One prospect. One next step.</h2><p class="sub">Phoenix keeps the order. You enter facts, review drafts, and approve decisions.</p></div><span class="operatorbadge">15-day solo mode</span></div>
         <div class="operatorsteps" id="operatorSteps">
@@ -188,15 +213,16 @@ h1{font-size:34px}
         <div class="commandgrid" id="orchestratorCommands"><div class="commandempty">Phoenix is organizing today’s priorities…</div></div>
       </article>
       <div class="lower"><article class="card goal"><p class="eye">Planning</p><h2>Goal calculator</h2><p class="sub">Turn your target into a clear client number.</p><label>Monthly income goal<div class="input">$ 5,500</div></label><label>Average project value<div class="input">$ 3,200</div></label><div class="results"><div><small>Clients needed</small><strong>2</strong></div><div><small>Delivery hours</small><strong>30</strong></div></div></article>
+        <article class="card calendarcard"><div class="calendarhead"><div><p class="eye">Schedule</p><h2 id="calendarMonth">Month</h2></div><div class="calendarnav"><button id="calendarPrev" type="button" aria-label="Previous month">‹</button><button id="calendarNext" type="button" aria-label="Next month">›</button></div></div><div class="calendarweek"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div><div class="calendargrid" id="calendarGrid"></div><p class="calendarlegend">Gold dots show Phoenix tasks or appointments scheduled for that day.</p></article>
         <article class="card leads" id="opportunities"><div class="leadhead"><div><p class="eye">Relationships</p><h2>Active opportunities</h2></div><button type="button" id="addLead">＋ Add lead</button></div><table><thead><tr><th>Name</th><th>Status</th><th>Score</th><th>Value</th><th>Stage</th><th>Action</th></tr></thead><tbody id="opportunityRows"><tr><td colspan="6">Loading protected opportunities…</td></tr></tbody></table></article>
       </div>
       <article class="card proof" id="insights"><div class="proofhead"><div><p class="eye">Proof &amp; performance</p><h2>What is producing movement</h2></div><p class="sub">Measured from your real Phoenix activity.</p></div><div class="proofgrid"><div class="proofmetric"><small>Outcomes recorded</small><strong id="proofOutcomes">0</strong></div><div class="proofmetric"><small>Follow-ups sent</small><strong id="proofFollowUps">0</strong></div><div class="proofmetric"><small>Interested</small><strong id="proofInterested">0</strong></div><div class="proofmetric"><small>Proposals</small><strong id="proofProposals">0</strong></div><div class="proofmetric"><small>Wins</small><strong id="proofWins">0</strong></div><div class="proofmetric"><small>Positive movement</small><strong id="proofConversion">0%</strong></div></div><div class="proofinsight" id="proofInsight">Phoenix needs a few recorded outcomes before it can identify a reliable pattern.</div><div class="proofinsight" id="proofFeedback">Recommendation feedback will appear here as you accept, edit, or reject Phoenix suggestions.</div></article>
     </section>
-    <aside><div class="aside"><p class="eye">Lead intelligence</p><h2 id="intelligenceName">Select an opportunity</h2><p class="location" id="intelligenceLocation">Protected owner workspace</p></div><div class="aside"><p class="eye">Stage roadmap</p><div class="road" id="stageRoadmap"><span data-stage="identified"><i>1</i>Capture</span><span data-stage="vetted"><i>2</i>Vetted</span><span data-stage="discovery"><i>3</i>Discovery</span><span data-stage="proposal"><i>4</i>Proposal</span><span data-stage="closed"><i>5</i>Closed</span></div></div><div class="aside"><p class="eye">Strategic briefing</p><div class="brief" id="strategicBrief">Choose an opportunity to review its current intelligence record.</div><button class="actionbtn" id="openPreparation" type="button">Prepare for conversation</button><button class="actionbtn" id="openQualification" type="button">Qualify and route opportunity</button><button class="actionbtn" id="openResearch" type="button">Research company and outreach angles</button><button class="actionbtn" id="openBrief" type="button">Prepare call brief</button><button class="actionbtn" id="openProposal" type="button">Prepare proposal</button><button class="actionbtn" id="openFulfillment" type="button">Prepare fulfillment handoff</button><button class="actionbtn" id="openGates" type="button">Track project gates A to E</button><button class="actionbtn" id="openContent" type="button">Create approved growth content</button></div><div class="aside"><p class="eye">Next best action</p><strong class="action" id="nextAction">Review the opportunity record</strong><button class="actionbtn" id="openWorkspace" type="button">Open lead workspace</button><button class="actionbtn" id="openOutcome" type="button">Record call outcome</button><button class="actionbtn" id="openActivity" type="button">View activity &amp; follow-up</button></div></aside>
+    <aside><div class="aside"><p class="eye">Lead intelligence</p><h2 id="intelligenceName">Select an opportunity</h2><p class="location" id="intelligenceLocation">Protected owner workspace</p></div><div class="aside"><p class="eye">Stage roadmap</p><div class="road" id="stageRoadmap"><span data-stage="identified"><i>1</i>Capture</span><span data-stage="vetted"><i>2</i>Vetted</span><span data-stage="discovery"><i>3</i>Discovery</span><span data-stage="proposal"><i>4</i>Proposal</span><span data-stage="closed"><i>5</i>Closed</span></div></div><div class="aside"><p class="eye">Strategic briefing</p><div class="brief" id="strategicBrief">Choose an opportunity to review its current intelligence record.</div><a class="actionbtn" href="https://app.notion.com/p/fd1db17278ed8339bd2b011b576ed8ea" target="_blank" rel="noopener noreferrer">Offers &amp; pricing source of truth</a><button class="actionbtn" id="openPreparation" type="button">Prepare for conversation</button><button class="actionbtn" id="openQualification" type="button">Qualify and route opportunity</button><button class="actionbtn" id="openResearch" type="button">Research company and outreach angles</button><button class="actionbtn" id="openBrief" type="button">Prepare call brief</button><button class="actionbtn" id="openProposal" type="button">Prepare proposal</button><button class="actionbtn" id="openFulfillment" type="button">Prepare fulfillment handoff</button><button class="actionbtn" id="openGates" type="button">Track project gates A to E</button><button class="actionbtn" id="openContent" type="button">Create approved growth content</button></div><div class="aside"><p class="eye">Next best action</p><strong class="action" id="nextAction">Review the test opportunity record</strong><button class="actionbtn" id="openWorkspace" type="button">Open lead workspace</button><button class="actionbtn" id="openOutcome" type="button">Record call outcome</button><button class="actionbtn" id="openActivity" type="button">View activity &amp; follow-up</button></div></aside>
   </div>
   <div class="utility" id="settings"><button type="button" id="resetConnection">Reset connection</button><button type="button" id="signOut">Sign out</button></div>
   <div id="authVeil" class="authveil" hidden></div>
-  <div id="workspaceVeil" class="workspaceveil" hidden><form class="workspacebox" id="workspaceForm"><header><div><p class="eye">Opportunity workspace</p><h2 id="workspaceName">Lead</h2><p class="location" id="workspaceLocation"></p></div><button class="close" id="closeWorkspace" type="button">Close</button></header><p class="eye">Primary contact</p><label>First name<input id="workspaceFirstName" placeholder="First name"></label><label>Last name<input id="workspaceLastName" placeholder="Last name"></label><label>Role<input id="workspaceRole" placeholder="Owner, Sales Manager, etc."></label><label>Email<input id="workspaceEmail" type="email" placeholder="name@company.com"></label><label>Phone<input id="workspacePhone" type="tel" placeholder="Phone number"></label><p class="eye">Opportunity</p><label>Stage<select id="workspaceStage"><option value="identified">Captured</option><option value="researched">Researched</option><option value="contacted">Contacted</option><option value="engaged">Engaged</option><option value="consultation_scheduled">Consultation scheduled</option><option value="consultation_completed">Consultation completed</option><option value="proposal_sent">Proposal sent</option><option value="decision_pending">Decision pending</option><option value="won">Won</option><option value="lost">Lost</option><option value="nurture">Nurture</option></select></label><label>Next best action<textarea id="workspaceAction" placeholder="What should happen next?"></textarea></label><button class="save" id="saveWorkspace" type="submit">Save contact and lead</button><p class="message" id="workspaceMessage"></p></form></div>
+  <div id="workspaceVeil" class="workspaceveil" hidden><form class="workspacebox" id="workspaceForm"><header><div><p class="eye">Opportunity workspace</p><h2 id="workspaceName">Lead</h2><p class="location" id="workspaceLocation"></p></div><button class="close" id="closeWorkspace" type="button">Close</button></header><section class="drawernext"><small>Do this next</small><strong id="drawerNextTitle">Review this opportunity</strong><p id="drawerNextCopy">Phoenix will keep the selected lead in context.</p><div class="drawernextbuttons"><button id="drawerNextButton" type="button">Open next action</button><button class="secondary" id="drawerOutcomeButton" type="button" hidden>Record the result</button></div></section><p class="eye">Primary contact</p><label>First name<input id="workspaceFirstName" placeholder="First name"></label><label>Last name<input id="workspaceLastName" placeholder="Last name"></label><label>Role<input id="workspaceRole" placeholder="Owner, Sales Manager, etc."></label><label>Email<input id="workspaceEmail" type="email" placeholder="name@company.com"></label><label>Phone<input id="workspacePhone" type="tel" placeholder="Phone number"></label><p class="eye">Opportunity</p><label>Stage<select id="workspaceStage"><option value="identified">Captured</option><option value="researched">Researched</option><option value="contacted">Contacted</option><option value="engaged">Engaged</option><option value="consultation_scheduled">Consultation scheduled</option><option value="consultation_completed">Consultation completed</option><option value="proposal_sent">Proposal sent</option><option value="decision_pending">Decision pending</option><option value="won">Won</option><option value="lost">Lost</option><option value="nurture">Nurture</option></select></label><label>Next best action<textarea id="workspaceAction" placeholder="What should happen next?"></textarea></label><button class="save" id="saveWorkspace" type="submit">Save contact and lead</button><p class="message" id="workspaceMessage"></p></form></div>
   <div id="orchestratorVeil" class="workspaceveil" hidden><form class="workspacebox" id="orchestratorForm"><header><div><p class="eye">Human decision required</p><h2 id="orchestratorReviewName">Review Phoenix recommendation</h2><p class="location" id="orchestratorReviewLocation">No action is taken until you approve it.</p></div><button class="close" id="closeOrchestrator" type="button">Close</button></header><label>Recommended action<textarea id="orchestratorAction"></textarea></label><label>Why Phoenix recommends it<textarea id="orchestratorRationale" readonly></textarea></label><label>Confidence score<input id="orchestratorConfidence" readonly></label><label>Your decision<select id="orchestratorDecision"><option value="accepted">Approve as written</option><option value="edited">Approve my edited action</option><option value="rejected">Decline this recommendation</option></select></label><label class="approval"><input id="approveOrchestrator" type="checkbox"><span>I reviewed the facts, rationale, action, and owner. I authorize Phoenix to record this decision.</span></label><button class="save" id="saveOrchestratorDecision" type="submit">Save decision and refresh priorities</button><p class="message" id="orchestratorMessage"></p></form></div>
   <div id="addLeadVeil" class="workspaceveil" hidden><form class="workspacebox" id="addLeadForm"><header><div><p class="eye">New relationship</p><h2>Add a lead</h2><p class="location">Create the company, contact, and first opportunity.</p></div><button class="close" id="closeAddLead" type="button">Close</button></header><p class="eye">Company</p><label>Company name<input id="newCompanyName" required placeholder="Company or prospect name"></label><label>Location<input id="newCompanyLocation" placeholder="City, State"></label><p class="eye">Primary contact</p><label>First name<input id="newFirstName" required placeholder="First name"></label><label>Last name<input id="newLastName" placeholder="Last name"></label><label>Role<input id="newContactRole" placeholder="Owner, Sales Manager, etc."></label><label>Email<input id="newContactEmail" type="email" placeholder="name@company.com"></label><label>Phone<input id="newContactPhone" type="tel" placeholder="Phone number"></label><p class="eye">Opportunity</p><label>Opportunity name<input id="newOpportunityName" required placeholder="Example: AI systems consultation"></label><label>Estimated value<input id="newEstimatedValue" type="number" min="0" step="1" value="0"></label><label>Next best action<textarea id="newNextAction" placeholder="Example: Research company and prepare outreach"></textarea></label><button class="save" id="saveNewLead" type="submit">Add lead to Phoenix</button><p class="message" id="addLeadMessage"></p></form></div>
   <div id="briefVeil" class="workspaceveil" hidden><form class="workspacebox" id="briefForm"><header><div><p class="eye">Closer intelligence</p><h2 id="briefName">Call preparation</h2><p class="location" id="briefLocation"></p></div><button class="close" id="closeBrief" type="button">Close</button></header><button class="save" id="generateBrief" type="button">Generate call brief</button><label>Company background<textarea id="briefBackground"></textarea></label><label>Possible needs to verify, one per line<textarea id="briefPainPoints"></textarea></label><label>Recommended questions, one per line<textarea id="briefQuestions"></textarea></label><label>Relevant Kelley AI offer<textarea id="briefOffer"></textarea></label><label>Possible objections and responses, using Objection | Response<textarea id="briefObjections"></textarea></label><label>Desired call outcome<textarea id="briefOutcome"></textarea></label><button class="save" id="saveBrief" type="submit">Save call brief</button><p class="message" id="briefMessage"></p></form></div>
@@ -209,11 +235,11 @@ h1{font-size:34px}
   <div id="outcomeVeil" class="workspaceveil" hidden><form class="workspacebox" id="outcomeForm"><header><div><p class="eye">Closed-loop handoff</p><h2 id="outcomeName">Record call outcome</h2><p class="location" id="outcomeLocation"></p></div><button class="close" id="closeOutcome" type="button">Close</button></header><label>Call disposition<select id="outcomeDisposition"><option value="follow_up">Follow-up needed</option><option value="interested">Interested</option><option value="proposal_requested">Proposal requested</option><option value="proposal_sent">Proposal sent</option><option value="closed_won">Closed won</option><option value="closed_lost">Closed lost</option><option value="no_answer">No answer</option></select></label><label>Confirmed pain points, one per line<textarea id="outcomePainPoints"></textarea></label><label>Objections raised, one per line<textarea id="outcomeObjections"></textarea></label><label>Commitments made, one per line<textarea id="outcomeCommitments"></textarea></label><label>Move pipeline to<select id="outcomeStage"><option value="identified">Captured</option><option value="researched">Researched</option><option value="contacted">Contacted</option><option value="engaged">Engaged</option><option value="consultation_scheduled">Consultation scheduled</option><option value="consultation_completed">Consultation completed</option><option value="proposal_sent">Proposal sent</option><option value="decision_pending">Decision pending</option><option value="won">Won</option><option value="lost">Lost</option><option value="nurture">Nurture</option></select></label><label>Next best action<textarea id="outcomeNextAction"></textarea></label><label>Follow-up due date<input id="outcomeDueDate" type="date"></label><button class="save" id="generateFollowUp" type="button">Generate follow-up message</button><label>Follow-up message<textarea id="outcomeFollowUp"></textarea></label><a class="save" id="openEmailDraft" href="#">Open email draft for review</a><label>Phoenix recommendation<select id="recommendationDecision"><option value="accepted">Accept as recommended</option><option value="edited">I edited the recommendation</option><option value="rejected">Reject the recommendation</option></select></label><label class="approval"><input id="approveOutcome" type="checkbox" checked><span>Allow Phoenix to update the pipeline and create the next task.</span></label><button class="save" id="saveOutcome" type="submit">Save outcome and update Phoenix</button><p class="message" id="outcomeMessage"></p></form></div>
   <div id="activityVeil" class="workspaceveil" hidden><section class="workspacebox"><header><div><p class="eye">Orchestrator view</p><h2 id="activityName">Activity &amp; follow-up</h2><p class="location" id="activityLocation"></p></div><button class="close" id="closeActivity" type="button">Close</button></header><div class="activitylist" id="activityList"></div><p class="message" id="activityMessage"></p></section></div>
   <div id="proposalVeil" class="workspaceveil" hidden><form class="workspacebox" id="proposalForm"><header><div><p class="eye">Sales agent</p><h2 id="proposalName">Proposal writer</h2><p class="location" id="proposalLocation">Drafted from the opportunity record</p></div><button class="close" id="closeProposal" type="button">Close</button></header><label>Project investment<input id="proposalInvestment" placeholder="Example: $3,200 setup plus $297 monthly"></label><label>Expected timeline<input id="proposalTimeline" value="2 to 3 weeks after receiving access and materials"></label><label>Payment terms<input id="proposalTerms" placeholder="Enter the payment schedule"></label><button class="save" id="generateProposal" type="button">Generate proposal draft</button><label>Editable proposal<textarea id="proposalDraft" style="min-height:460px" placeholder="Generate a draft, then revise it in your own words."></textarea></label><label class="approval"><input id="approveProposal" type="checkbox"><span>I reviewed this proposal and confirm that the facts, scope, price, and promises are accurate.</span></label><button class="save" id="saveProposal" type="button">Save draft on this device</button><button class="save" id="copyProposal" type="button">Copy approved proposal</button><button class="save" id="downloadProposal" type="button">Download approved proposal</button><p class="message" id="proposalMessage"></p></form></div>
-  <div id="fulfillmentVeil" class="workspaceveil" hidden><form class="workspacebox" id="fulfillmentForm"><header><div><p class="eye">Fulfillment handoff</p><h2 id="fulfillmentName">Project launch plan</h2><p class="location" id="fulfillmentLocation">Turn the sale into controlled delivery</p></div><button class="close" id="closeFulfillment" type="button">Close</button></header><div class="brief"><strong>Notion is the authoritative delivery record.</strong><br>Phoenix readiness and milestone reminders do not replace the protected Client Configuration record, 46-task Implementation Checklist, QA records, or Gates A through E.</div><a class="save" href="https://app.notion.com/p/3a8db17278ed8105a122f3f443841f26" target="_blank" rel="noopener">Open canonical lifecycle in Notion</a><a class="save" href="https://app.notion.com/p/3a1db17278ed8164a3d7f489d4ccfc9d" target="_blank" rel="noopener">Open Project Start Requirements</a><label>Readiness decision<select id="fulfillmentReadiness"><option value="not_ready">Not Ready</option><option value="conditionally_ready">Conditionally Ready</option><option value="ready">Ready</option></select></label><label>Internal project owner<input id="fulfillmentOwner" value="Roberta Kelley"></label><label>Confirmed Day 1<input id="fulfillmentStart" type="date"></label><p class="eye">Required evidence before Day 1</p><label class="approval"><input id="gateProposal" type="checkbox"><span>Final proposal and scope approved</span></label><label class="approval"><input id="gateAgreement" type="checkbox"><span>Services agreement signed</span></label><label class="approval"><input id="gatePayment" type="checkbox"><span>Initial payment paid and cleared</span></label><label class="approval"><input id="gateRequirements" type="checkbox"><span>Project Start Requirements complete</span></label><label class="approval"><input id="gateSetup" type="checkbox"><span>Private client setup and preflight audit complete in Notion</span></label><label class="approval"><input id="gateDay1" type="checkbox"><span>Written Day 1 Confirmation issued</span></label><button class="save" id="generateFulfillment" type="button">Generate handoff plan</button><label>Project summary<textarea id="fulfillmentSummary"></textarea></label><label>Client requirements, one per line<textarea id="fulfillmentRequirements"></textarea></label><label>Delivery milestones, one per line<textarea id="fulfillmentMilestones"></textarea></label><label>Known risks or boundaries<textarea id="fulfillmentRisks"></textarea></label><label class="approval"><input id="approveFulfillment" type="checkbox"><span>I verified these facts against the current Notion client records and approve Phoenix milestone reminders.</span></label><button class="save" id="saveFulfillment" type="button">Save readiness summary on this device</button><button class="save" id="createFulfillmentTasks" type="button">Create Day 1 milestone reminders</button><p class="message" id="fulfillmentMessage"></p></form></div>
+  <div id="fulfillmentVeil" class="workspaceveil" hidden><form class="workspacebox" id="fulfillmentForm"><header><div><p class="eye">Fulfillment handoff</p><h2 id="fulfillmentName">Project launch plan</h2><p class="location" id="fulfillmentLocation">Turn the sale into controlled delivery</p></div><button class="close" id="closeFulfillment" type="button">Close</button></header><div class="brief"><strong>Notion is the authoritative delivery record.</strong><br>Phoenix readiness and milestone reminders do not replace the protected Client Configuration record, 46-task Implementation Checklist, QA records, or Gates A through E.</div><a class="save" href="https://app.notion.com/p/3a8db17278ed8105a122f3f443841f26" target="_blank" rel="noopener">Open canonical lifecycle in Notion</a><a class="save" href="https://app.notion.com/p/3a1db17278ed8164a3d7f489d4ccfc9d" target="_blank" rel="noopener">Open Project Start Requirements</a><label class="approval"><input id="fulfillmentSynthetic" type="checkbox"><span>Use a clearly labeled synthetic delivery scenario for TEST MODE. No real agreement, payment, client setup, or launch approval is being claimed.</span></label><label>Readiness decision<select id="fulfillmentReadiness"><option value="not_ready">Not Ready</option><option value="conditionally_ready">Conditionally Ready</option><option value="ready">Ready</option></select></label><label>Internal project owner<input id="fulfillmentOwner" value="Roberta Kelley"></label><label>Confirmed Day 1<input id="fulfillmentStart" type="date"></label><p class="eye">Required evidence before Day 1</p><label class="approval"><input id="gateProposal" type="checkbox"><span>Final proposal and scope approved</span></label><label class="approval"><input id="gateAgreement" type="checkbox"><span>Services agreement signed</span></label><label class="approval"><input id="gatePayment" type="checkbox"><span>Initial payment paid and cleared</span></label><label class="approval"><input id="gateRequirements" type="checkbox"><span>Project Start Requirements complete</span></label><label class="approval"><input id="gateSetup" type="checkbox"><span>Private client setup and preflight audit complete in Notion</span></label><label class="approval"><input id="gateDay1" type="checkbox"><span>Written Day 1 Confirmation issued</span></label><button class="save" id="generateFulfillment" type="button">Generate handoff plan</button><label>Project summary<textarea id="fulfillmentSummary"></textarea></label><label>Client requirements, one per line<textarea id="fulfillmentRequirements"></textarea></label><label>Delivery milestones, one per line<textarea id="fulfillmentMilestones"></textarea></label><label>Known risks or boundaries<textarea id="fulfillmentRisks"></textarea></label><label class="approval"><input id="approveFulfillment" type="checkbox"><span id="approveFulfillmentText">I verified these facts against the current Notion client records and approve Phoenix milestone reminders.</span></label><button class="save" id="saveFulfillment" type="button">Save readiness summary on this device</button><button class="save" id="createFulfillmentTasks" type="button">Create Day 1 milestone reminders</button><p class="message" id="fulfillmentMessage"></p></form></div>
   <div id="gatesVeil" class="workspaceveil" hidden><form class="workspacebox" id="gatesForm"><header><div><p class="eye">Controlled delivery</p><h2 id="gatesName">Project gates A to E</h2><p class="location" id="gatesLocation">Each gate requires evidence and an authorized written decision.</p></div><button class="close" id="closeGates" type="button">Close</button></header><div class="brief"><strong>Notion remains the authoritative approval record.</strong><br>This Phoenix snapshot helps the orchestrator see the current gate, missing evidence, next owner, and next review date. It does not replace the client-specific Launch Approval record.</div><a class="save" href="https://app.notion.com/p/39cdb17278ed81e698e7cc5975ba7a73" target="_blank" rel="noopener">Open QA, Pilot and Launch Playbook in Notion</a><div class="gategrid" id="gateGrid"></div><div class="gateeditor"><p class="eye" id="gateEditorTitle">Gate A: Configuration</p><label>Gate status<select id="projectGateStatus"><option value="not_started">Not Started</option><option value="in_progress">In Progress</option><option value="ready_for_review">Ready for Review</option><option value="blocked">Blocked</option><option value="approved">Approved</option><option value="rejected">Rejected</option></select></label><label>Authorized approver<input id="projectGateApprover" placeholder="Name and role"></label><label>Decision date<input id="projectGateDate" type="date"></label><label>Exact version and scope<textarea id="projectGateScope" placeholder="Identify the version, workflow, and scope being reviewed."></textarea></label><label>Evidence location<textarea id="projectGateEvidence" placeholder="Paste the Notion page link or describe the exact evidence location."></textarea></label><label>Open risks or accepted exceptions<textarea id="projectGateRisks" placeholder="Write None, or describe the known risks and approved exceptions."></textarea></label><label>Written decision or review notes<textarea id="projectGateDecision" placeholder="Record approve, reject, hold, changes required, or the current review note."></textarea></label><label>Next owner<input id="projectGateNextOwner" placeholder="Person responsible for the next action"></label><label>Next review date<input id="projectGateNextDate" type="date"></label><label class="approval"><input id="approveProjectGate" type="checkbox"><span>I verified this gate against the current Notion evidence and authorized written decision.</span></label><button class="save" id="saveProjectGate" type="submit">Save gate snapshot</button><p class="message" id="gatesMessage"></p></div></form></div>
   <div id="contentVeil" class="workspaceveil" hidden><form class="workspacebox" id="contentForm"><header><div><p class="eye">Content and Growth Agent</p><h2 id="contentName">Human-reviewed content studio</h2><p class="location" id="contentLocation">Turn verified lessons into useful, approved communication.</p></div><button class="close" id="closeContent" type="button">Close</button></header><div class="brief"><strong>Nothing is published or sent automatically.</strong><br>Use only verified facts and current offer positioning. Client names, private records, quotes, and results require the correct written permission.</div><a class="save" href="https://app.notion.com/p/39fdb17278ed81ed8156e050ead18053" target="_blank" rel="noopener">Open Kelley AI Systems Marketing Studio in Notion</a><label>Content type<select id="contentType"><option value="educational_post">Educational social post</option><option value="lesson_post">Anonymized lesson post</option><option value="case_study">Client case-study draft</option><option value="email">Educational email draft</option></select></label><label>Audience<input id="contentAudience" value="Owner-led service businesses"></label><label>Channel<select id="contentChannel"><option value="Facebook">Facebook</option><option value="LinkedIn">LinkedIn</option><option value="Email">Email</option><option value="Website">Website</option></select></label><label>Purpose<input id="contentPurpose" placeholder="Example: Explain why clear follow-up ownership matters"></label><label>Verified lesson or result<textarea id="contentVerifiedFact" placeholder="Enter only a fact, lesson, or result you can support with evidence."></textarea></label><label>Evidence location<textarea id="contentEvidence" placeholder="Notion record, approved results review, test record, or source link"></textarea></label><label>Client permission<select id="contentPermission"><option value="not_applicable">Not applicable, no client information used</option><option value="anonymized_only">Anonymized use only</option><option value="written_permission">Written permission granted</option><option value="not_granted">Permission not granted</option></select></label><label>Call to action<input id="contentCta" value="If you want a clearer lead and follow-up process, I would be glad to show you how I approach it."></label><button class="save" id="generateContent" type="button">Generate content draft</button><label>Editable draft<textarea id="contentDraft" style="min-height:420px" placeholder="Your draft will appear here."></textarea></label><label class="approval"><input id="approveContent" type="checkbox"><span>I reviewed every fact, removed private information, confirmed permission, and approve this draft for manual use.</span></label><button class="save" id="saveContent" type="button">Save draft on this device</button><button class="save" id="copyContent" type="button">Copy approved draft</button><button class="save" id="downloadContent" type="button">Download approved draft</button><p class="message" id="contentMessage"></p></form></div>
   <div id="qualificationVeil" class="workspaceveil" hidden><form class="workspacebox" id="qualificationForm"><header><div><p class="eye">Reception and Qualification Agent</p><h2 id="qualificationName">Qualification review</h2><p class="location" id="qualificationLocation">Preserve facts, unknowns, consent, and the next owner.</p></div><button class="close" id="closeQualification" type="button">Close</button></header><div class="brief"><strong>Qualification supports a human decision.</strong><br>Phoenix does not promise price, availability, acceptance, outcomes, or professional advice. Unknown information stays unknown until it is verified.</div><a class="save" href="https://app.notion.com/p/3a8db17278ed8148ba87f298d07fcd38" target="_blank" rel="noopener">Open qualification playbook in Notion</a><label>Lead source<input id="qualificationSource" placeholder="Referral, website, outreach, Facebook, or other source"></label><label>Inquiry or opportunity summary<textarea id="qualificationSummary" placeholder="What did the person or company actually request?"></textarea></label><label>Communication preference<select id="qualificationPreference"><option value="unknown">Unknown</option><option value="email">Email</option><option value="phone">Phone</option><option value="text">Text</option><option value="no_preference">No preference stated</option><option value="do_not_contact">Do not contact</option></select></label><label>Consent status<select id="qualificationConsent"><option value="unknown">Unknown</option><option value="consented">Consented</option><option value="opted_out">Opted out</option></select></label><label>Niche and offer fit<select id="qualificationFit"><option value="unknown">Unknown</option><option value="strong">Strong fit</option><option value="possible">Possible fit</option><option value="poor">Poor fit</option></select></label><label>Decision-maker access<select id="qualificationDecisionMaker"><option value="unknown">Unknown</option><option value="yes">Confirmed</option><option value="no">Not confirmed</option></select></label><label>Business need confirmed<select id="qualificationNeed"><option value="unknown">Unknown</option><option value="yes">Confirmed</option><option value="no">Not confirmed</option></select></label><label>Timing or urgency<input id="qualificationTiming" placeholder="Unknown, this month, this quarter, or stated timing"></label><label>Verified fit facts, one per line<textarea id="qualificationFacts" placeholder="Use only facts supported by the record or direct conversation."></textarea></label><label>Missing information, one per line<textarea id="qualificationMissing" placeholder="Keep unanswered questions visible."></textarea></label><label>Risks or reasons to pause, one per line<textarea id="qualificationRisks"></textarea></label><label>Recommended decision<select id="qualificationRecommendation"><option value="human_review">Human Review</option><option value="pursue">Pursue</option><option value="nurture">Nurture</option><option value="hold">Hold</option><option value="decline">Decline</option></select></label><label>Recommendation rationale<textarea id="qualificationRationale" placeholder="Explain the recommendation without inventing certainty."></textarea></label><label>Confidence score<input id="qualificationConfidence" type="number" min="0" max="100" value="50"></label><label>Next action<textarea id="qualificationNextAction" placeholder="What should happen next?"></textarea></label><label>Next owner<input id="qualificationNextOwner" value="Roberta Kelley"></label><label>Review or action date<input id="qualificationNextDate" type="date"></label><button class="save" id="saveQualificationReview" type="button">Save qualification for review</button><label class="approval"><input id="approveQualification" type="checkbox"><span>I reviewed the verified facts, unknowns, consent, recommendation, next owner, and date, and approve Phoenix routing.</span></label><button class="save" id="approveQualificationRoute" type="button">Approve and route opportunity</button><p class="message" id="qualificationMessage"></p></form></div>
-  <div id="researchVeil" class="workspaceveil" hidden><form class="workspacebox" id="researchForm"><header><div><p class="eye">Client Research and Closer Intelligence</p><h2 id="researchName">Company research</h2><p class="location" id="researchLocation">Collect public evidence before outreach.</p></div><button class="close" id="closeResearch" type="button">Close</button></header><div class="brief"><strong>Public business research only.</strong><br>Use company-owned public webpages or other sources you are permitted to access. Do not use private pages, bypass access controls, or scrape LinkedIn, Google Maps, Facebook, or Instagram. Raw page text is temporary. Only your approved findings are saved.</div><a class="save" href="https://app.notion.com/p/3a8db17278ed81498dd5fcc9c7ac7af7" target="_blank" rel="noopener">Open research and Closer playbook in Notion</a><label>Company website URL<input id="researchWebsite" type="url" placeholder="https://company.com"></label><label>Additional permitted public URLs, one per line<textarea id="researchUrls" placeholder="Company About, Services, Projects, Blog, or public news pages"></textarea></label><button class="save" id="readResearchSources" type="button">Read public webpages</button><label>Temporary source evidence<textarea id="researchEvidence" readonly style="min-height:300px" placeholder="Fetched page evidence will appear here for review."></textarea></label><label>Verified facts with source, one per line<textarea id="researchFacts" placeholder="Fact | https://source-url"></textarea></label><label>Possible needs or hypotheses, one per line<textarea id="researchHypotheses" placeholder="Keep these framed as possibilities to verify, not facts."></textarea></label><label>Useful outreach angles, one per line<textarea id="researchAngles"></textarea></label><label>Recommended discovery questions, one per line<textarea id="researchQuestions"></textarea></label><label>Cautions or topics to avoid, one per line<textarea id="researchCautions"></textarea></label><label>Research confidence score<input id="researchConfidence" type="number" min="0" max="100" value="50"></label><label>Research date<input id="researchDate" type="date"></label><label class="approval"><input id="approveResearch" type="checkbox"><span>I reviewed every saved fact against the cited public source, separated hypotheses from facts, and approve this research for Closer use.</span></label><button class="save" id="saveResearch" type="submit">Save approved research and update Closer</button><p class="message" id="researchMessage"></p></form></div>
+  <div id="researchVeil" class="workspaceveil" hidden><form class="workspacebox" id="researchForm"><header><div><p class="eye">Client Research and Closer Intelligence</p><h2 id="researchName">Company research</h2><p class="location" id="researchLocation">Collect public evidence before outreach.</p></div><button class="close" id="closeResearch" type="button">Close</button></header><div class="brief"><strong>Public business research only.</strong><br>Use company-owned public webpages or other sources you are permitted to access. Do not use private pages, bypass access controls, or scrape LinkedIn, Google Maps, Facebook, or Instagram. Raw page text is temporary. Only your approved findings are saved.</div><a class="save" href="https://app.notion.com/p/3a8db17278ed81498dd5fcc9c7ac7af7" target="_blank" rel="noopener">Open research and Closer playbook in Notion</a><label class="approval"><input id="researchSynthetic" type="checkbox"><span>Use a clearly labeled synthetic scenario for TEST MODE. No real company or public source is being researched.</span></label><label>Company website URL<input id="researchWebsite" type="url" placeholder="https://company.com"></label><label>Additional permitted public URLs, one per line<textarea id="researchUrls" placeholder="Company About, Services, Projects, Blog, or public news pages"></textarea></label><button class="save" id="readResearchSources" type="button">Read public webpages</button><label>Temporary source evidence<textarea id="researchEvidence" readonly style="min-height:300px" placeholder="Fetched page evidence will appear here for review."></textarea></label><label>Verified facts with source, one per line<textarea id="researchFacts" placeholder="Fact | https://source-url"></textarea></label><label>Possible needs or hypotheses, one per line<textarea id="researchHypotheses" placeholder="Keep these framed as possibilities to verify, not facts."></textarea></label><label>Useful outreach angles, one per line<textarea id="researchAngles"></textarea></label><label>Recommended discovery questions, one per line<textarea id="researchQuestions"></textarea></label><label>Cautions or topics to avoid, one per line<textarea id="researchCautions"></textarea></label><label>Research confidence score<input id="researchConfidence" type="number" min="0" max="100" value="50"></label><label>Research date<input id="researchDate" type="date"></label><label class="approval"><input id="approveResearch" type="checkbox"><span id="approveResearchText">I reviewed every saved fact against the cited public source, separated hypotheses from facts, and approve this research for Closer use.</span></label><button class="save" id="saveResearch" type="submit">Save approved research and update Closer</button><p class="message" id="researchMessage"></p></form></div>
   <script>
     (() => {
       const URL_KEY = "kelley-ai:supabase-url";
@@ -245,6 +271,120 @@ h1{font-size:34px}
       let briefedOpportunityIds = new Set();
       let latestOutcomeByOpportunity = new Map();
       let fulfillmentTaskStateByOpportunity = new Map();
+      let dashboardCalendarTasks = [];
+      let calendarCursor = new Date();
+      const pageNames = {
+        dashboard:["Dashboard","Revenue, priorities, and the single next move."],
+        opportunities:["Opportunities","Keep every lead, stage, owner, and next action in one focused view."],
+        insights:["Insights","See what activity is creating movement and where the evidence is still limited."],
+        settings:["Settings","Manage this device’s Phoenix connection and session."]
+      };
+      const isTestPath = location.pathname.includes("/testing/");
+      const deployedBase = location.pathname.includes("/kelley-ai-systems-internal/") ? "/kelley-ai-systems-internal/" : "/";
+      const siteRoot = `${location.origin}${deployedBase}${isTestPath ? "testing/" : ""}`;
+      const pageUrls = {
+        dashboard:siteRoot,
+        opportunities:`${siteRoot}opportunities/`,
+        insights:`${siteRoot}insights/`,
+        settings:`${siteRoot}settings/`
+      };
+      const pageFromPath = () => {
+        const path = location.pathname.replace(/\/+$/,"");
+        if (path.endsWith("/opportunities")) return "opportunities";
+        if (path.endsWith("/insights")) return "insights";
+        if (path.endsWith("/settings")) return "settings";
+        return "dashboard";
+      };
+      const pageElements = {};
+      const addPageHeading = (page,before) => {
+        const heading = document.createElement("div");
+        heading.className = "pageheading";
+        heading.dataset.page = page;
+        heading.innerHTML = `<div><p class="eye">Phoenix workspace</p><h1>${pageNames[page][0]}</h1><p>${pageNames[page][1]}</p></div><button type="button">← Dashboard</button>`;
+        heading.querySelector("button").addEventListener("click", () => showPage("dashboard"));
+        before.parentNode.insertBefore(heading,before);
+        return heading;
+      };
+      const showPage = (page,{updateHash = true} = {}) => {
+        const safePage = pageNames[page] ? page : "dashboard";
+        document.body.dataset.currentPage = safePage;
+        Object.entries(pageElements).forEach(([name,elements]) => {
+          elements.forEach(element => { element.hidden = name !== safePage; });
+        });
+        const lower = document.querySelector(".lower");
+        lower.hidden = !["dashboard","opportunities"].includes(safePage);
+        document.querySelector(".goal").hidden = safePage !== "dashboard";
+        document.querySelector(".calendarcard").hidden = safePage !== "dashboard";
+        document.querySelector(".leads").hidden = safePage !== "opportunities";
+        lower.style.gridTemplateColumns = safePage === "opportunities" ? "1fr" : "";
+        document.querySelectorAll(".sidenav a[data-page-target],.mobilepagebar a").forEach(item => {
+          item.classList.toggle("active", item.dataset.pageTarget === safePage && !item.dataset.navAction);
+        });
+        if (updateHash && location.href !== pageUrls[safePage]) location.assign(pageUrls[safePage]);
+        window.scrollTo({top:0,behavior:"smooth"});
+      };
+      const setupPageViews = () => {
+        pageElements.dashboard = [
+          document.querySelector(".intro"),
+          document.querySelector(".metrics"),
+          document.querySelector(".progress"),
+          document.querySelector(".executivesnapshot"),
+          document.querySelector(".orchestrator")
+        ];
+        const proof = document.querySelector(".proof");
+        const opportunityHeading = addPageHeading("opportunities",document.querySelector(".lower"));
+        pageElements.opportunities = [opportunityHeading];
+        opportunityHeading.after(document.querySelector(".operatorguide"));
+        pageElements.insights = [addPageHeading("insights",proof),proof];
+        const settings = document.createElement("article");
+        settings.className = "card settingspage";
+        settings.dataset.page = "settings";
+        settings.innerHTML = `<div class="pageheading"><div><p class="eye">Phoenix workspace</p><h1>Settings</h1><p>${pageNames.settings[1]}</p></div><button type="button">← Dashboard</button></div><div class="settingsgrid"><div class="settingsblock"><h3>Connection</h3><p>Use this only if Phoenix cannot load your protected records. Your production records are not changed by opening this page.</p><button type="button" data-settings-action="reset">Reset connection</button></div><div class="settingsblock"><h3>Session</h3><p>Sign out when you are using a shared device. You can sign back in with the same Phoenix account.</p><button type="button" data-settings-action="signout">Sign out</button></div></div>`;
+        proof.parentNode.insertBefore(settings,proof.nextSibling);
+        settings.querySelector(".pageheading button").addEventListener("click", () => showPage("dashboard"));
+        settings.querySelector('[data-settings-action="reset"]').addEventListener("click", () => document.getElementById("resetConnection").click());
+        settings.querySelector('[data-settings-action="signout"]').addEventListener("click", () => document.getElementById("signOut").click());
+        pageElements.settings = [settings];
+        [...document.querySelectorAll(".sidenav a")].forEach(link => {
+          const target = link.dataset.pageTarget || "";
+          if (!target) return;
+          link.href = link.dataset.navAction === "next" ? `${pageUrls.opportunities}?focus=next` : pageUrls[target];
+        });
+        const mobile = document.createElement("nav");
+        mobile.className = "mobilepagebar";
+        mobile.setAttribute("aria-label","Phoenix pages");
+        mobile.innerHTML = `<a data-page-target="dashboard" href="${pageUrls.dashboard}">Home</a><a data-page-target="opportunities" href="${pageUrls.opportunities}">Leads</a><a data-page-target="opportunities" data-nav-action="next" href="${pageUrls.opportunities}?focus=next">Do next</a><a data-page-target="insights" href="${pageUrls.insights}">Insights</a><a data-page-target="settings" href="${pageUrls.settings}">Settings</a>`;
+        document.querySelector(".demo").after(mobile);
+        document.querySelectorAll(".workspacebox").forEach(box => {
+          const context = document.createElement("div");
+          context.className = "workspacecontext";
+          context.innerHTML = `<div class="workspacecontexttop"><button type="button">← Opportunities</button><div class="workspacecontextnext"><small>Do this next</small><strong>Review this step</strong></div></div><div class="workspacecontextsteps"></div>`;
+          context.querySelector("button").addEventListener("click", () => {
+            box.closest(".workspaceveil").hidden = true;
+            showPage("opportunities");
+          });
+          box.prepend(context);
+        });
+        showPage(pageFromPath(),{updateHash:false});
+        if (pageFromPath() === "opportunities" && new URLSearchParams(location.search).get("focus") === "next") {
+          requestAnimationFrame(() => document.querySelector(".operatorguide").scrollIntoView({behavior:"smooth",block:"start"}));
+        }
+      };
+      const syncWorkspaceContext = () => {
+        const next = document.getElementById("operatorNextTitle")?.textContent || "Review this step";
+        const sourceSteps = [...document.querySelectorAll("#operatorSteps .operatorstep")];
+        document.querySelectorAll(".workspacecontext").forEach(context => {
+          context.querySelector(".workspacecontextnext strong").textContent = next;
+          const steps = context.querySelector(".workspacecontextsteps");
+          steps.replaceChildren(...sourceSteps.map(source => {
+            const step = document.createElement("span");
+            step.textContent = source.textContent.replace(/^\d+/,"").trim();
+            step.className = source.classList.contains("current") ? "current" : source.classList.contains("done") ? "done" : "";
+            return step;
+          }));
+        });
+      };
+      setupPageViews();
       const projectGateDefinitions = [
         {id:"A",name:"Configuration",summary:"Approved rules, language, data, routing, scope, and boundaries"},
         {id:"B",name:"Build Review",summary:"Approved build matches configuration and acceptance criteria"},
@@ -260,6 +400,14 @@ h1{font-size:34px}
         const name = String(opportunity?.name || "").toLowerCase();
         return ["internal_test","synthetic","test"].includes(source) || name.includes("internal test") || name.startsWith("[test]");
       };
+      const isIsolatedTestOpportunity = opportunity => {
+        const source = String(opportunity?.source || "").toLowerCase().trim();
+        const name = String(opportunity?.name || "").trim();
+        return name.startsWith("[TEST]") && (source === "internal_test" || Boolean(source));
+      };
+      const TEST_MODE = false;
+      document.getElementById("researchSynthetic").closest("label").hidden = true;
+      document.getElementById("fulfillmentSynthetic").closest("label").hidden = true;
       let selectedOpportunity = null;
       let selectedCompany = null;
       let selectedContact = null;
@@ -441,6 +589,29 @@ h1{font-size:34px}
         const outcomeButton = document.getElementById("operatorOutcomeButton");
         outcomeButton.hidden = !showOutcome;
         outcomeButton.onclick = () => document.getElementById("openOutcome")?.click();
+        const drawerTitle = document.getElementById("drawerNextTitle");
+        const drawerCopy = document.getElementById("drawerNextCopy");
+        const drawerButton = document.getElementById("drawerNextButton");
+        const drawerOutcome = document.getElementById("drawerOutcomeButton");
+        if (drawerTitle && drawerCopy && drawerButton && drawerOutcome) {
+          drawerTitle.textContent = title;
+          drawerCopy.textContent = copy;
+          drawerButton.textContent = target === "openWorkspace" ? "Complete the contact details below" : buttonLabel;
+          drawerButton.onclick = () => {
+            if (target === "openWorkspace") {
+              document.getElementById("workspaceEmail")?.focus();
+              return;
+            }
+            workspaceVeil.hidden = true;
+            document.getElementById(target)?.click();
+          };
+          drawerOutcome.hidden = !showOutcome;
+          drawerOutcome.onclick = () => {
+            workspaceVeil.hidden = true;
+            document.getElementById("openOutcome")?.click();
+          };
+        }
+        syncWorkspaceContext();
       };
       const approvedProposalSaved = opportunityId => {
         if (!opportunityId) return false;
@@ -475,11 +646,19 @@ h1{font-size:34px}
           guidedAction(0,"Complete the contact record","Add an email or phone number for " + companyName + ". Enter only what you know; leave optional details blank.","openWorkspace",{buttonLabel:"Open the lead record"});
         } else if (stage === "won" || latestOutcome?.disposition === "closed_won") {
           if (deliveryReadinessSaved(selectedOpportunity.id)) {
+            const synthetic = (() => {
+              try { return JSON.parse(localStorage.getItem(FULFILLMENT_KEY + selectedOpportunity.id) || "null")?.synthetic_test === true; }
+              catch { return false; }
+            })();
             const taskState = fulfillmentTaskStateByOpportunity.get(selectedOpportunity.id);
             if (taskState?.total > 0 && taskState.open === 0) {
-              guidedAction(8,"Delivery milestones complete","All Phoenix delivery milestone reminders are complete. Confirm the authoritative project closeout in Notion.","openActivity",{buttonLabel:"Review completed activity"});
+              guidedAction(8,synthetic ? "Synthetic lifecycle test complete" : "Delivery milestones complete",synthetic
+                ? "All synthetic delivery milestones are complete. This TEST MODE opportunity has passed through the full Phoenix lifecycle."
+                : "All Phoenix delivery milestone reminders are complete. Confirm the authoritative project closeout in Notion.","openActivity",{buttonLabel:"Review completed activity"});
             } else {
-              guidedAction(7,"Manage the approved delivery milestones","The readiness plan is complete. Use the authoritative Notion project and review Phoenix milestone reminders in order.","openActivity",{buttonLabel:"Open delivery activity"});
+              guidedAction(7,synthetic ? "Manage the synthetic delivery milestones" : "Manage the approved delivery milestones",synthetic
+                ? "The test readiness plan is complete and milestone reminders exist for this synthetic opportunity. Review and complete them in order without using real client data."
+                : "The readiness plan is complete. Use the authoritative Notion project and review Phoenix milestone reminders in order.","openActivity",{buttonLabel:"Open delivery activity"});
             }
           } else {
             guidedAction(7,"Prepare the approved project for delivery","Use the signed agreement and authoritative Notion records. Phoenix will not invent requirements or start work automatically.","openFulfillment",{buttonLabel:"Open delivery handoff"});
@@ -529,6 +708,24 @@ h1{font-size:34px}
         renderGuidedWorkflow();
       };
       const createRecord = async (table, payload) => {
+        if (TEST_MODE && table === "opportunities") {
+          payload = {
+            ...payload,
+            source:"internal_test",
+            name:String(payload.name || "Phoenix workflow").includes("[TEST]")
+              ? String(payload.name)
+              : "[TEST] " + String(payload.name || "Phoenix workflow")
+          };
+        }
+        if (TEST_MODE && table === "companies") {
+          payload = {
+            ...payload,
+            source:"internal_test",
+            name:String(payload.name || "Test company").includes("[TEST]")
+              ? String(payload.name)
+              : "[TEST] " + String(payload.name || "Test company")
+          };
+        }
         const response = await authenticatedFetch(table, {
           method:"POST",
           headers:{
@@ -542,6 +739,9 @@ h1{font-size:34px}
         return data[0];
       };
       const updateRecord = async (table, id, payload) => {
+        if (TEST_MODE && selectedOpportunity && !isTestOpportunity(selectedOpportunity)) {
+          throw new Error("Testing mode blocked a change to a production opportunity.");
+        }
         const response = await authenticatedFetch(table + "?id=eq." + encodeURIComponent(id), {
           method:"PATCH",
           headers:{
@@ -554,7 +754,26 @@ h1{font-size:34px}
         if (!response.ok) throw new Error(data.message || data.hint || data.details || "The record could not be updated.");
         return data[0];
       };
+      const completeOpenTasks = async ({types = [], exceptTitle = ""} = {}) => {
+        if (!selectedOpportunity?.id) return 0;
+        const openTasks = await request(
+          "tasks?opportunity_id=eq." + encodeURIComponent(selectedOpportunity.id) +
+          "&status=neq.completed&select=id,title,task_type"
+        );
+        const matching = openTasks.filter(task =>
+          (!types.length || types.includes(String(task.task_type || ""))) &&
+          (!exceptTitle || task.title !== exceptTitle)
+        );
+        const completedAt = new Date().toISOString();
+        await Promise.all(matching.map(task =>
+          updateRecord("tasks", task.id, {status:"completed",completed_at:completedAt})
+        ));
+        return matching.length;
+      };
       const saveOpportunity = async changes => {
+        if (TEST_MODE && !isTestOpportunity(selectedOpportunity)) {
+          throw new Error("Testing mode blocked a change to a production opportunity.");
+        }
         const response = await authenticatedFetch("opportunities?id=eq." + encodeURIComponent(selectedOpportunity.id), {
           method:"PATCH",
           headers:{
@@ -812,6 +1031,102 @@ h1{font-size:34px}
           container.appendChild(card);
         });
       };
+      const renderExecutiveSnapshot = ({opportunities,tasks,outcomes}) => {
+        const now = new Date();
+        const startOfDay = new Date(now.getFullYear(),now.getMonth(),now.getDate());
+        const endOfDay = new Date(startOfDay);
+        endOfDay.setDate(endOfDay.getDate() + 1);
+        const startOfWeek = new Date(startOfDay);
+        startOfWeek.setDate(startOfWeek.getDate() - ((startOfWeek.getDay() + 6) % 7));
+        const startOfMonth = new Date(now.getFullYear(),now.getMonth(),1);
+        const startOfYear = new Date(now.getFullYear(),0,1);
+        const opportunityMap = new Map(opportunities.map(item => [item.id,item]));
+        const wonByOpportunity = new Map();
+        outcomes.forEach(outcome => {
+          const disposition = String(outcome.disposition || "").toLowerCase().replace(/\s+/g,"_");
+          if (!["closed_won","won"].includes(disposition) || wonByOpportunity.has(outcome.opportunity_id)) return;
+          wonByOpportunity.set(outcome.opportunity_id,outcome);
+        });
+        const revenueSince = start => [...wonByOpportunity.values()].reduce((total,outcome) => {
+          const recorded = new Date(outcome.created_at);
+          const opportunity = opportunityMap.get(outcome.opportunity_id);
+          return recorded >= start ? total + Number(opportunity?.estimated_value || 0) : total;
+        },0);
+        document.getElementById("revenueWeek").textContent = money.format(revenueSince(startOfWeek));
+        document.getElementById("revenueMonth").textContent = money.format(revenueSince(startOfMonth));
+        document.getElementById("revenueYear").textContent = money.format(revenueSince(startOfYear));
+        const appointmentTerms = /appointment|meeting|consultation|call/i;
+        const datedTasks = tasks.filter(task => task.due_at).sort((a,b) => new Date(a.due_at) - new Date(b.due_at));
+        const appointments = datedTasks.filter(task => {
+          const due = new Date(task.due_at);
+          return due >= startOfDay && due < endOfDay && appointmentTerms.test(`${task.task_type || ""} ${task.title || ""}`);
+        });
+        const priorityTasks = datedTasks.filter(task => {
+          const due = new Date(task.due_at);
+          return due < endOfDay && !appointmentTerms.test(`${task.task_type || ""} ${task.title || ""}`);
+        }).sort((a,b) => {
+          const rank = {high:3,urgent:4,normal:2,low:1};
+          return (rank[String(b.priority).toLowerCase()] || 0) - (rank[String(a.priority).toLowerCase()] || 0)
+            || new Date(a.due_at) - new Date(b.due_at);
+        });
+        const fillList = (id,items,emptyText) => {
+          const container = document.getElementById(id);
+          container.replaceChildren();
+          if (!items.length) {
+            const empty = document.createElement("p");
+            empty.className = "dayempty";
+            empty.textContent = emptyText;
+            container.appendChild(empty);
+            return;
+          }
+          items.slice(0,4).forEach(task => {
+            const item = document.createElement("div");
+            item.className = "dayitem";
+            const title = document.createElement("strong");
+            title.textContent = task.title;
+            const detail = document.createElement("small");
+            detail.textContent = new Date(task.due_at).toLocaleString("en-US",{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"});
+            item.append(title,detail);
+            container.appendChild(item);
+          });
+        };
+        fillList("dashboardAppointments",appointments,"No appointments are scheduled in Phoenix for today.");
+        fillList("dashboardTasks",priorityTasks,"No priority tasks are due today.");
+        dashboardCalendarTasks = tasks.filter(task => task.due_at);
+        renderDashboardCalendar();
+      };
+      const renderDashboardCalendar = () => {
+        const year = calendarCursor.getFullYear();
+        const month = calendarCursor.getMonth();
+        document.getElementById("calendarMonth").textContent = new Date(year,month,1).toLocaleDateString("en-US",{month:"long",year:"numeric"});
+        const grid = document.getElementById("calendarGrid");
+        grid.replaceChildren();
+        const first = new Date(year,month,1);
+        const start = new Date(year,month,1 - first.getDay());
+        const localKey = date => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2,"0")}-${String(date.getDate()).padStart(2,"0")}`;
+        const todayKey = localKey(new Date());
+        const taskDates = new Set(dashboardCalendarTasks.map(task => localKey(new Date(task.due_at))));
+        for (let offset = 0; offset < 42; offset += 1) {
+          const date = new Date(start);
+          date.setDate(start.getDate() + offset);
+          const key = localKey(date);
+          const day = document.createElement("div");
+          day.className = "calendarday";
+          if (date.getMonth() !== month) day.classList.add("outside");
+          if (key === todayKey) day.classList.add("today");
+          if (taskDates.has(key)) day.classList.add("hasitems");
+          day.textContent = String(date.getDate());
+          grid.appendChild(day);
+        }
+      };
+      document.getElementById("calendarPrev").addEventListener("click", () => {
+        calendarCursor = new Date(calendarCursor.getFullYear(),calendarCursor.getMonth() - 1,1);
+        renderDashboardCalendar();
+      });
+      document.getElementById("calendarNext").addEventListener("click", () => {
+        calendarCursor = new Date(calendarCursor.getFullYear(),calendarCursor.getMonth() + 1,1);
+        renderDashboardCalendar();
+      });
       const loadData = async () => {
         const previouslySelectedOpportunityId = selectedOpportunity?.id
           || localStorage.getItem(SELECTED_OPPORTUNITY_KEY)
@@ -838,10 +1153,19 @@ h1{font-size:34px}
           const sourceWarnings = [recommendationSource,agentRunSource,briefSource].filter(source => source.error).map(source => source.name);
           const companyMap = new Map(companies.map(company => [company.id, company]));
           const contactMap = new Map(contacts.map(contact => [contact.id, contact]));
-          const realOpportunities = opportunities.filter(opportunity => !isTestOpportunity(opportunity));
+          const realOpportunities = TEST_MODE
+            ? opportunities.filter(isIsolatedTestOpportunity)
+            : opportunities.filter(opportunity => !isTestOpportunity(opportunity));
           const realOpportunityIds = new Set(realOpportunities.map(opportunity => opportunity.id));
           const scopedTasks = tasks.filter(task => realOpportunityIds.has(task.opportunity_id));
           const realTasks = scopedTasks.filter(task => task.status !== "completed");
+          fulfillmentTaskStateByOpportunity = new Map();
+          scopedTasks.filter(task => task.task_type === "fulfillment").forEach(task => {
+            const state = fulfillmentTaskStateByOpportunity.get(task.opportunity_id) || {total:0,open:0};
+            state.total += 1;
+            if (task.status !== "completed") state.open += 1;
+            fulfillmentTaskStateByOpportunity.set(task.opportunity_id,state);
+          });
           const realOutcomes = outcomes.filter(outcome => realOpportunityIds.has(outcome.opportunity_id));
           const realRecommendations = recommendations.filter(recommendation => realOpportunityIds.has(recommendation.opportunity_id));
           const realAgentRuns = agentRuns.filter(run => !run.opportunity_id || realOpportunityIds.has(run.opportunity_id));
@@ -849,13 +1173,6 @@ h1{font-size:34px}
           latestOutcomeByOpportunity = new Map();
           realOutcomes.forEach(outcome => {
             if (!latestOutcomeByOpportunity.has(outcome.opportunity_id)) latestOutcomeByOpportunity.set(outcome.opportunity_id,outcome);
-          });
-          fulfillmentTaskStateByOpportunity = new Map();
-          scopedTasks.filter(task => task.task_type === "fulfillment").forEach(task => {
-            const state = fulfillmentTaskStateByOpportunity.get(task.opportunity_id) || {total:0,open:0};
-            state.total += 1;
-            if (task.status !== "completed") state.open += 1;
-            fulfillmentTaskStateByOpportunity.set(task.opportunity_id,state);
           });
           rows.replaceChildren();
           const activeOpportunities = realOpportunities.filter(item =>
@@ -909,6 +1226,7 @@ h1{font-size:34px}
               : "No positive movement is recorded yet. Phoenix will keep measuring which outreach and follow-up actions create a response.";
           document.getElementById("proofFeedback").textContent = "Recommendations · " + recommendationCounts.accepted + " accepted · " + recommendationCounts.edited + " edited · " + recommendationCounts.rejected + " rejected";
           renderOrchestrator({opportunities:realOpportunities,companies,contacts,tasks:realTasks,recommendations:realRecommendations,agentRuns:realAgentRuns,companyMap,contactMap,sourceWarnings});
+          renderExecutiveSnapshot({opportunities:realOpportunities,tasks:realTasks,outcomes:realOutcomes});
           const focusTask = dueTasks[0] || realTasks[0];
           const focusOpportunity = activeOpportunities.find(item => item.next_action);
           document.getElementById("todayFocus").textContent = focusTask
@@ -959,7 +1277,7 @@ h1{font-size:34px}
             tr.addEventListener("click", () => {
               rows.querySelectorAll("tr").forEach(row => row.classList.remove("selected"));
               tr.classList.add("selected");
-              selectOpportunity(opportunity, company, contact);
+              showLeadWorkspace(opportunity, company, contact);
             });
             rows.appendChild(tr);
           });
@@ -1120,7 +1438,7 @@ h1{font-size:34px}
             workspace_id:workspaceId,
             name:companyName,
             location:document.getElementById("newCompanyLocation").value.trim() || null,
-            source:"phoenix"
+            source:TEST_MODE ? "internal_test" : "phoenix"
           });
           const contact = await createRecord("contacts", {
             workspace_id:workspaceId,
@@ -1141,7 +1459,7 @@ h1{font-size:34px}
             estimated_value:Number(document.getElementById("newEstimatedValue").value || 0),
             priority_score:20,
             score_reasons:["New lead added in Phoenix"],
-            source:"phoenix",
+            source:TEST_MODE ? "internal_test" : "phoenix",
             next_action:document.getElementById("newNextAction").value.trim() || "Research and qualify this lead"
           });
           document.getElementById("addLeadForm").reset();
@@ -1156,6 +1474,93 @@ h1{font-size:34px}
         }
       });
       const lines = value => value.split("\n").map(item => item.trim()).filter(Boolean);
+      const addFormGuide = (formId,html) => {
+        const form = document.getElementById(formId);
+        const header = form?.querySelector("header");
+        if (!form || !header || form.querySelector(".formguide")) return;
+        const guide = document.createElement("div");
+        guide.className = "formguide";
+        guide.innerHTML = html;
+        header.insertAdjacentElement("afterend",guide);
+      };
+      const addFieldHelp = (id,tag,copy) => {
+        const field = document.getElementById(id);
+        const label = field?.closest("label");
+        if (!label || label.querySelector(".fieldhelp")) return;
+        const help = document.createElement("span");
+        help.className = "fieldhelp";
+        const badge = document.createElement("span");
+        badge.className = "fieldtag";
+        badge.textContent = tag;
+        help.append(badge,document.createTextNode(copy));
+        label.appendChild(help);
+      };
+      addFormGuide("addLeadForm","<strong>Your job:</strong> enter the few facts you know. Required fields are marked below. Phoenix creates the first stage and next action.");
+      addFormGuide("qualificationForm","<strong>Your job:</strong> preserve facts and unknowns. Choose Unknown whenever you do not know. Phoenix can complete the recommendation, score, next action, and date for your review.");
+      addFormGuide("researchForm","<strong>Fast path:</strong> add the company website → read public webpages → verify at least one fact as <em>Fact | source URL</em> → approve and save.");
+      addFormGuide("briefForm","<strong>Fast path:</strong> choose Generate call brief, review the draft for accuracy, personalize anything you want, then save it.");
+      addFormGuide("outcomeForm","<strong>Your job:</strong> record what actually happened. Phoenix suggests the pipeline stage, next action, due date, and follow-up wording. Nothing is sent automatically.");
+      addFormGuide("proposalForm","<strong>Your job:</strong> confirm the approved price, timeline, and payment terms. Phoenix drafts the proposal; you verify every fact and promise.");
+      addFormGuide("fulfillmentForm","<strong>Use only after a win:</strong> verify the signed agreement, cleared payment, start requirements, and Notion records before creating reminders.");
+      [
+        ["newCompanyName","Required · You","Company or prospect name."],
+        ["newCompanyLocation","Optional · You","City and state, if known."],
+        ["newFirstName","Required · You","Use the contact’s first name. If it is genuinely unavailable, write Unknown and replace it when confirmed."],
+        ["newContactEmail","Optional · You","Enter an email only if you have a permitted business contact address."],
+        ["newContactPhone","Optional · You","Enter a phone number only if you are permitted to use it."],
+        ["newOpportunityName","Required · You","Name the work simply, such as AI lead follow-up consultation."],
+        ["newEstimatedValue","Optional · You","Use 0 when the value is not known yet."],
+        ["newNextAction","Optional · Phoenix","Leave blank and Phoenix will start with research and qualification."],
+        ["qualificationSource","Required · You","Where this lead came from: referral, website, Facebook, outreach, or another source."],
+        ["qualificationSummary","Required · You","One or two factual sentences about why this company may be an opportunity."],
+        ["qualificationPreference","Unknown is okay","Choose only what the contact stated."],
+        ["qualificationConsent","Unknown is okay","Do not assume permission. Unknown keeps the question visible."],
+        ["qualificationFit","Unknown is okay","Your current business judgment—not a promise or final verdict."],
+        ["qualificationDecisionMaker","Unknown is okay","Confirmed means you know this person can decide or directly reach the decision-maker."],
+        ["qualificationNeed","Unknown is okay","Choose Confirmed only when the company stated or demonstrated a real need."],
+        ["qualificationTiming","Unknown is okay","Write Unknown or the timing the prospect actually stated."],
+        ["qualificationFacts","You verify","One supported fact per line. Do not put guesses here."],
+        ["qualificationMissing","You identify","List unanswered questions. This is useful, not a failure."],
+        ["qualificationRisks","Optional · You","Anything that makes outreach inappropriate, premature, or risky."],
+        ["qualificationRecommendation","Phoenix suggests","Review the recommendation after using the Phoenix suggestion button."],
+        ["qualificationRationale","Phoenix drafts","Plain-language reason for the recommendation. Edit it if it overstates certainty."],
+        ["qualificationConfidence","Phoenix calculates","Higher means more of the decision is supported by verified information."],
+        ["qualificationNextAction","Phoenix suggests","The single next action that keeps the opportunity moving."],
+        ["qualificationNextOwner","Phoenix prefills","The person responsible for the next action."],
+        ["qualificationNextDate","Phoenix suggests","The date the action should be completed or reviewed."],
+        ["researchWebsite","Required · You","Use the company’s official public website."],
+        ["researchUrls","Optional · You","Add up to three permitted company or public-news pages, one per line."],
+        ["researchEvidence","Phoenix generated","Temporary page text for review. This is not automatically treated as a verified fact."],
+        ["researchFacts","You verify","Copy only useful facts and cite each as Fact | complete source URL."],
+        ["researchHypotheses","Phoenix suggests","Possibilities to confirm in conversation—not facts."],
+        ["researchAngles","Phoenix suggests","Potential ways to begin a relevant conversation."],
+        ["researchQuestions","Phoenix suggests","Questions that help verify the possible need."],
+        ["researchCautions","Optional · You","Unsupported claims or sensitive topics to avoid."],
+        ["researchConfidence","You approve","How strongly the saved facts support the research summary."],
+        ["briefBackground","Phoenix drafts","Verify company facts and remove anything unsupported."],
+        ["briefPainPoints","Phoenix drafts","These are possible needs to ask about—not claims about the prospect."],
+        ["briefQuestions","Phoenix drafts","Keep the questions you can comfortably ask."],
+        ["briefOffer","Phoenix drafts","Present only after the prospect confirms a relevant need."],
+        ["briefObjections","Phoenix drafts","Each line uses Objection | Response. Edit responses into your natural voice."],
+        ["briefOutcome","You approve","The one reasonable result you want from the conversation."],
+        ["outcomeDisposition","Required · You","Choose what actually happened."],
+        ["outcomePainPoints","Optional · You","Only needs the prospect confirmed, one per line."],
+        ["outcomeObjections","Optional · You","What the prospect actually objected to, one per line."],
+        ["outcomeCommitments","Optional · You","Anything you or the prospect promised to do."],
+        ["outcomeStage","Phoenix suggests","Review the suggested pipeline position and change it if the facts require."],
+        ["outcomeNextAction","Phoenix suggests","The single concrete next step."],
+        ["outcomeDueDate","Phoenix suggests","When the next step should be completed."],
+        ["outcomeFollowUp","Phoenix drafts","Review the recipient, facts, tone, and timing before opening the unsent email draft."],
+        ["proposalInvestment","Required · You","State the total setup fee and recurring fee from the approved offer. Put installment timing in Payment terms."],
+        ["proposalTimeline","Required · You","Promise only a timeline you can reliably deliver."],
+        ["proposalTerms","Required · You","Enter the approved payment schedule."]
+      ].forEach(args => addFieldHelp(...args));
+      const qualificationAssistant = document.createElement("button");
+      qualificationAssistant.type = "button";
+      qualificationAssistant.id = "suggestQualification";
+      qualificationAssistant.className = "autofill";
+      qualificationAssistant.textContent = "Let Phoenix complete the recommendation fields";
+      document.querySelector("#qualificationForm .formguide")?.insertAdjacentElement("afterend",qualificationAssistant);
       const qualificationSnapshot = () => ({
         source:document.getElementById("qualificationSource").value.trim(),
         summary:document.getElementById("qualificationSummary").value.trim(),
@@ -1183,6 +1588,11 @@ h1{font-size:34px}
         "qualificationNextOwner","qualificationNextDate"
       ];
       const qualificationDraftKey = () => selectedOpportunity ? QUALIFICATION_DRAFT_KEY + selectedOpportunity.id : "";
+      const visibleLeadSource = value => String(value || "")
+        .replace(/\binternal[_ -]?test\b/gi,"")
+        .replace(/^[\s,;|:/-]+|[\s,;|:/-]+$/g,"")
+        .replace(/\s{2,}/g," ")
+        .trim();
       const saveQualificationDraft = () => {
         const key = qualificationDraftKey();
         if (!key) return;
@@ -1199,6 +1609,9 @@ h1{font-size:34px}
           qualificationDraftFields.forEach(id => {
             if (draft.values[id] !== undefined) document.getElementById(id).value = draft.values[id];
           });
+          document.getElementById("qualificationSource").value = visibleLeadSource(
+            document.getElementById("qualificationSource").value
+          );
           return true;
         } catch { return false; }
       };
@@ -1220,6 +1633,48 @@ h1{font-size:34px}
         const priority = Math.round((fit * .3) + (intent * .25) + (urgency * .2) + (engagement * .1) + (confidence * .15));
         return {fit,intent:Math.min(100,intent),urgency,engagement,confidence,priority};
       };
+      document.getElementById("suggestQualification").addEventListener("click", () => {
+        const knownIds = [
+          "qualificationPreference","qualificationConsent","qualificationFit",
+          "qualificationDecisionMaker","qualificationNeed"
+        ];
+        const knownCount = knownIds.filter(id => document.getElementById(id).value !== "unknown").length;
+        const facts = lines(document.getElementById("qualificationFacts").value);
+        const missing = lines(document.getElementById("qualificationMissing").value);
+        const consent = document.getElementById("qualificationConsent").value;
+        const preference = document.getElementById("qualificationPreference").value;
+        const fit = document.getElementById("qualificationFit").value;
+        const need = document.getElementById("qualificationNeed").value;
+        const decisionMaker = document.getElementById("qualificationDecisionMaker").value;
+        const recommendation = consent === "opted_out" || preference === "do_not_contact" ? "decline"
+          : fit === "poor" || need === "no" ? "hold"
+          : ["strong","possible"].includes(fit) && (need === "yes" || decisionMaker === "yes") ? "pursue"
+          : "human_review";
+        const nextActions = {
+          pursue:"Research the company and prepare outreach",
+          nurture:"Schedule a review of this opportunity",
+          hold:"Confirm the missing information before outreach",
+          decline:"Close the opportunity and record the reason",
+          human_review:"Review the missing information and decide whether to pursue"
+        };
+        const rationale = recommendation === "pursue"
+          ? "The available facts suggest a reasonable fit, but all hypotheses still need confirmation during outreach."
+          : recommendation === "decline"
+            ? "The contact preference or consent status means this opportunity should not be pursued."
+            : recommendation === "hold"
+              ? "The current information does not support active outreach yet. Resolve the missing information first."
+              : "There is not enough verified information for Phoenix to recommend outreach yet.";
+        const confidence = Math.max(20,Math.min(90,30 + (knownCount * 9) + Math.min(20,facts.length * 5) - Math.min(20,missing.length * 4)));
+        const nextDate = new Date();
+        nextDate.setDate(nextDate.getDate() + 1);
+        document.getElementById("qualificationRecommendation").value = recommendation;
+        document.getElementById("qualificationRationale").value = rationale;
+        document.getElementById("qualificationConfidence").value = confidence;
+        document.getElementById("qualificationNextAction").value = nextActions[recommendation];
+        document.getElementById("qualificationNextOwner").value = "Roberta Kelley";
+        document.getElementById("qualificationNextDate").value = nextDate.toISOString().slice(0,10);
+        document.getElementById("qualificationMessage").textContent = "Phoenix completed the recommendation fields. Review them, correct anything that does not match the facts, then save or approve.";
+      });
       const validateQualification = review => {
         if (!review.source || !review.summary) throw new Error("Add the lead source and a factual inquiry or opportunity summary.");
         if (!review.facts.length && !review.missing.length) throw new Error("Record at least one verified fact or one missing-information item.");
@@ -1243,7 +1698,7 @@ h1{font-size:34px}
         let saved = {};
         try { saved = record?.rationale ? JSON.parse(record.rationale) : {}; }
         catch { saved = {rationale:record?.rationale || ""}; }
-        document.getElementById("qualificationSource").value = saved.source || selectedOpportunity.source || "";
+        document.getElementById("qualificationSource").value = visibleLeadSource(saved.source || selectedOpportunity.source);
         document.getElementById("qualificationSummary").value = saved.summary || "";
         document.getElementById("qualificationPreference").value = saved.preference || "unknown";
         document.getElementById("qualificationConsent").value = saved.consent || selectedContact?.consent_status || "unknown";
@@ -1362,7 +1817,7 @@ h1{font-size:34px}
           ];
           const dueAt = new Date(review.nextDate + "T17:00:00").toISOString();
           selectedOpportunity = await updateRecord("opportunities",selectedOpportunity.id,{
-            stage,status,source:review.source,fit_score:scores.fit,intent_score:scores.intent,
+            stage,status,source:TEST_MODE ? "internal_test" : review.source,fit_score:scores.fit,intent_score:scores.intent,
             urgency_score:scores.urgency,engagement_score:scores.engagement,
             confidence_score:scores.confidence,priority_score:scores.priority,
             score_reasons:scoreReasons,next_action:review.nextAction,next_action_due_at:dueAt
@@ -1449,6 +1904,7 @@ h1{font-size:34px}
       const showResearch = () => {
         const facts = selectedCompany?.research_facts || {};
         const inferences = selectedCompany?.research_inferences || {};
+        document.getElementById("researchSynthetic").checked = facts.synthetic_test === true;
         loadedResearchSources = Array.isArray(facts.sources) ? facts.sources : [];
         document.getElementById("researchWebsite").value = selectedCompany?.website || "";
         document.getElementById("researchUrls").value = loadedResearchSources
@@ -1464,7 +1920,63 @@ h1{font-size:34px}
         document.getElementById("researchConfidence").value = inferences.confidence ?? 50;
         document.getElementById("researchDate").value = facts.researched_at || new Date().toISOString().slice(0,10);
         document.getElementById("approveResearch").checked = false;
+        toggleResearchMode();
       };
+      const toggleResearchMode = () => {
+        const synthetic = document.getElementById("researchSynthetic").checked;
+        const website = document.getElementById("researchWebsite");
+        const additionalUrls = document.getElementById("researchUrls");
+        const websiteLabel = website.closest("label");
+        const factsField = document.getElementById("researchFacts");
+        const factsLabel = factsField.closest("label");
+        if (websiteLabel?.firstChild) websiteLabel.firstChild.textContent = synthetic
+          ? "Company website URL (not used in synthetic test)"
+          : "Company website URL";
+        if (factsLabel?.firstChild) factsLabel.firstChild.textContent = synthetic
+          ? "Synthetic test facts, one per line"
+          : "Verified facts with source, one per line";
+        website.disabled = synthetic;
+        additionalUrls.disabled = synthetic;
+        document.getElementById("readResearchSources").disabled = synthetic;
+        factsField.placeholder = synthetic
+          ? "Synthetic test fact, one per line. Do not enter real company information."
+          : "Fact | https://source-url";
+        const websiteHelp = website.closest("label")?.querySelector(".fieldhelp");
+        const factsHelp = factsLabel?.querySelector(".fieldhelp");
+        if (websiteHelp) websiteHelp.innerHTML = synthetic
+          ? '<span class="fieldtag">Not used in test</span>No website is needed for this synthetic lifecycle.'
+          : '<span class="fieldtag">Required · You</span>Use the company’s official public website.';
+        if (factsHelp) factsHelp.innerHTML = synthetic
+          ? '<span class="fieldtag">Synthetic test data</span>Phoenix fills an invented scenario. Review it, but do not add real company information.'
+          : '<span class="fieldtag">You verify</span>Copy only useful facts and cite each as Fact | complete source URL.';
+        document.getElementById("approveResearchText").textContent = synthetic
+          ? "I confirm these are invented TEST MODE facts, separated hypotheses from test facts, and approve them only for this synthetic lifecycle test."
+          : "I reviewed every saved fact against the cited public source, separated hypotheses from facts, and approve this research for Closer use.";
+        if (synthetic) {
+          website.value = "";
+          additionalUrls.value = "";
+          loadedResearchSources = [];
+          document.getElementById("researchEvidence").value = "SYNTHETIC TEST SCENARIO\nNo public webpage was read. The entries below are invented test data and must not be treated as facts about a real company.";
+          const syntheticDefaults = {
+            researchFacts:"The company accepts inquiries through an online form.\nBusiness hours end at 4:00 PM.\nThe company is closed on weekends.",
+            researchHypotheses:"The company may need a clearer way to qualify, assign, and follow up with inquiries received outside business hours.",
+            researchAngles:"Ask about the current lead path before recommending any system change.",
+            researchQuestions:"What happens internally after a new inquiry arrives?\nHow are inquiries received after 4:00 PM or on weekends handled?",
+            researchCautions:"Do not say the company is losing leads or has a broken system. Confirm the current process first."
+          };
+          Object.entries(syntheticDefaults).forEach(([id,value]) => {
+            const field = document.getElementById(id);
+            if (!field.value.trim()) field.value = value;
+          });
+        }
+      };
+      document.getElementById("researchSynthetic").addEventListener("change", () => {
+        toggleResearchMode();
+        document.getElementById("approveResearch").checked = false;
+        document.getElementById("researchMessage").textContent = document.getElementById("researchSynthetic").checked
+          ? "Synthetic research mode is active. Enter invented test facts without source URLs, review the hypotheses, then approve them only for this test."
+          : "Public research mode is active. Add permitted URLs and verify every fact against its cited source.";
+      });
       document.getElementById("openResearch").addEventListener("click", () => {
         if (!selectedOpportunity || !selectedCompany) return;
         document.getElementById("researchName").textContent = selectedCompany.name || selectedOpportunity.name;
@@ -1538,34 +2050,44 @@ h1{font-size:34px}
         button.disabled = true;
         button.textContent = "Saving approved research...";
         try {
+          const synthetic = document.getElementById("researchSynthetic").checked;
           const urls = researchSourceUrls();
           const facts = lines(document.getElementById("researchFacts").value);
           const confidence = Number(document.getElementById("researchConfidence").value || 0);
           const researchedAt = document.getElementById("researchDate").value;
-          if (!urls.length || !facts.length) throw new Error("Add at least one source and one verified fact with its source URL.");
+          if (!facts.length) throw new Error(synthetic ? "Add at least one invented test fact." : "Add at least one verified fact with its source URL.");
+          if (!synthetic && !urls.length) throw new Error("Add at least one permitted public source.");
           if (!researchedAt) throw new Error("Add the research date.");
           if (confidence < 0 || confidence > 100) throw new Error("Research confidence must be between 0 and 100.");
           if (!document.getElementById("approveResearch").checked) {
             throw new Error("Review the sources, facts, hypotheses, and wording, then check the approval box.");
           }
-          facts.forEach(fact => {
-            const split = fact.lastIndexOf("|");
-            if (split < 1) throw new Error("Write each verified fact as Fact | complete source URL.");
-            const cited = fact.slice(split + 1).trim();
-            let citedUrl;
-            try { citedUrl = new URL(cited).href; }
-            catch { throw new Error("Every verified fact needs a complete source URL after the | symbol."); }
-            if (!urls.includes(citedUrl)) throw new Error("Each fact must cite one of the public URLs listed in this research record.");
-          });
+          if (!synthetic) {
+            facts.forEach(fact => {
+              const split = fact.lastIndexOf("|");
+              if (split < 1) throw new Error("Write each verified fact as Fact | complete source URL.");
+              const cited = fact.slice(split + 1).trim();
+              let citedUrl;
+              try { citedUrl = new URL(cited).href; }
+              catch { throw new Error("Every verified fact needs a complete source URL after the | symbol."); }
+              if (!urls.includes(citedUrl)) throw new Error("Each fact must cite one of the public URLs listed in this research record.");
+            });
+          }
           const sourceMap = new Map(loadedResearchSources.map(source => [source.url,source]));
-          const sources = urls.map(url => sourceMap.get(url) || {
+          const sources = synthetic ? [{
+            url:"synthetic-test-scenario",
+            title:"Synthetic TEST MODE scenario",
+            accessed_at:new Date().toISOString(),
+            status:"synthetic"
+          }] : urls.map(url => sourceMap.get(url) || {
             url,title:"Manually reviewed public source",accessed_at:new Date().toISOString(),status:"manual"
           });
-          const website = urls[0];
+          const website = synthetic ? selectedCompany.website || null : urls[0];
           const companyPayload = {
             website,
-            normalized_domain:new URL(website).hostname.replace(/^www\./,""),
+            normalized_domain:synthetic ? selectedCompany.normalized_domain || null : new URL(website).hostname.replace(/^www\./,""),
             research_facts:{
+              synthetic_test:synthetic,
               researched_at:researchedAt,
               sources,
               verified_facts:facts,
@@ -1578,6 +2100,7 @@ h1{font-size:34px}
               recommended_questions:lines(document.getElementById("researchQuestions").value),
               cautions:lines(document.getElementById("researchCautions").value),
               confidence,
+              synthetic_test:synthetic,
               human_approved:true
             }
           };
@@ -1585,6 +2108,7 @@ h1{font-size:34px}
           if (String(selectedOpportunity.stage) === "identified") {
             selectedOpportunity = await updateRecord("opportunities",selectedOpportunity.id,{stage:"researched"});
           }
+          await completeOpenTasks({types:["qualification"]});
           selectOpportunity(selectedOpportunity,selectedCompany,selectedContact);
           await loadData();
           message.textContent = "Research approved and saved. The Closer can now use these facts, hypotheses, angles, questions, and cautions.";
@@ -1629,9 +2153,13 @@ h1{font-size:34px}
         const researchFacts = selectedCompany?.research_facts?.verified_facts || [];
         const research = selectedCompany?.research_inferences || {};
         const approvedResearch = research.human_approved === true;
+        const syntheticResearch = selectedCompany?.research_facts?.synthetic_test === true
+          || research.synthetic_test === true;
         const factText = researchFacts.map(item => "• " + String(item).split("|")[0].trim()).join("\n");
         document.getElementById("briefBackground").value = approvedResearch && researchFacts.length
-          ? companyName + " is an active prospect in " + location + ". These public facts were reviewed and approved on " + (selectedCompany.research_facts.researched_at || "the recorded research date") + ":\n\n" + factText + "\n\nSource links remain in the approved research record. Verify time-sensitive details during the conversation."
+          ? syntheticResearch
+            ? companyName + " is a synthetic TEST MODE prospect in " + location + ". These invented test facts were approved for lifecycle testing on " + (selectedCompany.research_facts.researched_at || "the recorded test date") + ":\n\n" + factText + "\n\nNo public source was used. Do not treat these test details as facts about a real company."
+            : companyName + " is an active prospect in " + location + ". These public facts were reviewed and approved on " + (selectedCompany.research_facts.researched_at || "the recorded research date") + ":\n\n" + factText + "\n\nSource links remain in the approved research record. Verify time-sensitive details during the conversation."
           : companyName + " is an active prospect in " + location + ". Confirm its services, current lead process, response speed, scheduling flow, and follow-up process during discovery.";
         const starterPainPoints = [
           "Qualified inquiries may not receive immediate, consistent follow-up",
@@ -1650,7 +2178,7 @@ h1{font-size:34px}
         const approvedQuestions = approvedResearch ? research.recommended_questions || [] : [];
         document.getElementById("briefQuestions").value = (approvedQuestions.length ? approvedQuestions : starterQuestions).slice(0,6).join("\n");
         document.getElementById("briefOffer").value = approvedResearch
-          ? "A focused after-hours concierge and lead follow-up workflow that gives homeowners a polished first response and sends organized project details to Prestige’s team. It would support the process Prestige already uses."
+          ? "A focused after-hours concierge and lead follow-up workflow that gives homeowners a polished first response and sends organized project details to " + companyName + "’s team. It would support the process the company already uses."
           : "A focused Kelley AI Systems lead capture, qualification, and follow-up workflow built around the company’s existing process.";
         document.getElementById("briefObjections").value = approvedResearch
           ? [
@@ -1671,11 +2199,13 @@ h1{font-size:34px}
         document.getElementById("briefOutcome").value = approvedResearch
           ? "Primary objective: Learn what happens to a new inquiry after regular office hours and whether the current process leaves any response or follow-up gap.\n\n"
             + (angle ? "Positioning: " + angle + "\n\n" : "")
-            + "Desired next step: If Prestige confirms a meaningful gap, ask permission to schedule a short discovery conversation about one focused workflow."
+            + "Desired next step: If " + companyName + " confirms a meaningful gap, ask permission to schedule a short discovery conversation about one focused workflow."
             + cautionLines
           : "Understand the current lead process, confirm one meaningful problem, and agree on one appropriate next step.";
         document.getElementById("briefMessage").textContent = approvedResearch
-          ? "Research-informed starter brief generated. Facts are cited; hypotheses still need confirmation during the call."
+          ? syntheticResearch
+            ? "Synthetic TEST MODE brief generated. The test facts are invented; hypotheses still need confirmation within the scenario."
+            : "Research-informed starter brief generated. Facts are cited; hypotheses still need confirmation during the call."
           : "Starter brief generated. Review and personalize it before saving.";
       });
       document.getElementById("briefForm").addEventListener("submit", async event => {
@@ -1703,6 +2233,8 @@ h1{font-size:34px}
           selectedBrief = selectedBrief
             ? await updateRecord("intelligence_briefs", selectedBrief.id, payload)
             : await createRecord("intelligence_briefs", payload);
+          briefedOpportunityIds.add(selectedOpportunity.id);
+          renderGuidedWorkflow();
           message.textContent = "Call brief saved to this opportunity.";
           document.getElementById("strategicBrief").textContent = payload.likely_pain_points[0] || "Call preparation is ready.";
         } catch (problem) {
@@ -1725,6 +2257,8 @@ h1{font-size:34px}
         const contactName = selectedContact ? [selectedContact.first_name,selectedContact.last_name].filter(Boolean).join(" ") : "";
         const research = selectedCompany?.research_inferences || {};
         const facts = research.human_approved === true ? cleanResearchFacts() : [];
+        const syntheticResearch = selectedCompany?.research_facts?.synthetic_test === true
+          || research.synthetic_test === true;
         const brief = selectedBrief || {};
         const questions = brief.recommended_questions?.length ? brief.recommended_questions : research.recommended_questions || [];
         const needs = brief.likely_pain_points?.length ? brief.likely_pain_points : research.hypotheses || [];
@@ -1734,8 +2268,8 @@ h1{font-size:34px}
           companyName + (selectedCompany?.location ? " · " + selectedCompany.location : ""),
           contactName ? "Contact: " + contactName + (selectedContact?.role ? ", " + selectedContact.role : "") : "Contact: Not confirmed",
           "",
-          "VERIFIED PUBLIC FACTS",
-          ...(facts.length ? facts.map(item => "• " + item) : ["• No approved public facts are saved yet."]),
+          syntheticResearch ? "SYNTHETIC TEST FACTS" : "VERIFIED PUBLIC FACTS",
+          ...(facts.length ? facts.map(item => "• " + item) : [syntheticResearch ? "• No synthetic test facts are saved yet." : "• No approved public facts are saved yet."]),
           "",
           "POSSIBLE NEEDS TO VERIFY",
           ...(needs.length ? needs.map(item => "• " + item) : ["• Ask how inquiries are captured, qualified and followed up."]),
@@ -1779,10 +2313,6 @@ h1{font-size:34px}
         document.getElementById("knowledgeMessage").textContent = "";
       };
       document.getElementById("openPreparation").addEventListener("click", openPreparation);
-      document.getElementById("navAppointments").addEventListener("click", event => {
-        event.preventDefault();
-        openPreparation();
-      });
       document.getElementById("closePreparation").addEventListener("click", () => { preparationVeil.hidden = true; });
       document.querySelectorAll("[data-prep-tab]").forEach(button => {
         button.addEventListener("click", () => {
@@ -1954,7 +2484,9 @@ h1{font-size:34px}
         investment:document.getElementById("proposalInvestment").value.trim(),
         timeline:document.getElementById("proposalTimeline").value.trim(),
         terms:document.getElementById("proposalTerms").value.trim(),
-        draft:document.getElementById("proposalDraft").value.trim()
+        draft:document.getElementById("proposalDraft").value.trim(),
+        approved:document.getElementById("approveProposal").checked,
+        savedAt:new Date().toISOString()
       });
       const proposalFileName = () => ((selectedCompany?.name || selectedOpportunity?.name || "Client") + " Proposal")
         .replace(/[^a-z0-9]+/gi,"-").replace(/^-|-$/g,"") + ".txt";
@@ -2443,6 +2975,7 @@ h1{font-size:34px}
         message.textContent = "Gate " + gate.id + " snapshot saved on this device. Notion remains the authoritative approval record.";
       });
       const fulfillmentSnapshot = () => ({
+        synthetic_test:document.getElementById("fulfillmentSynthetic").checked,
         readiness:document.getElementById("fulfillmentReadiness").value,
         owner:document.getElementById("fulfillmentOwner").value.trim(),
         start:document.getElementById("fulfillmentStart").value,
@@ -2459,6 +2992,33 @@ h1{font-size:34px}
         milestones:document.getElementById("fulfillmentMilestones").value.trim(),
         risks:document.getElementById("fulfillmentRisks").value.trim()
       });
+      const fulfillmentGateLabels = {
+        gateProposal:"Final proposal and scope approved",
+        gateAgreement:"Services agreement signed",
+        gatePayment:"Initial payment paid and cleared",
+        gateRequirements:"Project Start Requirements complete",
+        gateSetup:"Private client setup and preflight audit complete in Notion",
+        gateDay1:"Written Day 1 Confirmation issued"
+      };
+      const toggleSyntheticFulfillment = () => {
+        const synthetic = document.getElementById("fulfillmentSynthetic").checked;
+        document.getElementById("approveFulfillmentText").textContent = synthetic
+          ? "I confirm these are simulated TEST MODE readiness facts and approve milestone reminders only for this synthetic opportunity."
+          : "I verified these facts against the current Notion client records and approve Phoenix milestone reminders.";
+        Object.entries(fulfillmentGateLabels).forEach(([id,label]) => {
+          const copy = document.getElementById(id).closest("label")?.querySelector("span");
+          if (copy) copy.textContent = synthetic ? "Simulated test gate: " + label : label;
+        });
+        if (synthetic) {
+          document.getElementById("fulfillmentReadiness").value = "ready";
+          ["gateProposal","gateAgreement","gatePayment","gateRequirements","gateSetup","gateDay1"].forEach(id => {
+            document.getElementById(id).checked = true;
+          });
+          document.getElementById("fulfillmentMessage").textContent = "Synthetic readiness mode is active. Generate the test handoff plan, review it, then approve reminders only for this test opportunity.";
+        }
+        document.getElementById("approveFulfillment").checked = false;
+      };
+      document.getElementById("fulfillmentSynthetic").addEventListener("change", toggleSyntheticFulfillment);
       document.getElementById("openFulfillment").addEventListener("click", () => {
         if (!selectedOpportunity) return;
         const companyName = selectedCompany?.name || selectedOpportunity.name;
@@ -2475,6 +3035,7 @@ h1{font-size:34px}
         document.getElementById("fulfillmentStart").value = tomorrow.toISOString().slice(0,10);
         try {
           const saved = JSON.parse(localStorage.getItem(fulfillmentStorageKey()) || "null");
+          document.getElementById("fulfillmentSynthetic").checked = saved?.synthetic_test === true;
           document.getElementById("fulfillmentReadiness").value = saved?.readiness || "not_ready";
           document.getElementById("fulfillmentOwner").value = saved?.owner || "Roberta Kelley";
           document.getElementById("fulfillmentStart").value = saved?.start || tomorrow.toISOString().slice(0,10);
@@ -2491,7 +3052,9 @@ h1{font-size:34px}
           document.getElementById("fulfillmentMessage").textContent = saved
             ? "Your saved readiness summary is loaded. Verify it against Notion before creating reminders."
             : "Generate a first draft, then verify every gate against the current Notion client records.";
+          toggleSyntheticFulfillment();
         } catch {
+          document.getElementById("fulfillmentSynthetic").checked = false;
           document.getElementById("fulfillmentReadiness").value = "not_ready";
           document.getElementById("gateProposal").checked = false;
           document.getElementById("gateAgreement").checked = false;
@@ -2500,6 +3063,7 @@ h1{font-size:34px}
           document.getElementById("gateSetup").checked = false;
           document.getElementById("gateDay1").checked = false;
           document.getElementById("fulfillmentMessage").textContent = "Generate a first draft, then confirm the requirements, dates, and boundaries.";
+          toggleSyntheticFulfillment();
         }
         fulfillmentVeil.hidden = false;
         fulfillmentVeil.scrollTop = 0;
@@ -2507,22 +3071,32 @@ h1{font-size:34px}
       document.getElementById("closeFulfillment").addEventListener("click", () => { fulfillmentVeil.hidden = true; });
       document.getElementById("generateFulfillment").addEventListener("click", () => {
         const companyName = selectedCompany?.name || selectedOpportunity.name;
+        const synthetic = document.getElementById("fulfillmentSynthetic").checked;
         const proposal = (() => {
           try { return JSON.parse(localStorage.getItem(PROPOSAL_KEY + selectedOpportunity.id) || "null"); }
           catch { return null; }
         })();
-        const commercialStatus = String(selectedOpportunity.stage) === "won"
+        const commercialStatus = synthetic
+          ? companyName + " is a synthetic TEST MODE project. No real agreement, payment, client setup, or launch approval is represented."
+          : String(selectedOpportunity.stage) === "won"
           ? companyName + " commercially approved a Kelley AI Systems project."
           : companyName + " is still in the sales lifecycle. This is a planning preview, not an approved client project.";
-        document.getElementById("fulfillmentSummary").value = commercialStatus + " Delivery may begin only after the current Notion readiness records are complete and written Day 1 Confirmation is issued." + (proposal?.investment ? " Proposed investment: " + proposal.investment + "." : "");
-        document.getElementById("fulfillmentRequirements").value = [
+        document.getElementById("fulfillmentSummary").value = commercialStatus + (synthetic
+          ? " These reminders exist only to validate the Phoenix delivery workflow."
+          : " Delivery may begin only after the current Notion readiness records are complete and written Day 1 Confirmation is issued.") + (proposal?.investment ? " Proposed investment: " + proposal.investment + "." : "");
+        document.getElementById("fulfillmentRequirements").value = (synthetic ? [
+          "Use only invented test access and sample records",
+          "Keep all test messages, approvals, and milestones labeled synthetic",
+          "Do not connect a real client account or transmit real credentials",
+          "Review each simulated gate before advancing the lifecycle"
+        ] : [
           "Name one person who can approve decisions and answer process questions",
           "Provide approved business information, offers, FAQs, and client-facing language",
           "Provide access through secure invitations or an approved password manager, never through plain text",
           "Confirm the current lead sources, forms, calendars, and follow-up process",
           "Provide test records and approve the required gates before launch",
           "Complete the private Client Configuration, 46-task checklist, QA selection, and Launch Approval records in Notion"
-        ].join("\n");
+        ]).join("\n");
         document.getElementById("fulfillmentMilestones").value = [
           "Kickoff and secure access confirmed",
           "Current workflow mapped and approved",
@@ -2530,13 +3104,20 @@ h1{font-size:34px}
           "Client review completed and revisions approved",
           "Launch, training, and written handoff completed"
         ].join("\n");
-        document.getElementById("fulfillmentRisks").value = "Work pauses when required access, content, or approvals are late. New requests outside the approved scope require a written change decision before they are added.";
+        document.getElementById("fulfillmentRisks").value = synthetic
+          ? "TEST MODE only. Do not reuse synthetic evidence, approvals, dates, or records for a real client launch."
+          : "Work pauses when required access, content, or approvals are late. New requests outside the approved scope require a written change decision before they are added.";
         document.getElementById("approveFulfillment").checked = false;
-        document.getElementById("fulfillmentMessage").textContent = "Readiness draft generated. Edit it to match the signed agreement and current Notion records.";
+        document.getElementById("fulfillmentMessage").textContent = synthetic
+          ? "Synthetic readiness draft generated. Review it as test data; it does not represent a real client launch."
+          : "Readiness draft generated. Edit it to match the signed agreement and current Notion records.";
       });
       document.getElementById("saveFulfillment").addEventListener("click", () => {
-        localStorage.setItem(fulfillmentStorageKey(), JSON.stringify(fulfillmentSnapshot()));
-        document.getElementById("fulfillmentMessage").textContent = "Readiness summary saved on this device. Notion remains authoritative. No reminders were created.";
+        const plan = fulfillmentSnapshot();
+        localStorage.setItem(fulfillmentStorageKey(), JSON.stringify(plan));
+        document.getElementById("fulfillmentMessage").textContent = plan.synthetic_test
+          ? "Synthetic readiness summary saved on this device. It is test data only. No reminders were created."
+          : "Readiness summary saved on this device. Notion remains authoritative. No reminders were created.";
       });
       const addBusinessDays = (date, days) => {
         const result = new Date(date);
@@ -2564,7 +3145,9 @@ h1{font-size:34px}
           return;
         }
         if (plan.readiness !== "ready" || !allGatesComplete) {
-          message.textContent = "Readiness is incomplete. Confirm every requirement in Notion and issue written Day 1 Confirmation first.";
+          message.textContent = plan.synthetic_test
+            ? "Synthetic readiness is incomplete. Confirm every simulated gate before creating test reminders."
+            : "Readiness is incomplete. Confirm every requirement in Notion and issue written Day 1 Confirmation first.";
           return;
         }
         if (!plan.owner || !plan.start || !plan.summary || !requirements.length || !milestones.length) {
@@ -2616,10 +3199,14 @@ h1{font-size:34px}
             created += 1;
           }
           message.textContent = created
-            ? created + " Phoenix milestone reminders created from confirmed Day 1. Continue managing the authoritative 46-task project in Notion."
+            ? plan.synthetic_test
+              ? created + " synthetic Phoenix milestone reminders created for this TEST MODE opportunity."
+              : created + " Phoenix milestone reminders created from confirmed Day 1. Continue managing the authoritative 46-task project in Notion."
             : rescheduled
               ? rescheduled + " existing Phoenix milestone reminders rescheduled from the confirmed Day 1. No duplicates were created."
-              : "The Phoenix milestone reminders already exist. No duplicates were created. Continue managing delivery in Notion.";
+              : plan.synthetic_test
+                ? "The synthetic Phoenix milestone reminders already exist. No duplicates were created."
+                : "The Phoenix milestone reminders already exist. No duplicates were created. Continue managing delivery in Notion.";
           await loadData();
         } catch (problem) {
           message.textContent = problem instanceof Error ? problem.message : "The fulfillment tasks could not be created.";
@@ -2718,6 +3305,18 @@ h1{font-size:34px}
         document.getElementById("approveOutcome").checked = event.target.value !== "rejected";
       });
       document.getElementById("outcomeFollowUp").addEventListener("input", refreshEmailDraft);
+      const repairSavedFollowUpGrammar = value => String(value || "")
+        .replace(
+          /I[’']m putting together prepare a focused test proposal for ([^.]+)\. I[’']ll base it on what you shared about inquiries need a clear owner and consistent follow-up and keep the scope clear and practical\. I[’']ll send it for your review, and you can let me know what you would like adjusted\./gi,
+          "My next step is to prepare a focused test proposal for $1. I’ll base it on what you shared about inquiries needing a clear owner and consistent follow-up. I’ll keep the scope clear and practical, send it for your review, and you can let me know what you would like adjusted."
+        )
+        .replace(
+          /I[’']ll put together prepare a focused test proposal and keep it focused on the priorities we discussed\./gi,
+          "My next step is to prepare a focused test proposal. I’ll make sure it reflects the priorities we discussed."
+        )
+        .replace(/\bI[’']m putting together prepare\b/gi,"My next step is to prepare")
+        .replace(/\bI[’']ll put together prepare\b/gi,"I’ll prepare")
+        .replace(/\band keep it focused on the priorities we discussed\./gi,". I’ll make sure it reflects the priorities we discussed.");
       document.getElementById("openEmailDraft").addEventListener("click", event => {
         refreshEmailDraft();
         if (!selectedContact?.email) {
@@ -2759,16 +3358,27 @@ h1{font-size:34px}
             human_approved:approved
           });
           if (approved) {
+            await completeOpenTasks({
+              types:["qualification","research","closer","proposal","follow_up","orchestration"],
+              exceptTitle:nextAction
+            });
             if (nextAction) {
-              await createRecord("tasks", {
-                workspace_id:selectedOpportunity.workspace_id,
-                opportunity_id:selectedOpportunity.id,
-                title:nextAction,
-                task_type:"follow_up",
-                priority:"high",
-                status:"open",
-                due_at:dueAt
-              });
+              const existingTasks = await request(
+                "tasks?opportunity_id=eq." + encodeURIComponent(selectedOpportunity.id) +
+                "&title=eq." + encodeURIComponent(nextAction) +
+                "&status=neq.completed&select=id"
+              );
+              if (!existingTasks.length) {
+                await createRecord("tasks", {
+                  workspace_id:selectedOpportunity.workspace_id,
+                  opportunity_id:selectedOpportunity.id,
+                  title:nextAction,
+                  task_type:"follow_up",
+                  priority:"high",
+                  status:"open",
+                  due_at:dueAt
+                });
+              }
             }
             selectedOpportunity = await updateRecord("opportunities", selectedOpportunity.id, {
               stage:proposedStage,
@@ -2829,6 +3439,13 @@ h1{font-size:34px}
       };
       document.getElementById("openActivity").addEventListener("click", async () => {
         if (!selectedOpportunity) return;
+        const syntheticDelivery = (() => {
+          try {
+            return JSON.parse(localStorage.getItem(FULFILLMENT_KEY + selectedOpportunity.id) || "null")?.synthetic_test === true;
+          } catch {
+            return false;
+          }
+        })();
         document.getElementById("activityName").textContent = selectedCompany?.name || selectedOpportunity.name;
         document.getElementById("activityLocation").textContent = "Activity & follow-up";
         document.getElementById("activityList").replaceChildren();
@@ -2847,12 +3464,16 @@ h1{font-size:34px}
               "Due " + due + " · " + task.priority + " priority",
               overdue
                 ? (task.task_type === "fulfillment"
-                  ? "This delivery reminder needs attention. Verify the authoritative task in Notion."
+                  ? (syntheticDelivery
+                    ? "This synthetic TEST MODE delivery reminder needs attention. No real client delivery is represented."
+                    : "This delivery reminder needs attention. Verify the authoritative task in Notion.")
                   : task.task_type === "qualification"
                     ? "This qualification decision needs human review."
                     : "This follow-up needs attention.")
                 : (task.task_type === "fulfillment"
-                  ? "Phoenix milestone reminder. The authoritative project task remains in Notion."
+                  ? (syntheticDelivery
+                    ? "Synthetic TEST MODE milestone reminder. No real client delivery is represented."
+                    : "Phoenix milestone reminder. The authoritative project task remains in Notion.")
                   : task.task_type === "qualification"
                     ? "Human-approved qualification task."
                     : "Open follow-up task"),
@@ -2907,7 +3528,7 @@ h1{font-size:34px}
               "Outcome: " + String(outcome.disposition).replaceAll("_"," "),
               date,
               body || "Outcome recorded.",
-              followUp ? followUp.replace("FOLLOW-UP MESSAGE: ","") : "",
+              followUp ? repairSavedFollowUpGrammar(followUp.replace("FOLLOW-UP MESSAGE: ","")) : "",
               options
             );
           });
@@ -2917,6 +3538,7 @@ h1{font-size:34px}
         }
       });
       document.getElementById("closeActivity").addEventListener("click", () => { activityVeil.hidden = true; });
+      renderGuidedWorkflow();
       if (!config().url || !config().key) showSetup();
       else if (!session()?.access_token) showLogin();
       else loadData();
