@@ -2928,6 +2928,7 @@ h1{font-size:34px}
           ? "I appreciated learning more about your priorities. I especially noted this: " + cleanDetail(painPoints[0]) + "."
           : "I appreciated learning more about the priorities we discussed.";
         const nextStep = cleanSentence(nextAction);
+        const infinitiveStep = nextStep.replace(/^to\s+/i,"");
         const disposition = document.getElementById("outcomeDisposition").value;
         const messages = {
           no_answer:greeting + "\n\nI tried to reach you today regarding " + companyName + " and wanted to follow up here as well. I help businesses improve lead response, qualification, and follow-up without replacing the tools that already work for them. If this is relevant, I would be glad to share a brief example and learn how your current process works.\n\nBest,\nRoberta\nKelley AI Systems",
@@ -2936,7 +2937,7 @@ h1{font-size:34px}
           proposal_sent:greeting + "\n\nI’ve sent the proposal for " + companyName + " based on the priorities and scope we discussed. Please review it when convenient and let me know what questions or adjustments would be helpful. I’ll follow up as agreed, and we can decide together whether it makes sense to move forward.\n\nBest,\nRoberta\nKelley AI Systems",
           closed_won:greeting + "\n\nThank you for choosing Kelley AI Systems. I’m excited to support " + companyName + ". Our next step is " + nextStep + ", and I’ll make sure the process stays clear and organized from the start.\n\nBest,\nRoberta\nKelley AI Systems",
           closed_lost:greeting + "\n\nThank you for considering Kelley AI Systems and for the time you shared. I understand that now may not be the right time for " + companyName + ". I appreciate the conversation and would be glad to reconnect if your priorities change.\n\nBest,\nRoberta\nKelley AI Systems",
-          follow_up:greeting + "\n\nI wanted to follow up regarding " + companyName + ". Based on what we discussed, the most relevant next step is " + nextStep + ". Please let me know if you have any questions or if there is anything else you would like me to include.\n\nBest,\nRoberta\nKelley AI Systems"
+          follow_up:greeting + "\n\nI wanted to follow up regarding " + companyName + ". Based on what we discussed, the most relevant next step is to " + infinitiveStep + ". Please let me know if you have any questions or if there is anything else you would like me to include.\n\nBest,\nRoberta\nKelley AI Systems"
         };
         document.getElementById("outcomeFollowUp").value = messages[disposition] || messages.follow_up;
         refreshEmailDraft();
