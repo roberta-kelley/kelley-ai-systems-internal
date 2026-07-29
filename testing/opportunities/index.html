@@ -1463,18 +1463,22 @@ body[data-current-page="opportunities"] .shell>aside{display:grid;grid-template-
         message.textContent = "";
         try {
           const firstName = document.getElementById("workspaceFirstName").value.trim();
+          const lastName = document.getElementById("workspaceLastName").value.trim();
+          const role = document.getElementById("workspaceRole").value.trim();
+          const email = document.getElementById("workspaceEmail").value.trim();
+          const phone = document.getElementById("workspacePhone").value.trim();
+          const hasContactDetails = Boolean(firstName || lastName || role || email || phone);
           const contactPayload = {
             workspace_id:selectedOpportunity.workspace_id,
             company_id:selectedCompany.id,
-            first_name:firstName,
-            last_name:document.getElementById("workspaceLastName").value.trim() || null,
-            role:document.getElementById("workspaceRole").value.trim() || null,
-            email:document.getElementById("workspaceEmail").value.trim() || null,
-            phone:document.getElementById("workspacePhone").value.trim() || null
+            first_name:firstName || "Unknown",
+            last_name:lastName || null,
+            role:role || null,
+            email:email || null,
+            phone:phone || null
           };
-          if (selectedContact && !firstName) throw new Error("The contact needs a first name.");
           if (selectedContact) selectedContact = await updateRecord("contacts", selectedContact.id, contactPayload);
-          else if (firstName) selectedContact = await createRecord("contacts", contactPayload);
+          else if (hasContactDetails) selectedContact = await createRecord("contacts", contactPayload);
           const opportunityChanges = {
             stage:document.getElementById("workspaceStage").value,
             next_action:document.getElementById("workspaceAction").value.trim()
