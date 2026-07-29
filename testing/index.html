@@ -458,6 +458,19 @@ h1{font-size:34px}
           return Boolean(saved?.approved && saved?.draft);
         } catch { return false; }
       };
+      const deliveryReadinessSaved = opportunityId => {
+        if (!opportunityId) return false;
+        try {
+          const saved = JSON.parse(localStorage.getItem(FULFILLMENT_KEY + opportunityId) || "null");
+          return Boolean(
+            saved?.readiness === "ready"
+            && Object.values(saved?.gates || {}).length === 6
+            && Object.values(saved.gates).every(Boolean)
+            && saved?.summary
+            && saved?.milestones
+          );
+        } catch { return false; }
+      };
       const renderGuidedWorkflow = () => {
         if (!selectedOpportunity) {
           guidedAction(0,"Add or select a prospect","Start with the company, one contact, and what you are offering. Use 0 when the value is not known yet.","addLead",{buttonLabel:"Add a prospect"});
@@ -470,7 +483,17 @@ h1{font-size:34px}
         if (!hasContactMethod && ["identified","researched"].includes(stage)) {
           guidedAction(0,"Complete the contact record","Add an email or phone number for " + companyName + ". Enter only what you know; leave optional details blank.","openWorkspace",{buttonLabel:"Open the lead record"});
         } else if (stage === "won" || latestOutcome?.disposition === "closed_won") {
-          guidedAction(7,"Prepare the approved project for delivery","Use the signed agreement and authoritative Notion records. Phoenix will not invent requirements or start work automatically.","openFulfillment",{buttonLabel:"Open delivery handoff"});
+          if (deliveryReadinessSaved(selectedOpportunity.id)) {
+            const synthetic = (() => {
+              try { return JSON.parse(localStorage.getItem(FULFILLMENT_KEY + selectedOpportunity.id) || "null")?.synthetic_test === true; }
+              catch { return false; }
+            })();
+            guidedAction(7,synthetic ? "Manage the synthetic delivery milestones" : "Manage the approved delivery milestones",synthetic
+              ? "The test readiness plan is complete and milestone reminders exist for this synthetic opportunity. Review and complete them in order without using real client data."
+              : "The readiness plan is complete. Use the authoritative Notion project and review Phoenix milestone reminders in order.","openActivity",{buttonLabel:"Open delivery activity"});
+          } else {
+            guidedAction(7,"Prepare the approved project for delivery","Use the signed agreement and authoritative Notion records. Phoenix will not invent requirements or start work automatically.","openFulfillment",{buttonLabel:"Open delivery handoff"});
+          }
         } else if (latestOutcome?.disposition === "proposal_requested" || stage === "consultation_completed") {
           if (approvedProposalSaved(selectedOpportunity.id)) {
             guidedAction(6,"Review and manually send the saved proposal","Phoenix confirmed the approved draft is saved on this device. Open it when you are ready to copy or download it; Phoenix will not send it automatically.","openProposal",{showOutcome:true,buttonLabel:"Open saved proposal"});
