@@ -224,6 +224,7 @@ h1{font-size:34px}
       const URL_KEY = "kelley-ai:supabase-url";
       const API_KEY = "kelley-ai:supabase-publishable-key";
       const SESSION_KEY = "phoenix:supabase-session";
+      const SELECTED_OPPORTUNITY_KEY = "phoenix:selected-opportunity";
       const veil = document.getElementById("authVeil");
       const rows = document.getElementById("opportunityRows");
       const workspaceVeil = document.getElementById("workspaceVeil");
@@ -520,6 +521,7 @@ h1{font-size:34px}
         selectedOpportunity = opportunity;
         selectedCompany = company;
         selectedContact = contact;
+        localStorage.setItem(SELECTED_OPPORTUNITY_KEY, opportunity.id);
         document.getElementById("intelligenceName").textContent = company?.name || opportunity.name;
         const contactName = contact ? [contact.first_name,contact.last_name].filter(Boolean).join(" ") : "";
         document.getElementById("intelligenceLocation").textContent = [contactName,company?.location].filter(Boolean).join(" · ") || "Kelley AI opportunity";
@@ -862,7 +864,9 @@ h1{font-size:34px}
         });
       };
       const loadData = async () => {
-        const previouslySelectedOpportunityId = selectedOpportunity?.id || null;
+        const previouslySelectedOpportunityId = selectedOpportunity?.id
+          || localStorage.getItem(SELECTED_OPPORTUNITY_KEY)
+          || null;
         rows.replaceChildren();
         const loading = document.createElement("tr");
         const loadingCell = cell("Loading protected opportunities…");
@@ -3162,6 +3166,13 @@ h1{font-size:34px}
       };
       document.getElementById("openActivity").addEventListener("click", async () => {
         if (!selectedOpportunity) return;
+        const syntheticDelivery = (() => {
+          try {
+            return JSON.parse(localStorage.getItem(FULFILLMENT_KEY + selectedOpportunity.id) || "null")?.synthetic_test === true;
+          } catch {
+            return false;
+          }
+        })();
         document.getElementById("activityName").textContent = selectedCompany?.name || selectedOpportunity.name;
         document.getElementById("activityLocation").textContent = "Activity & follow-up";
         document.getElementById("activityList").replaceChildren();
@@ -3180,12 +3191,16 @@ h1{font-size:34px}
               "Due " + due + " · " + task.priority + " priority",
               overdue
                 ? (task.task_type === "fulfillment"
-                  ? "This delivery reminder needs attention. Verify the authoritative task in Notion."
+                  ? (syntheticDelivery
+                    ? "This synthetic TEST MODE delivery reminder needs attention. No real client delivery is represented."
+                    : "This delivery reminder needs attention. Verify the authoritative task in Notion.")
                   : task.task_type === "qualification"
                     ? "This qualification decision needs human review."
                     : "This follow-up needs attention.")
                 : (task.task_type === "fulfillment"
-                  ? "Phoenix milestone reminder. The authoritative project task remains in Notion."
+                  ? (syntheticDelivery
+                    ? "Synthetic TEST MODE milestone reminder. No real client delivery is represented."
+                    : "Phoenix milestone reminder. The authoritative project task remains in Notion.")
                   : task.task_type === "qualification"
                     ? "Human-approved qualification task."
                     : "Open follow-up task"),
