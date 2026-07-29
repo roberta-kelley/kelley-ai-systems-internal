@@ -73,8 +73,9 @@ h1{font-size:40px}
 .settingspage{padding:22px}.settingsgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}.settingsblock{border:1px solid var(--gold);border-radius:14px;background:#fff;padding:16px}.settingsblock h3{margin:0;font-size:15px}.settingsblock p{color:var(--muted);font-size:10px;line-height:1.6}.settingsblock button{width:100%;margin-top:10px;border:1px solid var(--gold);border-radius:10px;background:var(--rose);padding:11px;color:#fff;font-size:9px;font-weight:800}
 .workspacecontext{position:sticky;top:-26px;z-index:5;margin:-26px -26px 20px;padding:12px 18px;border-bottom:1px solid var(--gold);background:#fff}.workspacecontexttop{display:flex;align-items:center;justify-content:space-between;gap:14px}.workspacecontexttop button{border:1px solid var(--gold);border-radius:999px;background:var(--rose);padding:9px 13px;color:#fff;font-size:9px;font-weight:800}.workspacecontextnext{min-width:0;text-align:right}.workspacecontextnext small{display:block;color:var(--muted);font-size:7px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.workspacecontextnext strong{display:block;overflow:hidden;color:var(--rose2);font-size:11px;text-overflow:ellipsis;white-space:nowrap}.workspacecontextsteps{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;margin-top:9px}.workspacecontextsteps span{border:1px solid var(--line);border-radius:999px;background:#fff;padding:5px 3px;color:var(--muted);font-size:7px;font-weight:800;text-align:center}.workspacecontextsteps span.done{background:var(--goldSoft)}.workspacecontextsteps span.current{border-color:var(--rose);background:var(--rose);color:#fff}
 [data-page][hidden]{display:none!important}
-.leadhead{display:flex;align-items:center;justify-content:space-between;padding:19px 20px;border-bottom:1px solid var(--gold)}
-.leadhead button{border:1px solid var(--gold);border-radius:999px;background:var(--taupe);padding:9px 14px;color:white;font-size:10px;font-weight:700}
+.leadhead{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:19px 20px;border-bottom:1px solid var(--gold)}
+.leadheadactions{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px}.leadhead button{border:1px solid var(--gold);border-radius:999px;background:var(--taupe);padding:9px 14px;color:white;font-size:10px;font-weight:700}.leadhead button.secondary{background:#fff;color:var(--rose2)}
+.importbox{width:min(760px,96vw)!important}.importintro{margin:14px 0;border:1px solid var(--gold);border-radius:13px;background:var(--roseSoft);padding:13px;color:var(--ink);font-size:10px;line-height:1.55}.importpreview{display:grid;gap:8px;margin-top:14px}.importrow{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:start;gap:10px;border:1px solid var(--gold);border-radius:12px;background:#fff;padding:11px}.importrow input{margin-top:3px}.importrow strong{display:block;color:var(--ink);font-size:11px}.importrow small{display:block;margin-top:4px;color:var(--muted);font-size:8px;line-height:1.45}.importstate{border-radius:999px;background:var(--goldSoft);padding:4px 7px;color:var(--rose2);font-size:7px;font-weight:900;text-transform:uppercase}.importrow.duplicate{opacity:.65}.importrow.invalid{border-color:var(--rose)}.importsummary{margin:10px 0 0;color:var(--muted);font-size:9px}.importbox input[type="file"]{width:100%;margin-top:7px;border:1px solid var(--gold);border-radius:11px;background:#fff;padding:11px;color:var(--ink)}
 table{width:100%;border-collapse:collapse;font-size:10px}
 th{background:#fff;color:var(--muted);font-size:8px;letter-spacing:.11em;text-align:left;text-transform:uppercase}
 th,td{padding:13px 11px;border-bottom:1px solid var(--line);white-space:nowrap}
@@ -214,7 +215,7 @@ body[data-current-page="opportunities"] .shell>aside{display:grid;grid-template-
       </article>
       <div class="lower"><article class="card goal"><p class="eye">Planning</p><h2>Goal calculator</h2><p class="sub">Turn your target into a clear client number.</p><label>Monthly income goal<div class="input">$ 5,500</div></label><label>Average project value<div class="input">$ 3,200</div></label><div class="results"><div><small>Clients needed</small><strong>2</strong></div><div><small>Delivery hours</small><strong>30</strong></div></div></article>
         <article class="card calendarcard"><div class="calendarhead"><div><p class="eye">Schedule</p><h2 id="calendarMonth">Month</h2></div><div class="calendarnav"><button id="calendarPrev" type="button" aria-label="Previous month">‹</button><button id="calendarNext" type="button" aria-label="Next month">›</button></div></div><div class="calendarweek"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div><div class="calendargrid" id="calendarGrid"></div><div class="calendardetail" id="calendarDetail"></div><p class="calendarlegend">Select a date to review its tasks and appointments. Gold dots mark scheduled activity.</p></article>
-        <article class="card leads" id="opportunities"><div class="leadhead"><div><p class="eye">Relationships</p><h2>Active opportunities</h2></div><button type="button" id="addLead">＋ Add lead</button></div><table><thead><tr><th>Name</th><th>Status</th><th>Score</th><th>Value</th><th>Stage</th><th>Action</th></tr></thead><tbody id="opportunityRows"><tr><td colspan="6">Loading protected opportunities…</td></tr></tbody></table></article>
+        <article class="card leads" id="opportunities"><div class="leadhead"><div><p class="eye">Relationships</p><h2>Active opportunities</h2></div><div class="leadheadactions"><button class="secondary" type="button" id="importNotion">Import Notion CRM</button><button type="button" id="addLead">＋ Add lead</button></div></div><table><thead><tr><th>Name</th><th>Status</th><th>Score</th><th>Value</th><th>Stage</th><th>Action</th></tr></thead><tbody id="opportunityRows"><tr><td colspan="6">Loading protected opportunities…</td></tr></tbody></table></article>
       </div>
       <article class="card proof" id="insights"><div class="proofhead"><div><p class="eye">Proof &amp; performance</p><h2>What is producing movement</h2></div><p class="sub">Measured from your real Phoenix activity.</p></div><div class="proofgrid"><div class="proofmetric"><small>Outcomes recorded</small><strong id="proofOutcomes">0</strong></div><div class="proofmetric"><small>Follow-ups sent</small><strong id="proofFollowUps">0</strong></div><div class="proofmetric"><small>Interested</small><strong id="proofInterested">0</strong></div><div class="proofmetric"><small>Proposals</small><strong id="proofProposals">0</strong></div><div class="proofmetric"><small>Wins</small><strong id="proofWins">0</strong></div><div class="proofmetric"><small>Positive movement</small><strong id="proofConversion">0%</strong></div></div><div class="proofinsight" id="proofInsight">Phoenix needs a few recorded outcomes before it can identify a reliable pattern.</div><div class="proofinsight" id="proofFeedback">Recommendation feedback will appear here as you accept, edit, or reject Phoenix suggestions.</div></article>
     </section>
@@ -225,6 +226,7 @@ body[data-current-page="opportunities"] .shell>aside{display:grid;grid-template-
   <div id="workspaceVeil" class="workspaceveil" hidden><form class="workspacebox" id="workspaceForm"><header><div><p class="eye">Opportunity workspace</p><h2 id="workspaceName">Lead</h2><p class="location" id="workspaceLocation"></p></div><button class="close" id="closeWorkspace" type="button">Close</button></header><section class="drawernext"><small>Do this next</small><strong id="drawerNextTitle">Review this opportunity</strong><p id="drawerNextCopy">Phoenix will keep the selected lead in context.</p><div class="drawernextbuttons"><button id="drawerNextButton" type="button">Open next action</button><button class="secondary" id="drawerOutcomeButton" type="button" hidden>Record the result</button></div></section><p class="eye">Primary contact</p><label>First name<input id="workspaceFirstName" placeholder="First name"></label><label>Last name<input id="workspaceLastName" placeholder="Last name"></label><label>Role<input id="workspaceRole" placeholder="Owner, Sales Manager, etc."></label><label>Email<input id="workspaceEmail" type="email" placeholder="name@company.com"></label><label>Phone<input id="workspacePhone" type="tel" placeholder="Phone number"></label><p class="eye">Opportunity</p><label>Stage<select id="workspaceStage"><option value="identified">Captured</option><option value="researched">Researched</option><option value="contacted">Contacted</option><option value="engaged">Engaged</option><option value="consultation_scheduled">Consultation scheduled</option><option value="consultation_completed">Consultation completed</option><option value="proposal_sent">Proposal sent</option><option value="decision_pending">Decision pending</option><option value="won">Won</option><option value="lost">Lost</option><option value="nurture">Nurture</option></select></label><label>Next best action<textarea id="workspaceAction" placeholder="What should happen next?"></textarea></label><button class="save" id="saveWorkspace" type="submit">Save contact and lead</button><p class="message" id="workspaceMessage"></p></form></div>
   <div id="orchestratorVeil" class="workspaceveil" hidden><form class="workspacebox" id="orchestratorForm"><header><div><p class="eye">Human decision required</p><h2 id="orchestratorReviewName">Review Phoenix recommendation</h2><p class="location" id="orchestratorReviewLocation">No action is taken until you approve it.</p></div><button class="close" id="closeOrchestrator" type="button">Close</button></header><label>Recommended action<textarea id="orchestratorAction"></textarea></label><label>Why Phoenix recommends it<textarea id="orchestratorRationale" readonly></textarea></label><label>Confidence score<input id="orchestratorConfidence" readonly></label><label>Your decision<select id="orchestratorDecision"><option value="accepted">Approve as written</option><option value="edited">Approve my edited action</option><option value="rejected">Decline this recommendation</option></select></label><label class="approval"><input id="approveOrchestrator" type="checkbox"><span>I reviewed the facts, rationale, action, and owner. I authorize Phoenix to record this decision.</span></label><button class="save" id="saveOrchestratorDecision" type="submit">Save decision and refresh priorities</button><p class="message" id="orchestratorMessage"></p></form></div>
   <div id="addLeadVeil" class="workspaceveil" hidden><form class="workspacebox" id="addLeadForm"><header><div><p class="eye">New relationship</p><h2>Add a lead</h2><p class="location">Create the company, contact, and first opportunity.</p></div><button class="close" id="closeAddLead" type="button">Close</button></header><p class="eye">Company</p><label>Company name<input id="newCompanyName" required placeholder="Company or prospect name"></label><label>Location<input id="newCompanyLocation" placeholder="City, State"></label><p class="eye">Primary contact</p><label>First name<input id="newFirstName" required placeholder="First name"></label><label>Last name<input id="newLastName" placeholder="Last name"></label><label>Role<input id="newContactRole" placeholder="Owner, Sales Manager, etc."></label><label>Email<input id="newContactEmail" type="email" placeholder="name@company.com"></label><label>Phone<input id="newContactPhone" type="tel" placeholder="Phone number"></label><p class="eye">Opportunity</p><label>Opportunity name<input id="newOpportunityName" required placeholder="Example: AI systems consultation"></label><label>Estimated value<input id="newEstimatedValue" type="number" min="0" step="1" value="0"></label><label>Next best action<textarea id="newNextAction" placeholder="Example: Research company and prepare outreach"></textarea></label><button class="save" id="saveNewLead" type="submit">Add lead to Phoenix</button><p class="message" id="addLeadMessage"></p></form></div>
+  <div id="importLeadVeil" class="workspaceveil" hidden><form class="workspacebox importbox" id="importLeadForm"><header><div><p class="eye">Notion CRM import</p><h2>Bring prospects into Phoenix</h2><p class="location">Preview, check duplicates, then approve only the records you want.</p></div><button class="close" id="closeImportLead" type="button">Close</button></header><div class="importintro"><strong>Safe import:</strong> In Notion, open <em>Kelley AI Systems — Prospect &amp; Outreach CRM</em>, choose the ••• menu, then Export → CSV. Phoenix reads the file only on this device. It does not store a Notion password or integration secret.</div><button class="save" id="loadSyntheticImport" type="button" hidden>Load a fictional TEST MODE prospect</button><label>Select the Notion CSV export<input id="notionCsvFile" type="file" accept=".csv,text/csv"></label><p class="importsummary" id="importSummary">Choose the CSV file to begin. Nothing will be imported yet.</p><div class="importpreview" id="importPreview"></div><label class="approval"><input id="approveNotionImport" type="checkbox"><span>I reviewed the selected prospects and approve creating these Phoenix records.</span></label><button class="save" id="runNotionImport" type="submit" disabled>Import selected prospects</button><p class="message" id="importMessage"></p></form></div>
   <div id="briefVeil" class="workspaceveil" hidden><form class="workspacebox" id="briefForm"><header><div><p class="eye">Closer intelligence</p><h2 id="briefName">Call preparation</h2><p class="location" id="briefLocation"></p></div><button class="close" id="closeBrief" type="button">Close</button></header><button class="save" id="generateBrief" type="button">Generate call brief</button><label>Company background<textarea id="briefBackground"></textarea></label><label>Possible needs to verify, one per line<textarea id="briefPainPoints"></textarea></label><label>Recommended questions, one per line<textarea id="briefQuestions"></textarea></label><label>Relevant Kelley AI offer<textarea id="briefOffer"></textarea></label><label>Possible objections and responses, using Objection | Response<textarea id="briefObjections"></textarea></label><label>Desired call outcome<textarea id="briefOutcome"></textarea></label><button class="save" id="saveBrief" type="submit">Save call brief</button><p class="message" id="briefMessage"></p></form></div>
   <div id="preparationVeil" class="workspaceveil" hidden><section class="workspacebox prepbox"><header><div><p class="eye">Unified prospect preparation</p><h2 id="preparationName">Prepare for conversation</h2><p class="location" id="preparationLocation">Closer practice, revenue context, meeting access and shared knowledge.</p></div><button class="close" id="closePreparation" type="button">Close</button></header><div class="brief"><strong>One approved source of truth.</strong><br>This workspace uses the selected opportunity, approved public research and saved Closer brief. Estimates remain estimates. Zoom is opened only when you choose it. No message, call, recording or external action happens automatically.</div><div class="preptabs"><button class="preptab active" type="button" data-prep-tab="conversation">Call briefing</button><button class="preptab" type="button" data-prep-tab="practice">Practice</button><button class="preptab" type="button" data-prep-tab="calculator">Revenue loss</button><button class="preptab" type="button" data-prep-tab="knowledge">Agent knowledge</button></div>
     <div class="preppanel" data-prep-panel="conversation"><label>Conversation briefing<textarea id="preparationBrief" style="min-height:360px" readonly></textarea></label><div class="prepgrid"><label>Zoom meeting link<input id="preparationZoom" type="url" placeholder="https://zoom.us/j/..."></label><label>Meeting time<input id="preparationMeetingTime" type="datetime-local"></label></div><button class="save" id="saveMeetingPreparation" type="button">Save meeting details on this device</button><button class="save" id="joinPreparationZoom" type="button">Open Zoom meeting</button><p class="message" id="preparationMeetingMessage"></p></div>
@@ -250,6 +252,7 @@ body[data-current-page="opportunities"] .shell>aside{display:grid;grid-template-
       const rows = document.getElementById("opportunityRows");
       const workspaceVeil = document.getElementById("workspaceVeil");
       const addLeadVeil = document.getElementById("addLeadVeil");
+      const importLeadVeil = document.getElementById("importLeadVeil");
       const briefVeil = document.getElementById("briefVeil");
       const preparationVeil = document.getElementById("preparationVeil");
       const PREPARATION_KEY = "phoenix:preparation:";
@@ -407,6 +410,7 @@ body[data-current-page="opportunities"] .shell>aside{display:grid;grid-template-
         return name.startsWith("[TEST]") && (source === "internal_test" || Boolean(source));
       };
       const TEST_MODE = false;
+      document.getElementById("loadSyntheticImport").hidden = !TEST_MODE;
       document.getElementById("researchSynthetic").closest("label").hidden = true;
       document.getElementById("fulfillmentSynthetic").closest("label").hidden = true;
       let selectedOpportunity = null;
@@ -415,6 +419,7 @@ body[data-current-page="opportunities"] .shell>aside{display:grid;grid-template-
       let selectedBrief = null;
       let selectedQualificationRecommendation = null;
       let selectedOrchestratorRecommendation = null;
+      let notionImportCandidates = [];
 
       const config = () => ({
         url: localStorage.getItem(URL_KEY) || "",
@@ -1463,6 +1468,310 @@ body[data-current-page="opportunities"] .shell>aside{display:grid;grid-template-
         addLeadVeil.hidden = false;
       });
       document.getElementById("closeAddLead").addEventListener("click", () => { addLeadVeil.hidden = true; });
+      const normalizeImportText = value => String(value || "").trim();
+      const normalizeCompanyKey = value => normalizeImportText(value)
+        .replace(/^\[TEST\]\s*/i,"")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g,"");
+      const normalizePhoneKey = value => normalizeImportText(value).replace(/\D/g,"");
+      const parseCsv = text => {
+        const records = [];
+        let record = [];
+        let fieldValue = "";
+        let quoted = false;
+        for (let index = 0; index < text.length; index += 1) {
+          const character = text[index];
+          if (quoted) {
+            if (character === '"' && text[index + 1] === '"') {
+              fieldValue += '"';
+              index += 1;
+            } else if (character === '"') {
+              quoted = false;
+            } else {
+              fieldValue += character;
+            }
+          } else if (character === '"') {
+            quoted = true;
+          } else if (character === ",") {
+            record.push(fieldValue);
+            fieldValue = "";
+          } else if (character === "\n") {
+            record.push(fieldValue.replace(/\r$/,""));
+            records.push(record);
+            record = [];
+            fieldValue = "";
+          } else {
+            fieldValue += character;
+          }
+        }
+        if (fieldValue || record.length) {
+          record.push(fieldValue.replace(/\r$/,""));
+          records.push(record);
+        }
+        const headers = (records.shift() || []).map((header,index) =>
+          normalizeImportText(index === 0 ? header.replace(/^\uFEFF/,"") : header)
+        );
+        return records
+          .filter(row => row.some(value => normalizeImportText(value)))
+          .map(row => Object.fromEntries(headers.map((header,index) => [header,row[index] ?? ""])));
+      };
+      const notionStageToPhoenix = stage => {
+        const normalized = normalizeImportText(stage).toLowerCase();
+        if (normalized === "contacted" || normalized === "following up") return "contacted";
+        if (normalized === "discovery booked") return "consultation_scheduled";
+        if (normalized === "proposal") return "proposal_sent";
+        if (normalized === "nurture" || normalized === "closed") return "nurture";
+        if (normalized === "converted") return "won";
+        return "identified";
+      };
+      const notionPriorityScore = row => {
+        const fit = normalizeImportText(row["Fit Tier"]).toLowerCase();
+        const priority = normalizeImportText(row.Priority).toLowerCase();
+        let score = fit.startsWith("a ") ? 80
+          : fit.startsWith("b ") ? 60
+          : fit.startsWith("c ") ? 40
+          : fit.includes("do not pursue") ? 10
+          : 30;
+        if (priority === "high") score += 10;
+        if (priority === "low") score -= 10;
+        return Math.max(0,Math.min(100,score));
+      };
+      const splitContactName = value => {
+        const parts = normalizeImportText(value).split(/\s+/).filter(Boolean);
+        return {
+          first:parts.shift() || "",
+          last:parts.join(" ")
+        };
+      };
+      const syncImportButton = () => {
+        const selected = notionImportCandidates.filter(candidate => candidate.selected && !candidate.duplicate && !candidate.invalid).length;
+        document.getElementById("runNotionImport").disabled = selected === 0;
+        document.getElementById("importSummary").textContent = notionImportCandidates.length
+          ? selected + " prospect" + (selected === 1 ? "" : "s") + " selected · "
+            + notionImportCandidates.filter(candidate => candidate.duplicate).length + " duplicate"
+            + (notionImportCandidates.filter(candidate => candidate.duplicate).length === 1 ? "" : "s") + " skipped"
+          : "Choose the CSV file to begin. Nothing will be imported yet.";
+      };
+      const renderImportPreview = () => {
+        const preview = document.getElementById("importPreview");
+        preview.replaceChildren();
+        notionImportCandidates.forEach((candidate,index) => {
+          const item = document.createElement("div");
+          item.className = "importrow";
+          if (candidate.duplicate) item.classList.add("duplicate");
+          if (candidate.invalid) item.classList.add("invalid");
+          const checkbox = document.createElement("input");
+          checkbox.type = "checkbox";
+          checkbox.checked = candidate.selected;
+          checkbox.disabled = candidate.duplicate || candidate.invalid;
+          checkbox.setAttribute("aria-label","Import " + (candidate.company || "unnamed row"));
+          checkbox.addEventListener("change", () => {
+            notionImportCandidates[index].selected = checkbox.checked;
+            syncImportButton();
+          });
+          const details = document.createElement("div");
+          const title = document.createElement("strong");
+          title.textContent = candidate.company || "Missing company name";
+          const meta = document.createElement("small");
+          meta.textContent = [
+            candidate.contact || "Contact unknown",
+            candidate.row.Email || candidate.row.Phone || "No contact method",
+            candidate.row["Pipeline Stage"] || "Stage not set"
+          ].join(" · ");
+          details.append(title,meta);
+          const state = document.createElement("span");
+          state.className = "importstate";
+          state.textContent = candidate.unsafeTestRecord ? "Preview only"
+            : candidate.invalid ? "Needs company"
+            : candidate.duplicate ? "Already in Phoenix"
+            : "Ready";
+          item.append(checkbox,details,state);
+          preview.appendChild(item);
+        });
+        syncImportButton();
+      };
+      document.getElementById("importNotion").addEventListener("click", () => {
+        document.getElementById("importMessage").textContent = "";
+        document.getElementById("approveNotionImport").checked = false;
+        importLeadVeil.hidden = false;
+      });
+      document.getElementById("closeImportLead").addEventListener("click", () => { importLeadVeil.hidden = true; });
+      document.getElementById("notionCsvFile").addEventListener("change", async event => {
+        const file = event.target.files?.[0];
+        const message = document.getElementById("importMessage");
+        message.textContent = "";
+        notionImportCandidates = [];
+        renderImportPreview();
+        if (!file) return;
+        try {
+          const parsedRows = parseCsv(await file.text());
+          if (!parsedRows.length) throw new Error("The CSV did not contain any prospect rows.");
+          if (!Object.prototype.hasOwnProperty.call(parsedRows[0],"Prospect / Company")) {
+            throw new Error("Choose the CSV exported from Kelley AI Systems — Prospect & Outreach CRM.");
+          }
+          const [companies,contacts] = await Promise.all([
+            request("companies?select=id,name"),
+            request("contacts?select=id,email,phone")
+          ]);
+          const companyKeys = new Set(companies.map(company => normalizeCompanyKey(company.name)).filter(Boolean));
+          const emailKeys = new Set(contacts.map(contact => normalizeImportText(contact.email).toLowerCase()).filter(Boolean));
+          const phoneKeys = new Set(contacts.map(contact => normalizePhoneKey(contact.phone)).filter(Boolean));
+          notionImportCandidates = parsedRows.map(row => {
+            const company = normalizeImportText(row["Prospect / Company"]);
+            const contact = normalizeImportText(row["Primary Contact"] || row["Contact Person"]);
+            const email = normalizeImportText(row.Email).toLowerCase();
+            const phone = normalizePhoneKey(row.Phone);
+            const duplicate = companyKeys.has(normalizeCompanyKey(company))
+              || Boolean(email && emailKeys.has(email))
+              || Boolean(phone && phoneKeys.has(phone));
+            const unsafeTestRecord = TEST_MODE && !company.startsWith("[TEST]");
+            const invalid = !company || unsafeTestRecord;
+            return {row,company,contact,duplicate,invalid,unsafeTestRecord,selected:!duplicate && !invalid};
+          });
+          renderImportPreview();
+          message.textContent = TEST_MODE && notionImportCandidates.some(candidate => candidate.unsafeTestRecord)
+            ? "Preview only. TEST MODE will not save real CRM records. Use the fictional test prospect button for the import test."
+            : "Preview ready. Review the selected records before importing.";
+        } catch (problem) {
+          message.textContent = problem instanceof Error ? problem.message : "The Notion export could not be read.";
+        }
+      });
+      document.getElementById("loadSyntheticImport").addEventListener("click", async () => {
+        const message = document.getElementById("importMessage");
+        message.textContent = "";
+        try {
+          const companies = await request("companies?select=id,name");
+          const company = "[TEST] Notion Import Sample";
+          const duplicate = companies.some(item => normalizeCompanyKey(item.name) === normalizeCompanyKey(company));
+          const row = {
+            "Prospect / Company":company,
+            "Primary Contact":"Sample Owner",
+            "Contact Role":"Owner",
+            "Email":"sample-owner@example.com",
+            "Phone":"404-555-0100",
+            "Website":"https://example.com/",
+            "Pipeline Stage":"Researching",
+            "Fit Tier":"B — Promising",
+            "Priority":"Medium",
+            "Industry":"Remodeling",
+            "Next Action":"Qualify this fictional imported prospect",
+            "Next Contact":"",
+            "Source":"Other",
+            "Reason to help":"Invented TEST MODE import data"
+          };
+          notionImportCandidates = [{row,company,contact:"Sample Owner",duplicate,invalid:false,unsafeTestRecord:false,selected:!duplicate}];
+          renderImportPreview();
+          message.textContent = duplicate
+            ? "The fictional sample was already imported. Phoenix correctly identified it as a duplicate."
+            : "Fictional sample ready. Review it, approve it, then run the TEST MODE import.";
+        } catch (problem) {
+          message.textContent = problem instanceof Error ? problem.message : "The fictional sample could not be prepared.";
+        }
+      });
+      document.getElementById("importLeadForm").addEventListener("submit", async event => {
+        event.preventDefault();
+        const button = document.getElementById("runNotionImport");
+        const message = document.getElementById("importMessage");
+        const approved = document.getElementById("approveNotionImport").checked;
+        const selected = notionImportCandidates.filter(candidate => candidate.selected && !candidate.duplicate && !candidate.invalid);
+        const workspaceId = selectedOpportunity?.workspace_id || selectedCompany?.workspace_id;
+        if (!approved) {
+          message.textContent = "Review the selected prospects and check the approval box before importing.";
+          return;
+        }
+        if (!workspaceId) {
+          message.textContent = "Open an existing opportunity once so Phoenix can confirm the secure workspace.";
+          return;
+        }
+        if (!selected.length) {
+          message.textContent = "Select at least one new prospect.";
+          return;
+        }
+        button.disabled = true;
+        button.textContent = "Importing…";
+        message.textContent = "";
+        let imported = 0;
+        const failures = [];
+        for (const candidate of selected) {
+          const row = candidate.row;
+          try {
+            const companyPayload = {
+              workspace_id:workspaceId,
+              name:candidate.company,
+              website:normalizeImportText(row.Website) || null,
+              industry:normalizeImportText(row.Industry) || null,
+              source:TEST_MODE ? "internal_test" : "notion_import"
+            };
+            const company = await createRecord("companies",companyPayload);
+            const contactLabel = candidate.contact || normalizeImportText(row["Contact Person"]);
+            const hasContactData = Boolean(contactLabel || row.Email || row.Phone);
+            let contact = null;
+            if (hasContactData) {
+              const name = splitContactName(contactLabel);
+              contact = await createRecord("contacts",{
+                workspace_id:workspaceId,
+                company_id:company.id,
+                first_name:name.first || "Unknown",
+                last_name:name.last || null,
+                role:normalizeImportText(row["Contact Role"]) || null,
+                email:normalizeImportText(row.Email) || null,
+                phone:normalizeImportText(row.Phone) || null,
+                consent_status:"unknown"
+              });
+            }
+            const importedNotes = [
+              row["Pipeline Stage"] ? "Notion stage: " + normalizeImportText(row["Pipeline Stage"]) : "",
+              row["Fit Tier"] ? "Notion fit: " + normalizeImportText(row["Fit Tier"]) : "",
+              row.Priority ? "Notion priority: " + normalizeImportText(row.Priority) : "",
+              row["Verified Opportunity"] ? "Notion note: " + normalizeImportText(row["Verified Opportunity"]) : "",
+              row["Reason to help"] ? "Reason recorded in Notion: " + normalizeImportText(row["Reason to help"]) : ""
+            ].filter(Boolean);
+            const opportunityPayload = {
+              workspace_id:workspaceId,
+              company_id:company.id,
+              name:candidate.company + " opportunity",
+              stage:notionStageToPhoenix(row["Pipeline Stage"]),
+              status:"open",
+              estimated_value:0,
+              priority_score:notionPriorityScore(row),
+              score_reasons:importedNotes.length ? importedNotes : ["Imported from the Kelley AI Systems Notion CRM"],
+              source:TEST_MODE ? "internal_test" : "notion_import",
+              next_action:normalizeImportText(row["Next Action"]) || "Qualify this imported prospect"
+            };
+            if (contact) opportunityPayload.primary_contact_id = contact.id;
+            const opportunity = await createRecord("opportunities",opportunityPayload);
+            const nextContact = normalizeImportText(row["Next Contact"] || row["date:Next Contact:start"]);
+            if (nextContact) {
+              const due = new Date(nextContact.length === 10 ? nextContact + "T09:00:00" : nextContact);
+              if (!Number.isNaN(due.getTime())) {
+                await createRecord("tasks",{
+                  workspace_id:workspaceId,
+                  opportunity_id:opportunity.id,
+                  title:opportunityPayload.next_action,
+                  task_type:"follow_up",
+                  priority:normalizeImportText(row.Priority).toLowerCase() === "high" ? "high" : "normal",
+                  status:"open",
+                  due_at:due.toISOString()
+                });
+              }
+            }
+            imported += 1;
+          } catch (problem) {
+            failures.push(candidate.company + ": " + (problem instanceof Error ? problem.message : "Import failed"));
+          }
+        }
+        message.textContent = imported + " prospect" + (imported === 1 ? "" : "s") + " imported."
+          + (failures.length ? " " + failures.length + " could not be imported: " + failures.join(" | ") : "");
+        await loadData();
+        button.textContent = "Import selected prospects";
+        button.disabled = false;
+        if (!failures.length) {
+          notionImportCandidates = [];
+          document.getElementById("notionCsvFile").value = "";
+          document.getElementById("approveNotionImport").checked = false;
+          renderImportPreview();
+        }
+      });
       document.getElementById("addLeadForm").addEventListener("submit", async event => {
         event.preventDefault();
         const button = document.getElementById("saveNewLead");
