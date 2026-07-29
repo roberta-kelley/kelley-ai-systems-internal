@@ -147,6 +147,13 @@ h1{font-size:34px}
 .utility{position:fixed;right:12px;bottom:12px;z-index:900;display:flex;gap:7px}.utility button{width:auto;margin:0;background:#fff;color:var(--ink);font-size:9px;padding:7px 10px}
 .dataerror{padding:18px!important;color:var(--rose2);white-space:normal}
 @media(max-width:500px){.authveil{padding:10px}.authbox{margin:8px auto;padding:22px}}
+.executivesnapshot{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}.executiverevenue,.executiveday{padding:22px}.periodgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:17px}.periodmetric{border:1px solid var(--gold);border-radius:14px;background:#fff;padding:15px}.periodmetric small{display:block;color:var(--muted);font-size:8px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.periodmetric strong{display:block;margin-top:7px;color:var(--rose);font-size:24px}.daycolumns{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:17px}.daycolumn{border:1px solid var(--gold);border-radius:14px;background:#fff;padding:14px}.daycolumn h3{font-size:14px}.daylist{display:grid;gap:8px;margin-top:10px}.dayitem{border-radius:10px;background:var(--roseSoft);padding:10px;color:var(--ink);font-size:10px;line-height:1.45}.dayitem small{display:block;margin-top:3px;color:var(--muted);font-size:8px}.dayempty{color:var(--muted);font-size:10px;line-height:1.5}
+body[data-current-page="dashboard"] .operatorguide,body[data-current-page="dashboard"] .shell>aside,body[data-current-page="insights"] .operatorguide,body[data-current-page="insights"] .shell>aside,body[data-current-page="settings"] .operatorguide,body[data-current-page="settings"] .shell>aside{display:none!important}
+body[data-current-page="dashboard"] .shell,body[data-current-page="insights"] .shell,body[data-current-page="settings"] .shell,body[data-current-page="opportunities"] .shell{grid-template-columns:minmax(0,1fr)}
+body[data-current-page="opportunities"] .operatorguide{position:static;top:auto;margin:0 0 18px;box-shadow:none}body[data-current-page="opportunities"] .operatorpanel{display:block}body[data-current-page="opportunities"] .operatorpanel small{display:block}body[data-current-page="opportunities"] .operatorpanel strong,body[data-current-page="opportunities"] .operatorpanel p,body[data-current-page="opportunities"] .operatorbuttons{margin-top:8px}body[data-current-page="opportunities"] .operatorbuttons{display:grid;grid-template-columns:1fr 1fr}
+body[data-current-page="opportunities"] .shell>aside{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--gold);border-left:0}body[data-current-page="opportunities"] .shell>aside .aside:nth-child(3),body[data-current-page="opportunities"] .shell>aside .aside:nth-child(4){grid-column:1/-1}body[data-current-page="opportunities"] .shell>aside .aside:nth-child(3){display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}body[data-current-page="opportunities"] .shell>aside .aside:nth-child(3)>.eye,body[data-current-page="opportunities"] .shell>aside .aside:nth-child(3)>.brief{grid-column:1/-1}body[data-current-page="opportunities"] .shell>aside .aside:nth-child(3) .actionbtn{margin-top:0}body[data-current-page="opportunities"] .shell>aside .aside:nth-child(4){display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}body[data-current-page="opportunities"] .shell>aside .aside:nth-child(4)>.eye,body[data-current-page="opportunities"] .shell>aside .aside:nth-child(4)>.action{grid-column:1/-1}body[data-current-page="opportunities"] .shell>aside .aside:nth-child(4) .actionbtn{margin-top:0}
+@media(max-width:1100px){.executivesnapshot{grid-template-columns:1fr}.daycolumns{grid-template-columns:1fr 1fr}body[data-current-page="opportunities"] .shell>aside .aside:nth-child(3){grid-template-columns:1fr 1fr}}
+@media(max-width:700px){.periodgrid,.daycolumns{grid-template-columns:1fr}body[data-current-page="opportunities"] .shell>aside{grid-template-columns:1fr}body[data-current-page="opportunities"] .shell>aside .aside:nth-child(3),body[data-current-page="opportunities"] .shell>aside .aside:nth-child(4){grid-column:1;grid-template-columns:1fr}body[data-current-page="opportunities"] .shell>aside .aside:nth-child(3)>.eye,body[data-current-page="opportunities"] .shell>aside .aside:nth-child(3)>.brief,body[data-current-page="opportunities"] .shell>aside .aside:nth-child(4)>.eye,body[data-current-page="opportunities"] .shell>aside .aside:nth-child(4)>.action{grid-column:1}body[data-current-page="opportunities"] .operatorbuttons{grid-template-columns:1fr}}
 
   </style>
 </head>
@@ -158,7 +165,7 @@ h1{font-size:34px}
     <nav class="sidenav">
       <a class="active" href="./" data-page-target="dashboard"><em>▦</em>Dashboard</a>
       <a href="./opportunities/" data-page-target="opportunities"><em>♙</em>Leads &amp; Pipeline</a>
-      <a href="./?focus=next" data-page-target="dashboard" data-nav-action="next"><em>▣</em>Do this next</a>
+      <a href="./opportunities/?focus=next" data-page-target="opportunities" data-nav-action="next"><em>▣</em>Do this next</a>
       <a href="https://typebot.co/prestige-remodeling-solutions-demo-concierge-9eezvm4" target="_blank" rel="noopener noreferrer"><em>✣</em>AI Concierge Demo <span class="live">Demo</span></a>
       <a href="./insights/" data-page-target="insights"><em>⌁</em>Insights</a>
       <a href="./settings/" data-page-target="settings"><em>⚙</em>Settings</a>
@@ -174,6 +181,10 @@ h1{font-size:34px}
       <div class="intro"><div><p class="eye" id="todayDate">Today</p><h1>Executive overview</h1><p>Revenue, relationships, and the next decisions that move the business forward.</p></div><div class="focus" id="todayFocus">Today’s focus · Loading your next best move</div></div>
       <div class="metrics"><article class="card metric"><span class="icon">A</span><p>Active leads</p><strong id="metricActive">0</strong></article><article class="card metric"><span class="icon">D</span><p>Follow-ups due</p><strong id="metricDue">0</strong></article><article class="card metric"><span class="icon">P</span><p>Open pipeline</p><strong id="metricPipeline">$0</strong></article><article class="card metric"><span class="icon">W</span><p>Won value</p><strong id="metricWon">$0</strong></article></div>
       <article class="card progress"><div><p class="eye">Won-value progress</p><strong id="wonProgress">$0</strong><span> / $5,500 goal</span></div><b class="pct" id="wonPercent">0%</b><div class="track"><i id="wonTrack"></i></div></article>
+      <div class="executivesnapshot">
+        <article class="card executiverevenue"><p class="eye">Revenue snapshot</p><h2>What the business has earned</h2><p class="sub">Based on opportunities recorded as won in Phoenix.</p><div class="periodgrid"><div class="periodmetric"><small>This week</small><strong id="revenueWeek">$0</strong></div><div class="periodmetric"><small>This month</small><strong id="revenueMonth">$0</strong></div><div class="periodmetric"><small>This year</small><strong id="revenueYear">$0</strong></div></div></article>
+        <article class="card executiveday"><p class="eye">Today</p><h2>Appointments and priority work</h2><div class="daycolumns"><section class="daycolumn"><h3>Scheduled appointments</h3><div class="daylist" id="dashboardAppointments"><p class="dayempty">No appointments are scheduled in Phoenix.</p></div></section><section class="daycolumn"><h3>Priority tasks</h3><div class="daylist" id="dashboardTasks"><p class="dayempty">No priority tasks are due.</p></div></section></div></article>
+      </div>
       <article class="card operatorguide">
         <div class="operatorhead"><div><p class="eye">Guided operating mode</p><h2>One prospect. One next step.</h2><p class="sub">Phoenix keeps the order. You enter facts, review drafts, and approve decisions.</p></div><span class="operatorbadge">15-day solo mode</span></div>
         <div class="operatorsteps" id="operatorSteps">
@@ -293,6 +304,7 @@ h1{font-size:34px}
       };
       const showPage = (page,{updateHash = true} = {}) => {
         const safePage = pageNames[page] ? page : "dashboard";
+        document.body.dataset.currentPage = safePage;
         Object.entries(pageElements).forEach(([name,elements]) => {
           elements.forEach(element => { element.hidden = name !== safePage; });
         });
@@ -302,7 +314,7 @@ h1{font-size:34px}
         document.querySelector(".leads").hidden = safePage !== "opportunities";
         lower.style.gridTemplateColumns = safePage === "opportunities" ? "1fr" : "";
         document.querySelectorAll(".sidenav a[data-page-target],.mobilepagebar a").forEach(item => {
-          item.classList.toggle("active", item.dataset.pageTarget === safePage);
+          item.classList.toggle("active", item.dataset.pageTarget === safePage && !item.dataset.navAction);
         });
         if (updateHash && location.href !== pageUrls[safePage]) location.assign(pageUrls[safePage]);
         window.scrollTo({top:0,behavior:"smooth"});
@@ -312,10 +324,13 @@ h1{font-size:34px}
           document.querySelector(".intro"),
           document.querySelector(".metrics"),
           document.querySelector(".progress"),
+          document.querySelector(".executivesnapshot"),
           document.querySelector(".orchestrator")
         ];
         const proof = document.querySelector(".proof");
-        pageElements.opportunities = [addPageHeading("opportunities",document.querySelector(".lower"))];
+        const opportunityHeading = addPageHeading("opportunities",document.querySelector(".lower"));
+        pageElements.opportunities = [opportunityHeading];
+        opportunityHeading.after(document.querySelector(".operatorguide"));
         pageElements.insights = [addPageHeading("insights",proof),proof];
         const settings = document.createElement("article");
         settings.className = "card settingspage";
@@ -329,25 +344,25 @@ h1{font-size:34px}
         [...document.querySelectorAll(".sidenav a")].forEach(link => {
           const target = link.dataset.pageTarget || "";
           if (!target) return;
-          link.href = link.dataset.navAction === "next" ? `${pageUrls.dashboard}?focus=next` : pageUrls[target];
+          link.href = link.dataset.navAction === "next" ? `${pageUrls.opportunities}?focus=next` : pageUrls[target];
         });
         const mobile = document.createElement("nav");
         mobile.className = "mobilepagebar";
         mobile.setAttribute("aria-label","Phoenix pages");
-        mobile.innerHTML = `<a data-page-target="dashboard" href="${pageUrls.dashboard}">Home</a><a data-page-target="opportunities" href="${pageUrls.opportunities}">Leads</a><a data-page-target="dashboard" href="${pageUrls.dashboard}?focus=next">Do next</a><a data-page-target="insights" href="${pageUrls.insights}">Insights</a><a data-page-target="settings" href="${pageUrls.settings}">Settings</a>`;
+        mobile.innerHTML = `<a data-page-target="dashboard" href="${pageUrls.dashboard}">Home</a><a data-page-target="opportunities" href="${pageUrls.opportunities}">Leads</a><a data-page-target="opportunities" data-nav-action="next" href="${pageUrls.opportunities}?focus=next">Do next</a><a data-page-target="insights" href="${pageUrls.insights}">Insights</a><a data-page-target="settings" href="${pageUrls.settings}">Settings</a>`;
         document.querySelector(".demo").after(mobile);
         document.querySelectorAll(".workspacebox").forEach(box => {
           const context = document.createElement("div");
           context.className = "workspacecontext";
-          context.innerHTML = `<div class="workspacecontexttop"><button type="button">← Dashboard</button><div class="workspacecontextnext"><small>Do this next</small><strong>Review this step</strong></div></div><div class="workspacecontextsteps"></div>`;
+          context.innerHTML = `<div class="workspacecontexttop"><button type="button">← Opportunities</button><div class="workspacecontextnext"><small>Do this next</small><strong>Review this step</strong></div></div><div class="workspacecontextsteps"></div>`;
           context.querySelector("button").addEventListener("click", () => {
             box.closest(".workspaceveil").hidden = true;
-            showPage("dashboard");
+            showPage("opportunities");
           });
           box.prepend(context);
         });
         showPage(pageFromPath(),{updateHash:false});
-        if (pageFromPath() === "dashboard" && new URLSearchParams(location.search).get("focus") === "next") {
+        if (pageFromPath() === "opportunities" && new URLSearchParams(location.search).get("focus") === "next") {
           requestAnimationFrame(() => document.querySelector(".operatorguide").scrollIntoView({behavior:"smooth",block:"start"}));
         }
       };
@@ -988,6 +1003,68 @@ h1{font-size:34px}
           container.appendChild(card);
         });
       };
+      const renderExecutiveSnapshot = ({opportunities,tasks,outcomes}) => {
+        const now = new Date();
+        const startOfDay = new Date(now.getFullYear(),now.getMonth(),now.getDate());
+        const endOfDay = new Date(startOfDay);
+        endOfDay.setDate(endOfDay.getDate() + 1);
+        const startOfWeek = new Date(startOfDay);
+        startOfWeek.setDate(startOfWeek.getDate() - ((startOfWeek.getDay() + 6) % 7));
+        const startOfMonth = new Date(now.getFullYear(),now.getMonth(),1);
+        const startOfYear = new Date(now.getFullYear(),0,1);
+        const opportunityMap = new Map(opportunities.map(item => [item.id,item]));
+        const wonByOpportunity = new Map();
+        outcomes.forEach(outcome => {
+          const disposition = String(outcome.disposition || "").toLowerCase().replace(/\s+/g,"_");
+          if (!["closed_won","won"].includes(disposition) || wonByOpportunity.has(outcome.opportunity_id)) return;
+          wonByOpportunity.set(outcome.opportunity_id,outcome);
+        });
+        const revenueSince = start => [...wonByOpportunity.values()].reduce((total,outcome) => {
+          const recorded = new Date(outcome.created_at);
+          const opportunity = opportunityMap.get(outcome.opportunity_id);
+          return recorded >= start ? total + Number(opportunity?.estimated_value || 0) : total;
+        },0);
+        document.getElementById("revenueWeek").textContent = money.format(revenueSince(startOfWeek));
+        document.getElementById("revenueMonth").textContent = money.format(revenueSince(startOfMonth));
+        document.getElementById("revenueYear").textContent = money.format(revenueSince(startOfYear));
+        const appointmentTerms = /appointment|meeting|consultation|call/i;
+        const datedTasks = tasks.filter(task => task.due_at).sort((a,b) => new Date(a.due_at) - new Date(b.due_at));
+        const appointments = datedTasks.filter(task => {
+          const due = new Date(task.due_at);
+          return due >= startOfDay && due < endOfDay && appointmentTerms.test(`${task.task_type || ""} ${task.title || ""}`);
+        });
+        const priorityTasks = datedTasks.filter(task => {
+          const due = new Date(task.due_at);
+          return due < endOfDay && !appointmentTerms.test(`${task.task_type || ""} ${task.title || ""}`);
+        }).sort((a,b) => {
+          const rank = {high:3,urgent:4,normal:2,low:1};
+          return (rank[String(b.priority).toLowerCase()] || 0) - (rank[String(a.priority).toLowerCase()] || 0)
+            || new Date(a.due_at) - new Date(b.due_at);
+        });
+        const fillList = (id,items,emptyText) => {
+          const container = document.getElementById(id);
+          container.replaceChildren();
+          if (!items.length) {
+            const empty = document.createElement("p");
+            empty.className = "dayempty";
+            empty.textContent = emptyText;
+            container.appendChild(empty);
+            return;
+          }
+          items.slice(0,4).forEach(task => {
+            const item = document.createElement("div");
+            item.className = "dayitem";
+            const title = document.createElement("strong");
+            title.textContent = task.title;
+            const detail = document.createElement("small");
+            detail.textContent = new Date(task.due_at).toLocaleString("en-US",{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"});
+            item.append(title,detail);
+            container.appendChild(item);
+          });
+        };
+        fillList("dashboardAppointments",appointments,"No appointments are scheduled in Phoenix for today.");
+        fillList("dashboardTasks",priorityTasks,"No priority tasks are due today.");
+      };
       const loadData = async () => {
         const previouslySelectedOpportunityId = selectedOpportunity?.id
           || localStorage.getItem(SELECTED_OPPORTUNITY_KEY)
@@ -1087,6 +1164,7 @@ h1{font-size:34px}
               : "No positive movement is recorded yet. Phoenix will keep measuring which outreach and follow-up actions create a response.";
           document.getElementById("proofFeedback").textContent = "Recommendations · " + recommendationCounts.accepted + " accepted · " + recommendationCounts.edited + " edited · " + recommendationCounts.rejected + " rejected";
           renderOrchestrator({opportunities:realOpportunities,companies,contacts,tasks:realTasks,recommendations:realRecommendations,agentRuns:realAgentRuns,companyMap,contactMap,sourceWarnings});
+          renderExecutiveSnapshot({opportunities:realOpportunities,tasks:realTasks,outcomes:realOutcomes});
           const focusTask = dueTasks[0] || realTasks[0];
           const focusOpportunity = activeOpportunities.find(item => item.next_action);
           document.getElementById("todayFocus").textContent = focusTask
