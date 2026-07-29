@@ -8,7 +8,6 @@
     :root{--taupe:#bb7481;--taupeSoft:#fff;--rose:#bb7481;--rose2:#8e4f5c;--roseSoft:#f6e8eb;--roseAccent:#bb7481;--gold:#b8924b;--goldSoft:#f7f0e2;--ink:#273842;--muted:#8e4f5c;--line:#eadbbd;--paper:#fff;--ground:#fff}
 
     *{box-sizing:border-box}
-    [hidden]{display:none!important}
 body{display:flex;margin:0;background:#fff;color:var(--ink);font-family:"DM Sans","Manrope",Arial,sans-serif}
 .kfside{position:sticky;top:0;display:flex;width:292px;height:100vh;flex:none;flex-direction:column;border-right:1px solid var(--gold);background:#fff;padding:30px 24px;color:var(--ink)}
 .kflogo{display:flex;align-items:center;gap:12px}.waves{color:var(--gold);font-size:26px;letter-spacing:-8px}.kflogo b{display:block;color:var(--gold);font-family:"Manrope","DM Sans",Arial,sans-serif;font-size:19px}.kflogo small{display:block;margin-top:3px;color:var(--muted);font-size:8px;letter-spacing:.18em;text-transform:uppercase}
@@ -63,12 +62,6 @@ h1{font-size:40px}
 .proof{margin-top:16px;padding:22px}.proofhead{display:flex;align-items:end;justify-content:space-between;gap:18px}.proofhead h2{font-size:23px}.proofgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:18px}.proofmetric{border:1px solid var(--gold);border-radius:14px;background:#fff;padding:14px}.proofmetric small{display:block;color:var(--muted);font-size:8px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.proofmetric strong{display:block;margin-top:8px;color:var(--rose);font:600 24px "Manrope","DM Sans",Arial,sans-serif}.proofinsight{margin-top:14px;border:1px solid var(--gold);border-radius:14px;background:var(--roseSoft);padding:14px;color:var(--ink);font-size:11px;line-height:1.6}
 .orchestrator{margin-top:16px;padding:22px}.orchestratorhead{display:flex;align-items:end;justify-content:space-between;gap:18px}.orchestratorhead>div{min-width:0}.orchestratorhead h2{font-size:24px}.orchestratorstatus{max-width:320px;border:1px solid var(--gold);border-radius:18px;background:#fff;padding:7px 11px;color:var(--rose2);font-size:9px;font-weight:800;line-height:1.35;text-align:center;overflow-wrap:anywhere}.orchestratorsummary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:17px}.orsummary{min-width:0;border:1px solid var(--gold);border-radius:13px;background:#fff;padding:12px}.orsummary small{display:block;color:var(--muted);font-size:7px;font-weight:800;letter-spacing:.11em;text-transform:uppercase}.orsummary strong{display:block;margin-top:5px;color:var(--rose);font-size:21px}.commandgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin-top:14px}.commandcard{display:flex;min-width:0;min-height:190px;flex-direction:column;border:1px solid var(--gold);border-radius:15px;background:#fff;padding:15px;overflow-wrap:anywhere}.commandcard.overdue{background:var(--roseSoft);box-shadow:inset 4px 0 0 var(--rose)}.commandcard.approval{background:var(--goldSoft)}.commandcard .commandmeta{display:flex;align-items:center;justify-content:space-between;gap:8px;color:var(--muted);font-size:7px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}.commandcard .owner{border:1px solid var(--gold);border-radius:999px;background:#fff;padding:4px 7px;color:var(--rose2)}.commandcard h3{margin:12px 0 0;font:600 16px/1.35 "Manrope","DM Sans",Arial,sans-serif}.commandcard p{margin:8px 0 0;color:var(--muted);font-size:10px;line-height:1.55}.commandcard .why{color:var(--ink)}.commandcard button{width:100%;margin-top:auto;border:1px solid var(--gold);border-radius:10px;background:var(--rose);padding:9px;color:#fff;font-size:9px;font-weight:800}.commandempty{grid-column:1/-1;border:1px solid var(--gold);border-radius:14px;background:#fff;padding:18px;color:var(--muted);font-size:11px;line-height:1.6}
 .operatorguide{margin-top:16px;padding:22px;border-width:2px}.operatorhead{display:flex;align-items:start;justify-content:space-between;gap:18px}.operatorhead h2{font-size:25px}.operatorbadge{border:1px solid var(--gold);border-radius:999px;background:var(--roseSoft);padding:7px 11px;color:var(--rose2);font-size:8px;font-weight:900;letter-spacing:.1em;text-transform:uppercase}.operatorsteps{display:grid;grid-template-columns:repeat(8,minmax(74px,1fr));gap:7px;margin-top:18px}.operatorstep{border:1px solid var(--gold);border-radius:12px;background:#fff;padding:10px 7px;color:var(--muted);font-size:8px;font-weight:800;line-height:1.35;text-align:center}.operatorstep span{display:grid;width:22px;height:22px;margin:0 auto 6px;place-items:center;border:1px solid var(--gold);border-radius:50%;color:var(--rose2)}.operatorstep.done{background:var(--goldSoft)}.operatorstep.current{background:var(--rose);color:#fff;box-shadow:0 9px 20px #bb748133}.operatorstep.current span{background:#fff;color:var(--rose2)}.operatoraction{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:12px;margin-top:15px}.operatorpanel{border:1px solid var(--gold);border-radius:14px;background:#fff;padding:15px}.operatorpanel small{display:block;color:var(--muted);font-size:8px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.operatorpanel strong{display:block;margin-top:7px;color:var(--rose2);font-size:18px}.operatorpanel p{margin:8px 0 0;color:var(--ink);font-size:11px;line-height:1.6}.operatorbuttons{display:flex;gap:8px;margin-top:13px}.operatorbuttons button{flex:1;border:1px solid var(--gold);border-radius:11px;background:var(--rose);padding:11px;color:#fff;font-size:10px;font-weight:800}.operatorbuttons button.secondary{background:#fff;color:var(--rose2)}.operatorlegend{display:grid;gap:8px;margin-top:9px}.operatorlegend div{border-radius:10px;padding:9px 10px;font-size:10px;line-height:1.45}.operatorlegend b{display:block;margin-bottom:2px;color:var(--rose2)}.operatorlegend .you{background:var(--roseSoft)}.operatorlegend .phoenix{background:var(--goldSoft)}.operatorlegend .approve{border:1px solid var(--gold);background:#fff}
-.operatorguide{position:sticky;top:0;z-index:35;background:#fff;box-shadow:0 12px 32px #27384214}.operatorhead .sub,.operatorlegend{display:none}.operatorhead{align-items:center}.operatorhead h2{font-size:18px}.operatorbadge{flex:none}.operatorsteps{margin-top:12px}.operatorstep{padding:7px 5px}.operatorstep span{width:19px;height:19px;margin-bottom:4px}.operatoraction{display:block;margin-top:10px}.operatorpanel{display:grid;grid-template-columns:auto minmax(180px,1fr) minmax(220px,1.4fr) auto;align-items:center;gap:10px;padding:10px 12px}.operatorpanel strong,.operatorpanel p,.operatorbuttons{margin:0}.operatorpanel strong{font-size:14px}.operatorpanel p{font-size:9px;line-height:1.4}.operatorbuttons{min-width:0}.operatorbuttons button{min-width:0;white-space:normal;padding:9px 12px}.operatoraction>.operatorpanel:last-child{display:none}
-.mobilepagebar{display:none;position:sticky;top:0;z-index:50;grid-template-columns:repeat(5,1fr);border-bottom:1px solid var(--gold);background:#fff;padding:7px;box-shadow:0 8px 22px #27384214}.mobilepagebar a{border:0;border-radius:10px;background:transparent;padding:8px 4px;color:var(--muted);font-size:8px;font-weight:800;text-align:center;text-decoration:none}.mobilepagebar a.active{background:var(--rose);color:#fff}
-.pageheading{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:18px}.pageheading h1{font-size:32px}.pageheading p{margin:7px 0 0;color:var(--muted);font-size:11px}.pageheading button{border:1px solid var(--gold);border-radius:999px;background:#fff;padding:10px 14px;color:var(--rose2);font-size:9px;font-weight:800}
-.settingspage{padding:22px}.settingsgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}.settingsblock{border:1px solid var(--gold);border-radius:14px;background:#fff;padding:16px}.settingsblock h3{margin:0;font-size:15px}.settingsblock p{color:var(--muted);font-size:10px;line-height:1.6}.settingsblock button{width:100%;margin-top:10px;border:1px solid var(--gold);border-radius:10px;background:var(--rose);padding:11px;color:#fff;font-size:9px;font-weight:800}
-.workspacecontext{position:sticky;top:-26px;z-index:5;margin:-26px -26px 20px;padding:12px 18px;border-bottom:1px solid var(--gold);background:#fff}.workspacecontexttop{display:flex;align-items:center;justify-content:space-between;gap:14px}.workspacecontexttop button{border:1px solid var(--gold);border-radius:999px;background:var(--rose);padding:9px 13px;color:#fff;font-size:9px;font-weight:800}.workspacecontextnext{min-width:0;text-align:right}.workspacecontextnext small{display:block;color:var(--muted);font-size:7px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.workspacecontextnext strong{display:block;overflow:hidden;color:var(--rose2);font-size:11px;text-overflow:ellipsis;white-space:nowrap}.workspacecontextsteps{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;margin-top:9px}.workspacecontextsteps span{border:1px solid var(--line);border-radius:999px;background:#fff;padding:5px 3px;color:var(--muted);font-size:7px;font-weight:800;text-align:center}.workspacecontextsteps span.done{background:var(--goldSoft)}.workspacecontextsteps span.current{border-color:var(--rose);background:var(--rose);color:#fff}
-[data-page][hidden]{display:none!important}
 .leadhead{display:flex;align-items:center;justify-content:space-between;padding:19px 20px;border-bottom:1px solid var(--gold)}
 .leadhead button{border:1px solid var(--gold);border-radius:999px;background:var(--taupe);padding:9px 14px;color:white;font-size:10px;font-weight:700}
 table{width:100%;border-collapse:collapse;font-size:10px}
@@ -102,7 +95,6 @@ aside{border-top:1px solid var(--line);border-left:0}
 .operatorsteps{grid-template-columns:repeat(4,1fr)}
 }
 @media(max-width:900px){.kfside{display:none}
-.mobilepagebar{display:grid}
 }
 @media(max-width:800px){.main{padding:22px 16px}
 .intro{align-items:start;flex-direction:column}
@@ -113,7 +105,6 @@ aside{border-top:1px solid var(--line);border-left:0}
 .orchestratorsummary{grid-template-columns:1fr 1fr}
 .commandgrid{grid-template-columns:1fr}
 .operatoraction{grid-template-columns:1fr}
-.operatorguide{top:55px}.operatorpanel{grid-template-columns:1fr}.operatorpanel small{display:none}.operatorpanel p{display:none}.operatorbuttons{display:flex}.settingsgrid{grid-template-columns:1fr}
 }
 @media(max-width:500px){.pipe{display:none}
 .metrics{grid-template-columns:1fr}
@@ -122,7 +113,6 @@ h1{font-size:34px}
 .proofgrid{grid-template-columns:1fr}
 .orchestratorhead{align-items:start;flex-direction:column}
 .operatorhead{flex-direction:column}.operatorsteps{grid-template-columns:repeat(2,1fr)}.operatorbuttons{flex-direction:column}
-.operatorguide{position:sticky;padding:12px}.operatorhead{display:none}.operatorsteps{display:flex;overflow-x:auto;margin:0 0 8px;padding-bottom:2px}.operatorstep{min-width:72px}.operatorpanel strong{font-size:13px}.workspacecontextsteps{display:flex;overflow-x:auto}.workspacecontextsteps span{min-width:66px}.workspacecontextnext{max-width:55%}
 }
 .authveil{position:fixed;inset:0;z-index:1000;display:block;overflow-y:auto;background:transparent;padding:20px;pointer-events:none}
 .authveil[hidden]{display:none!important}
@@ -152,12 +142,13 @@ h1{font-size:34px}
     <div class="kflogo"><span class="waves">≋≋≋</span><span><b>Phoenix</b><small>Executive Systems</small></span></div>
     <div class="workspace"><span><i>PS</i><span><b>Phoenix Systems</b><small>Executive workspace</small></span></span><b>⌄</b></div>
     <nav class="sidenav">
-      <a class="active" href="./" data-page-target="dashboard"><em>▦</em>Dashboard</a>
-      <a href="./opportunities/" data-page-target="opportunities"><em>♙</em>Leads &amp; Pipeline</a>
-      <a href="./?focus=next" data-page-target="dashboard" data-nav-action="next"><em>▣</em>Do this next</a>
+      <a class="active" href="#dashboard"><em>▦</em>Dashboard</a>
+      <a href="#opportunities"><em>♙</em>Leads</a>
+      <a href="#opportunities"><em>▥</em>Pipeline</a>
+      <a href="#dashboard" id="navAppointments"><em>▣</em>Appointments</a>
       <a href="https://typebot.co/prestige-remodeling-solutions-demo-concierge-9eezvm4" target="_blank" rel="noopener noreferrer"><em>✣</em>AI Concierge Demo <span class="live">Demo</span></a>
-      <a href="./insights/" data-page-target="insights"><em>⌁</em>Insights</a>
-      <a href="./settings/" data-page-target="settings"><em>⚙</em>Settings</a>
+      <a href="#insights"><em>⌁</em>Insights</a>
+      <a href="#settings"><em>⚙</em>Settings</a>
     </nav>
     <div class="working"><span class="spark">✣</span><b>Your systems are working</b><p>Phoenix is organizing activity and surfacing the next best move.</p><a>View activity →</a></div>
   </aside>
@@ -254,115 +245,6 @@ h1{font-size:34px}
       let briefedOpportunityIds = new Set();
       let latestOutcomeByOpportunity = new Map();
       let fulfillmentTaskStateByOpportunity = new Map();
-      const pageNames = {
-        dashboard:["Dashboard","Revenue, priorities, and the single next move."],
-        opportunities:["Opportunities","Keep every lead, stage, owner, and next action in one focused view."],
-        insights:["Insights","See what activity is creating movement and where the evidence is still limited."],
-        settings:["Settings","Manage this device’s Phoenix connection and session."]
-      };
-      const isTestPath = location.pathname.includes("/testing/");
-      const deployedBase = location.pathname.includes("/kelley-ai-systems-internal/") ? "/kelley-ai-systems-internal/" : "/";
-      const siteRoot = `${location.origin}${deployedBase}${isTestPath ? "testing/" : ""}`;
-      const pageUrls = {
-        dashboard:siteRoot,
-        opportunities:`${siteRoot}opportunities/`,
-        insights:`${siteRoot}insights/`,
-        settings:`${siteRoot}settings/`
-      };
-      const pageFromPath = () => {
-        const path = location.pathname.replace(/\/+$/,"");
-        if (path.endsWith("/opportunities")) return "opportunities";
-        if (path.endsWith("/insights")) return "insights";
-        if (path.endsWith("/settings")) return "settings";
-        return "dashboard";
-      };
-      const pageElements = {};
-      const addPageHeading = (page,before) => {
-        const heading = document.createElement("div");
-        heading.className = "pageheading";
-        heading.dataset.page = page;
-        heading.innerHTML = `<div><p class="eye">Phoenix workspace</p><h1>${pageNames[page][0]}</h1><p>${pageNames[page][1]}</p></div><button type="button">← Dashboard</button>`;
-        heading.querySelector("button").addEventListener("click", () => showPage("dashboard"));
-        before.parentNode.insertBefore(heading,before);
-        return heading;
-      };
-      const showPage = (page,{updateHash = true} = {}) => {
-        const safePage = pageNames[page] ? page : "dashboard";
-        Object.entries(pageElements).forEach(([name,elements]) => {
-          elements.forEach(element => { element.hidden = name !== safePage; });
-        });
-        const lower = document.querySelector(".lower");
-        lower.hidden = !["dashboard","opportunities"].includes(safePage);
-        document.querySelector(".goal").hidden = safePage !== "dashboard";
-        document.querySelector(".leads").hidden = safePage !== "opportunities";
-        lower.style.gridTemplateColumns = safePage === "opportunities" ? "1fr" : "";
-        document.querySelectorAll(".sidenav a[data-page-target],.mobilepagebar a").forEach(item => {
-          item.classList.toggle("active", item.dataset.pageTarget === safePage);
-        });
-        if (updateHash && location.href !== pageUrls[safePage]) location.assign(pageUrls[safePage]);
-        window.scrollTo({top:0,behavior:"smooth"});
-      };
-      const setupPageViews = () => {
-        pageElements.dashboard = [
-          document.querySelector(".intro"),
-          document.querySelector(".metrics"),
-          document.querySelector(".progress"),
-          document.querySelector(".orchestrator")
-        ];
-        const leads = document.querySelector(".leads");
-        const proof = document.querySelector(".proof");
-        pageElements.opportunities = [addPageHeading("opportunities",document.querySelector(".lower"))];
-        pageElements.insights = [addPageHeading("insights",proof),proof];
-        const settings = document.createElement("article");
-        settings.className = "card settingspage";
-        settings.dataset.page = "settings";
-        settings.innerHTML = `<div class="pageheading"><div><p class="eye">Phoenix workspace</p><h1>Settings</h1><p>${pageNames.settings[1]}</p></div><button type="button">← Dashboard</button></div><div class="settingsgrid"><div class="settingsblock"><h3>Connection</h3><p>Use this only if Phoenix cannot load your protected records. Your production records are not changed by opening this page.</p><button type="button" data-settings-action="reset">Reset connection</button></div><div class="settingsblock"><h3>Session</h3><p>Sign out when you are using a shared device. You can sign back in with the same Phoenix account.</p><button type="button" data-settings-action="signout">Sign out</button></div></div>`;
-        proof.parentNode.insertBefore(settings,proof.nextSibling);
-        settings.querySelector(".pageheading button").addEventListener("click", () => showPage("dashboard"));
-        settings.querySelector('[data-settings-action="reset"]').addEventListener("click", () => document.getElementById("resetConnection").click());
-        settings.querySelector('[data-settings-action="signout"]').addEventListener("click", () => document.getElementById("signOut").click());
-        pageElements.settings = [settings];
-        const links = [...document.querySelectorAll(".sidenav a")];
-        links.forEach(link => {
-          const target = link.dataset.pageTarget || "";
-          if (!target) return;
-          link.href = link.dataset.navAction === "next" ? `${pageUrls.dashboard}?focus=next` : pageUrls[target];
-        });
-        const mobile = document.createElement("nav");
-        mobile.className = "mobilepagebar";
-        mobile.setAttribute("aria-label","Phoenix pages");
-        mobile.innerHTML = `<a data-page-target="dashboard" href="${pageUrls.dashboard}">Home</a><a data-page-target="opportunities" href="${pageUrls.opportunities}">Leads</a><a data-page-target="dashboard" href="${pageUrls.dashboard}?focus=next">Do next</a><a data-page-target="insights" href="${pageUrls.insights}">Insights</a><a data-page-target="settings" href="${pageUrls.settings}">Settings</a>`;
-        document.querySelector(".demo").after(mobile);
-        document.querySelectorAll(".workspacebox").forEach(box => {
-          const context = document.createElement("div");
-          context.className = "workspacecontext";
-          context.innerHTML = `<div class="workspacecontexttop"><button type="button">← Dashboard</button><div class="workspacecontextnext"><small>Do this next</small><strong>Review this step</strong></div></div><div class="workspacecontextsteps"></div>`;
-          context.querySelector("button").addEventListener("click", () => {
-            box.closest(".workspaceveil").hidden = true;
-            showPage("dashboard");
-          });
-          box.prepend(context);
-        });
-        showPage(pageFromPath(),{updateHash:false});
-        if (pageFromPath() === "dashboard" && new URLSearchParams(location.search).get("focus") === "next") {
-          requestAnimationFrame(() => document.querySelector(".operatorguide").scrollIntoView({behavior:"smooth",block:"start"}));
-        }
-      };
-      const syncWorkspaceContext = () => {
-        const next = document.getElementById("operatorNextTitle")?.textContent || "Review this step";
-        const sourceSteps = [...document.querySelectorAll("#operatorSteps .operatorstep")];
-        document.querySelectorAll(".workspacecontext").forEach(context => {
-          context.querySelector(".workspacecontextnext strong").textContent = next;
-          const steps = context.querySelector(".workspacecontextsteps");
-          steps.replaceChildren(...sourceSteps.map(source => {
-            const step = document.createElement("span");
-            step.textContent = source.textContent.replace(/^\d+/,"").trim();
-            step.className = source.classList.contains("current") ? "current" : source.classList.contains("done") ? "done" : "";
-            return step;
-          }));
-        });
-      };
-      setupPageViews();
       const projectGateDefinitions = [
         {id:"A",name:"Configuration",summary:"Approved rules, language, data, routing, scope, and boundaries"},
         {id:"B",name:"Build Review",summary:"Approved build matches configuration and acceptance criteria"},
@@ -559,7 +441,6 @@ h1{font-size:34px}
         const outcomeButton = document.getElementById("operatorOutcomeButton");
         outcomeButton.hidden = !showOutcome;
         outcomeButton.onclick = () => document.getElementById("openOutcome")?.click();
-        syncWorkspaceContext();
       };
       const approvedProposalSaved = opportunityId => {
         if (!opportunityId) return false;
@@ -1898,6 +1779,10 @@ h1{font-size:34px}
         document.getElementById("knowledgeMessage").textContent = "";
       };
       document.getElementById("openPreparation").addEventListener("click", openPreparation);
+      document.getElementById("navAppointments").addEventListener("click", event => {
+        event.preventDefault();
+        openPreparation();
+      });
       document.getElementById("closePreparation").addEventListener("click", () => { preparationVeil.hidden = true; });
       document.querySelectorAll("[data-prep-tab]").forEach(button => {
         button.addEventListener("click", () => {
