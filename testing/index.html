@@ -2692,11 +2692,23 @@ h1{font-size:34px}
         milestones:document.getElementById("fulfillmentMilestones").value.trim(),
         risks:document.getElementById("fulfillmentRisks").value.trim()
       });
+      const fulfillmentGateLabels = {
+        gateProposal:"Final proposal and scope approved",
+        gateAgreement:"Services agreement signed",
+        gatePayment:"Initial payment paid and cleared",
+        gateRequirements:"Project Start Requirements complete",
+        gateSetup:"Private client setup and preflight audit complete in Notion",
+        gateDay1:"Written Day 1 Confirmation issued"
+      };
       const toggleSyntheticFulfillment = () => {
         const synthetic = document.getElementById("fulfillmentSynthetic").checked;
         document.getElementById("approveFulfillmentText").textContent = synthetic
           ? "I confirm these are simulated TEST MODE readiness facts and approve milestone reminders only for this synthetic opportunity."
           : "I verified these facts against the current Notion client records and approve Phoenix milestone reminders.";
+        Object.entries(fulfillmentGateLabels).forEach(([id,label]) => {
+          const copy = document.getElementById(id).closest("label")?.querySelector("span");
+          if (copy) copy.textContent = synthetic ? "Simulated test gate: " + label : label;
+        });
         if (synthetic) {
           document.getElementById("fulfillmentReadiness").value = "ready";
           ["gateProposal","gateAgreement","gatePayment","gateRequirements","gateSetup","gateDay1"].forEach(id => {
