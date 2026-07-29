@@ -1545,6 +1545,7 @@ body[data-current-page="opportunities"] .shell>aside{display:grid;grid-template-
       };
       const notionStageToPhoenix = stage => {
         const normalized = normalizeImportText(stage).toLowerCase();
+        if (normalized === "researching" || normalized === "researched") return "researched";
         if (normalized === "contacted" || normalized === "following up") return "contacted";
         if (normalized === "discovery booked") return "consultation_scheduled";
         if (normalized === "proposal") return "proposal_sent";
