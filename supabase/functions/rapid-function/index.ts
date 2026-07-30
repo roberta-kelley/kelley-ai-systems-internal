@@ -210,6 +210,32 @@ const researchTitle = (text: string) => {
   return match ? match[1].trim() : "Public webpage";
 };
 
+const decodeHtml = (value: string) => value
+  .replace(/&#(\d+);/g, (_match, code) => String.fromCodePoint(Number(code)))
+  .replace(/&#x([0-9a-f]+);/gi, (_match, code) => String.fromCodePoint(parseInt(code, 16)))
+  .replace(/&nbsp;/gi, " ")
+  .replace(/&amp;/gi, "&")
+  .replace(/&quot;/gi, '"')
+  .replace(/&#39;|&apos;/gi, "'")
+  .replace(/&lt;/gi, "<")
+  .replace(/&gt;/gi, ">");
+
+const publicHtmlText = (html: string) => decodeHtml(html
+  .replace(/<!--[\s\S]*?-->/g, " ")
+  .replace(/<(script|style|svg|noscript|template)\b[\s\S]*?<\/\1>/gi, " ")
+  .replace(/<(br|p|div|section|article|header|footer|main|nav|li|h[1-6])\b[^>]*>/gi, "\n")
+  .replace(/<[^>]+>/g, " "))
+  .replace(/\r/g, "")
+  .replace(/[ \t]+/g, " ")
+  .replace(/\n[ \t]+/g, "\n")
+  .replace(/\n{3,}/g, "\n\n")
+  .trim();
+
+const directPageTitle = (html: string) => {
+  const match = html.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i);
+  return match ? decodeHtml(match[1].replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim()) : "Public webpage";
+};
+
 const readResearchPages = async (values: unknown) => {
   if (!Array.isArray(values)) throw new Error("RESEARCH_URL");
   const urls = [...new Set(values.map(permittedResearchUrl))].slice(0, 4);
@@ -217,6 +243,7 @@ const readResearchPages = async (values: unknown) => {
   return await Promise.all(urls.map(async (url) => {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 25000);
+    let readerError = "";
     try {
       const response = await fetch(`https://r.jina.ai/${url}`, {
         headers: { "Accept": "text/plain" },
@@ -232,17 +259,45 @@ const readResearchPages = async (values: unknown) => {
         accessed_at: new Date().toISOString(),
       };
     } catch (problem) {
-      const error = problem instanceof DOMException && problem.name === "AbortError"
+      readerError = problem instanceof DOMException && problem.name === "AbortError"
         ? "The reader timed out after 25 seconds."
         : problem instanceof Error ? problem.message : "The page could not be read.";
-      return {
-        url,
-        title: "Page could not be read",
-        text: "",
-        status: "unavailable",
-        error,
-        accessed_at: new Date().toISOString(),
-      };
+      try {
+        const response = await fetch(url, {
+          headers: {
+            "Accept": "text/html,text/plain;q=0.9",
+            "User-Agent": "Mozilla/5.0 (compatible; PhoenixResearch/1.0)",
+          },
+          signal: controller.signal,
+          redirect: "follow",
+        });
+        if (!response.ok) throw new Error(`Website returned ${response.status}`);
+        const contentType = response.headers.get("content-type") || "";
+        const raw = (await response.text()).slice(0, 600000);
+        const text = contentType.includes("html") ? publicHtmlText(raw) : raw.trim();
+        if (!text) throw new Error("The website returned no readable public text.");
+        return {
+          url,
+          title: contentType.includes("html") ? directPageTitle(raw) : "Public webpage",
+          text: text.slice(0, 18000),
+          status: "read",
+          reader: "direct",
+          accessed_at: new Date().toISOString(),
+        };
+      } catch (fallbackProblem) {
+        const fallbackError = fallbackProblem instanceof DOMException && fallbackProblem.name === "AbortError"
+          ? "The direct website request timed out."
+          : fallbackProblem instanceof Error ? fallbackProblem.message : "The website could not be read directly.";
+        const error = `${readerError} Direct fallback: ${fallbackError}`;
+        return {
+          url,
+          title: "Page could not be read",
+          text: "",
+          status: "unavailable",
+          error,
+          accessed_at: new Date().toISOString(),
+        };
+      }
     } finally {
       clearTimeout(timeout);
     }
