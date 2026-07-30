@@ -566,7 +566,7 @@ body[data-current-page="opportunities"] .shell>aside{display:grid;grid-template-
         if (!response.ok) throw new Error(data.message || data.hint || data.details || ("Supabase returned " + response.status));
         return data;
       };
-      const functionRequest = async name => {
+      const functionRequest = async (name,payload = {}) => {
         const {url,key} = config();
         let current = session();
         if (!current) {
@@ -583,7 +583,7 @@ body[data-current-page="opportunities"] .shell>aside{display:grid;grid-template-
             "Authorization":"Bearer " + token,
             "Content-Type":"application/json"
           },
-          body:"{}"
+          body:JSON.stringify(payload)
         });
         let response = await send(current.access_token);
         if (response.status === 401) {
@@ -2432,38 +2432,32 @@ body[data-current-page="opportunities"] .shell>aside{display:grid;grid-template-
           message.textContent = "Reading " + urls.length + " public page" + (urls.length === 1 ? "" : "s") + ". This can take up to 25 seconds.";
           evidenceField.value = "READING PUBLIC PAGES...\n\n" + urls.map((url,index) => (index + 1) + ". Waiting for " + url).join("\n");
           evidenceField.scrollTop = 0;
-          const readPage = async (url,index) => {
-            const controller = new AbortController();
-            const timeout = setTimeout(() => controller.abort(),25000);
-            try {
-              const response = await fetch("https://r.jina.ai/" + url,{
-                headers:{"Accept":"text/plain"},
-                signal:controller.signal
-              });
-              if (!response.ok) throw new Error("Reader returned " + response.status);
-              const text = (await response.text()).slice(0,18000);
-              const title = researchTitle(text);
-              return {
-                index,
-                source:{url,title,accessed_at:new Date().toISOString(),status:"read"},
-                evidence:"SOURCE: " + title + "\nURL: " + url + "\n\n" + text.slice(0,6500),
-                text
-              };
-            } catch (problem) {
-              const reason = problem instanceof DOMException && problem.name === "AbortError"
-                ? "The reader timed out after 25 seconds."
-                : problem instanceof Error ? problem.message : "The page could not be read.";
-              return {
-                index,
-                source:{url,title:"Page could not be read",accessed_at:new Date().toISOString(),status:"unavailable"},
-                evidence:"SOURCE UNAVAILABLE\nURL: " + url + "\nReason: " + reason,
-                text:""
-              };
-            } finally {
-              clearTimeout(timeout);
-            }
-          };
-          const results = (await Promise.all(urls.map(readPage))).sort((a,b) => a.index - b.index);
+          const reader = await functionRequest("rapid-function",{action:"research_pages",urls});
+          const pages = Array.isArray(reader.pages) ? reader.pages : [];
+          const results = urls.map((url,index) => {
+            const page = pages.find(item => item?.url === url) || {
+              url,
+              title:"Page could not be read",
+              text:"",
+              status:"unavailable",
+              error:"The protected reader returned no result for this page.",
+              accessed_at:new Date().toISOString()
+            };
+            const read = page.status === "read";
+            return {
+              index,
+              source:{
+                url,
+                title:page.title || (read ? "Public webpage" : "Page could not be read"),
+                accessed_at:page.accessed_at || new Date().toISOString(),
+                status:read ? "read" : "unavailable"
+              },
+              evidence:read
+                ? "SOURCE: " + (page.title || "Public webpage") + "\nURL: " + url + "\n\n" + String(page.text || "").slice(0,6500)
+                : "SOURCE UNAVAILABLE\nURL: " + url + "\nReason: " + (page.error || "The page could not be read."),
+              text:read ? String(page.text || "") : ""
+            };
+          });
           loadedResearchSources = results.map(result => result.source);
           evidenceField.value = results.map(result => result.evidence).join("\n\n====================\n\n");
           evidenceField.scrollTop = 0;

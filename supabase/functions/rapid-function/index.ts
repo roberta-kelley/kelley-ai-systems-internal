@@ -14,6 +14,15 @@ type NotionPage = {
 };
 
 const env = (name: string) => Deno.env.get(name)?.trim() || "";
+const RESTRICTED_RESEARCH_HOSTS = new Set([
+  "linkedin.com",
+  "www.linkedin.com",
+  "facebook.com",
+  "www.facebook.com",
+  "instagram.com",
+  "www.instagram.com",
+  "maps.google.com",
+]);
 
 const corsHeaders = (request: Request) => {
   const origin = request.headers.get("origin") || "";
@@ -163,6 +172,83 @@ const queryNotion = async () => {
   return rows.filter((row) => String(row["Prospect / Company"] || "").trim());
 };
 
+const permittedResearchUrl = (value: unknown) => {
+  let url: URL;
+  try {
+    url = new URL(String(value || ""));
+  } catch {
+    throw new Error("RESEARCH_URL");
+  }
+  if (!["https:", "http:"].includes(url.protocol)) throw new Error("RESEARCH_URL");
+  const host = url.hostname.toLowerCase();
+  if (
+    RESTRICTED_RESEARCH_HOSTS.has(host) ||
+    host.endsWith(".linkedin.com") ||
+    host.endsWith(".facebook.com") ||
+    host.endsWith(".instagram.com") ||
+    (host.includes("google.") && url.pathname.toLowerCase().includes("/maps"))
+  ) {
+    throw new Error("RESEARCH_RESTRICTED");
+  }
+  if (
+    host === "localhost" ||
+    host.endsWith(".local") ||
+    host === "127.0.0.1" ||
+    host === "::1" ||
+    /^10\./.test(host) ||
+    /^192\.168\./.test(host) ||
+    /^172\.(1[6-9]|2\d|3[01])\./.test(host)
+  ) {
+    throw new Error("RESEARCH_PRIVATE");
+  }
+  url.hash = "";
+  return url.href;
+};
+
+const researchTitle = (text: string) => {
+  const match = text.match(/^Title:\s*(.+)$/m);
+  return match ? match[1].trim() : "Public webpage";
+};
+
+const readResearchPages = async (values: unknown) => {
+  if (!Array.isArray(values)) throw new Error("RESEARCH_URL");
+  const urls = [...new Set(values.map(permittedResearchUrl))].slice(0, 4);
+  if (!urls.length) throw new Error("RESEARCH_URL");
+  return await Promise.all(urls.map(async (url) => {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 25000);
+    try {
+      const response = await fetch(`https://r.jina.ai/${url}`, {
+        headers: { "Accept": "text/plain" },
+        signal: controller.signal,
+      });
+      if (!response.ok) throw new Error(`Reader returned ${response.status}`);
+      const text = (await response.text()).slice(0, 18000);
+      return {
+        url,
+        title: researchTitle(text),
+        text,
+        status: "read",
+        accessed_at: new Date().toISOString(),
+      };
+    } catch (problem) {
+      const error = problem instanceof DOMException && problem.name === "AbortError"
+        ? "The reader timed out after 25 seconds."
+        : problem instanceof Error ? problem.message : "The page could not be read.";
+      return {
+        url,
+        title: "Page could not be read",
+        text: "",
+        status: "unavailable",
+        error,
+        accessed_at: new Date().toISOString(),
+      };
+    } finally {
+      clearTimeout(timeout);
+    }
+  }));
+};
+
 Deno.serve(async (request: Request) => {
   if (request.method === "OPTIONS") {
     return new Response(null, { status: 204, headers: corsHeaders(request) });
@@ -173,6 +259,15 @@ Deno.serve(async (request: Request) => {
   if (origin && origin !== allowed) return json(request, { error: "Origin not allowed." }, 403);
   try {
     await authenticateOwner(request);
+    const body = await request.json().catch(() => ({}));
+    if (body?.action === "research_pages") {
+      const pages = await readResearchPages(body.urls);
+      return json(request, {
+        pages,
+        source: "Phoenix protected public-page reader",
+        read_at: new Date().toISOString(),
+      });
+    }
     const prospects = await queryNotion();
     return json(request, {
       prospects,
@@ -186,6 +281,11 @@ Deno.serve(async (request: Request) => {
     if (message === "SERVER_CONFIG" || message === "NOTION_CONFIG") {
       return json(request, { error: "The private Notion connection has not been configured yet." }, 503);
     }
+    if (message === "RESEARCH_URL") return json(request, { error: "Add at least one complete public webpage URL." }, 400);
+    if (message === "RESEARCH_RESTRICTED") {
+      return json(request, { error: "Phoenix does not automatically read LinkedIn, Google Maps, Facebook, or Instagram." }, 400);
+    }
+    if (message === "RESEARCH_PRIVATE") return json(request, { error: "Private or local network addresses cannot be researched." }, 400);
     if (message.startsWith("NOTION_ERROR:")) return json(request, { error: message.slice(13) }, 502);
     return json(request, { error: "Phoenix could not read the Notion CRM." }, 500);
   }
