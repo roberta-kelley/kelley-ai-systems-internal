@@ -2422,15 +2422,17 @@ body[data-current-page="opportunities"] .shell>aside{display:grid;grid-template-
       document.getElementById("readResearchSources").addEventListener("click", async () => {
         const button = document.getElementById("readResearchSources");
         const message = document.getElementById("researchMessage");
+        const evidenceField = document.getElementById("researchEvidence");
         button.disabled = true;
         button.textContent = "Reading public pages...";
         try {
           const urls = researchSourceUrls();
           if (!urls.length) throw new Error("Add at least one permitted public webpage.");
           loadedResearchSources = [];
-          const evidence = [];
-          const combinedText = [];
-          for (const url of urls) {
+          message.textContent = "Reading " + urls.length + " public page" + (urls.length === 1 ? "" : "s") + ". This can take up to 25 seconds.";
+          evidenceField.value = "READING PUBLIC PAGES...\n\n" + urls.map((url,index) => (index + 1) + ". Waiting for " + url).join("\n");
+          evidenceField.scrollTop = 0;
+          const readPage = async (url,index) => {
             const controller = new AbortController();
             const timeout = setTimeout(() => controller.abort(),25000);
             try {
@@ -2441,18 +2443,31 @@ body[data-current-page="opportunities"] .shell>aside{display:grid;grid-template-
               if (!response.ok) throw new Error("Reader returned " + response.status);
               const text = (await response.text()).slice(0,18000);
               const title = researchTitle(text);
-              loadedResearchSources.push({url,title,accessed_at:new Date().toISOString(),status:"read"});
-              evidence.push("SOURCE: " + title + "\nURL: " + url + "\n\n" + text.slice(0,6500));
-              combinedText.push(text);
+              return {
+                index,
+                source:{url,title,accessed_at:new Date().toISOString(),status:"read"},
+                evidence:"SOURCE: " + title + "\nURL: " + url + "\n\n" + text.slice(0,6500),
+                text
+              };
             } catch (problem) {
-              loadedResearchSources.push({url,title:"Page could not be read",accessed_at:new Date().toISOString(),status:"unavailable"});
-              evidence.push("SOURCE UNAVAILABLE\nURL: " + url + "\nReason: " + (problem instanceof Error ? problem.message : "The page could not be read."));
+              const reason = problem instanceof DOMException && problem.name === "AbortError"
+                ? "The reader timed out after 25 seconds."
+                : problem instanceof Error ? problem.message : "The page could not be read.";
+              return {
+                index,
+                source:{url,title:"Page could not be read",accessed_at:new Date().toISOString(),status:"unavailable"},
+                evidence:"SOURCE UNAVAILABLE\nURL: " + url + "\nReason: " + reason,
+                text:""
+              };
             } finally {
               clearTimeout(timeout);
             }
-          }
-          document.getElementById("researchEvidence").value = evidence.join("\n\n====================\n\n");
-          const suggestions = researchSuggestions(combinedText.join("\n"));
+          };
+          const results = (await Promise.all(urls.map(readPage))).sort((a,b) => a.index - b.index);
+          loadedResearchSources = results.map(result => result.source);
+          evidenceField.value = results.map(result => result.evidence).join("\n\n====================\n\n");
+          evidenceField.scrollTop = 0;
+          const suggestions = researchSuggestions(results.map(result => result.text).join("\n"));
           if (!document.getElementById("researchHypotheses").value.trim()) {
             document.getElementById("researchHypotheses").value = suggestions.hypotheses.join("\n");
           }
