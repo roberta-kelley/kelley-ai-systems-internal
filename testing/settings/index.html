@@ -2334,7 +2334,7 @@ body[data-current-page="opportunities"] .shell>aside{display:grid;grid-template-
       const showResearch = () => {
         const facts = selectedCompany?.research_facts || {};
         const inferences = selectedCompany?.research_inferences || {};
-        document.getElementById("researchSynthetic").checked = facts.synthetic_test === true;
+        document.getElementById("researchSynthetic").checked = TEST_MODE && facts.synthetic_test === true;
         loadedResearchSources = Array.isArray(facts.sources) ? facts.sources : [];
         document.getElementById("researchWebsite").value = selectedCompany?.website || "";
         document.getElementById("researchUrls").value = loadedResearchSources
@@ -2353,7 +2353,7 @@ body[data-current-page="opportunities"] .shell>aside{display:grid;grid-template-
         toggleResearchMode();
       };
       const toggleResearchMode = () => {
-        const synthetic = document.getElementById("researchSynthetic").checked;
+        const synthetic = TEST_MODE && document.getElementById("researchSynthetic").checked;
         const website = document.getElementById("researchWebsite");
         const additionalUrls = document.getElementById("researchUrls");
         const websiteLabel = website.closest("label");
