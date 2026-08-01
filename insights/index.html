@@ -237,7 +237,7 @@ body[data-current-page="opportunities"] .shell>aside{display:grid;grid-template-
     <div class="preppanel" data-prep-panel="calculator" hidden><div class="prepgrid"><label>New inquiries per month<input id="lossLeads" type="number" min="0" value="30"></label><label>Average project value<input id="lossValue" type="number" min="0" value="10000"></label><label>Estimated inquiries not reached promptly (%)<input id="lossMissed" type="number" min="0" max="100" value="20"></label><label>Estimated close rate on qualified inquiries (%)<input id="lossClose" type="number" min="0" max="100" value="25"></label></div><button class="save" id="calculateLoss" type="button">Calculate transparent estimate</button><div class="prepresult"><small>Potential monthly revenue exposed</small><strong id="lossResult">$0</strong><p id="lossExplanation">Enter the prospect’s confirmed or clearly labeled estimated numbers. This calculator does not predict or guarantee recovered revenue.</p></div></div>
     <div class="preppanel" data-prep-panel="knowledge" hidden><button class="save" id="buildKnowledgePack" type="button">Build governed knowledge pack</button><label>Approved agent knowledge<textarea id="knowledgePack" class="knowledgepack"></textarea></label><label class="approval"><input id="approveKnowledgePack" type="checkbox"><span>I reviewed this pack, removed unsupported or private information, and approve it for manual use by Kelley AI Systems agents.</span></label><button class="save" id="copyKnowledgePack" type="button">Copy approved knowledge pack</button><button class="save" id="downloadKnowledgePack" type="button">Download approved knowledge pack</button><p class="message" id="knowledgeMessage"></p></div>
   </section></div>
-  <div id="outcomeVeil" class="workspaceveil" hidden><form class="workspacebox" id="outcomeForm"><header><div><p class="eye">Closed-loop handoff</p><h2 id="outcomeName">Record call outcome</h2><p class="location" id="outcomeLocation"></p></div><button class="close" id="closeOutcome" type="button">Close</button></header><label>Call disposition<select id="outcomeDisposition"><option value="follow_up">Follow-up needed</option><option value="interested">Interested</option><option value="proposal_requested">Proposal requested</option><option value="proposal_sent">Proposal sent</option><option value="closed_won">Closed won</option><option value="closed_lost">Closed lost</option><option value="no_answer">No answer</option></select></label><label>Confirmed pain points, one per line<textarea id="outcomePainPoints"></textarea></label><label>Objections raised, one per line<textarea id="outcomeObjections"></textarea></label><label>Commitments made, one per line<textarea id="outcomeCommitments"></textarea></label><label>Move pipeline to<select id="outcomeStage"><option value="identified">Captured</option><option value="researched">Researched</option><option value="contacted">Contacted</option><option value="engaged">Engaged</option><option value="consultation_scheduled">Consultation scheduled</option><option value="consultation_completed">Consultation completed</option><option value="proposal_sent">Proposal sent</option><option value="decision_pending">Decision pending</option><option value="won">Won</option><option value="lost">Lost</option><option value="nurture">Nurture</option></select></label><label>Next best action<textarea id="outcomeNextAction"></textarea></label><label>Follow-up due date<input id="outcomeDueDate" type="date"></label><button class="save" id="generateFollowUp" type="button">Generate follow-up message</button><label>Follow-up message<textarea id="outcomeFollowUp"></textarea></label><a class="save" id="openEmailDraft" href="#">Open email draft for review</a><label>Phoenix recommendation<select id="recommendationDecision"><option value="accepted">Accept as recommended</option><option value="edited">I edited the recommendation</option><option value="rejected">Reject the recommendation</option></select></label><label class="approval"><input id="approveOutcome" type="checkbox" checked><span>Allow Phoenix to update the pipeline and create the next task.</span></label><button class="save" id="saveOutcome" type="submit">Save outcome and update Phoenix</button><p class="message" id="outcomeMessage"></p></form></div>
+  <div id="outcomeVeil" class="workspaceveil" hidden><form class="workspacebox" id="outcomeForm"><header><div><p class="eye">Closed-loop handoff</p><h2 id="outcomeName">Record call outcome</h2><p class="location" id="outcomeLocation"></p></div><button class="close" id="closeOutcome" type="button">Close</button></header><label>Call disposition<select id="outcomeDisposition"><option value="follow_up">Follow-up needed</option><option value="interested">Interested</option><option value="proposal_requested">Proposal requested</option><option value="proposal_sent">Proposal sent</option><option value="closed_won">Closed won</option><option value="closed_lost">Closed lost</option><option value="no_answer">No answer</option></select></label><label>Confirmed pain points, one per line<textarea id="outcomePainPoints"></textarea></label><label>Objections raised, one per line<textarea id="outcomeObjections"></textarea></label><label>Commitments made, one per line<textarea id="outcomeCommitments"></textarea></label><label>Move pipeline to<select id="outcomeStage"><option value="identified">Captured</option><option value="researched">Researched</option><option value="contacted">Contacted</option><option value="engaged">Engaged</option><option value="consultation_scheduled">Consultation scheduled</option><option value="consultation_completed">Consultation completed</option><option value="proposal_sent">Proposal sent</option><option value="decision_pending">Decision pending</option><option value="won">Won</option><option value="lost">Lost</option><option value="nurture">Nurture</option></select></label><label>Next best action<textarea id="outcomeNextAction"></textarea></label><label>Follow-up due date<input id="outcomeDueDate" type="date"></label><button class="save" id="generateFollowUp" type="button">Generate follow-up message</button><label>Follow-up message<textarea id="outcomeFollowUp"></textarea></label><button class="save" id="copyFollowUp" type="button">Copy message for a contact form or text</button><a class="save" id="openEmailDraft" href="#">Open email draft for review</a><label>Phoenix recommendation<select id="recommendationDecision"><option value="accepted">Accept as recommended</option><option value="edited">I edited the recommendation</option><option value="rejected">Reject the recommendation</option></select></label><label class="approval"><input id="approveOutcome" type="checkbox" checked><span>Allow Phoenix to update the pipeline and create the next task.</span></label><button class="save" id="saveOutcome" type="submit">Save outcome and update Phoenix</button><p class="message" id="outcomeMessage"></p></form></div>
   <div id="activityVeil" class="workspaceveil" hidden><section class="workspacebox"><header><div><p class="eye">Orchestrator view</p><h2 id="activityName">Activity &amp; follow-up</h2><p class="location" id="activityLocation"></p></div><button class="close" id="closeActivity" type="button">Close</button></header><div class="activitylist" id="activityList"></div><p class="message" id="activityMessage"></p></section></div>
   <div id="proposalVeil" class="workspaceveil" hidden><form class="workspacebox" id="proposalForm"><header><div><p class="eye">Sales agent</p><h2 id="proposalName">Proposal writer</h2><p class="location" id="proposalLocation">Drafted from the opportunity record</p></div><button class="close" id="closeProposal" type="button">Close</button></header><label>Project investment<input id="proposalInvestment" placeholder="Example: $3,200 setup plus $297 monthly"></label><label>Expected timeline<input id="proposalTimeline" value="2 to 3 weeks after receiving access and materials"></label><label>Payment terms<input id="proposalTerms" placeholder="Enter the payment schedule"></label><button class="save" id="generateProposal" type="button">Generate proposal draft</button><label>Editable proposal<textarea id="proposalDraft" style="min-height:460px" placeholder="Generate a draft, then revise it in your own words."></textarea></label><label class="approval"><input id="approveProposal" type="checkbox"><span>I reviewed this proposal and confirm that the facts, scope, price, and promises are accurate.</span></label><button class="save" id="saveProposal" type="button">Save draft on this device</button><button class="save" id="copyProposal" type="button">Copy approved proposal</button><button class="save" id="downloadProposal" type="button">Download approved proposal</button><p class="message" id="proposalMessage"></p></form></div>
   <div id="fulfillmentVeil" class="workspaceveil" hidden><form class="workspacebox" id="fulfillmentForm"><header><div><p class="eye">Fulfillment handoff</p><h2 id="fulfillmentName">Project launch plan</h2><p class="location" id="fulfillmentLocation">Turn the sale into controlled delivery</p></div><button class="close" id="closeFulfillment" type="button">Close</button></header><div class="brief"><strong>Notion is the authoritative delivery record.</strong><br>Phoenix readiness and milestone reminders do not replace the protected Client Configuration record, 46-task Implementation Checklist, QA records, or Gates A through E.</div><a class="save" href="https://app.notion.com/p/3a8db17278ed8105a122f3f443841f26" target="_blank" rel="noopener">Open canonical lifecycle in Notion</a><a class="save" href="https://app.notion.com/p/3a1db17278ed8164a3d7f489d4ccfc9d" target="_blank" rel="noopener">Open Project Start Requirements</a><label class="approval"><input id="fulfillmentSynthetic" type="checkbox"><span>Use a clearly labeled synthetic delivery scenario for TEST MODE. No real agreement, payment, client setup, or launch approval is being claimed.</span></label><label>Readiness decision<select id="fulfillmentReadiness"><option value="not_ready">Not Ready</option><option value="conditionally_ready">Conditionally Ready</option><option value="ready">Ready</option></select></label><label>Internal project owner<input id="fulfillmentOwner" value="Roberta Kelley"></label><label>Confirmed Day 1<input id="fulfillmentStart" type="date"></label><p class="eye">Required evidence before Day 1</p><label class="approval"><input id="gateProposal" type="checkbox"><span>Final proposal and scope approved</span></label><label class="approval"><input id="gateAgreement" type="checkbox"><span>Services agreement signed</span></label><label class="approval"><input id="gatePayment" type="checkbox"><span>Initial payment paid and cleared</span></label><label class="approval"><input id="gateRequirements" type="checkbox"><span>Project Start Requirements complete</span></label><label class="approval"><input id="gateSetup" type="checkbox"><span>Private client setup and preflight audit complete in Notion</span></label><label class="approval"><input id="gateDay1" type="checkbox"><span>Written Day 1 Confirmation issued</span></label><button class="save" id="generateFulfillment" type="button">Generate handoff plan</button><label>Project summary<textarea id="fulfillmentSummary"></textarea></label><label>Client requirements, one per line<textarea id="fulfillmentRequirements"></textarea></label><label>Delivery milestones, one per line<textarea id="fulfillmentMilestones"></textarea></label><label>Known risks or boundaries<textarea id="fulfillmentRisks"></textarea></label><label class="approval"><input id="approveFulfillment" type="checkbox"><span id="approveFulfillmentText">I verified these facts against the current Notion client records and approve Phoenix milestone reminders.</span></label><button class="save" id="saveFulfillment" type="button">Save readiness summary on this device</button><button class="save" id="createFulfillmentTasks" type="button">Create Day 1 milestone reminders</button><p class="message" id="fulfillmentMessage"></p></form></div>
@@ -680,9 +680,8 @@ body[data-current-page="opportunities"] .shell>aside{display:grid;grid-template-
         const companyName = selectedCompany?.name || selectedOpportunity.name;
         const latestOutcome = latestOutcomeByOpportunity.get(selectedOpportunity.id);
         const hasContactMethod = Boolean(selectedContact?.email || selectedContact?.phone);
-        if (!hasContactMethod && ["identified","researched"].includes(stage)) {
-          guidedAction(0,"Complete the contact record","Add an email or phone number for " + companyName + ". Enter only what you know; leave optional details blank.","openWorkspace",{buttonLabel:"Open the lead record"});
-        } else if (stage === "won" || latestOutcome?.disposition === "closed_won") {
+        const hasPublicWebsiteRoute = Boolean(selectedCompany?.website);
+        if (stage === "won" || latestOutcome?.disposition === "closed_won") {
           if (deliveryReadinessSaved(selectedOpportunity.id)) {
             const synthetic = (() => {
               try { return JSON.parse(localStorage.getItem(FULFILLMENT_KEY + selectedOpportunity.id) || "null")?.synthetic_test === true; }
@@ -719,6 +718,8 @@ body[data-current-page="opportunities"] .shell>aside{display:grid;grid-template-
           guidedAction(2,"Research the company","Add the company website, let Phoenix read permitted public pages, then verify the facts before approving them.","openResearch",{buttonLabel:"Open company research"});
         } else if (!briefedOpportunityIds.has(selectedOpportunity.id)) {
           guidedAction(3,"Prepare the call brief","Phoenix will turn the approved research into questions, possible needs, objections, and a suggested outcome. Review and save it.","openBrief",{buttonLabel:"Generate the call brief"});
+        } else if (!hasContactMethod && !hasPublicWebsiteRoute) {
+          guidedAction(4,"Choose a permitted outreach route","No email or phone is required. Add the official company website so you can use its public contact form, or add another permitted business contact method.","openResearch",{buttonLabel:"Add company website"});
         } else {
           guidedAction(4,"Contact the prospect","Open the preparation workspace, review the brief, and make the call or send the outreach yourself. Return here immediately afterward.","openPreparation",{showOutcome:true,buttonLabel:"Open conversation prep"});
         }
@@ -2033,6 +2034,8 @@ body[data-current-page="opportunities"] .shell>aside{display:grid;grid-template-
       const qualificationDraftKey = () => selectedOpportunity ? QUALIFICATION_DRAFT_KEY + selectedOpportunity.id : "";
       const visibleLeadSource = value => String(value || "")
         .replace(/\binternal[_ -]?test\b/gi,"")
+        .replace(/\bnotion[_ -]?import\b/gi,"Notion CRM")
+        .replace(/^phoenix$/i,"Manual entry")
         .replace(/^[\s,;|:/-]+|[\s,;|:/-]+$/g,"")
         .replace(/\s{2,}/g," ")
         .trim();
@@ -2142,7 +2145,11 @@ body[data-current-page="opportunities"] .shell>aside{display:grid;grid-template-
         try { saved = record?.rationale ? JSON.parse(record.rationale) : {}; }
         catch { saved = {rationale:record?.rationale || ""}; }
         document.getElementById("qualificationSource").value = visibleLeadSource(saved.source || selectedOpportunity.source);
-        document.getElementById("qualificationSummary").value = saved.summary || "";
+        const importedContext = (selectedOpportunity?.score_reasons || [])
+          .map(value => String(value || "").trim())
+          .find(value => /^(notion note|reason recorded in notion|verified)/i.test(value));
+        document.getElementById("qualificationSummary").value = saved.summary
+          || (importedContext ? importedContext.replace(/^[^:]+:\s*/,"") : "");
         document.getElementById("qualificationPreference").value = saved.preference || "unknown";
         document.getElementById("qualificationConsent").value = saved.consent || selectedContact?.consent_status || "unknown";
         document.getElementById("qualificationFit").value = saved.fit || "unknown";
@@ -2150,7 +2157,8 @@ body[data-current-page="opportunities"] .shell>aside{display:grid;grid-template-
         document.getElementById("qualificationNeed").value = saved.need || "unknown";
         document.getElementById("qualificationTiming").value = saved.timing || "";
         document.getElementById("qualificationFacts").value = (saved.facts || []).join("\n");
-        document.getElementById("qualificationMissing").value = (saved.missing || []).join("\n");
+        document.getElementById("qualificationMissing").value = (saved.missing || []).join("\n")
+          || "What happens after a new inquiry arrives?";
         document.getElementById("qualificationRisks").value = (saved.risks || []).join("\n");
         document.getElementById("qualificationRecommendation").value = record?.action || "human_review";
         document.getElementById("qualificationRationale").value = saved.rationale || "";
@@ -2171,6 +2179,7 @@ body[data-current-page="opportunities"] .shell>aside{display:grid;grid-template-
           const records = await request("recommendations?opportunity_id=eq." + encodeURIComponent(selectedOpportunity.id) + "&role=eq.concierge&select=id,workspace_id,opportunity_id,role,action,rationale,confidence_score,decision,edited_action,decided_at,created_at&order=created_at.desc&limit=1");
           showQualification(records[0] || null);
           const draftRestored = restoreQualificationDraft();
+          if (!records.length && !draftRestored) document.getElementById("suggestQualification").click();
           document.getElementById("qualificationMessage").textContent = draftRestored
             ? "Your saved device draft was restored. Verify every field before routing."
             : records.length
@@ -3037,6 +3046,7 @@ body[data-current-page="opportunities"] .shell>aside{display:grid;grid-template-
         return issues;
       };
       const proposalStorageKey = () => PROPOSAL_KEY + selectedOpportunity.id;
+      const proposalDefaultsKey = () => PROPOSAL_KEY + "approved-offer-defaults:" + (TEST_MODE ? "test" : "production");
       const proposalSnapshot = () => ({
         investment:document.getElementById("proposalInvestment").value.trim(),
         timeline:document.getElementById("proposalTimeline").value.trim(),
@@ -3073,11 +3083,14 @@ body[data-current-page="opportunities"] .shell>aside{display:grid;grid-template-
             document.getElementById("proposalDraft").value = saved.draft || "";
             document.getElementById("proposalMessage").textContent = "Your saved draft is loaded. It is stored on this device.";
           } else {
-            document.getElementById("proposalInvestment").value = "";
-            document.getElementById("proposalTimeline").value = "2 to 3 weeks after receiving access and materials";
-            document.getElementById("proposalTerms").value = "";
+            const defaults = JSON.parse(localStorage.getItem(proposalDefaultsKey()) || "null");
+            document.getElementById("proposalInvestment").value = defaults?.investment || "";
+            document.getElementById("proposalTimeline").value = defaults?.timeline || "2 to 3 weeks after receiving access and materials";
+            document.getElementById("proposalTerms").value = defaults?.terms || "";
             document.getElementById("proposalDraft").value = "";
-            document.getElementById("proposalMessage").textContent = "Enter the investment and payment terms, then generate the first draft.";
+            document.getElementById("proposalMessage").textContent = defaults
+              ? "Your last approved offer terms are prefilled. Verify that they apply to this prospect before generating the draft."
+              : "Enter the investment and payment terms, then generate the first draft.";
           }
         } catch {
           document.getElementById("proposalMessage").textContent = "Enter the investment and payment terms, then generate the first draft.";
@@ -3183,6 +3196,12 @@ body[data-current-page="opportunities"] .shell>aside{display:grid;grid-template-
           requireApprovedProposal();
           const snapshot = proposalSnapshot();
           localStorage.setItem(proposalStorageKey(), JSON.stringify(snapshot));
+          localStorage.setItem(proposalDefaultsKey(), JSON.stringify({
+            investment:snapshot.investment,
+            timeline:snapshot.timeline,
+            terms:snapshot.terms,
+            approvedAt:snapshot.savedAt
+          }));
           const confirmed = JSON.parse(localStorage.getItem(proposalStorageKey()) || "null");
           if (!confirmed?.approved || confirmed.draft !== snapshot.draft) throw new Error("Phoenix could not verify the saved proposal.");
           message.textContent = "Approved draft saved and verified on this device. It has not been sent.";
@@ -3267,18 +3286,24 @@ body[data-current-page="opportunities"] .shell>aside{display:grid;grid-template-
         document.getElementById("approveContent").checked = false;
         try {
           const saved = JSON.parse(localStorage.getItem(contentStorageKey()) || "null");
+          const approvedResearchFact = selectedCompany?.research_inferences?.human_approved === true
+            ? cleanResearchFacts()[0] || ""
+            : "";
+          const approvedResearchSource = selectedCompany?.research_facts?.sources?.[0]?.url || "";
           document.getElementById("contentType").value = saved?.type || "educational_post";
           document.getElementById("contentAudience").value = saved?.audience || "Owner-led service businesses";
           document.getElementById("contentChannel").value = saved?.channel || "Facebook";
           document.getElementById("contentPurpose").value = saved?.purpose || "";
-          document.getElementById("contentVerifiedFact").value = saved?.verifiedFact || "";
-          document.getElementById("contentEvidence").value = saved?.evidence || "";
+          document.getElementById("contentVerifiedFact").value = saved?.verifiedFact || approvedResearchFact;
+          document.getElementById("contentEvidence").value = saved?.evidence || approvedResearchSource;
           document.getElementById("contentPermission").value = saved?.permission || "not_applicable";
           document.getElementById("contentCta").value = saved?.cta || "If you want a clearer lead and follow-up process, I would be glad to show you how I approach it.";
           document.getElementById("contentDraft").value = saved?.draft || "";
           document.getElementById("contentMessage").textContent = saved
             ? "Your saved draft is loaded from this device. Verify the source and permission again before using it."
-            : "Choose the content type and enter one verified lesson or result with its evidence.";
+            : approvedResearchFact
+              ? "Phoenix prefilled one approved research fact and its source. Choose a purpose and verify the wording before drafting."
+              : "Choose the content type and enter one verified lesson or result with its evidence.";
         } catch {
           document.getElementById("contentMessage").textContent = "Choose the content type and enter one verified lesson or result with its evidence.";
         }
@@ -3855,7 +3880,25 @@ body[data-current-page="opportunities"] .shell>aside{display:grid;grid-template-
         refreshEmailDraft();
         document.getElementById("outcomeMessage").textContent = selectedContact?.email
           ? "Follow-up draft generated. Review it, then open the unsent email draft."
-          : "Follow-up generated. Add the contact’s email in Lead Workspace to open an email draft.";
+          : "Follow-up generated. Copy it for the company’s contact form or another permitted channel.";
+      });
+      document.getElementById("copyFollowUp").addEventListener("click", async () => {
+        const message = document.getElementById("outcomeMessage");
+        const text = document.getElementById("outcomeFollowUp").value.trim();
+        if (!text) {
+          message.textContent = "Generate or write the follow-up message first.";
+          return;
+        }
+        try {
+          if (navigator.clipboard?.writeText) await navigator.clipboard.writeText(text);
+          else {
+            const field = document.getElementById("outcomeFollowUp");
+            field.focus(); field.select(); document.execCommand("copy");
+          }
+          message.textContent = "Follow-up copied. Paste it only into the permitted contact channel you chose.";
+        } catch {
+          message.textContent = "The message could not be copied automatically. Select the text and copy it manually.";
+        }
       });
       document.getElementById("outcomeDisposition").addEventListener("change", suggestOutcomeFields);
       document.getElementById("recommendationDecision").addEventListener("change", event => {
