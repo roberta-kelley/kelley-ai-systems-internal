@@ -2347,6 +2347,7 @@ body[data-current-page="opportunities"] .shell>aside{display:grid;grid-template-
         const useful = /service|specializ|remodel|renovat|kitchen|bath|cabinet|floor|design|build|project|consultation|appointment|contact|call|form|hour|monday|tuesday|wednesday|thursday|friday|saturday|sunday|serving|serve|located|location|area|county|city|year|family.owned|licensed|insured|warranty/i;
         const promotional = /best|premier|unmatched|unparalleled|dream|stunning|exceptional|number one|#1|leading/i;
         const candidates = [];
+        const fallbackCandidates = [];
         results.forEach(result => {
           String(result.text || "").split(/\n+/).forEach(block => {
             block.split(/(?<=[.!?])\s+/).forEach(raw => {
@@ -2354,15 +2355,17 @@ body[data-current-page="opportunities"] .shell>aside{display:grid;grid-template-
                 .replace(/!\[[^\]]*\]\([^)]*\)/g,"")
                 .replace(/\[([^\]]+)\]\([^)]*\)/g,"$1")
                 .replace(/[>*_`]/g,"").replace(/\s+/g," ").trim();
-              if (fact.length < 28 || fact.length > 220 || !useful.test(fact) || promotional.test(fact)
+              if (fact.length < 28 || fact.length > 220 || promotional.test(fact)
                 || /^(title|url|source|menu|navigation|skip to|copyright|privacy|terms)/i.test(fact)
                 || /\?$/.test(fact)) return;
-              candidates.push({text:fact,url:result.source.url,title:result.source.title || researchTitle(result.text)});
+              const item = {text:fact,url:result.source.url,title:result.source.title || researchTitle(result.text),selected:false};
+              fallbackCandidates.push(item);
+              if (useful.test(fact)) candidates.push(item);
             });
           });
         });
         const seen = new Set();
-        return candidates.filter(item => {
+        return [...candidates,...fallbackCandidates].filter(item => {
           const key = item.text.toLowerCase().replace(/[^a-z0-9]+/g," ").trim();
           if (seen.has(key)) return false;
           seen.add(key);
@@ -2385,6 +2388,7 @@ body[data-current-page="opportunities"] .shell>aside{display:grid;grid-template-
           const checkbox = document.createElement("input");
           checkbox.type = "checkbox";
           checkbox.dataset.researchFact = String(index);
+          checkbox.checked = item.selected === true;
           checkbox.addEventListener("change",updateResearchConfidence);
           const copy = document.createElement("span");
           const fact = document.createElement("strong");
@@ -2416,17 +2420,20 @@ body[data-current-page="opportunities"] .shell>aside{display:grid;grid-template-
           .filter(url => url && url !== selectedCompany?.website)
           .join("\n");
         document.getElementById("researchEvidence").value = "";
-        suggestedResearchFacts = [];
-        renderResearchFactSuggestions();
         savedResearchFactSources = new Map();
-        document.getElementById("researchFacts").value = (facts.verified_facts || []).map(value => {
+        const savedFactItems = (facts.verified_facts || []).map(value => {
           const stored = String(value);
           const split = stored.lastIndexOf("|");
           const text = split > 0 ? stored.slice(0,split).trim() : stored.trim();
-          const source = split > 0 ? stored.slice(split + 1).trim() : "";
+          const source = split > 0 ? stored.slice(split + 1).trim() : (loadedResearchSources[0]?.url || selectedCompany?.website || "");
           if (text && source) savedResearchFactSources.set(text,source);
-          return text;
-        }).filter(Boolean).join("\n");
+          const sourceRecord = loadedResearchSources.find(item => item.url === source);
+          return text ? {text,url:source,title:sourceRecord?.title || "Previously approved public source",selected:true} : null;
+        }).filter(Boolean);
+        const synthetic = TEST_MODE && facts.synthetic_test === true;
+        suggestedResearchFacts = synthetic ? [] : savedFactItems;
+        renderResearchFactSuggestions();
+        document.getElementById("researchFacts").value = synthetic ? savedFactItems.map(item => item.text).join("\n") : "";
         document.getElementById("researchHypotheses").value = (inferences.hypotheses || []).join("\n");
         document.getElementById("researchAngles").value = (inferences.outreach_angles || []).join("\n");
         document.getElementById("researchQuestions").value = (inferences.recommended_questions || []).join("\n");
@@ -2549,7 +2556,15 @@ body[data-current-page="opportunities"] .shell>aside{display:grid;grid-template-
           loadedResearchSources = results.map(result => result.source);
           evidenceField.value = results.map(result => result.evidence).join("\n\n====================\n\n");
           evidenceField.scrollTop = 0;
-          suggestedResearchFacts = researchFactSuggestions(results);
+          const newlySuggested = researchFactSuggestions(results);
+          const combinedFacts = [...suggestedResearchFacts.filter(item => item.selected),...newlySuggested];
+          const seenFacts = new Set();
+          suggestedResearchFacts = combinedFacts.filter(item => {
+            const key = item.text.toLowerCase().replace(/[^a-z0-9]+/g," ").trim();
+            if (seenFacts.has(key)) return false;
+            seenFacts.add(key);
+            return true;
+          }).slice(0,12);
           renderResearchFactSuggestions();
           const suggestions = researchSuggestions(results.map(result => result.text).join("\n"));
           if (!document.getElementById("researchHypotheses").value.trim()) {
@@ -2596,7 +2611,12 @@ body[data-current-page="opportunities"] .shell>aside{display:grid;grid-template-
           }
           const facts = synthetic ? plainFacts : [];
           if (!synthetic) {
-            selectedFacts.forEach(item => facts.push(item.text + " | " + item.url));
+            selectedFacts.forEach(item => {
+              let source = item.url;
+              try { source = new URL(source).href; } catch { source = urls[0]; }
+              if (!urls.includes(source)) source = urls[0];
+              facts.push(item.text + " | " + source);
+            });
             plainFacts.forEach(value => {
               const legacySplit = value.lastIndexOf("|");
               const plain = legacySplit > 0 ? value.slice(0,legacySplit).trim() : value.trim();
