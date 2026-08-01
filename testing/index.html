@@ -416,6 +416,7 @@ body[data-current-page="opportunities"] .shell>aside{display:grid;grid-template-
       };
       const TEST_MODE = true;
       document.getElementById("loadSyntheticImport").hidden = !TEST_MODE;
+      document.getElementById("researchSynthetic").closest("label").hidden = !TEST_MODE;
       let selectedOpportunity = null;
       let selectedCompany = null;
       let selectedContact = null;
